@@ -1,0 +1,90 @@
+@reference "../app/globals.css";
+
+.el_1 {
+  @apply flex justify-start items-end gap-2;
+}
+
+.el_2 {
+  @apply text-white;
+}
+
+.el_3 {
+  @apply bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-2xl rounded-bl-none px-4 py-3 flex items-center gap-1;
+}
+
+.el_4 {
+  @apply bar;
+}
+
+.el_5 {
+  @apply bar;
+}
+
+.el_6 {
+  @apply absolute top-0 right-0 w-32 h-32 bg-brand-primary opacity-10 rounded-full blur-2xl -mr-16 -mt-16 pointer-events-none;
+}
+
+.el_7 {
+  @apply flex items-center gap-2.5;
+}
+
+.el_8 {
+  @apply relative;
+}
+
+.el_9 {
+  @apply w-8 h-8 rounded-full bg-gradient-to-tr from-brand-primary via-orange-400 to-brand-secondary flex items-center justify-center text-white shadow-md shadow-brand-primary/20;
+}
+
+.el_10 {
+  @apply text-sm font-semibold mono-font leading-none;
+}
+
+.el_11 {
+  @apply text-[10px] text-[var(--text-muted)] mt-0.5;
+}
+
+.el_12 {
+  @apply flex items-center gap-1;
+}
+
+.el_13 {
+  @apply flex-1 overflow-y-auto space-y-3 pr-1 mb-3 min-h-[200px] max-h-[380px];
+}
+
+.el_14 {
+  @apply flex-1 overflow-y-auto space-y-3 pr-1 mb-3 min-h-[200px] max-h-[380px];
+}
+
+.el_15 {
+  @apply w-5 h-5 rounded-full bg-gradient-to-tr from-brand-primary to-brand-secondary flex items-center justify-center shrink-0 mb-0.5;
+}
+
+.el_16 {
+  @apply inline-block w-1.5 h-3 bg-brand-primary animate-pulse rounded-sm ml-1 align-middle;
+}
+
+.el_17 {
+  @apply text-[9px] text-[var(--text-muted)] px-7 mono-font;
+}
+
+.el_18 {
+  @apply mb-3 shrink-0;
+}
+
+.el_19 {
+  @apply text-[9px] text-[var(--text-muted)] font-medium mb-1.5 mono-font flex items-center gap-1 uppercase tracking-wider;
+}
+
+.el_20 {
+  @apply relative flex-1;
+}
+
+.el_21 {
+  @apply flex gap-2 shrink-0;
+}
+
+.el_22 {
+  @apply relative flex-1;
+}
+

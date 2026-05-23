@@ -1,0 +1,6 @@
+@reference "../app/globals.css";
+
+.el_1 {
+  @apply w-full h-[420px];
+}
+

@@ -1,0 +1,54 @@
+@reference "../app/globals.css";
+
+.el_1 {
+  @apply mt-4 border-t border-[var(--border-color)] pt-4;
+}
+
+.el_2 {
+  @apply text-brand-primary;
+}
+
+.el_3 {
+  @apply text-xs font-bold text-brand-primary mono-font uppercase tracking-widest;
+}
+
+.el_4 {
+  @apply relative;
+}
+
+.el_5 {
+  @apply relative;
+}
+
+.el_6 {
+  @apply flex items-center gap-1.5 mb-2;
+}
+
+.el_7 {
+  @apply space-y-0.5;
+}
+
+.el_8 {
+  @apply text-[10px] text-[var(--text-secondary)] flex items-start gap-1;
+}
+
+.el_9 {
+  @apply bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-xl px-4 py-3 mb-3;
+}
+
+.el_10 {
+  @apply bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-xl px-4 py-3 mb-3;
+}
+
+.el_11 {
+  @apply text-[10px] text-[var(--text-secondary)] mono-font leading-relaxed;
+}
+
+.el_12 {
+  @apply flex flex-wrap gap-2;
+}
+
+.el_13 {
+  @apply text-[9px] bg-brand-primary/10 border border-brand-primary/20 text-brand-primary font-bold px-2.5 py-1 rounded-full mono-font;
+}
+

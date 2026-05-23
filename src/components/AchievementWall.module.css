@@ -1,0 +1,30 @@
+@reference "../app/globals.css";
+
+.el_1 {
+  @apply w-full h-full rounded-xl bg-[var(--bg-secondary)] flex items-center justify-center;
+}
+
+.el_2 {
+  @apply text-sm font-bold text-[var(--text-primary)] mt-1 leading-tight;
+}
+
+.el_3 {
+  @apply relative py-12 border-t border-[var(--border-color)];
+}
+
+.el_4 {
+  @apply w-full max-w-6xl z-10 px-4;
+}
+
+.el_5 {
+  @apply flex flex-col mb-8 text-left;
+}
+
+.el_6 {
+  @apply text-3xl font-extrabold tracking-tight text-[var(--text-primary)];
+}
+
+.el_7 {
+  @apply text-sm text-[var(--text-secondary)] mt-2;
+}
+

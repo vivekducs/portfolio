@@ -1,0 +1,106 @@
+@reference "../app/globals.css";
+
+.el_1 {
+  @apply relative py-12 border-t border-[var(--border-color)];
+}
+
+.el_2 {
+  @apply w-full max-w-6xl z-10 px-4;
+}
+
+.el_3 {
+  @apply flex flex-col mb-8 text-left;
+}
+
+.el_4 {
+  @apply text-3xl font-extrabold tracking-tight text-[var(--text-primary)];
+}
+
+.el_5 {
+  @apply text-xl font-bold tracking-tight text-[var(--text-primary)];
+}
+
+.el_6 {
+  @apply text-sm text-[var(--text-secondary)] leading-relaxed;
+}
+
+.el_7 {
+  @apply text-sm text-[var(--text-secondary)] leading-relaxed;
+}
+
+.el_8 {
+  @apply space-y-4 pt-2;
+}
+
+.el_9 {
+  @apply text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider mono-font;
+}
+
+.el_10 {
+  @apply text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider mono-font;
+}
+
+.el_11 {
+  @apply absolute top-0 right-0 w-32 h-32 bg-brand-secondary opacity-5 rounded-full blur-2xl -mr-16 -mt-16 pointer-events-none;
+}
+
+.el_12 {
+  @apply text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider mono-font;
+}
+
+.el_13 {
+  @apply font-bold text-lg text-[var(--text-primary)];
+}
+
+.el_14 {
+  @apply absolute top-0 right-0 w-32 h-32 bg-brand-secondary opacity-5 rounded-full blur-2xl -mr-16 -mt-16 pointer-events-none;
+}
+
+.el_15 {
+  @apply py-10 text-center flex flex-col items-center justify-center space-y-4 duration-300;
+}
+
+.el_16 {
+  @apply font-bold text-lg text-[var(--text-primary)];
+}
+
+.el_17 {
+  @apply text-xs text-[var(--text-secondary)] font-medium max-w-xs;
+}
+
+.el_18 {
+  @apply space-y-4;
+}
+
+.el_19 {
+  @apply text-left;
+}
+
+.el_20 {
+  @apply block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider mono-font mb-1.5;
+}
+
+.el_21 {
+  @apply flex justify-center gap-6;
+}
+
+.el_22 {
+  @apply text-left;
+}
+
+.el_23 {
+  @apply block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider mono-font mb-1.5;
+}
+
+.el_24 {
+  @apply text-left;
+}
+
+.el_25 {
+  @apply block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider mono-font mb-1.5;
+}
+
+.el_26 {
+  @apply flex justify-center gap-6;
+}
+

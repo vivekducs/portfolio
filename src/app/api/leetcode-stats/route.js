@@ -1,37 +1,62 @@
 export async function GET() {
   try {
-    // Using alfa-leetcode-api public proxy
-    const res = await fetch("https://alfa-leetcode-api.onrender.com/vivekducs/solved", {
+    const query = `
+      query userPublicProfile($username: String!) {
+        matchedUser(username: $username) {
+          submitStats: submitStatsGlobal {
+            acSubmissionNum {
+              difficulty
+              count
+            }
+          }
+        }
+        userContestRanking(username: $username) {
+          rating
+          globalRanking
+          topPercentage
+        }
+      }
+    `;
+
+    const res = await fetch("https://leetcode.com/graphql", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Referer": "https://leetcode.com",
+      },
+      body: JSON.stringify({
+        query,
+        variables: { username: "AVPXM8" },
+      }),
       next: { revalidate: 3600 },
     });
 
-    let solved = { solvedProblem: 500, easySolved: 210, mediumSolved: 240, hardSolved: 50 };
-    if (res.ok) {
-      const data = await res.json();
-      solved = {
-        solvedProblem: data.solvedProblem || 500,
-        easySolved: data.easySolved || 210,
-        mediumSolved: data.mediumSolved || 240,
-        hardSolved: data.hardSolved || 50,
-      };
+    if (!res.ok) throw new Error("LeetCode API failed");
+
+    const json = await res.json();
+    if (json.errors) {
+      throw new Error(json.errors[0].message);
     }
 
-    const contestRes = await fetch("https://alfa-leetcode-api.onrender.com/vivekducs/contest", {
-      next: { revalidate: 3600 },
+    const matchedUser = json.data?.matchedUser;
+    const contestRanking = json.data?.userContestRanking;
+
+    if (!matchedUser) throw new Error("User not found");
+
+    const submissions = matchedUser.submitStats.acSubmissionNum;
+    const getCount = (diff) => submissions.find((s) => s.difficulty === diff)?.count || 0;
+
+    return Response.json({
+      solvedProblem: getCount("All"),
+      easySolved: getCount("Easy"),
+      mediumSolved: getCount("Medium"),
+      hardSolved: getCount("Hard"),
+      contestRating: contestRanking ? Math.round(contestRanking.rating) : 1664,
+      contestGlobalRanking: contestRanking ? contestRanking.globalRanking : 0,
+      contestTopPercentage: contestRanking ? contestRanking.topPercentage : 16.41,
     });
-
-    let contest = { contestRating: 1664, contestGlobalRanking: 0 };
-    if (contestRes.ok) {
-      const data = await contestRes.json();
-      contest = {
-        contestRating: Math.round(data.contestRating || 1664),
-        contestGlobalRanking: data.contestGlobalRanking || 0,
-        contestTopPercentage: data.contestTopPercentage || 16.41,
-      };
-    }
-
-    return Response.json({ ...solved, ...contest });
-  } catch {
+  } catch (error) {
+    console.error("LeetCode API Error:", error);
     return Response.json({
       solvedProblem: 500,
       easySolved: 210,

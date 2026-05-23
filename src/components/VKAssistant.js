@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Send, Sparkles, MessageSquare, X, Mic, MicOff, Volume2, VolumeX, ChevronDown } from "lucide-react";
+import styles from "./VKAssistant.module.css";
 
 const SUGGESTED_PROMPTS = [
   { label: "Tell me about Mathem Solvex", text: "Tell me about the Mathem Solvex project." },
@@ -16,13 +17,13 @@ const SUGGESTED_PROMPTS = [
 
 function TypingIndicator() {
   return (
-    <div className="flex justify-start items-end gap-2">
-      <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-luxury-violet to-luxury-magenta flex items-center justify-center shrink-0">
-        <Sparkles size={10} className="text-white" />
+    <div className={styles.el_1}>
+      <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-brand-primary to-brand-secondary flex items-center justify-center shrink-0">
+        <Sparkles size={10} className={styles.el_2} />
       </div>
-      <div className="bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-2xl rounded-bl-none px-4 py-3 flex items-center gap-1">
-        <span className="bar" />
-        <span className="bar" />
+      <div className={styles.el_3}>
+        <span className={styles.el_4} />
+        <span className={styles.el_5} />
         <span className="bar" />
         <span className="bar" />
         <span className="bar" />
@@ -214,14 +215,14 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
     >
       {/* Glow */}
       {!isModal && (
-        <div className="absolute top-0 right-0 w-32 h-32 bg-luxury-purple opacity-10 rounded-full blur-2xl -mr-16 -mt-16 pointer-events-none" />
+        <div className={styles.el_6} />
       )}
 
       {/* Header */}
       <div className="flex items-center justify-between border-b pb-3 mb-3 border-[var(--border-color)] shrink-0">
-        <div className="flex items-center gap-2.5">
-          <div className="relative">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-luxury-violet via-luxury-magenta to-luxury-orange flex items-center justify-center text-white shadow-md shadow-luxury-purple/20">
+        <div className={styles.el_7}>
+          <div className={styles.el_8}>
+            <div className={styles.el_9}>
               <Sparkles size={14} className={isStreaming ? "animate-spin" : "animate-pulse"} />
             </div>
             <span className={`absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full border-2 border-[var(--bg-secondary)] ${
@@ -229,20 +230,21 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
             }`} />
           </div>
           <div>
-            <h4 className="text-sm font-semibold mono-font leading-none">VK Assistant</h4>
-            <p className="text-[10px] text-[var(--text-muted)] mt-0.5">
+            <h4 className={styles.el_10}>VK Assistant</h4>
+            <p className={styles.el_11}>
               {isListening ? "🎙 Listening..." : isSpeaking ? "🔊 Speaking..." : isStreaming ? "● Thinking..." : "● Online · AI Agent"}
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-1">
+        <div className={styles.el_12}>
           {/* Voice TTS toggle */}
           <button
+            suppressHydrationWarning
             onClick={() => { setVoiceEnabled((v) => !v); window.speechSynthesis?.cancel(); }}
             className={`p-1.5 rounded-lg transition-all cursor-pointer ${
               voiceEnabled
-                ? "bg-luxury-purple/15 text-luxury-purple border border-luxury-purple/30"
+                ? "bg-brand-primary/15 text-brand-primary border border-brand-primary/30"
                 : "text-[var(--text-muted)] hover:bg-[var(--bg-tertiary)]"
             }`}
             title={voiceEnabled ? "Disable voice responses" : "Enable voice responses"}
@@ -252,8 +254,9 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
 
           {isModal && onClose && (
             <button
+              suppressHydrationWarning
               onClick={onClose}
-              className="p-1.5 rounded-lg hover:bg-[var(--bg-tertiary)] transition-colors text-[var(--text-muted)] hover:text-[var(--text-primary)] cursor-pointer"
+              className={styles.el_13}
             >
               <X size={16} />
             </button>
@@ -262,13 +265,13 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
       </div>
 
       {/* Chat Messages */}
-      <div className="flex-1 overflow-y-auto space-y-3 pr-1 mb-3 min-h-[200px] max-h-[380px]">
+      <div className={styles.el_14}>
         {messages.map((msg, index) => (
           <div key={index} className={`flex flex-col ${msg.role === "user" ? "items-end" : "items-start"} gap-1`}>
             <div className={`flex items-end gap-2 max-w-[88%] ${msg.role === "user" ? "flex-row-reverse" : "flex-row"}`}>
               {/* Avatar */}
               {msg.role === "assistant" && (
-                <div className="w-5 h-5 rounded-full bg-gradient-to-tr from-luxury-violet to-luxury-magenta flex items-center justify-center shrink-0 mb-0.5">
+                <div className={styles.el_15}>
                   <Sparkles size={9} className="text-white" />
                 </div>
               )}
@@ -276,19 +279,19 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
               <div
                 className={`px-3.5 py-2.5 text-xs leading-relaxed rounded-2xl ${
                   msg.role === "user"
-                    ? "bg-gradient-to-r from-luxury-violet to-luxury-purple text-white rounded-tr-none shadow-md shadow-luxury-purple/10"
+                    ? "bg-gradient-to-r from-brand-primary to-brand-secondary text-white rounded-tr-none shadow-md shadow-brand-primary/10"
                     : "bg-[var(--bg-tertiary)] border border-[var(--border-color)] text-[var(--text-primary)] rounded-tl-none"
                 }`}
                 style={{ whiteSpace: "pre-line" }}
               >
                 {msg.content}
                 {msg.streaming && (
-                  <span className="inline-block w-1.5 h-3 bg-luxury-purple animate-pulse rounded-sm ml-1 align-middle" />
+                  <span className={styles.el_16} />
                 )}
               </div>
             </div>
 
-            <span className="text-[9px] text-[var(--text-muted)] px-7 mono-font">
+            <span className={styles.el_17}>
               {formatTime(msg.timestamp)}
             </span>
           </div>
@@ -303,24 +306,25 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
         <div className={`mb-2 px-3 py-2 rounded-xl text-xs border ${
           micError
             ? "border-red-500/30 bg-red-500/5 text-red-400"
-            : "border-luxury-purple/20 bg-luxury-purple/5 text-[var(--text-secondary)]"
+            : "border-brand-primary/20 bg-brand-primary/5 text-[var(--text-secondary)]"
         } mono-font`}>
           {micError || `🎙 ${transcript}...`}
         </div>
       )}
 
       {/* Suggested Prompts */}
-      <div className="mb-3 shrink-0">
-        <p className="text-[9px] text-[var(--text-muted)] font-medium mb-1.5 mono-font flex items-center gap-1 uppercase tracking-wider">
+      <div className={styles.el_18}>
+        <p className={styles.el_19}>
           <MessageSquare size={9} /> Quick queries
         </p>
         <div className="flex flex-wrap gap-1">
           {SUGGESTED_PROMPTS.slice(0, isModal ? 8 : 4).map((q, idx) => (
             <button
               key={idx}
+              suppressHydrationWarning
               onClick={() => sendMessage(q.text)}
               disabled={isStreaming}
-              className="text-[10px] bg-[var(--bg-secondary)] border border-[var(--border-color)] text-[var(--text-secondary)] hover:text-luxury-purple hover:border-luxury-purple/40 hover:bg-luxury-purple/5 transition-all px-2.5 py-1 rounded-full mono-font cursor-pointer disabled:opacity-50"
+              className={styles.el_20}
             >
               {q.label}
             </button>
@@ -331,36 +335,39 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
       {/* Input Row */}
       <form
         onSubmit={(e) => { e.preventDefault(); sendMessage(inputText); }}
-        className="flex gap-2 shrink-0"
+        className={styles.el_21}
       >
         {/* Mic button */}
         <button
+          suppressHydrationWarning
           type="button"
           onClick={isListening ? stopVoice : startVoice}
           className={`p-2.5 rounded-xl border transition-all cursor-pointer shrink-0 ${
             isListening
               ? "bg-red-500/10 border-red-500/40 text-red-400 animate-pulse"
-              : "border-[var(--border-color)] text-[var(--text-muted)] hover:border-luxury-purple/30 hover:text-luxury-purple hover:bg-luxury-purple/5"
+              : "border-[var(--border-color)] text-[var(--text-muted)] hover:border-brand-primary/30 hover:text-brand-primary hover:bg-brand-primary/5"
           }`}
           title={isListening ? "Stop recording" : "Start voice input"}
         >
           {isListening ? <MicOff size={14} /> : <Mic size={14} />}
         </button>
 
-        <div className="relative flex-1">
+        <div className={styles.el_22}>
           <input
+            suppressHydrationWarning
             ref={inputRef}
             type="text"
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
             placeholder={isListening ? "Listening..." : "Ask anything about Vivek..."}
             disabled={isStreaming || isListening}
-            className="w-full bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-xl px-3.5 py-2.5 text-xs focus:outline-none focus:border-luxury-purple/40 focus:ring-1 focus:ring-luxury-purple/20 transition-all pr-10 text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
+            className={styles.el_22}
           />
           <button
+            suppressHydrationWarning
             type="submit"
             disabled={!inputText.trim() || isStreaming}
-            className="absolute right-1.5 top-1.5 p-1.5 rounded-lg bg-gradient-to-r from-luxury-violet to-luxury-purple hover:opacity-90 disabled:opacity-40 text-white transition-all cursor-pointer"
+            className={styles.el_21}
           >
             <Send size={12} />
           </button>

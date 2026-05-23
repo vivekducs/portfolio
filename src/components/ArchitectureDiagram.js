@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ChevronDown, ChevronUp, Cpu, Database, Globe, Lock, Layers, GitBranch, ArrowRight, Zap } from "lucide-react";
+import styles from "./ArchitectureDiagram.module.css";
 
 const ARCHITECTURES = {
   "mathem-solvex": {
@@ -18,15 +19,15 @@ const ARCHITECTURES = {
       {
         layer: "Backend API",
         icon: Cpu,
-        color: "text-luxury-purple",
-        bg: "bg-luxury-purple/10 border-luxury-purple/20",
+        color: "text-brand-primary",
+        bg: "bg-brand-primary/10 border-brand-primary/20",
         items: ["Node.js + Express.js", "REST API endpoints", "JWT Auth middleware"],
       },
       {
         layer: "AI Layer",
         icon: Zap,
-        color: "text-luxury-magenta",
-        bg: "bg-luxury-magenta/10 border-luxury-magenta/20",
+        color: "text-brand-secondary",
+        bg: "bg-brand-secondary/10 border-brand-secondary/20",
         items: ["Gemini API (embeddings)", "Pinecone vector DB", "Semantic search pipeline"],
       },
       {
@@ -61,8 +62,8 @@ const ARCHITECTURES = {
       {
         layer: "Log Aggregator",
         icon: Cpu,
-        color: "text-luxury-purple",
-        bg: "bg-luxury-purple/10 border-luxury-purple/20",
+        color: "text-brand-primary",
+        bg: "bg-brand-primary/10 border-brand-primary/20",
         items: ["Node.js log collector", "Event stream parser", "Threshold alert engine"],
       },
       {
@@ -104,15 +105,15 @@ const ARCHITECTURES = {
       {
         layer: "API Server",
         icon: Cpu,
-        color: "text-luxury-purple",
-        bg: "bg-luxury-purple/10 border-luxury-purple/20",
+        color: "text-brand-primary",
+        bg: "bg-brand-primary/10 border-brand-primary/20",
         items: ["Node.js + Express.js", "Session management", "Sentiment analysis pipeline"],
       },
       {
         layer: "AI Engine",
         icon: Zap,
-        color: "text-luxury-magenta",
-        bg: "bg-luxury-magenta/10 border-luxury-magenta/20",
+        color: "text-brand-secondary",
+        bg: "bg-brand-secondary/10 border-brand-secondary/20",
         items: ["Gemini API (NLP)", "Emotion classification", "Wellness recommendations"],
       },
       {
@@ -133,31 +134,31 @@ function ArchitecturePanel({ projectId }) {
   if (!arch) return null;
 
   return (
-    <div className="mt-4 border-t border-[var(--border-color)] pt-4">
+    <div className={styles.el_1}>
       <div className="flex items-center gap-2 mb-4">
-        <Layers size={13} className="text-luxury-purple" />
-        <h4 className="text-xs font-bold text-luxury-purple mono-font uppercase tracking-widest">
+        <Layers size={13} className={styles.el_2} />
+        <h4 className={styles.el_3}>
           System Architecture · {arch.subtitle}
         </h4>
       </div>
 
       {/* Architecture nodes */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3 mb-4">
+      <div className={styles.el_4}>
         {arch.nodes.map((node, idx) => {
           const Icon = node.icon;
           return (
-            <div key={idx} className="relative">
+            <div key={idx} className={styles.el_5}>
               <div className={`rounded-xl border p-3 ${node.bg} text-left`}>
-                <div className="flex items-center gap-1.5 mb-2">
+                <div className={styles.el_6}>
                   <Icon size={12} className={node.color} />
                   <span className={`text-[10px] font-bold mono-font uppercase tracking-wider ${node.color}`}>
                     {node.layer}
                   </span>
                 </div>
-                <ul className="space-y-0.5">
+                <ul className={styles.el_7}>
                   {node.items.map((item, i) => (
-                    <li key={i} className="text-[10px] text-[var(--text-secondary)] flex items-start gap-1">
-                      <span className="text-luxury-purple mt-0.5">·</span>
+                    <li key={i} className={styles.el_8}>
+                      <span className="text-brand-primary mt-0.5">·</span>
                       {item}
                     </li>
                   ))}
@@ -165,8 +166,8 @@ function ArchitecturePanel({ projectId }) {
               </div>
               {/* Arrow connector */}
               {idx < arch.nodes.length - 1 && (
-                <div className="hidden xl:flex absolute top-1/2 -right-2 -translate-y-1/2 z-10">
-                  <ArrowRight size={12} className="text-luxury-purple/40" />
+                <div className={styles.el_9}>
+                  <ArrowRight size={12} className="text-brand-primary/40" />
                 </div>
               )}
             </div>
@@ -175,17 +176,17 @@ function ArchitecturePanel({ projectId }) {
       </div>
 
       {/* Data flow */}
-      <div className="bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-xl px-4 py-3 mb-3">
+      <div className={styles.el_10}>
         <p className="text-[9px] text-[var(--text-muted)] mono-font uppercase tracking-wider mb-1 font-bold">Data Flow</p>
-        <p className="text-[10px] text-[var(--text-secondary)] mono-font leading-relaxed">{arch.flow}</p>
+        <p className={styles.el_11}>{arch.flow}</p>
       </div>
 
       {/* Metrics */}
-      <div className="flex flex-wrap gap-2">
+      <div className={styles.el_12}>
         {arch.metrics.map((m, i) => (
           <span
             key={i}
-            className="text-[9px] bg-luxury-purple/10 border border-luxury-purple/20 text-luxury-purple font-bold px-2.5 py-1 rounded-full mono-font"
+            className={styles.el_13}
           >
             {m}
           </span>
@@ -204,11 +205,12 @@ export default function ArchitectureDiagram({ projectId }) {
   return (
     <div>
       <button
+        suppressHydrationWarning
         onClick={() => setOpen((o) => !o)}
         className={`flex items-center gap-1.5 text-[10px] font-bold mono-font transition-all cursor-pointer px-3 py-1.5 rounded-lg border ${
           open
-            ? "bg-luxury-purple/15 border-luxury-purple/30 text-luxury-purple"
-            : "border-[var(--border-color)] text-[var(--text-muted)] hover:border-luxury-purple/30 hover:text-luxury-purple hover:bg-luxury-purple/5"
+            ? "bg-brand-primary/15 border-brand-primary/30 text-brand-primary"
+            : "border-[var(--border-color)] text-[var(--text-muted)] hover:border-brand-primary/30 hover:text-brand-primary hover:bg-brand-primary/5"
         }`}
       >
         <Layers size={11} />

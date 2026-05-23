@@ -2,6 +2,7 @@
 
 import { Home, User, Code2, Briefcase, Award, History, BarChart3, Mail, FileText, Moon, Sun, Sparkles } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
+import styles from "./Sidebar.module.css";
 
 const Github = ({ size = 24, ...props }) => (
   <svg
@@ -61,26 +62,26 @@ export default function Sidebar({ activeSection, onOpenAssistant }) {
   };
 
   return (
-    <aside className="hidden lg:flex flex-col w-64 h-screen sticky top-0 bg-[var(--bg-secondary)] border-r border-[var(--border-color)] p-6 justify-between select-none z-40">
+    <aside className={styles.el_1}>
       {/* Top Section - Brand Logo */}
-      <div className="space-y-8">
-        <div className="flex items-center justify-between">
+      <div className={styles.el_2}>
+        <div className={styles.el_3}>
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => handleScroll("home")}>
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-luxury-violet via-luxury-magenta to-luxury-orange p-[1.5px] shadow-lg shadow-luxury-purple/10">
+            <div className={styles.el_4}>
               <div className="w-full h-full rounded-xl bg-[var(--bg-secondary)] flex items-center justify-center font-bold text-lg tracking-wider">
-                <span className="gradient-text">VK</span>
+                <span className={styles.el_5}>VK</span>
               </div>
             </div>
             <div>
-              <h3 className="font-bold text-sm tracking-tight leading-tight">Vivek Kumar</h3>
-              <p className="text-[10px] text-[var(--text-muted)] mono-font tracking-wide">AI Engineer</p>
+              <h3 className={styles.el_6}>Vivek Kumar</h3>
+              <p className={styles.el_7}>AI Engineer</p>
             </div>
           </div>
 
           {/* Theme Switcher Toggle */}
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-xl border border-[var(--border-color)] bg-[var(--bg-tertiary)] hover:bg-[var(--border-color)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all cursor-pointer shadow-sm"
+            className={styles.el_8}
             title={theme === "light" ? "Switch to Dark Mode" : "Switch to Light Mode"}
           >
             {theme === "light" ? <Moon size={15} /> : <Sun size={15} />}
@@ -88,7 +89,7 @@ export default function Sidebar({ activeSection, onOpenAssistant }) {
         </div>
 
         {/* Navigation List */}
-        <nav className="space-y-1">
+        <nav className={styles.el_9}>
           {menuItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeSection === item.id;
@@ -98,11 +99,11 @@ export default function Sidebar({ activeSection, onOpenAssistant }) {
                 onClick={() => handleScroll(item.id)}
                 className={`w-full flex items-center gap-3.5 px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-200 cursor-pointer ${
                   isActive
-                    ? "bg-gradient-to-r from-luxury-purple/10 to-luxury-magenta/5 border-l-2 border-luxury-purple text-luxury-purple"
+                    ? "bg-gradient-to-r from-brand-primary/10 to-brand-secondary/5 border-l-2 border-brand-primary text-brand-primary"
                     : "text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-tertiary)]"
                 }`}
               >
-                <Icon size={16} className={isActive ? "text-luxury-purple" : ""} />
+                <Icon size={16} className={isActive ? "text-brand-primary" : ""} />
                 <span>{item.label}</span>
               </button>
             );
@@ -111,27 +112,27 @@ export default function Sidebar({ activeSection, onOpenAssistant }) {
       </div>
 
       {/* Bottom Section - Controls and Social Profiles */}
-      <div className="space-y-5">
+      <div className={styles.el_10}>
         {/* Floating VK Assistant Control */}
         <div 
           onClick={onOpenAssistant}
-          className="glass-card rounded-xl border p-3 hover:border-luxury-purple/40 shadow-sm cursor-pointer group transition-all"
+          className={styles.el_11}
         >
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-[10px] font-bold text-luxury-purple mono-font tracking-widest flex items-center gap-1.5">
-              <Sparkles size={10} className="animate-pulse" /> VK ASSISTANT
+          <div className={styles.el_12}>
+            <span className="text-[10px] font-bold text-brand-primary mono-font tracking-widest flex items-center gap-1.5">
+              <Sparkles size={10} className={styles.el_13} /> VK ASSISTANT
             </span>
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+            <span className={styles.el_14}></span>
           </div>
-          <div className="flex items-center gap-2">
-            <div className="flex gap-[2px] items-center">
-              <span className="bar"></span>
-              <span className="bar"></span>
-              <span className="bar"></span>
-              <span className="bar"></span>
-              <span className="bar"></span>
+          <div className={styles.el_15}>
+            <div className={styles.el_16}>
+              <span className={styles.el_17}></span>
+              <span className={styles.el_18}></span>
+              <span className={styles.el_19}></span>
+              <span className={styles.el_20}></span>
+              <span className={styles.el_21}></span>
             </div>
-            <span className="text-[11px] text-[var(--text-muted)] group-hover:text-luxury-purple transition-all font-semibold mono-font">
+            <span className={styles.el_22}>
               Ask AI about VK
             </span>
           </div>
@@ -142,19 +143,19 @@ export default function Sidebar({ activeSection, onOpenAssistant }) {
           href="https://github.com/AVPXM8"
           target="_blank"
           rel="noopener noreferrer"
-          className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-[var(--bg-tertiary)] border border-[var(--border-color)] hover:border-luxury-purple hover:bg-luxury-purple/5 text-[var(--text-primary)] font-semibold text-sm rounded-xl shadow-sm transition-all group"
+          className={styles.el_23}
         >
-          <FileText size={15} className="text-luxury-purple group-hover:scale-110 transition-transform" />
+          <FileText size={15} className={styles.el_19} />
           <span>View GitHub CV</span>
         </a>
 
         {/* Social Icons row */}
-        <div className="flex items-center justify-between px-2 text-[var(--text-muted)]">
+        <div className={styles.el_24}>
           <a
             href="https://github.com/AVPXM8"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-luxury-purple transition-colors p-1 hover:bg-[var(--bg-tertiary)] rounded-lg"
+            className={styles.el_22}
           >
             <Github size={16} />
           </a>
@@ -162,20 +163,20 @@ export default function Sidebar({ activeSection, onOpenAssistant }) {
             href="https://www.linkedin.com/in/vivek33pal/"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-luxury-purple transition-colors p-1 hover:bg-[var(--bg-tertiary)] rounded-lg"
+            className={styles.el_23}
           >
             <Linkedin size={16} />
           </a>
           <a
             href="mailto:vivekducs@gmail.com"
-            className="hover:text-luxury-purple transition-colors p-1 hover:bg-[var(--bg-tertiary)] rounded-lg"
+            className={styles.el_24}
           >
             <Mail size={16} />
           </a>
         </div>
 
         {/* Footer legal text */}
-        <div className="text-[10px] text-[var(--text-muted)] text-center font-medium mono-font pt-2 border-t border-[var(--border-color)]">
+        <div className={styles.el_25}>
           © 2026 Vivek Kumar. All rights reserved.
         </div>
       </div>

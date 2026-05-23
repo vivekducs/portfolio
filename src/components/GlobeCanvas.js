@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { OrbitControls, Sphere, MeshDistortMaterial } from "@react-three/drei";
 import * as THREE from "three";
+import styles from "./GlobeCanvas.module.css";
 
 // Noida coordinates: 28.5355°N, 77.3910°E
 // Convert to 3D sphere coordinates
@@ -125,7 +126,7 @@ function MouseLight() {
 
 export default function GlobeCanvas() {
   return (
-    <div className="w-full h-[420px]">
+    <div className={styles.el_1}>
       <Canvas
         camera={{ position: [0, 0, 2.8], fov: 45 }}
         gl={{ antialias: true, alpha: true }}

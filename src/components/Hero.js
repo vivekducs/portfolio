@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { ArrowRight, FileDown, Sparkles, MessageSquare, Terminal } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
+import styles from "./Hero.module.css";
 
 // Stable constant outside component — avoids stale closure & ESLint dep warnings
 const TYPING_PHRASES = [
@@ -64,83 +65,83 @@ export default function Hero({ onOpenAssistant }) {
   };
 
   return (
-    <section id="home" className="relative py-8 md:py-16 overflow-hidden flex flex-col items-center">
+    <section id="home" className={styles.el_1}>
       {/* Mouse-reactive glow spotlight */}
       <div
-        className="mouse-glow hidden lg:block"
+        className={styles.el_3}
         style={{ left: mousePos.x, top: mousePos.y }}
       />
 
       {/* Cinematic backlighting effects */}
-      <div className="absolute top-20 right-[15%] w-96 h-96 bg-luxury-purple opacity-20 rounded-full blur-[100px] pointer-events-none"></div>
-      <div className="absolute bottom-10 left-[10%] w-96 h-96 bg-luxury-magenta opacity-15 rounded-full blur-[100px] pointer-events-none"></div>
-      <div className="absolute top-40 left-[40%] w-80 h-80 bg-luxury-orange opacity-10 rounded-full blur-[80px] pointer-events-none"></div>
+      <div className={styles.el_2}></div>
+      <div className="absolute bottom-10 left-[10%] w-96 h-96 bg-brand-secondary opacity-15 rounded-full blur-[100px] pointer-events-none"></div>
+      <div className="absolute top-40 left-[40%] w-80 h-80 bg-brand-primary opacity-10 rounded-full blur-[80px] pointer-events-none"></div>
 
       {/* Floating particles background simulation */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-40 select-none">
-        <div className="absolute top-1/4 left-1/4 w-2 h-2 rounded-full bg-luxury-purple animate-ping"></div>
-        <div className="absolute top-1/3 right-1/3 w-1.5 h-1.5 rounded-full bg-luxury-magenta animate-pulse" style={{ animationDelay: "1s" }}></div>
-        <div className="absolute bottom-1/4 right-1/4 w-2 h-2 rounded-full bg-luxury-orange animate-ping" style={{ animationDelay: "0.5s" }}></div>
+        <div className={styles.el_4}></div>
+        <div className="absolute top-1/3 right-1/3 w-1.5 h-1.5 rounded-full bg-brand-secondary animate-pulse" style={{ animationDelay: "1s" }}></div>
+        <div className={styles.el_5} style={{ animationDelay: "0.5s" }}></div>
       </div>
 
       <div className="w-full max-w-6xl z-10 px-4">
         {/* Available Pill */}
         <AnimatedSection delay={0}>
-          <div className="inline-flex items-center gap-2 bg-[var(--bg-secondary)] border border-[var(--border-color)] text-[var(--text-secondary)] rounded-full px-4 py-1.5 text-xs font-semibold shadow-sm mb-8">
+          <div className={styles.el_6}>
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 flex items-center justify-center">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
             </span>
-            <span className="mono-font">Available for SDE / AI Engineer Roles</span>
+            <span className={styles.el_7}>Available for SDE / AI Engineer Roles</span>
           </div>
         </AnimatedSection>
 
         {/* Desktop Split Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-16">
+        <div className={styles.el_8}>
           {/* Left Column: Heading and description */}
-          <div className="lg:col-span-7 space-y-6 text-left">
+          <div className={styles.el_9}>
             {/* Passport Circular Avatar */}
             <AnimatedSection delay={100}>
-              <div className="flex items-center gap-4">
-                <div className="relative w-16 h-16 rounded-full bg-gradient-to-tr from-luxury-violet via-luxury-magenta to-luxury-orange p-[2px] shadow-lg shadow-luxury-purple/20">
+              <div className={styles.el_10}>
+                <div className={styles.el_11}>
                   <Image
                     src="/vivek_avatar.png"
                     alt="Vivek Kumar"
                     width={64}
                     height={64}
                     priority
-                    className="w-full h-full rounded-full object-cover bg-[var(--bg-secondary)]"
+                    className={styles.el_12}
                   />
                   <span className="absolute bottom-0 right-0 w-4 h-4 rounded-full bg-emerald-500 border-2 border-[var(--bg-secondary)] shadow-sm"></span>
                 </div>
                 <div>
-                  <p className="text-xs text-[var(--text-muted)] font-bold tracking-widest uppercase mono-font">Developer Persona</p>
-                  <h4 className="text-base font-bold tracking-tight">Vivek Kumar <span className="text-luxury-magenta">👋</span></h4>
+                  <p className={styles.el_13}>Developer Persona</p>
+                  <h4 className="text-base font-bold tracking-tight">Vivek Kumar <span className={styles.el_14}>👋</span></h4>
                 </div>
               </div>
             </AnimatedSection>
 
             {/* Core Titles */}
             <AnimatedSection delay={200}>
-              <h1 className="text-4xl sm:text-5xl font-black tracking-tight leading-[1.1] text-[var(--text-primary)]">
-                Building Scalable <br className="hidden sm:inline" />
-                <span className="gradient-text">AI Systems</span> & Modern <br />
+              <h1 className={styles.el_15}>
+                Building Scalable <br className={styles.el_12} />
+                <span className={styles.el_16}>AI Systems</span> & Modern <br />
                 Software Products
               </h1>
             </AnimatedSection>
 
             <AnimatedSection delay={300}>
-              <h2 className="text-sm sm:text-base font-bold text-[var(--text-secondary)] mono-font tracking-wide">
+              <h2 className={styles.el_18}>
                 AI Engineer • Backend Developer • Full Stack Product Builder
               </h2>
             </AnimatedSection>
 
             {/* Animated Typing Segment */}
             <AnimatedSection delay={400}>
-              <div className="h-10 flex items-center bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-xl px-4 py-2 w-fit">
-                <span className="text-xs font-bold text-luxury-purple uppercase tracking-widest mono-font flex items-center gap-2 mr-2">
+              <div className={styles.el_17}>
+                <span className="text-xs font-bold text-brand-primary uppercase tracking-widest mono-font flex items-center gap-2 mr-2">
                   <Terminal size={14} /> FOCUS:
                 </span>
-                <span className="text-sm font-semibold mono-font text-[var(--text-primary)] typing-cursor">
+                <span className={styles.el_18}>
                   {typedText}
                 </span>
               </div>
@@ -148,17 +149,17 @@ export default function Hero({ onOpenAssistant }) {
 
             {/* Introduction paragraph */}
             <AnimatedSection delay={500}>
-              <p className="text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed max-w-xl font-medium">
+              <p className={styles.el_19}>
                 I am an MCA student specialized in architecturing high-throughput backends, integrating advanced generative AI systems, and deploying real-world responsive products.
               </p>
             </AnimatedSection>
 
             {/* Call to Actions */}
             <AnimatedSection delay={600}>
-              <div className="flex flex-wrap gap-3.5 pt-2">
+              <div className={styles.el_20}>
                 <button
                   onClick={() => handleScroll("projects")}
-                  className="px-6 py-3.5 bg-gradient-to-r from-luxury-violet to-luxury-purple hover:opacity-95 text-white font-bold text-sm rounded-xl shadow-md shadow-luxury-purple/15 flex items-center gap-2 transition-all cursor-pointer hover:translate-y-[-2px]"
+                  className={styles.el_23}
                 >
                   <span>Explore Projects</span>
                   <ArrowRight size={14} />
@@ -168,22 +169,22 @@ export default function Hero({ onOpenAssistant }) {
                   href="https://github.com/AVPXM8"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-6 py-3.5 bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:border-luxury-purple/40 text-[var(--text-primary)] font-bold text-sm rounded-xl flex items-center gap-2 transition-all shadow-sm cursor-pointer hover:translate-y-[-2px]"
+                  className={styles.el_24}
                 >
-                  <FileDown size={14} className="text-luxury-purple" />
+                  <FileDown size={14} className={styles.el_21} />
                   <span>Resume</span>
                 </a>
 
                 <button
                   onClick={() => handleScroll("contact")}
-                  className="px-6 py-3.5 bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:border-luxury-purple/40 text-[var(--text-primary)] font-bold text-sm rounded-xl transition-all shadow-sm cursor-pointer hover:translate-y-[-2px]"
+                  className={styles.el_25}
                 >
                   Contact
                 </button>
 
                 <button
                   onClick={onOpenAssistant}
-                  className="px-6 py-3.5 bg-luxury-purple/10 border border-luxury-purple/20 text-luxury-purple font-bold text-sm rounded-xl flex items-center gap-2 hover:bg-luxury-purple/20 transition-all cursor-pointer hover:translate-y-[-2px]"
+                  className={styles.el_18}
                 >
                   <MessageSquare size={14} />
                   <span>Talk to VK Assistant</span>
@@ -193,11 +194,11 @@ export default function Hero({ onOpenAssistant }) {
           </div>
 
           {/* Right Column: Dynamic Workstation Image Rendering */}
-          <div className="lg:col-span-5 relative flex justify-center mt-8 lg:mt-0 select-none">
-            <div className="relative w-full max-w-[420px] aspect-square rounded-3xl overflow-hidden glass-card border p-2 shadow-2xl flex items-center justify-center animate-in fade-in zoom-in duration-1000">
+          <div className={styles.el_26}>
+            <div className={`animate-in fade-in zoom-in ${styles.el_22}`}>
               
               {/* Outer decorative neon frame rings */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-luxury-purple/10 via-luxury-magenta/5 to-luxury-orange/10 pointer-events-none rounded-3xl"></div>
+              <div className="absolute inset-0 bg-gradient-to-tr from-brand-primary/10 via-orange-400/5 to-brand-secondary/10 pointer-events-none rounded-3xl"></div>
               
               {/* Actual Image */}
               <Image
@@ -206,12 +207,12 @@ export default function Hero({ onOpenAssistant }) {
                 width={400}
                 height={400}
                 priority
-                className="w-full h-full rounded-2xl object-cover"
+                className={styles.el_23}
               />
 
               {/* Dynamic glowing HUD widget layers */}
-              <div className="absolute bottom-4 left-4 bg-black/70 backdrop-blur-md border border-white/10 text-white rounded-2xl p-3 text-[10px] font-semibold mono-font shadow-lg flex items-center gap-2">
-                <Sparkles size={12} className="text-luxury-orange animate-spin" />
+              <div className={styles.el_24}>
+                <Sparkles size={12} className="text-brand-primary animate-spin" />
                 <span>VK.AI Model Active</span>
               </div>
             </div>
@@ -219,7 +220,7 @@ export default function Hero({ onOpenAssistant }) {
         </div>
 
         {/* Dashboard Highlights Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+        <div className={styles.el_30}>
           {[
             { metric: "2+", label: "Years Coding" },
             { metric: "50+", label: "Projects Built" },
@@ -229,12 +230,12 @@ export default function Hero({ onOpenAssistant }) {
           ].map((stat, idx) => (
             <div
               key={idx}
-              className="glass-card rounded-2xl border border-[var(--glass-border)] p-4 text-center hover:border-luxury-purple/30 transition-all shadow-sm"
+              className={styles.el_31}
             >
-              <h3 className="text-2xl sm:text-3xl font-black gradient-text tracking-tight mb-1">
+              <h3 className={styles.el_22}>
                 {stat.metric}
               </h3>
-              <p className="text-[10px] sm:text-xs text-[var(--text-muted)] font-semibold uppercase tracking-wider mono-font">
+              <p className={styles.el_32}>
                 {stat.label}
               </p>
             </div>

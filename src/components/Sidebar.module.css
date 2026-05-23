@@ -1,0 +1,102 @@
+@reference "../app/globals.css";
+
+.el_1 {
+  @apply space-y-8;
+}
+
+.el_2 {
+  @apply space-y-8;
+}
+
+.el_3 {
+  @apply flex items-center justify-between;
+}
+
+.el_4 {
+  @apply w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-primary via-orange-400 to-brand-secondary p-[1.5px] shadow-lg shadow-brand-primary/10;
+}
+
+.el_5 {
+  @apply gradient-text;
+}
+
+.el_6 {
+  @apply font-bold text-sm tracking-tight leading-tight;
+}
+
+.el_7 {
+  @apply text-[10px] text-[var(--text-muted)] mono-font tracking-wide;
+}
+
+.el_8 {
+  @apply space-y-1;
+}
+
+.el_9 {
+  @apply space-y-1;
+}
+
+.el_10 {
+  @apply space-y-5;
+}
+
+.el_11 {
+  @apply animate-pulse;
+}
+
+.el_12 {
+  @apply flex items-center justify-between mb-2;
+}
+
+.el_13 {
+  @apply animate-pulse;
+}
+
+.el_14 {
+  @apply w-2 h-2 rounded-full bg-emerald-500 animate-ping;
+}
+
+.el_15 {
+  @apply flex items-center gap-2;
+}
+
+.el_16 {
+  @apply flex gap-[2px] items-center;
+}
+
+.el_17 {
+  @apply bar;
+}
+
+.el_18 {
+  @apply bar;
+}
+
+.el_19 {
+  @apply bar;
+}
+
+.el_20 {
+  @apply bar;
+}
+
+.el_21 {
+  @apply bar;
+}
+
+.el_22 {
+  @apply flex items-center justify-between px-2 text-[var(--text-muted)];
+}
+
+.el_23 {
+  @apply text-[10px] text-[var(--text-muted)] text-center font-medium mono-font pt-2 border-t border-[var(--border-color)];
+}
+
+.el_24 {
+  @apply flex items-center justify-between px-2 text-[var(--text-muted)];
+}
+
+.el_25 {
+  @apply text-[10px] text-[var(--text-muted)] text-center font-medium mono-font pt-2 border-t border-[var(--border-color)];
+}
+

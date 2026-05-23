@@ -1,0 +1,34 @@
+@reference "../app/globals.css";
+
+.el_1 {
+  @apply flex items-center justify-between;
+}
+
+.el_2 {
+  @apply w-8 h-8 rounded-lg bg-gradient-to-tr from-brand-primary to-brand-secondary p-[1.5px];
+}
+
+.el_3 {
+  @apply gradient-text;
+}
+
+.el_4 {
+  @apply font-bold text-xs leading-none tracking-tight;
+}
+
+.el_5 {
+  @apply text-[9px] text-[var(--text-muted)] mono-font mt-0.5;
+}
+
+.el_6 {
+  @apply p-2 h-11 w-11 flex items-center justify-center rounded-full bg-[var(--bg-tertiary)] border border-[var(--border-color)] text-[var(--text-secondary)] cursor-pointer select-none;
+}
+
+.el_7 {
+  @apply flex items-center justify-around px-2 py-2;
+}
+
+.el_8 {
+  @apply absolute top-0 right-0 w-2 h-2 rounded-full bg-brand-primary animate-ping;
+}
+

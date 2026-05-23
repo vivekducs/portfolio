@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { X, Sparkles, Cpu } from "lucide-react";
 import VKAssistant from "./VKAssistant";
+import styles from "./VKAssistantPopup.module.css";
 
 export default function VKAssistantPopup({ isOpen, onClose }) {
   const overlayRef = useRef(null);
@@ -24,50 +25,50 @@ export default function VKAssistantPopup({ isOpen, onClose }) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div className={styles.el_1}>
       {/* Backdrop */}
       <div
         ref={overlayRef}
         onClick={onClose}
-        className="absolute inset-0 bg-black/70 backdrop-blur-md"
+        className={styles.el_2}
         style={{ animation: "fadeIn 0.2s ease" }}
       />
 
       {/* Dialog — bottom sheet on mobile, centered on desktop */}
       <div
-        className="relative w-full sm:max-w-lg glass-card sm:rounded-3xl rounded-t-3xl border border-[var(--glass-border)] shadow-2xl overflow-hidden flex flex-col z-10 max-h-[92vh] sm:max-h-[85vh]"
+        className={styles.el_3}
         style={{ animation: "slideUp 0.3s cubic-bezier(0.34,1.56,0.64,1)" }}
       >
         {/* Decorative glow blobs */}
-        <div className="absolute -top-20 -left-20 w-40 h-40 bg-luxury-violet opacity-20 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-luxury-orange opacity-15 rounded-full blur-3xl pointer-events-none" />
+        <div className={styles.el_4} />
+        <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-brand-primary opacity-15 rounded-full blur-3xl pointer-events-none" />
 
         {/* Header bar */}
-        <div className="flex items-center gap-3 px-5 py-4 border-b border-[var(--border-color)] shrink-0 relative">
+        <div className={styles.el_5}>
           {/* Drag handle on mobile */}
-          <div className="absolute top-2 left-1/2 -translate-x-1/2 w-10 h-1 rounded-full bg-[var(--border-color)] sm:hidden" />
+          <div className={styles.el_7} />
 
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-luxury-violet via-luxury-magenta to-luxury-orange p-[1.5px] shadow-lg shadow-luxury-purple/20">
+          <div className={styles.el_6}>
             <div className="w-full h-full rounded-xl bg-[var(--bg-secondary)] flex items-center justify-center">
-              <Sparkles size={16} className="text-luxury-magenta animate-pulse" />
+              <Sparkles size={16} className="text-brand-secondary animate-pulse" />
             </div>
           </div>
 
-          <div className="flex-1 min-w-0">
-            <h3 className="font-bold text-sm text-[var(--text-primary)] leading-tight">
+          <div className={styles.el_8}>
+            <h3 className={styles.el_9}>
               VK <span className="gradient-text">Assistant</span>
             </h3>
-            <p className="text-[10px] text-[var(--text-muted)] mono-font">
+            <p className={styles.el_10}>
               AI · Voice · Recruiter Mode
             </p>
           </div>
 
           {/* Waveform decoration */}
-          <div className="hidden sm:flex items-center gap-0.5 mr-2">
+          <div className={styles.el_10}>
             {[...Array(6)].map((_, i) => (
               <span
                 key={i}
-                className="inline-block w-[3px] rounded-full bg-gradient-to-t from-luxury-violet to-luxury-magenta"
+                className={styles.el_11}
                 style={{
                   height: `${8 + (i % 3) * 6}px`,
                   animation: `soundwave 1.4s infinite ease-in-out alternate`,
@@ -79,24 +80,24 @@ export default function VKAssistantPopup({ isOpen, onClose }) {
 
           <button
             onClick={onClose}
-            className="p-1.5 rounded-full hover:bg-[var(--bg-tertiary)] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-all cursor-pointer"
+            className={styles.el_12}
           >
             <X size={17} />
           </button>
         </div>
 
         {/* Chat body */}
-        <div className="flex-1 overflow-hidden p-4 sm:p-5">
+        <div className={styles.el_10}>
           <VKAssistant isModal={true} onClose={onClose} />
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between px-5 py-2 border-t border-[var(--border-color)] shrink-0">
+        <div className={styles.el_13}>
           <span className="text-[9px] text-[var(--text-muted)] mono-font flex items-center gap-1">
             <Cpu size={9} />
             Powered by VK AI · Gemini 1.5 Flash
           </span>
-          <span className="text-[9px] text-emerald-500 font-semibold mono-font">● Online</span>
+          <span className={styles.el_14}>● Online</span>
         </div>
       </div>
 

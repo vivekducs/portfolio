@@ -1,6 +1,7 @@
 "use client";
 
 import { Award, CheckCircle, ExternalLink, ShieldCheck } from "lucide-react";
+import styles from "./Certifications.module.css";
 
 export default function Certifications() {
   const certs = [
@@ -8,62 +9,62 @@ export default function Certifications() {
       title: "Back-End Apps with Node.js & Express",
       issuer: "IBM Corporation",
       logoColor: "text-blue-500",
-      accent: "border-l-2 border-luxury-purple"
+      accent: "border-l-2 border-brand-primary"
     },
     {
       title: "Google Attention Mechanism",
       issuer: "Google Cloud",
       logoColor: "text-red-500",
-      accent: "border-l-2 border-luxury-magenta"
+      accent: "border-l-2 border-brand-secondary"
     },
     {
       title: "Supervised Machine Learning",
       issuer: "Stanford University",
       logoColor: "text-red-800",
-      accent: "border-l-2 border-luxury-orange"
+      accent: "border-l-2 border-brand-primary"
     },
     {
       title: "JavaScript Programming Essentials",
       issuer: "IBM Corporation",
       logoColor: "text-blue-500",
-      accent: "border-l-2 border-luxury-gold"
+      accent: "border-l-2 border-brand-secondary"
     },
     {
       title: "Python for AI & Data Science",
       issuer: "IBM Corporation",
       logoColor: "text-blue-500",
-      accent: "border-l-2 border-luxury-purple"
+      accent: "border-l-2 border-brand-primary"
     },
     {
       title: "Google Responsible AI",
       issuer: "Google Cloud",
       logoColor: "text-red-500",
-      accent: "border-l-2 border-luxury-magenta"
+      accent: "border-l-2 border-brand-secondary"
     },
     {
       title: "Google Generative AI Fundamental",
       issuer: "Google Cloud",
       logoColor: "text-red-500",
-      accent: "border-l-2 border-luxury-orange"
+      accent: "border-l-2 border-brand-primary"
     },
     {
       title: "Google Introduction to LLMs",
       issuer: "Google Cloud",
       logoColor: "text-red-500",
-      accent: "border-l-2 border-luxury-gold"
+      accent: "border-l-2 border-brand-secondary"
     }
   ];
 
   return (
-    <section id="certifications" className="relative py-12 border-t border-[var(--border-color)]">
+    <section id="certifications" className={styles.el_1}>
       {/* Light highlights */}
-      <div className="absolute bottom-10 left-[10%] w-72 h-72 bg-luxury-gold opacity-[0.05] rounded-full blur-[80px] pointer-events-none"></div>
+      <div className={styles.el_2}></div>
 
       <div className="w-full max-w-6xl z-10 px-4">
         
         {/* Title */}
         <div className="flex flex-col mb-8 text-left">
-          <p className="text-xs font-bold text-luxury-purple mono-font uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
+          <p className={styles.el_3}>
             <Award size={13} /> VERIFIED CREDENTIALS
           </p>
           <h2 className="text-3xl font-extrabold tracking-tight text-[var(--text-primary)]">
@@ -72,30 +73,30 @@ export default function Certifications() {
         </div>
 
         {/* 3D Hover Wall Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
+        <div className={styles.el_4}>
           {certs.map((c, idx) => (
             <div
               key={idx}
               className={`glass-card glass-card-hover rounded-2xl border p-4.5 flex flex-col justify-between shadow-sm relative overflow-hidden group ${c.accent}`}
             >
               {/* Subtle background glow on card hover */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-luxury-purple/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+              <div className={styles.el_5}></div>
 
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-[9px] text-luxury-orange font-bold uppercase tracking-widest mono-font">
+              <div className={styles.el_6}>
+                <div className={styles.el_7}>
+                  <span className={styles.el_8}>
                     {c.issuer}
                   </span>
-                  <ShieldCheck size={14} className="text-emerald-500 shrink-0" />
+                  <ShieldCheck size={14} className={styles.el_9} />
                 </div>
 
-                <h4 className="font-bold text-xs leading-snug tracking-tight text-[var(--text-primary)] min-h-[36px] group-hover:text-luxury-purple transition-all">
+                <h4 className={styles.el_10}>
                   {c.title}
                 </h4>
               </div>
 
               {/* Bottom tag block */}
-              <div className="flex items-center justify-between pt-3 mt-2 border-t border-[var(--border-color)] text-[10px] text-[var(--text-muted)] font-semibold mono-font">
+              <div className={styles.el_11}>
                 <span className="flex items-center gap-1">
                   <CheckCircle size={10} className="text-emerald-500" />
                   <span>Verified Credentials</span>

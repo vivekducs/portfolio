@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ExternalLink, Sparkles, BookOpen, Layers, Target, Shield } from "lucide-react";
 import ArchitectureDiagram from "./ArchitectureDiagram";
+import styles from "./Projects.module.css";
 
 const Github = ({ size = 24, ...props }) => (
   <svg
@@ -49,7 +50,7 @@ export default function Projects() {
       featured: false,
       desc: "AI-powered emotional wellness and mental health counseling platform. Features sentiment-aware journaling prompts, real-time stress analysis, and supportive wellness guidance.",
       tech: ["Node.js", "Express.js", "MongoDB", "Gemini API"],
-      github: "https://github.com/AVPXM8" // Placeholder since no specific github was specified
+      github: "https://github.com/AVPXM8/Palora-backend" // Placeholder since no specific github was specified
     },
     {
       id: "observeflow",
@@ -81,32 +82,32 @@ export default function Projects() {
     }
   ];
 
-  const filteredProjects = filter === "all" 
-    ? projects.filter(p => !p.featured) 
+  const filteredProjects = filter === "all"
+    ? projects.filter(p => !p.featured)
     : projects.filter(p => p.category === filter && !p.featured);
 
   const featuredProject = projects.find(p => p.featured);
 
   return (
-    <section id="projects" className="relative py-12 border-t border-[var(--border-color)]">
+    <section id="projects" className={styles.el_1}>
       {/* Glow Orbs */}
-      <div className="absolute bottom-20 right-10 w-80 h-80 bg-luxury-magenta opacity-[0.07] rounded-full blur-[90px] pointer-events-none"></div>
+      <div className="absolute bottom-20 right-10 w-80 h-80 bg-brand-secondary opacity-[0.07] rounded-full blur-[90px] pointer-events-none"></div>
 
-      <div className="w-full max-w-6xl z-10 px-4">
-        
+      <div className={styles.el_2}>
+
         {/* Title */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 text-left">
+        <div className={styles.el_3}>
           <div>
-            <p className="text-xs font-bold text-luxury-purple mono-font uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
+            <p className="text-xs font-bold text-brand-primary mono-font uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
               <Layers size={13} /> PORTFOLIO PROJECTS
             </p>
-            <h2 className="text-3xl font-extrabold tracking-tight text-[var(--text-primary)]">
+            <h2 className={styles.el_4}>
               Featured Innovations
             </h2>
           </div>
 
           {/* Filtering buttons */}
-          <div className="flex flex-wrap gap-1.5 mt-4 md:mt-0 bg-[var(--bg-tertiary)] border border-[var(--border-color)] p-1 rounded-xl">
+          <div className={styles.el_5}>
             {[
               { id: "all", label: "Other Projects" },
               { id: "ai-ml", label: "AI / ML" },
@@ -116,11 +117,10 @@ export default function Projects() {
               <button
                 key={btn.id}
                 onClick={() => setFilter(btn.id)}
-                className={`text-xs font-bold px-3 py-1.5 rounded-lg transition-all cursor-pointer mono-font ${
-                  filter === btn.id
-                    ? "bg-gradient-to-r from-luxury-purple to-luxury-magenta text-white shadow-sm"
-                    : "text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
-                }`}
+                className={`text-xs font-bold px-3 py-1.5 rounded-lg transition-all cursor-pointer mono-font ${filter === btn.id
+                  ? "bg-gradient-to-r from-brand-primary to-brand-secondary text-white shadow-sm"
+                  : "text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
+                  }`}
               >
                 {btn.label}
               </button>
@@ -130,22 +130,22 @@ export default function Projects() {
 
         {/* Featured Project Showcase */}
         {featuredProject && (
-          <div className="glass-card rounded-3xl border border-[var(--glass-border)] p-6 md:p-8 shadow-lg mb-8 relative overflow-hidden text-left hover:border-luxury-purple/35 transition-all">
+          <div className={styles.el_6}>
             
             {/* Corner glowing badge */}
-            <div className="absolute top-0 right-0 bg-gradient-to-l from-luxury-purple to-luxury-magenta text-white text-[10px] font-bold tracking-widest uppercase px-5 py-2.5 rounded-bl-3xl shadow-sm mono-font flex items-center gap-1.5 select-none animate-pulse">
+            <div className={styles.el_7}>
               <Sparkles size={11} /> FEATURED CASE STUDY
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center pt-4 lg:pt-0">
-              
+            <div className={styles.el_11}>
+
               {/* Left Column: Details */}
-              <div className="lg:col-span-7 space-y-5">
+              <div className={styles.el_8}>
                 <div>
-                  <h3 className="text-2xl font-bold tracking-tight text-[var(--text-primary)]">
+                  <h3 className={styles.el_9}>
                     {featuredProject.title}
                   </h3>
-                  <p className="text-xs text-luxury-orange font-bold uppercase tracking-wider mono-font mt-1">
+                  <p className={styles.el_10}>
                     AI-powered Educational Doubts solver
                   </p>
                 </div>
@@ -155,14 +155,14 @@ export default function Projects() {
                 </p>
 
                 {/* Highlights List */}
-                <div className="space-y-2">
-                  <h4 className="text-xs font-bold text-luxury-purple mono-font uppercase tracking-widest">
+                <div className={styles.el_12}>
+                  <h4 className={styles.el_13}>
                     Performance Metrics & Highlights
                   </h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  <div className={styles.el_14}>
                     {featuredProject.highlights.map((h, i) => (
                       <div key={i} className="flex items-start gap-2 text-xs text-[var(--text-secondary)] font-medium">
-                        <Target size={12} className="text-luxury-orange mt-0.5 shrink-0" />
+                        <Target size={12} className={styles.el_15} />
                         <span>{h}</span>
                       </div>
                     ))}
@@ -170,15 +170,15 @@ export default function Projects() {
                 </div>
 
                 {/* Tech Pills */}
-                <div className="space-y-2">
-                  <h4 className="text-xs font-bold text-luxury-purple mono-font uppercase tracking-widest">
+                <div className={styles.el_16}>
+                  <h4 className={styles.el_17}>
                     Infrastructure Stack
                   </h4>
-                  <div className="flex flex-wrap gap-1.5">
+                  <div className={styles.el_18}>
                     {featuredProject.tech.map((t, idx) => (
                       <span
                         key={idx}
-                        className="text-[10px] bg-[var(--bg-tertiary)] border border-[var(--border-color)] text-[var(--text-secondary)] font-semibold px-2.5 py-1 rounded-full mono-font"
+                        className={styles.el_19}
                       >
                         {t}
                       </span>
@@ -187,13 +187,13 @@ export default function Projects() {
                 </div>
 
                 {/* Actions */}
-                <div className="flex flex-wrap items-center gap-3 pt-2">
+                <div className={styles.el_20}>
                   {featuredProject.live && (
                     <a
                       href={featuredProject.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-5 py-2.5 bg-gradient-to-r from-luxury-violet to-luxury-purple text-white text-xs font-bold rounded-xl shadow-md hover:opacity-95 transition-all flex items-center gap-1.5"
+                      className={styles.el_21}
                     >
                       <span>Live Demo</span>
                       <ExternalLink size={12} />
@@ -204,9 +204,9 @@ export default function Projects() {
                       href={featuredProject.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-5 py-2.5 bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:border-luxury-purple text-[var(--text-primary)] text-xs font-bold rounded-xl transition-all flex items-center gap-1.5"
+                      className={styles.el_22}
                     >
-                      <Github size={12} className="text-luxury-purple" />
+                      <Github size={12} className={styles.el_23} />
                       <span>GitHub Spec</span>
                     </a>
                   )}
@@ -215,34 +215,34 @@ export default function Projects() {
               </div>
 
               {/* Right Column: Dynamic Terminal Mockup */}
-              <div className="lg:col-span-5 select-none">
+              <div className={styles.el_24}>
                 <div className="w-full bg-neutral-900 text-neutral-300 rounded-2xl border border-neutral-800 p-4 shadow-xl font-mono text-[10px] space-y-2 relative overflow-hidden h-64 flex flex-col justify-between">
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-luxury-purple/10 blur-xl rounded-full"></div>
-                  
+                  <div className={styles.el_25}></div>
+
                   {/* Terminal Header */}
-                  <div className="flex items-center justify-between border-b border-neutral-800 pb-2 mb-1">
+                  <div className={styles.el_26}>
                     <div className="flex items-center gap-1.5">
-                      <span className="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
-                      <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
-                      <span className="w-2.5 h-2.5 rounded-full bg-green-500/80"></span>
+                      <span className={styles.el_27}></span>
+                      <span className={styles.el_28}></span>
+                      <span className={styles.el_29}></span>
                     </div>
-                    <span className="text-[9px] text-neutral-500 font-bold uppercase tracking-wider">vk-terminal@mathem</span>
+                    <span className={styles.el_30}>vk-terminal@mathem</span>
                   </div>
 
                   {/* Terminal Body */}
-                  <div className="flex-1 space-y-1.5 text-left overflow-y-auto">
-                    <p className="text-neutral-500"># Initializing vector space index</p>
-                    <p className="text-luxury-orange">$ pinecone.init_index("math-doubts")</p>
-                    <p className="text-green-400">✓ Index linked: 4,500 dimensions loaded</p>
-                    <p className="text-neutral-500"># Invoking Gemini semantic search inference</p>
-                    <p className="text-luxury-magenta">$ gemini.embed_query("linear equations graph")</p>
-                    <p className="text-neutral-300">↳ Embeddings: [0.124, -0.984, 0.443, ...]</p>
+                  <div className={styles.el_31}>
+                    <p className={styles.el_34}># Initializing vector space index</p>
+                    <p className={styles.el_32}>$ pinecone.init_index("math-doubts")</p>
+                    <p className={styles.el_33}>✓ Index linked: 4,500 dimensions loaded</p>
+                    <p className={styles.el_37}># Invoking Gemini semantic search inference</p>
+                    <p className={styles.el_35}>$ gemini.embed_query("linear equations graph")</p>
+                    <p className={styles.el_36}>↳ Embeddings: [0.124, -0.984, 0.443, ...]</p>
                     <p className="text-neutral-500"># Query response complete (98.4% match)</p>
-                    <p className="text-luxury-gold">✓ Doubts resolved for user session 3,104</p>
+                    <p className={styles.el_38}>✓ Doubts resolved for user session 3,104</p>
                   </div>
 
                   {/* Terminal Footer */}
-                  <div className="text-[9px] text-neutral-600 border-t border-neutral-800 pt-2 flex justify-between">
+                  <div className={styles.el_39}>
                     <span>Active connections: 104</span>
                     <span>Lat: 42ms</span>
                   </div>
@@ -254,31 +254,31 @@ export default function Projects() {
         )}
 
         {/* Secondary Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+        <div className={styles.el_40}>
           {filteredProjects.map((p) => (
             <div
               key={p.id}
-              className="glass-card glass-card-hover rounded-2xl border border-[var(--glass-border)] p-6 shadow-sm flex flex-col justify-between"
+              className={styles.el_40}
             >
-              <div className="space-y-4">
-                <div className="flex items-start justify-between">
+              <div className={styles.el_41}>
+                <div className={styles.el_42}>
                   <div>
-                    <h4 className="font-bold text-base text-[var(--text-primary)] leading-tight">
+                    <h4 className={styles.el_43}>
                       {p.title}
                     </h4>
-                    <span className="text-[9px] text-luxury-purple font-bold uppercase tracking-widest mono-font">
+                    <span className={styles.el_44}>
                       {p.category}
                     </span>
                   </div>
 
                   {/* Icon indicators */}
-                  <div className="flex gap-2">
+                  <div className={styles.el_45}>
                     {p.github && (
                       <a
                         href={p.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2 rounded-lg border border-[var(--border-color)] hover:border-luxury-purple text-[var(--text-muted)] hover:text-luxury-purple transition-all"
+                        className={styles.el_43}
                         title="GitHub Code"
                       >
                         <Github size={13} />
@@ -289,7 +289,7 @@ export default function Projects() {
                         href={p.live}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2 rounded-lg border border-[var(--border-color)] hover:border-luxury-purple text-[var(--text-muted)] hover:text-luxury-purple transition-all"
+                        className={styles.el_44}
                         title="Live Site"
                       >
                         <ExternalLink size={13} />
@@ -298,18 +298,18 @@ export default function Projects() {
                   </div>
                 </div>
 
-                <p className="text-xs text-[var(--text-secondary)] leading-relaxed min-h-[48px]">
+                <p className={styles.el_46}>
                   {p.desc}
                 </p>
               </div>
 
               {/* Technologies used */}
-              <div className="mt-4 pt-3 border-t border-[var(--border-color)] space-y-3">
+              <div className={styles.el_47}>
                 <div className="flex flex-wrap gap-1">
                   {p.tech.map((t, idx) => (
                     <span
                       key={idx}
-                      className="text-[9px] bg-[var(--bg-tertiary)] border border-[var(--border-color)] text-[var(--text-secondary)] font-semibold px-2 py-0.5 rounded-md mono-font"
+                      className={styles.el_48}
                     >
                       {t}
                     </span>

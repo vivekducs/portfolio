@@ -1,0 +1,58 @@
+@reference "../app/globals.css";
+
+.el_1 {
+  @apply relative py-12 border-t border-[var(--border-color)];
+}
+
+.el_2 {
+  @apply w-full max-w-6xl z-10 px-4;
+}
+
+.el_3 {
+  @apply flex flex-col mb-8 text-left;
+}
+
+.el_4 {
+  @apply text-3xl font-extrabold tracking-tight text-[var(--text-primary)];
+}
+
+.el_5 {
+  @apply glass-card glass-card-hover rounded-2xl border border-[var(--glass-border)] p-5 text-left relative overflow-hidden flex flex-col justify-between;
+}
+
+.el_6 {
+  @apply glass-card glass-card-hover rounded-2xl border border-[var(--glass-border)] p-5 text-left relative overflow-hidden flex flex-col justify-between;
+}
+
+.el_7 {
+  @apply space-y-4;
+}
+
+.el_8 {
+  @apply flex items-center gap-3;
+}
+
+.el_9 {
+  @apply w-full h-full rounded-lg bg-[var(--bg-secondary)] flex items-center justify-center text-brand-primary;
+}
+
+.el_10 {
+  @apply font-bold text-sm tracking-tight text-[var(--text-primary)];
+}
+
+.el_11 {
+  @apply grid grid-cols-2 gap-2 pt-2;
+}
+
+.el_12 {
+  @apply truncate;
+}
+
+.el_13 {
+  @apply text-brand-primary shrink-0;
+}
+
+.el_14 {
+  @apply truncate;
+}
+
