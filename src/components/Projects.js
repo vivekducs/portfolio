@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ExternalLink, Sparkles, BookOpen, Layers, Target, Shield } from "lucide-react";
+import ArchitectureDiagram from "./ArchitectureDiagram";
 
 const Github = ({ size = 24, ...props }) => (
   <svg
@@ -186,7 +187,7 @@ export default function Projects() {
                 </div>
 
                 {/* Actions */}
-                <div className="flex items-center gap-3 pt-2">
+                <div className="flex flex-wrap items-center gap-3 pt-2">
                   {featuredProject.live && (
                     <a
                       href={featuredProject.live}
@@ -209,6 +210,7 @@ export default function Projects() {
                       <span>GitHub Spec</span>
                     </a>
                   )}
+                  <ArchitectureDiagram projectId={featuredProject.id} />
                 </div>
               </div>
 
@@ -302,15 +304,18 @@ export default function Projects() {
               </div>
 
               {/* Technologies used */}
-              <div className="flex flex-wrap gap-1 mt-4 pt-3 border-t border-[var(--border-color)]">
-                {p.tech.map((t, idx) => (
-                  <span
-                    key={idx}
-                    className="text-[9px] bg-[var(--bg-tertiary)] border border-[var(--border-color)] text-[var(--text-secondary)] font-semibold px-2 py-0.5 rounded-md mono-font"
-                  >
-                    {t}
-                  </span>
-                ))}
+              <div className="mt-4 pt-3 border-t border-[var(--border-color)] space-y-3">
+                <div className="flex flex-wrap gap-1">
+                  {p.tech.map((t, idx) => (
+                    <span
+                      key={idx}
+                      className="text-[9px] bg-[var(--bg-tertiary)] border border-[var(--border-color)] text-[var(--text-secondary)] font-semibold px-2 py-0.5 rounded-md mono-font"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+                <ArchitectureDiagram projectId={p.id} />
               </div>
             </div>
           ))}

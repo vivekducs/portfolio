@@ -13,8 +13,50 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Vivek Kumar | Premium AI Engineer & Full Stack Developer Portfolio",
-  description: "Portfolio of Vivek Kumar, an MCA Student, AI Engineer, Backend Developer, and Full Stack Product Builder specializing in scalable architectures, real-time logs, and AI solutions.",
+  title: "Vivek Kumar | AI Engineer & Full Stack Developer Portfolio",
+  description:
+    "Portfolio of Vivek Kumar — MCA Student, AI Engineer, Full Stack Developer & Backend Architect from Noida, India. Specializing in scalable AI-powered systems, real-time backends, and production-grade products.",
+  keywords: [
+    "Vivek Kumar",
+    "AI Engineer",
+    "Full Stack Developer",
+    "Backend Developer",
+    "Node.js",
+    "React.js",
+    "Next.js",
+    "Gemini API",
+    "MCA Delhi University",
+    "Software Engineer",
+    "Portfolio",
+  ],
+  authors: [{ name: "Vivek Kumar", url: "https://github.com/AVPXM8" }],
+  creator: "Vivek Kumar",
+  openGraph: {
+    type: "website",
+    title: "Vivek Kumar | AI Engineer & Full Stack Developer",
+    description:
+      "Premium AI-powered engineering portfolio. Mathem Solvex · ObserveFlow · Palora. LeetCode Top 16.41% · 500+ DSA Problems · 3000+ Platform Users.",
+    siteName: "Vivek Kumar Portfolio",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Vivek Kumar | AI Engineer & Full Stack Developer",
+    description:
+      "Premium AI-powered engineering portfolio — scalable backends, AI integrations, and real-world products.",
+    creator: "@vivekducs",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 export default function RootLayout({ children }) {
@@ -29,4 +71,3 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
-

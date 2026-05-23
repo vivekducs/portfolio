@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
@@ -13,19 +14,38 @@ import Stats from "@/components/Stats";
 import Contact from "@/components/Contact";
 import VKAssistant from "@/components/VKAssistant";
 import VKAssistantPopup from "@/components/VKAssistantPopup";
-import { MessageSquare, Sparkles } from "lucide-react";
+import AchievementWall from "@/components/AchievementWall";
+import AIBootLoader from "@/components/AIBootLoader";
+import { MessageSquare, Sparkles, Bot } from "lucide-react";
+
+// Lazy load heavy 3D globe section
+const GlobeSection = dynamic(() => import("@/components/GlobeSection"), {
+  ssr: false,
+  loading: () => null,
+});
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState("home");
   const [isAssistantOpen, setIsAssistantOpen] = useState(false);
+  const [bootDone, setBootDone] = useState(false);
 
-  // Monitor scroll progress to trigger highlight changes in the sidebar
+  // Only show boot loader on first visit (per session)
+  const [showBoot, setShowBoot] = useState(false);
+  useEffect(() => {
+    const hasSeen = sessionStorage.getItem("vk-boot-seen");
+    if (!hasSeen) {
+      setShowBoot(true);
+      sessionStorage.setItem("vk-boot-seen", "1");
+    } else {
+      setBootDone(true);
+    }
+  }, []);
+
+  // Monitor scroll to update active section in sidebar
   useEffect(() => {
     const sections = ["home", "about", "skills", "projects", "experience", "certifications", "stats", "contact"];
-    
     const handleScrollObserver = () => {
       const scrollPos = window.scrollY + 200;
-      
       for (const section of sections) {
         const el = document.getElementById(section);
         if (el) {
@@ -38,91 +58,107 @@ export default function Home() {
         }
       }
     };
-
     window.addEventListener("scroll", handleScrollObserver);
     return () => window.removeEventListener("scroll", handleScrollObserver);
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col lg:flex-row bg-[var(--bg-primary)] transition-colors duration-400 select-none">
-      
-      {/* Desktop Sidebar Panel */}
-      <Sidebar 
-        activeSection={activeSection} 
-        onOpenAssistant={() => setIsAssistantOpen(true)} 
-      />
+    <>
+      {/* AI Boot Loader — cinematic first-visit experience */}
+      {showBoot && (
+        <AIBootLoader
+          onComplete={() => {
+            setShowBoot(false);
+            setBootDone(true);
+          }}
+        />
+      )}
 
-      {/* Main Workspace Frame */}
-      <div className="flex-1 flex flex-col overflow-x-hidden min-h-screen">
-        
-        {/* Sticky Mobile/Tablet Header Header */}
-        <Header 
-          activeSection={activeSection} 
-          onOpenAssistant={() => setIsAssistantOpen(true)} 
+      <div
+        className="min-h-screen flex flex-col lg:flex-row bg-[var(--bg-primary)] transition-colors duration-400 select-none"
+        style={{ opacity: bootDone ? 1 : 0, transition: "opacity 0.5s ease" }}
+      >
+        {/* Desktop Sidebar Panel */}
+        <Sidebar
+          activeSection={activeSection}
+          onOpenAssistant={() => setIsAssistantOpen(true)}
         />
 
-        {/* Dashboard Split Content grid */}
-        <div className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            
-            {/* Center Grid Column: Central Portfolio Sections (Hero, Projects, Skills) */}
-            <main className="lg:col-span-8 space-y-4">
-              <Hero onOpenAssistant={() => setIsAssistantOpen(true)} />
-              <About />
-              <Skills />
-              <Projects />
-              <Experience />
-              <Certifications />
-              <Stats />
-              <Contact />
-            </main>
+        {/* Main Workspace Frame */}
+        <div className="flex-1 flex flex-col overflow-x-hidden min-h-screen">
 
-            {/* Right Grid Column: Sticky Widget sidebar (VK Assistant chat client) */}
-            <aside className="hidden lg:block lg:col-span-4 sticky top-6 space-y-6 pt-16">
-              
-              {/* Dedicated VK AI Chat Window */}
-              <div className="relative">
-                <div className="absolute -top-3 left-6 z-10 px-2 py-0.5 bg-gradient-to-r from-luxury-violet to-luxury-magenta text-white font-bold text-[9px] rounded-full uppercase tracking-wider mono-font shadow-sm animate-pulse">
-                  Active Sandbox
+          {/* Sticky Mobile/Tablet Header */}
+          <Header
+            activeSection={activeSection}
+            onOpenAssistant={() => setIsAssistantOpen(true)}
+          />
+
+          {/* Dashboard Content Grid */}
+          <div className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+              {/* Center Grid Column: Main Portfolio Sections */}
+              <main className="lg:col-span-8 space-y-4">
+                <Hero onOpenAssistant={() => setIsAssistantOpen(true)} />
+                <About />
+                <GlobeSection />
+                <Skills />
+                <Projects />
+                <Experience />
+                <AchievementWall />
+                <Certifications />
+                <Stats />
+                <Contact />
+              </main>
+
+              {/* Right Grid Column: Sticky VK AI Chat Widget */}
+              <aside className="hidden lg:block lg:col-span-4 sticky top-6 space-y-6 pt-16">
+
+                {/* Dedicated VK AI Chat Window */}
+                <div className="relative">
+                  <div className="absolute -top-3 left-6 z-10 px-2 py-0.5 bg-gradient-to-r from-luxury-violet to-luxury-magenta text-white font-bold text-[9px] rounded-full uppercase tracking-wider mono-font shadow-sm animate-pulse">
+                    AI Active
+                  </div>
+                  <VKAssistant />
                 </div>
-                <VKAssistant />
-              </div>
 
-              {/* Recruitment Pitch Glass panel */}
-              <div className="glass-card rounded-2xl border border-[var(--glass-border)] p-5 shadow-sm text-left relative overflow-hidden">
-                {/* Glowing light spot */}
-                <div className="absolute top-0 right-0 w-24 h-24 bg-luxury-orange opacity-5 rounded-full blur-xl pointer-events-none"></div>
+                {/* Recruitment Pitch Glass panel */}
+                <div className="glass-card rounded-2xl border border-[var(--glass-border)] p-5 shadow-sm text-left relative overflow-hidden">
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-luxury-orange opacity-5 rounded-full blur-xl pointer-events-none" />
+                  <h4 className="text-xs font-bold text-luxury-orange mono-font uppercase tracking-widest mb-2 flex items-center gap-1.5">
+                    <Sparkles size={11} /> Quick Recruitment Spec
+                  </h4>
+                  <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed font-semibold">
+                    Vivek Kumar has a clean SDE intern record working on Vercel architectures, maintains a 1664 LeetCode rating, and specializes in Express/Node backend APIs. Request his full transcripts inside the Contact section!
+                  </p>
+                </div>
 
-                <h4 className="text-xs font-bold text-luxury-orange mono-font uppercase tracking-widest mb-2 flex items-center gap-1.5">
-                  <Sparkles size={11} /> Quick Recruitment Spec
-                </h4>
-                <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed font-semibold">
-                  Vivek Kumar has a clean SDE intern record working on Vercel architectures, maintains a 1664 LeetCode rating, and specializes in Express/Node backend APIs. Request his full transcripts inside the Contact section!
-                </p>
-              </div>
+              </aside>
 
-            </aside>
-
+            </div>
           </div>
+
         </div>
 
+        {/* Floating AI Button — Mobile */}
+        <button
+          onClick={() => setIsAssistantOpen(true)}
+          className="lg:hidden fixed bottom-6 right-6 z-50 p-4 rounded-full text-white shadow-xl shadow-luxury-purple/30 cursor-pointer flex items-center justify-center group"
+          style={{ background: "linear-gradient(135deg, #7c3aed, #d946ef, #f97316)" }}
+          title="Open VK Assistant AI"
+        >
+          <Bot size={20} className="group-hover:scale-110 transition-transform" />
+          {/* Pulse rings */}
+          <span className="absolute inset-0 rounded-full animate-ping bg-luxury-purple opacity-20" />
+        </button>
+
+        {/* Full AI Assistant Modal */}
+        <VKAssistantPopup
+          isOpen={isAssistantOpen}
+          onClose={() => setIsAssistantOpen(false)}
+        />
+
       </div>
-
-      {/* Floating Action Button (FAB) for Mobile AI Assistant */}
-      <button
-        onClick={() => setIsAssistantOpen(true)}
-        className="lg:hidden fixed bottom-6 right-6 z-50 p-4 rounded-full bg-gradient-to-r from-luxury-violet via-luxury-magenta to-luxury-orange text-white shadow-xl shadow-luxury-purple/20 hover:opacity-95 hover:scale-110 active:scale-95 transition-all cursor-pointer flex items-center justify-center animate-bounce"
-        title="Open VK Assistant AI"
-      >
-        <MessageSquare size={20} />
-      </button>
-
-      {/* Full AI Assistant Modal Dialog Drawer */}
-      <VKAssistantPopup 
-        isOpen={isAssistantOpen} 
-        onClose={() => setIsAssistantOpen(false)} 
-      />
-
-    </div>
+    </>
   );
 }
