@@ -1,0 +1,9 @@
+# Normalize line endings to LF on all platforms
+* text=auto eol=lf
+
+# Explicitly declare binary assets
+*.png binary
+*.ico binary
+*.svg text
+*.jpg binary
+*.webp binary

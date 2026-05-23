@@ -1,0 +1,172 @@
+@import "tailwindcss";
+
+@theme {
+  --color-luxury-purple: #9333ea;
+  --color-luxury-violet: #7c3aed;
+  --color-luxury-magenta: #d946ef;
+  --color-luxury-orange: #f97316;
+  --color-luxury-gold: #eab308;
+  --color-luxury-charcoal: #1e1e24;
+  --color-luxury-charcoal-dark: #121214;
+  --color-luxury-charcoal-light: #2d2d34;
+  
+  --font-geist-sans: var(--font-geist-sans);
+  --font-geist-mono: var(--font-geist-mono);
+}
+
+:root {
+  --bg-primary: #f6f7fb;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f0f1f6;
+  --text-primary: #121214;
+  --text-secondary: #4b5563;
+  --text-muted: #8c92a0;
+  --border-color: rgba(26, 26, 30, 0.08);
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --glow-opacity: 0.15;
+}
+
+[data-theme="dark"] {
+  --bg-primary: #08080a;
+  --bg-secondary: #121215;
+  --bg-tertiary: #16161b;
+  --text-primary: #f3f4f6;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
+  --border-color: rgba(255, 255, 255, 0.06);
+  --glass-bg: rgba(18, 18, 21, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.04);
+  --glow-opacity: 0.35;
+}
+
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(124, 58, 237, 0.2);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(124, 58, 237, 0.4);
+}
+
+/* Typography Overrides */
+.mono-font {
+  font-family: var(--font-geist-mono), monospace;
+}
+
+/* Custom Utilities for Luxury Aesthetic */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.04);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.glass-card-hover:hover {
+  transform: translateY(-4px);
+  border-color: rgba(124, 58, 237, 0.3);
+  box-shadow: 0 12px 40px -10px rgba(124, 58, 237, 0.15), 
+              0 0 20px -2px rgba(249, 115, 22, 0.05);
+}
+
+/* Glowing Neon Gradients */
+.text-glow-purple {
+  text-shadow: 0 0 12px rgba(147, 51, 234, 0.4);
+}
+
+.text-glow-orange {
+  text-shadow: 0 0 12px rgba(249, 115, 22, 0.4);
+}
+
+.gradient-text {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(135deg, #7c3aed 0%, #d946ef 50%, #f97316 100%);
+}
+
+.gradient-text-gold {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(135deg, #eab308 0%, #f97316 50%, #d946ef 100%);
+}
+
+.gradient-bg-purple-magenta {
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.08) 0%, rgba(217, 70, 239, 0.08) 100%);
+}
+
+/* Animated interactive floating lights */
+.glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: var(--glow-opacity);
+  transition: opacity 0.5s ease;
+  animation: float-orb 15s infinite alternate ease-in-out;
+}
+
+@keyframes float-orb {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(40px, -60px) scale(1.1);
+  }
+  100% {
+    transform: translate(-30px, 40px) scale(0.9);
+  }
+}
+
+.typing-cursor::after {
+  content: '|';
+  animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Simulated Audio Wave Animation */
+.bar {
+  display: inline-block;
+  width: 3px;
+  height: 2px;
+  background: linear-gradient(to top, #7c3aed, #d946ef);
+  border-radius: 3px;
+  animation: soundwave 1.2s infinite ease-in-out alternate;
+}
+.bar:nth-child(2) { animation-delay: 0.15s; }
+.bar:nth-child(3) { animation-delay: 0.3s; }
+.bar:nth-child(4) { animation-delay: 0.45s; }
+.bar:nth-child(5) { animation-delay: 0.05s; }
+
+@keyframes soundwave {
+  0% { height: 4px; }
+  100% { height: 18px; }
+}
