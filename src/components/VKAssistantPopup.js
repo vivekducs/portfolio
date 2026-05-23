@@ -1,107 +1,109 @@
 "use client";
 
-import { useState } from "react";
-import { X, Sparkles, Cpu, Clock, Terminal, Zap } from "lucide-react";
+import { useEffect, useRef } from "react";
+import { X, Sparkles, Cpu } from "lucide-react";
 import VKAssistant from "./VKAssistant";
 
 export default function VKAssistantPopup({ isOpen, onClose }) {
-  const [showDemo, setShowDemo] = useState(false);
+  const overlayRef = useRef(null);
+
+  // Close on Escape
+  useEffect(() => {
+    const handler = (e) => { if (e.key === "Escape") onClose(); };
+    if (isOpen) document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, [isOpen, onClose]);
+
+  // Prevent body scroll when open
+  useEffect(() => {
+    if (isOpen) document.body.style.overflow = "hidden";
+    else document.body.style.overflow = "";
+    return () => { document.body.style.overflow = ""; };
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      {/* Dark overlay with dynamic backdrop blur */}
-      <div 
-        onClick={onClose} 
-        className="absolute inset-0 bg-black/60 backdrop-blur-md transition-all duration-300"
-      ></div>
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4">
+      {/* Backdrop */}
+      <div
+        ref={overlayRef}
+        onClick={onClose}
+        className="absolute inset-0 bg-black/70 backdrop-blur-md"
+        style={{ animation: "fadeIn 0.2s ease" }}
+      />
 
-      {/* Glassmorphism Dialog container */}
-      <div className="relative w-full max-w-lg glass-card rounded-3xl border border-[var(--glass-border)] shadow-2xl p-6 overflow-hidden max-h-[90vh] flex flex-col z-10 animate-in fade-in zoom-in duration-300">
-        
-        {/* Colorful dynamic background spots */}
-        <div className="absolute -top-16 -left-16 w-32 h-32 bg-luxury-magenta opacity-25 rounded-full blur-3xl pointer-events-none"></div>
-        <div className="absolute -bottom-16 -right-16 w-32 h-32 bg-luxury-orange opacity-20 rounded-full blur-3xl pointer-events-none"></div>
+      {/* Dialog — bottom sheet on mobile, centered on desktop */}
+      <div
+        className="relative w-full sm:max-w-lg glass-card sm:rounded-3xl rounded-t-3xl border border-[var(--glass-border)] shadow-2xl overflow-hidden flex flex-col z-10 max-h-[92vh] sm:max-h-[85vh]"
+        style={{ animation: "slideUp 0.3s cubic-bezier(0.34,1.56,0.64,1)" }}
+      >
+        {/* Decorative glow blobs */}
+        <div className="absolute -top-20 -left-20 w-40 h-40 bg-luxury-violet opacity-20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-luxury-orange opacity-15 rounded-full blur-3xl pointer-events-none" />
 
-        {/* Close Button */}
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 p-1.5 rounded-full bg-[var(--bg-tertiary)] hover:bg-[var(--border-color)] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-all cursor-pointer"
-        >
-          <X size={18} />
-        </button>
+        {/* Header bar */}
+        <div className="flex items-center gap-3 px-5 py-4 border-b border-[var(--border-color)] shrink-0 relative">
+          {/* Drag handle on mobile */}
+          <div className="absolute top-2 left-1/2 -translate-x-1/2 w-10 h-1 rounded-full bg-[var(--border-color)] sm:hidden" />
 
-        {!showDemo ? (
-          <div className="text-center py-6 flex flex-col items-center">
-            {/* Holographic Glowing Icon */}
-            <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-luxury-violet via-luxury-magenta to-luxury-orange p-[2px] mb-4 shadow-lg shadow-luxury-purple/20 animate-bounce">
-              <div className="w-full h-full rounded-2xl bg-[var(--bg-secondary)] flex items-center justify-center text-luxury-magenta">
-                <Cpu size={28} />
-              </div>
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-luxury-violet via-luxury-magenta to-luxury-orange p-[1.5px] shadow-lg shadow-luxury-purple/20">
+            <div className="w-full h-full rounded-xl bg-[var(--bg-secondary)] flex items-center justify-center">
+              <Sparkles size={16} className="text-luxury-magenta animate-pulse" />
             </div>
+          </div>
 
-            <h3 className="text-2xl font-bold tracking-tight mb-2">
-              <span className="gradient-text">VK Assistant</span>
+          <div className="flex-1 min-w-0">
+            <h3 className="font-bold text-sm text-[var(--text-primary)] leading-tight">
+              VK <span className="gradient-text">Assistant</span>
             </h3>
-            <div className="inline-flex items-center gap-1.5 bg-luxury-purple/10 border border-luxury-purple/20 text-luxury-purple text-xs font-semibold px-3 py-1 rounded-full mb-6 mono-font">
-              <Clock size={12} className="animate-spin" /> PHASE 1: DEVELOPMENT
-            </div>
-
-            {/* Placeholder Text */}
-            <div className="glass-card rounded-2xl border p-5 mb-6 text-sm text-[var(--text-secondary)] leading-relaxed text-center max-w-sm">
-              <p className="font-semibold text-[var(--text-primary)] text-base mb-2">AI Assistant Coming Soon</p>
-              Integrating RAG pipelines, Gemini 1.5 Pro models, and vector stores to let you conduct voice and text interviews directly with Vivek's digital twin.
-            </div>
-
-            {/* Technical Spec Roadmap */}
-            <div className="w-full text-left space-y-3 mb-8 px-4 text-xs font-medium text-[var(--text-muted)] mono-font">
-              <div className="flex items-center gap-2">
-                <Terminal size={14} className="text-luxury-orange" />
-                <span>Fine-tuned LLM with customized portfolio system prompt</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Zap size={14} className="text-luxury-gold" />
-                <span>Vector embeddings via Pinecone for instant document search</span>
-              </div>
-            </div>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-3 w-full justify-center">
-              <button
-                onClick={() => setShowDemo(true)}
-                className="bg-gradient-to-r from-luxury-violet to-luxury-magenta text-white font-semibold text-sm px-6 py-3 rounded-xl hover:opacity-95 shadow-md shadow-luxury-purple/20 transition-all cursor-pointer flex items-center justify-center gap-1.5"
-              >
-                <Sparkles size={14} /> Try Pre-release Simulation
-              </button>
-              <button
-                onClick={onClose}
-                className="border border-[var(--border-color)] bg-[var(--bg-secondary)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] font-semibold text-sm px-6 py-3 rounded-xl hover:bg-[var(--bg-tertiary)] transition-all cursor-pointer"
-              >
-                Close Window
-              </button>
-            </div>
+            <p className="text-[10px] text-[var(--text-muted)] mono-font">
+              AI · Voice · Recruiter Mode
+            </p>
           </div>
-        ) : (
-          <div className="flex flex-col h-full">
-            <div className="flex items-center justify-between mb-4">
-              <div>
-                <h3 className="font-bold text-lg text-[var(--text-primary)]">Pre-release Sandbox</h3>
-                <p className="text-xs text-[var(--text-muted)]">Testing simulated knowledge graphs</p>
-              </div>
-              <button
-                onClick={() => setShowDemo(false)}
-                className="text-xs text-luxury-purple font-semibold hover:underline mono-font cursor-pointer"
-              >
-                ← Back to Roadmap
-              </button>
-            </div>
-            <div className="flex-1 overflow-hidden">
-              <VKAssistant isModal={true} onClose={onClose} />
-            </div>
+
+          {/* Waveform decoration */}
+          <div className="hidden sm:flex items-center gap-0.5 mr-2">
+            {[...Array(6)].map((_, i) => (
+              <span
+                key={i}
+                className="inline-block w-[3px] rounded-full bg-gradient-to-t from-luxury-violet to-luxury-magenta"
+                style={{
+                  height: `${8 + (i % 3) * 6}px`,
+                  animation: `soundwave 1.4s infinite ease-in-out alternate`,
+                  animationDelay: `${i * 0.1}s`,
+                }}
+              />
+            ))}
           </div>
-        )}
+
+          <button
+            onClick={onClose}
+            className="p-1.5 rounded-full hover:bg-[var(--bg-tertiary)] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-all cursor-pointer"
+          >
+            <X size={17} />
+          </button>
+        </div>
+
+        {/* Chat body */}
+        <div className="flex-1 overflow-hidden p-4 sm:p-5">
+          <VKAssistant isModal={true} onClose={onClose} />
+        </div>
+
+        {/* Footer */}
+        <div className="flex items-center justify-between px-5 py-2 border-t border-[var(--border-color)] shrink-0">
+          <span className="text-[9px] text-[var(--text-muted)] mono-font flex items-center gap-1">
+            <Cpu size={9} />
+            Powered by VK AI · Gemini 1.5 Flash
+          </span>
+          <span className="text-[9px] text-emerald-500 font-semibold mono-font">● Online</span>
+        </div>
       </div>
+
+      <style jsx>{`
+        @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px) scale(0.97) } to { opacity: 1; transform: translateY(0) scale(1) } }
+      `}</style>
     </div>
   );
 }
