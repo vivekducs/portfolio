@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Mail, Send, MessageSquareCode, FileText, CheckCircle2 } from "lucide-react";
-import styles from "./Contact.module.css";
 
 const Github = ({ size = 24, ...props }) => (
   <svg
@@ -60,48 +59,48 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className={styles.el_1}>
+    <section id="contact" className="relative py-12 border-t border-[var(--border-color)]">
       {/* Light orbs */}
-      <div className="absolute top-10 left-[15%] w-80 h-80 bg-brand-primary opacity-[0.06] rounded-full blur-[90px] pointer-events-none"></div>
+      <div className="absolute top-10 left-[15%] w-80 h-80 bg-luxury-purple opacity-[0.06] rounded-full blur-[90px] pointer-events-none"></div>
 
-      <div className={styles.el_2}>
+      <div className="w-full max-w-6xl z-10 px-4">
         
         {/* Title */}
-        <div className={styles.el_3}>
-          <p className="text-xs font-bold text-brand-primary mono-font uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
+        <div className="flex flex-col mb-8 text-left">
+          <p className="text-xs font-bold text-luxury-purple mono-font uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
             <MessageSquareCode size={13} /> INITIATE CONNECTION
           </p>
-          <h2 className={styles.el_4}>
+          <h2 className="text-3xl font-extrabold tracking-tight text-[var(--text-primary)]">
             Get In Touch
           </h2>
         </div>
 
         {/* Desktop Split Layout */}
-        <div className={styles.el_5}>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 text-left">
           
           {/* Left Column: Coordinates & Information */}
-          <div className={styles.el_6}>
+          <div className="lg:col-span-5 space-y-6">
             <h3 className="text-xl font-bold tracking-tight text-[var(--text-primary)]">
               Let's build something exceptional together
             </h3>
             
-            <p className={styles.el_7}>
+            <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
               If you are a recruiter, startup founder, or CTO looking for an agile **AI Engineer / Backend Developer** to join your team, let's connect! I respond promptly to all professional business inquiries.
             </p>
 
             {/* Coordinates Grid */}
-            <div className={styles.el_8}>
+            <div className="space-y-4 pt-2">
               
               {/* Email */}
               <a
                 href="mailto:vivekducs@gmail.com"
-                className={styles.el_10}
+                className="flex items-center gap-4 p-4 glass-card rounded-2xl border border-[var(--glass-border)] hover:border-luxury-purple/30 shadow-sm transition-all group"
               >
-                <div className={styles.el_8}>
+                <div className="w-10 h-10 rounded-xl bg-luxury-purple/10 border border-luxury-purple/20 text-luxury-purple flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                   <Mail size={16} />
                 </div>
                 <div>
-                  <h4 className={styles.el_9}>Email address</h4>
+                  <h4 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider mono-font">Email address</h4>
                   <p className="text-sm font-semibold text-[var(--text-primary)] break-all">vivekducs@gmail.com</p>
                 </div>
               </a>
@@ -111,13 +110,13 @@ export default function Contact() {
                 href="https://www.linkedin.com/in/vivek33pal/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={styles.el_12}
+                className="flex items-center gap-4 p-4 glass-card rounded-2xl border border-[var(--glass-border)] hover:border-luxury-purple/30 shadow-sm transition-all group"
               >
-                <div className={styles.el_10}>
+                <div className="w-10 h-10 rounded-xl bg-luxury-purple/10 border border-luxury-purple/20 text-luxury-purple flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                   <Linkedin size={16} />
                 </div>
                 <div>
-                  <h4 className={styles.el_10}>LinkedIn Profile</h4>
+                  <h4 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider mono-font">LinkedIn Profile</h4>
                   <p className="text-sm font-semibold text-[var(--text-primary)] break-all">linkedin.com/in/vivek33pal</p>
                 </div>
               </a>
@@ -127,13 +126,13 @@ export default function Contact() {
                 href="https://github.com/AVPXM8"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={styles.el_11}
+                className="flex items-center gap-4 p-4 glass-card rounded-2xl border border-[var(--glass-border)] hover:border-luxury-purple/30 shadow-sm transition-all group"
               >
-                <div className={styles.el_12}>
+                <div className="w-10 h-10 rounded-xl bg-luxury-purple/10 border border-luxury-purple/20 text-luxury-purple flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                   <Github size={16} />
                 </div>
                 <div>
-                  <h4 className={styles.el_12}>GitHub Handles</h4>
+                  <h4 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider mono-font">GitHub Handles</h4>
                   <p className="text-sm font-semibold text-[var(--text-primary)] break-all">github.com/AVPXM8</p>
                 </div>
               </a>
@@ -142,85 +141,81 @@ export default function Contact() {
           </div>
 
           {/* Right Column: Dynamic Form */}
-          <div className={styles.el_13}>
-            <div className={styles.el_17}>
+          <div className="lg:col-span-7">
+            <div className="glass-card rounded-3xl border border-[var(--glass-border)] p-6 md:p-8 shadow-md relative overflow-hidden">
               
               {/* Corner accent glow decorative */}
-              <div className={styles.el_14}></div>
+              <div className="absolute top-0 right-0 w-32 h-32 bg-luxury-magenta opacity-5 rounded-full blur-2xl -mr-16 -mt-16 pointer-events-none"></div>
 
-              <h4 className="text-sm font-bold text-brand-primary uppercase tracking-widest mono-font mb-6">
+              <h4 className="text-sm font-bold text-luxury-purple uppercase tracking-widest mono-font mb-6">
                 Send a Message
               </h4>
 
               {success ? (
-                <div className={`animate-in fade-in ${styles.el_15}`}>
+                <div className="py-10 text-center flex flex-col items-center justify-center space-y-4 animate-in fade-in duration-300">
                   <div className="w-14 h-14 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 flex items-center justify-center animate-bounce">
                     <CheckCircle2 size={32} />
                   </div>
-                  <h5 className={styles.el_16}>Message Transmitted Successfully!</h5>
+                  <h5 className="font-bold text-lg text-[var(--text-primary)]">Message Transmitted Successfully!</h5>
                   <p className="text-xs text-[var(--text-secondary)] font-medium max-w-xs">
                     Thank you! Your message has been encrypted and routed to Vivek Kumar. He will be in touch shortly.
                   </p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className={styles.el_18}>
+                <form onSubmit={handleSubmit} className="space-y-4">
                   {/* Name field */}
-                  <div className={styles.el_19}>
-                    <label htmlFor="name" className={styles.el_20}>
+                  <div className="text-left">
+                    <label htmlFor="name" className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider mono-font mb-1.5">
                       Your Name
                     </label>
                     <input
-                      suppressHydrationWarning
                       id="name"
                       type="text"
                       required
                       value={form.name}
                       onChange={(e) => setForm({ ...form, name: e.target.value })}
                       placeholder="e.g. Alex Recruiter"
-                      className={styles.el_21}
+                      className="w-full bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-luxury-purple focus:ring-1 focus:ring-luxury-purple transition-all text-[var(--text-primary)]"
                     />
                   </div>
 
                   {/* Email field */}
-                  <div className={styles.el_22}>
-                    <label htmlFor="email" className={styles.el_23}>
+                  <div className="text-left">
+                    <label htmlFor="email" className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider mono-font mb-1.5">
                       Email Address
                     </label>
                     <input
-                      suppressHydrationWarning
                       id="email"
                       type="email"
                       required
                       value={form.email}
                       onChange={(e) => setForm({ ...form, email: e.target.value })}
                       placeholder="e.g. alex@company.com"
-                      className={styles.el_26}
+                      className="w-full bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-luxury-purple focus:ring-1 focus:ring-luxury-purple transition-all text-[var(--text-primary)]"
                     />
                   </div>
 
                   {/* Message field */}
-                  <div className={styles.el_24}>
-                    <label htmlFor="message" className={styles.el_25}>
+                  <div className="text-left">
+                    <label htmlFor="message" className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider mono-font mb-1.5">
                       Message
                     </label>
                     <textarea
-                      suppressHydrationWarning
                       id="message"
                       required
                       rows={4}
                       value={form.message}
                       onChange={(e) => setForm({ ...form, message: e.target.value })}
                       placeholder="Hi Vivek, I looked at your NIMCET Rank Predictor and SDE intern timeline..."
-                      className={styles.el_27}
+                      className="w-full bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-luxury-purple focus:ring-1 focus:ring-luxury-purple transition-all text-[var(--text-primary)]"
                     />
                   </div>
 
                   {/* Submit Button */}
                   <button
-                    suppressHydrationWarning
                     type="submit"
                     disabled={isSubmitting}
-                    className={styles.el_28}
+                    className="w-full py-3.5 bg-gradient-to-r from-luxury-violet to-luxury-purple hover:opacity-95 text-white font-bold text-sm rounded-xl shadow-md flex items-center justify-center gap-2 transition-all cursor-pointer disabled:opacity-50 hover:translate-y-[-1px]"
                   >
                     <span>{isSubmitting ? "Transmitting..." : "Send Secure Message"}</span>
                     <Send size={13} className={isSubmitting ? "animate-ping" : ""} />
@@ -234,11 +229,11 @@ export default function Contact() {
         </div>
 
         {/* Mobile footer credits */}
-        <div className={styles.el_29}>
-          <div className={styles.el_26}>
-            <a href="https://github.com/AVPXM8" target="_blank" rel="noopener noreferrer" className={styles.el_30}>GitHub</a>
-            <a href="https://www.linkedin.com/in/vivek33pal/" target="_blank" rel="noopener noreferrer" className={styles.el_31}>LinkedIn</a>
-            <a href="mailto:vivekducs@gmail.com" className={styles.el_32}>Email</a>
+        <div className="lg:hidden text-[10px] text-[var(--text-muted)] font-semibold mono-font text-center border-t border-[var(--border-color)] mt-12 pt-6 pb-2 space-y-4">
+          <div className="flex justify-center gap-6">
+            <a href="https://github.com/AVPXM8" target="_blank" rel="noopener noreferrer" className="hover:text-luxury-purple">GitHub</a>
+            <a href="https://www.linkedin.com/in/vivek33pal/" target="_blank" rel="noopener noreferrer" className="hover:text-luxury-purple">LinkedIn</a>
+            <a href="mailto:vivekducs@gmail.com" className="hover:text-luxury-purple">Email</a>
           </div>
           <div>
             © 2026 Vivek Kumar. All rights reserved.

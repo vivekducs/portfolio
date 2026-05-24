@@ -17,7 +17,6 @@ import VKAssistantPopup from "@/components/VKAssistantPopup";
 import AchievementWall from "@/components/AchievementWall";
 import AIBootLoader from "@/components/AIBootLoader";
 import { MessageSquare, Sparkles, Bot } from "lucide-react";
-import styles from "./page.module.css";
 
 // Lazy load heavy 3D globe section
 const GlobeSection = dynamic(() => import("@/components/GlobeSection"), {
@@ -76,7 +75,7 @@ export default function Home() {
       )}
 
       <div
-        className={styles.el_1}
+        className="min-h-screen flex flex-col lg:flex-row bg-[var(--bg-primary)] transition-colors duration-400 select-none"
         style={{ opacity: bootDone ? 1 : 0, transition: "opacity 0.5s ease" }}
       >
         {/* Desktop Sidebar Panel */}
@@ -86,7 +85,7 @@ export default function Home() {
         />
 
         {/* Main Workspace Frame */}
-        <div className={styles.el_2}>
+        <div className="flex-1 flex flex-col overflow-x-hidden min-h-screen">
 
           {/* Sticky Mobile/Tablet Header */}
           <Header
@@ -95,11 +94,11 @@ export default function Home() {
           />
 
           {/* Dashboard Content Grid */}
-          <div className={styles.el_3}>
-            <div className={styles.el_2}>
+          <div className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
               {/* Center Grid Column: Main Portfolio Sections */}
-              <main className={styles.el_4}>
+              <main className="lg:col-span-8 space-y-4">
                 <Hero onOpenAssistant={() => setIsAssistantOpen(true)} />
                 <About />
                 <GlobeSection />
@@ -112,51 +111,25 @@ export default function Home() {
                 <Contact />
               </main>
 
-              {/* Right Grid Column: Persistent Utilities Pane */}
-              <aside className={styles.el_5}>
+              {/* Right Grid Column: Sticky VK AI Chat Widget */}
+              <aside className="hidden lg:block lg:col-span-4 sticky top-6 space-y-6 pt-16">
 
-                {/* VK AI Chat Window (Taller & Persistent) */}
-                <div className={styles.el_6}>
-                  <div className="absolute -top-3 left-6 z-10 px-2.5 py-0.5 bg-gradient-to-r from-brand-primary to-brand-secondary text-white font-bold text-[9px] rounded-full uppercase tracking-wider mono-font shadow-sm">
-                    <span className={styles.el_7}>●</span> AI Active
+                {/* Dedicated VK AI Chat Window */}
+                <div className="relative">
+                  <div className="absolute -top-3 left-6 z-10 px-2 py-0.5 bg-gradient-to-r from-luxury-violet to-luxury-magenta text-white font-bold text-[9px] rounded-full uppercase tracking-wider mono-font shadow-sm animate-pulse">
+                    AI Active
                   </div>
-                  <div className={styles.el_8}>
-                    <VKAssistant />
-                  </div>
+                  <VKAssistant />
                 </div>
 
-                {/* Quick Stats / System Status Widget */}
-                <div className={styles.el_9}>
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-brand-primary opacity-5 rounded-full blur-2xl pointer-events-none" />
-                  <h4 className={styles.el_10}>
-                    <Bot size={11} className="text-brand-primary" /> Live System Status
+                {/* Recruitment Pitch Glass panel */}
+                <div className="glass-card rounded-2xl border border-[var(--glass-border)] p-5 shadow-sm text-left relative overflow-hidden">
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-luxury-orange opacity-5 rounded-full blur-xl pointer-events-none" />
+                  <h4 className="text-xs font-bold text-luxury-orange mono-font uppercase tracking-widest mb-2 flex items-center gap-1.5">
+                    <Sparkles size={11} /> Quick Recruitment Spec
                   </h4>
-                  
-                  <div className={styles.el_11}>
-                    <div className={styles.el_12}>
-                      <span className={styles.el_13}>LeetCode Global Rank</span>
-                      <span className={styles.el_14}>Top 4%</span>
-                    </div>
-                    <div className={styles.el_15}>
-                      <div className="bg-brand-primary h-full rounded-full" style={{ width: "96%" }}></div>
-                    </div>
-                    
-                    <div className={styles.el_16}>
-                      <span className={styles.el_17}>Backend Systems</span>
-                      <span className={styles.el_18}>
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Online
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Recruitment Pitch */}
-                <div className={styles.el_19}>
-                  <h4 className="text-xs font-bold text-brand-primary mono-font uppercase tracking-widest mb-2 flex items-center gap-1.5">
-                    <Sparkles size={11} /> Quick Spec
-                  </h4>
-                  <p className={styles.el_20}>
-                    Vivek Kumar has a clean SDE intern record working on Vercel architectures, maintains a 1664 LeetCode rating, and specializes in Express/Node backend APIs.
+                  <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed font-semibold">
+                    Vivek Kumar has a clean SDE intern record working on Vercel architectures, maintains a 1664 LeetCode rating, and specializes in Express/Node backend APIs. Request his full transcripts inside the Contact section!
                   </p>
                 </div>
 
@@ -167,7 +140,19 @@ export default function Home() {
 
         </div>
 
-        {/* Full AI Assistant Bottom Sheet (Mobile) */}
+        {/* Floating AI Button — Mobile */}
+        <button
+          onClick={() => setIsAssistantOpen(true)}
+          className="lg:hidden fixed bottom-6 right-6 z-50 p-4 rounded-full text-white shadow-xl shadow-luxury-purple/30 cursor-pointer flex items-center justify-center group"
+          style={{ background: "linear-gradient(135deg, #7c3aed, #d946ef, #f97316)" }}
+          title="Open VK Assistant AI"
+        >
+          <Bot size={20} className="group-hover:scale-110 transition-transform" />
+          {/* Pulse rings */}
+          <span className="absolute inset-0 rounded-full animate-ping bg-luxury-purple opacity-20" />
+        </button>
+
+        {/* Full AI Assistant Modal */}
         <VKAssistantPopup
           isOpen={isAssistantOpen}
           onClose={() => setIsAssistantOpen(false)}

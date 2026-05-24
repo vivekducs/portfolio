@@ -1,26 +1,20 @@
 export async function GET() {
   try {
-    const headers = {
-      Accept: "application/vnd.github.v3+json",
-      "User-Agent": "VK-Portfolio",
-    };
-    
-    if (process.env.GITHUB_PAT) {
-      headers.Authorization = `Bearer ${process.env.GITHUB_PAT}`;
-    }
-
     const res = await fetch("https://api.github.com/users/AVPXM8", {
-      headers,
+      headers: {
+        Accept: "application/vnd.github.v3+json",
+        "User-Agent": "VK-Portfolio",
+      },
       next: { revalidate: 3600 }, // Cache 1 hour
     });
 
-    if (!res.ok) throw new Error("GitHub API failed: " + res.status);
+    if (!res.ok) throw new Error("GitHub API failed");
 
     const data = await res.json();
 
     // Also fetch repos for language stats
     const reposRes = await fetch("https://api.github.com/users/AVPXM8/repos?per_page=100&sort=updated", {
-      headers,
+      headers: { Accept: "application/vnd.github.v3+json", "User-Agent": "VK-Portfolio" },
       next: { revalidate: 3600 },
     });
 
@@ -40,16 +34,15 @@ export async function GET() {
     }
 
     return Response.json({
-      public_repos: data.public_repos || 0,
+      public_repos: data.public_repos || 30,
       followers: data.followers || 0,
       following: data.following || 0,
       avatar_url: data.avatar_url,
       bio: data.bio,
       topLanguages,
     });
-  } catch (error) {
-    console.error("GitHub API Error:", error);
-    // Fallback static data just in case
+  } catch {
+    // Fallback static data
     return Response.json({
       public_repos: 30,
       followers: 12,

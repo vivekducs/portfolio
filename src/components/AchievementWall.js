@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect } from "react";
 import { Trophy, Star, Code2, Users, TrendingUp, Zap, Award } from "lucide-react";
-import styles from "./AchievementWall.module.css";
 
 const Github = ({ size = 24, ...props }) => (
   <svg viewBox="0 0 24 24" width={size} height={size} stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" {...props}>
@@ -19,7 +18,7 @@ const ACHIEVEMENTS = [
     suffix: "+",
     label: "DSA Problems Solved",
     sub: "LeetCode, GFG, HackerRank",
-    color: "from-brand-primary to-brand-secondary",
+    color: "from-luxury-violet to-luxury-purple",
     glowColor: "rgba(124,58,237,0.25)",
     delay: 0,
   },
@@ -30,7 +29,7 @@ const ACHIEVEMENTS = [
     suffix: "+",
     label: "Active Platform Users",
     sub: "Mathem Solvex",
-    color: "from-brand-secondary to-pink-500",
+    color: "from-luxury-magenta to-pink-500",
     glowColor: "rgba(217,70,239,0.25)",
     delay: 100,
   },
@@ -41,7 +40,7 @@ const ACHIEVEMENTS = [
     suffix: "K+",
     label: "Search Impressions",
     sub: "Google Search Console",
-    color: "from-brand-primary to-yellow-500",
+    color: "from-luxury-orange to-yellow-500",
     glowColor: "rgba(249,115,22,0.25)",
     delay: 200,
   },
@@ -74,7 +73,7 @@ const ACHIEVEMENTS = [
     suffix: "+",
     label: "AI Products Built",
     sub: "Gemini · Pinecone · TensorFlow",
-    color: "from-brand-primary to-brand-secondary",
+    color: "from-luxury-violet to-luxury-magenta",
     glowColor: "rgba(124,58,237,0.25)",
     delay: 100,
   },
@@ -96,7 +95,7 @@ const ACHIEVEMENTS = [
     suffix: "+",
     label: "Production Deployments",
     sub: "Vercel · Docker · CI/CD",
-    color: "from-brand-primary to-brand-secondary",
+    color: "from-luxury-orange to-luxury-magenta",
     glowColor: "rgba(249,115,22,0.25)",
     delay: 300,
   },
@@ -153,7 +152,7 @@ function AchievementCard({ ach, index }) {
       ref={ref}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className={`group ${styles.el_1}`}
+      className="relative glass-card rounded-2xl border border-[var(--glass-border)] p-5 flex flex-col items-start gap-3 cursor-default overflow-hidden transition-all duration-300 group"
       style={{
         transitionDelay: `${ach.delay}ms`,
         transform: inView ? "translateY(0) scale(1)" : "translateY(20px) scale(0.97)",
@@ -170,8 +169,8 @@ function AchievementCard({ ach, index }) {
 
       {/* Icon */}
       <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${ach.color} p-[1.5px] shadow-md`}>
-        <div className={styles.el_1}>
-          <Icon size={18} className="text-brand-primary" />
+        <div className="w-full h-full rounded-xl bg-[var(--bg-secondary)] flex items-center justify-center">
+          <Icon size={18} className="text-luxury-purple" />
         </div>
       </div>
 
@@ -189,7 +188,7 @@ function AchievementCard({ ach, index }) {
             <span>0{ach.suffix}</span>
           )}
         </div>
-        <p className={styles.el_2}>{ach.label}</p>
+        <p className="text-sm font-bold text-[var(--text-primary)] mt-1 leading-tight">{ach.label}</p>
         <p className="text-[10px] text-[var(--text-muted)] mono-font mt-0.5">{ach.sub}</p>
       </div>
     </div>
@@ -198,24 +197,24 @@ function AchievementCard({ ach, index }) {
 
 export default function AchievementWall() {
   return (
-    <section className={styles.el_3}>
+    <section className="relative py-12 border-t border-[var(--border-color)]">
       {/* Glow */}
-      <div className="absolute top-20 left-[30%] w-80 h-80 bg-brand-primary opacity-[0.06] rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-20 left-[30%] w-80 h-80 bg-luxury-purple opacity-[0.06] rounded-full blur-[100px] pointer-events-none" />
 
-      <div className={styles.el_4}>
-        <div className={styles.el_5}>
-          <p className="text-xs font-bold text-brand-primary mono-font uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
+      <div className="w-full max-w-6xl z-10 px-4">
+        <div className="flex flex-col mb-8 text-left">
+          <p className="text-xs font-bold text-luxury-purple mono-font uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
             <Trophy size={13} /> MILESTONES
           </p>
-          <h2 className={styles.el_6}>
+          <h2 className="text-3xl font-extrabold tracking-tight text-[var(--text-primary)]">
             Achievement Wall
           </h2>
-          <p className={styles.el_7}>
+          <p className="text-sm text-[var(--text-secondary)] mt-2">
             Real metrics. Real impact. Built with code, deployed in production.
           </p>
         </div>
 
-        <div className={styles.el_9}>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {ACHIEVEMENTS.map((ach, i) => (
             <AchievementCard key={ach.id} ach={ach} index={i} />
           ))}
