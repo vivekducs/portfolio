@@ -68,7 +68,7 @@ export default function RootLayout({ children }) {
     "url": "https://vivekkumar-portfolio.vercel.app",
     "sameAs": [
       "https://github.com/AVPXM8",
-      "https://linkedin.com/in/vivekkumar"
+      "https://www.linkedin.com/in/vivek33pal/"
     ],
     "knowsAbout": ["Artificial Intelligence", "Node.js", "React.js", "MongoDB", "System Architecture"]
   };

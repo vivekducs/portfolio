@@ -169,13 +169,13 @@ export default function Sidebar({ activeSection, onOpenAssistant, isRecruiterMod
 
         {/* Resume Download CTA */}
         <a
-          href="https://github.com/AVPXM8"
+          href="https://drive.google.com/drive/folders/17Jgpo84jUw77VX0JZ6AZZ4IGqIZ_u6f4?usp=drive_link"
           target="_blank"
           rel="noopener noreferrer"
           className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-[var(--bg-tertiary)] border border-[var(--border-color)] hover:border-[var(--text-primary)] hover:bg-[var(--text-primary)] hover:text-[var(--bg-primary)] text-[var(--text-primary)] font-semibold text-sm rounded-xl shadow-sm transition-all group"
         >
           <FileText size={15} className="group-hover:scale-110 transition-transform" />
-          <span>View GitHub CV</span>
+          <span>View Resume</span>
         </a>
 
         {/* Social Icons row */}

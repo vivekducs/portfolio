@@ -144,7 +144,7 @@ export default function Hero({ onOpenAssistant }) {
                 </button>
 
                 <a
-                  href="https://github.com/AVPXM8"
+                  href="https://drive.google.com/drive/folders/17Jgpo84jUw77VX0JZ6AZZ4IGqIZ_u6f4?usp=drive_link"
                   onClick={() => trackDownload("Resume.pdf")}
                   target="_blank"
                   rel="noopener noreferrer"
