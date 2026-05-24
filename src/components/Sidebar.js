@@ -1,6 +1,6 @@
 "use client";
 
-import { Home, User, Code2, Briefcase, Award, History, BarChart3, Mail, FileText, Moon, Sun, Sparkles } from "lucide-react";
+import { Home, User, Code2, Briefcase, Award, History, BarChart3, Mail, FileText, Moon, Sun, Sparkles, BookOpen } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 
 const Github = ({ size = 24, ...props }) => (
@@ -39,24 +39,38 @@ const Linkedin = ({ size = 24, ...props }) => (
 );
 
 
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+
 export default function Sidebar({ activeSection, onOpenAssistant, isRecruiterMode, toggleRecruiterMode }) {
   const { theme, toggleTheme } = useTheme();
+  const pathname = usePathname();
+  const router = useRouter();
 
   const menuItems = [
-    { id: "home", label: "Home", icon: Home },
-    { id: "about", label: "About", icon: User },
-    { id: "skills", label: "Skills", icon: Code2 },
-    { id: "projects", label: "Projects", icon: Briefcase },
-    { id: "experience", label: "Experience", icon: History },
-    { id: "certifications", label: "Certifications", icon: Award },
-    { id: "stats", label: "Stats & DSA", icon: BarChart3 },
-    { id: "contact", label: "Contact", icon: Mail },
+    { id: "home", label: "Home", icon: Home, type: "anchor" },
+    { id: "about", label: "About", icon: User, type: "anchor" },
+    { id: "skills", label: "Skills", icon: Code2, type: "anchor" },
+    { id: "projects", label: "Projects", icon: Briefcase, type: "anchor" },
+    { id: "experience", label: "Experience", icon: History, type: "anchor" },
+    { id: "certifications", label: "Certifications", icon: Award, type: "anchor" },
+    { id: "stats", label: "Stats & DSA", icon: BarChart3, type: "anchor" },
+    { id: "contact", label: "Contact", icon: Mail, type: "anchor" },
+    { id: "blog", label: "Blog & Articles", icon: BookOpen, type: "link", path: "/blog" },
   ];
 
-  const handleScroll = (id) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
+  const handleNavigation = (item) => {
+    if (item.type === "link") {
+      router.push(item.path);
+    } else {
+      if (pathname !== "/") {
+        router.push(`/#${item.id}`);
+      } else {
+        const el = document.getElementById(item.id);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+        }
+      }
     }
   };
 
@@ -65,7 +79,7 @@ export default function Sidebar({ activeSection, onOpenAssistant, isRecruiterMod
       {/* Top Section - Brand Logo */}
       <div className="space-y-8">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2 cursor-pointer" onClick={() => handleScroll("home")}>
+          <div className="flex items-center gap-2 cursor-pointer" onClick={() => handleNavigation({ id: "home", type: "anchor" })}>
             <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-luxury-violet via-luxury-magenta to-luxury-orange p-[1.5px] shadow-lg shadow-luxury-purple/10">
               <div className="w-full h-full rounded-xl bg-[var(--bg-secondary)] flex items-center justify-center font-bold text-lg tracking-wider">
                 <span className="gradient-text">VK</span>
@@ -91,11 +105,11 @@ export default function Sidebar({ activeSection, onOpenAssistant, isRecruiterMod
         <nav className="space-y-1">
           {menuItems.map((item) => {
             const Icon = item.icon;
-            const isActive = activeSection === item.id;
+            const isActive = item.type === "link" ? pathname.startsWith(item.path) : (pathname === "/" && activeSection === item.id);
             return (
               <button
                 key={item.id}
-                onClick={() => handleScroll(item.id)}
+                onClick={() => handleNavigation(item)}
                 className={`w-full flex items-center gap-3.5 px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-200 cursor-pointer ${
                   isActive
                     ? "bg-gradient-to-r from-luxury-purple/10 to-luxury-magenta/5 border-l-2 border-luxury-purple text-luxury-purple"

@@ -1,37 +1,49 @@
 "use client";
 
 import { useState } from "react";
-import { Menu, X, Sun, Moon, Sparkles, Home, User, Code2, Briefcase, Award, History, BarChart3, Mail, FileText, Link as LinkIcon } from "lucide-react";
+import { Menu, X, Sun, Moon, Sparkles, Home, User, Code2, Briefcase, Award, History, BarChart3, Mail, FileText, Link as LinkIcon, BookOpen } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function Header({ activeSection, onOpenAssistant, isRecruiterMode, toggleRecruiterMode }) {
   const { theme, toggleTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
 
-  const handleScroll = (id) => {
+  const handleNavigation = (item) => {
     setIsOpen(false);
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
+    if (item.type === "link") {
+      router.push(item.path);
+    } else {
+      if (pathname !== "/") {
+        router.push(`/#${item.id}`);
+      } else {
+        const el = document.getElementById(item.id);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+        }
+      }
     }
   };
 
   const menuItems = [
-    { id: "home", label: "Home", icon: Home },
-    { id: "about", label: "About", icon: User },
-    { id: "skills", label: "Skills", icon: Code2 },
-    { id: "projects", label: "Projects", icon: Briefcase },
-    { id: "experience", label: "Experience", icon: History },
-    { id: "certifications", label: "Certifications", icon: Award },
-    { id: "stats", label: "Stats & DSA", icon: BarChart3 },
-    { id: "contact", label: "Contact", icon: Mail },
+    { id: "home", label: "Home", icon: Home, type: "anchor" },
+    { id: "about", label: "About", icon: User, type: "anchor" },
+    { id: "skills", label: "Skills", icon: Code2, type: "anchor" },
+    { id: "projects", label: "Projects", icon: Briefcase, type: "anchor" },
+    { id: "experience", label: "Experience", icon: History, type: "anchor" },
+    { id: "certifications", label: "Certifications", icon: Award, type: "anchor" },
+    { id: "stats", label: "Stats & DSA", icon: BarChart3, type: "anchor" },
+    { id: "contact", label: "Contact", icon: Mail, type: "anchor" },
+    { id: "blog", label: "Blog & Articles", icon: BookOpen, type: "link", path: "/blog" },
   ];
 
   return (
     <header className="lg:hidden w-full sticky top-0 bg-[var(--bg-secondary)] border-b border-[var(--border-color)] px-5 py-4 z-40">
       <div className="flex items-center justify-between">
         {/* Mobile Logo */}
-        <div className="flex items-center gap-2 cursor-pointer" onClick={() => handleScroll("home")}>
+        <div className="flex items-center gap-2 cursor-pointer" onClick={() => handleNavigation({ id: "home", type: "anchor" })}>
           <div className="w-9 h-9 rounded-lg bg-gradient-to-tr from-luxury-violet via-luxury-magenta to-luxury-orange p-[1.5px]">
             <div className="w-full h-full rounded-lg bg-[var(--bg-secondary)] flex items-center justify-center font-bold text-base">
               <span className="gradient-text">VK</span>
@@ -90,11 +102,11 @@ export default function Header({ activeSection, onOpenAssistant, isRecruiterMode
           <nav className="flex flex-col px-6 space-y-1">
             {menuItems.map((item) => {
               const Icon = item.icon;
-              const isActive = activeSection === item.id;
+              const isActive = item.type === "link" ? pathname.startsWith(item.path) : (pathname === "/" && activeSection === item.id);
               return (
                 <button
                   key={item.id}
-                  onClick={() => handleScroll(item.id)}
+                  onClick={() => handleNavigation(item)}
                   className={`w-full flex items-center gap-3.5 px-4 py-3 rounded-xl text-sm font-semibold transition-all cursor-pointer ${
                     isActive
                       ? "bg-luxury-purple/10 border-l-2 border-luxury-purple text-luxury-purple"
