@@ -18,8 +18,8 @@ const ACHIEVEMENTS = [
     suffix: "+",
     label: "DSA Problems Solved",
     sub: "LeetCode, GFG, HackerRank",
-    color: "from-luxury-violet to-luxury-purple",
-    glowColor: "rgba(124,58,237,0.25)",
+    color: "from-green-600 to-emerald-500",
+    glowColor: "rgba(34,197,94,0.15)",
     delay: 0,
   },
   {
@@ -29,8 +29,8 @@ const ACHIEVEMENTS = [
     suffix: "+",
     label: "Active Platform Users",
     sub: "Mathem Solvex",
-    color: "from-luxury-magenta to-pink-500",
-    glowColor: "rgba(217,70,239,0.25)",
+    color: "from-emerald-600 to-green-500",
+    glowColor: "rgba(16,185,129,0.15)",
     delay: 100,
   },
   {
@@ -40,8 +40,8 @@ const ACHIEVEMENTS = [
     suffix: "K+",
     label: "Search Impressions",
     sub: "Google Search Console",
-    color: "from-luxury-orange to-yellow-500",
-    glowColor: "rgba(249,115,22,0.25)",
+    color: "from-green-600 to-amber-500",
+    glowColor: "rgba(34,197,94,0.15)",
     delay: 200,
   },
   {
@@ -51,8 +51,8 @@ const ACHIEVEMENTS = [
     suffix: "+",
     label: "GitHub Repositories",
     sub: "@AVPXM8",
-    color: "from-sky-500 to-blue-600",
-    glowColor: "rgba(14,165,233,0.25)",
+    color: "from-emerald-600 to-green-600",
+    glowColor: "rgba(16,185,129,0.15)",
     delay: 300,
   },
   {
@@ -62,8 +62,8 @@ const ACHIEVEMENTS = [
     suffix: "%",
     label: "Top LeetCode Ranking",
     sub: "Rating: 1664",
-    color: "from-yellow-500 to-amber-400",
-    glowColor: "rgba(234,179,8,0.25)",
+    color: "from-amber-600 to-yellow-500",
+    glowColor: "rgba(217,119,6,0.15)",
     delay: 0,
   },
   {
@@ -73,8 +73,8 @@ const ACHIEVEMENTS = [
     suffix: "+",
     label: "AI Products Built",
     sub: "Gemini · Pinecone · TensorFlow",
-    color: "from-luxury-violet to-luxury-magenta",
-    glowColor: "rgba(124,58,237,0.25)",
+    color: "from-green-600 to-emerald-500",
+    glowColor: "rgba(34,197,94,0.15)",
     delay: 100,
   },
   {
@@ -84,8 +84,8 @@ const ACHIEVEMENTS = [
     suffix: "+",
     label: "Years Engineering",
     sub: "Full Stack + AI",
-    color: "from-emerald-500 to-teal-400",
-    glowColor: "rgba(16,185,129,0.25)",
+    color: "from-emerald-600 to-green-500",
+    glowColor: "rgba(16,185,129,0.15)",
     delay: 200,
   },
   {
@@ -95,8 +95,8 @@ const ACHIEVEMENTS = [
     suffix: "+",
     label: "Production Deployments",
     sub: "Vercel · Docker · CI/CD",
-    color: "from-luxury-orange to-luxury-magenta",
-    glowColor: "rgba(249,115,22,0.25)",
+    color: "from-green-600 to-amber-500",
+    glowColor: "rgba(34,197,94,0.15)",
     delay: 300,
   },
 ];
@@ -158,7 +158,7 @@ function AchievementCard({ ach, index }) {
         transform: inView ? "translateY(0) scale(1)" : "translateY(20px) scale(0.97)",
         opacity: inView ? 1 : 0,
         boxShadow: hovered ? `0 0 30px ${ach.glowColor}` : undefined,
-        borderColor: hovered ? `rgba(124,58,237,0.3)` : undefined,
+        borderColor: hovered ? `var(--accent-color)` : undefined,
       }}
     >
       {/* Background gradient glow */}
@@ -170,13 +170,13 @@ function AchievementCard({ ach, index }) {
       {/* Icon */}
       <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${ach.color} p-[1.5px] shadow-md`}>
         <div className="w-full h-full rounded-xl bg-[var(--bg-secondary)] flex items-center justify-center">
-          <Icon size={18} className="text-luxury-purple" />
+          <Icon size={18} className="text-[var(--accent-color)]" />
         </div>
       </div>
 
       {/* Value */}
       <div>
-        <div className={`text-2xl font-black mono-font gradient-text tracking-tight leading-none`}>
+        <div className={`text-2xl font-black mono-font text-[var(--text-primary)] tracking-tight leading-none`}>
           {inView ? (
             <CountUp
               target={ach.value}
@@ -197,13 +197,13 @@ function AchievementCard({ ach, index }) {
 
 export default function AchievementWall() {
   return (
-    <section className="relative py-12 border-t border-[var(--border-color)]">
-      {/* Glow */}
-      <div className="absolute top-20 left-[30%] w-80 h-80 bg-luxury-purple opacity-[0.06] rounded-full blur-[100px] pointer-events-none" />
+    <section className="relative py-12 border-t border-[var(--border-color)] bg-[var(--bg-primary)]">
+      {/* Glow - Professional green */}
+      <div className="absolute top-20 left-[30%] w-80 h-80 bg-emerald-500 opacity-[0.03] rounded-full blur-[100px] pointer-events-none" />
 
       <div className="w-full max-w-6xl z-10 px-4">
         <div className="flex flex-col mb-8 text-left">
-          <p className="text-xs font-bold text-luxury-purple mono-font uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
+          <p className="text-xs font-bold text-[var(--accent-color)] mono-font uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
             <Trophy size={13} /> MILESTONES
           </p>
           <h2 className="text-3xl font-extrabold tracking-tight text-[var(--text-primary)]">

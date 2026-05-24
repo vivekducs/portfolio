@@ -67,10 +67,10 @@ function Heatmap({ data, tooltipPrefix = "contributions" }) {
 
   const getStyle = (lvl) => {
     if (lvl === 0) return "bg-[var(--bg-tertiary)]"; 
-    if (lvl === 1) return "bg-neutral-300 dark:bg-neutral-800";
-    if (lvl === 2) return "bg-neutral-400 dark:bg-neutral-600";
-    if (lvl === 3) return "bg-neutral-600 dark:bg-neutral-400";
-    return "bg-neutral-800 dark:bg-neutral-200"; 
+    if (lvl === 1) return "bg-emerald-500/20 dark:bg-emerald-400/10";
+    if (lvl === 2) return "bg-emerald-500/40 dark:bg-emerald-400/30";
+    if (lvl === 3) return "bg-emerald-500/70 dark:bg-emerald-400/60";
+    return "bg-emerald-600 dark:bg-emerald-500"; 
   };
 
   return (

@@ -182,11 +182,11 @@ export default function Hero({ onOpenAssistant }) {
               {/* Actual Image */}
               <Image
                 src="/Photovivek.jpeg"
-                alt="AI futuristic workstation"
+                alt="Vivek Kumar"
                 width={400}
                 height={400}
                 priority
-                className="w-full h-full rounded-2xl object-cover grayscale opacity-90 hover:grayscale-0 transition-all duration-500"
+                className="w-full h-full rounded-2xl object-cover opacity-100 transition-all duration-500"
               />
 
               {/* Dynamic glowing HUD widget layers */}

@@ -10,31 +10,30 @@ export const MDXComponents = {
     const isInternal = href && (href.startsWith("/") || href.startsWith("#"));
     if (isInternal) {
       return (
-        <Link href={href} className="text-luxury-orange hover:text-luxury-magenta transition-colors font-medium border-b border-luxury-orange/30 hover:border-luxury-magenta" {...props}>
+        <Link href={href} className="text-[var(--accent-color)] hover:text-green-700 dark:hover:text-green-400 transition-colors font-medium border-b border-green-500/20 hover:border-[var(--accent-color)]" {...props}>
           {children}
         </Link>
       );
     }
     return (
-      <a href={href} target="_blank" rel="noopener noreferrer" className="text-luxury-orange hover:text-luxury-magenta transition-colors font-medium border-b border-luxury-orange/30 hover:border-luxury-magenta" {...props}>
+      <a href={href} target="_blank" rel="noopener noreferrer" className="text-[var(--accent-color)] hover:text-green-700 dark:hover:text-green-400 transition-colors font-medium border-b border-green-500/20 hover:border-[var(--accent-color)]" {...props}>
         {children}
       </a>
     );
   },
-  ul: (props) => <ul className="list-disc pl-6 mb-6 text-[var(--text-secondary)] text-sm md:text-base space-y-2 marker:text-luxury-orange" {...props} />,
-  ol: (props) => <ol className="list-decimal pl-6 mb-6 text-[var(--text-secondary)] text-sm md:text-base space-y-2 marker:text-luxury-orange" {...props} />,
+  ul: (props) => <ul className="list-disc pl-6 mb-6 text-[var(--text-secondary)] text-sm md:text-base space-y-2 marker:text-[var(--accent-color)]" {...props} />,
+  ol: (props) => <ol className="list-decimal pl-6 mb-6 text-[var(--text-secondary)] text-sm md:text-base space-y-2 marker:text-[var(--accent-color)]" {...props} />,
   li: (props) => <li className="pl-1" {...props} />,
   blockquote: (props) => (
-    <blockquote className="border-l-4 border-luxury-purple pl-4 italic text-[var(--text-muted)] my-6 bg-[var(--bg-tertiary)] py-3 rounded-r-lg" {...props} />
+    <blockquote className="border-l-4 border-[var(--accent-color)] pl-4 italic text-[var(--text-muted)] my-6 bg-[var(--bg-tertiary)] py-3 rounded-r-lg" {...props} />
   ),
   pre: (props) => (
     <pre className="bg-[#0d0d0d] rounded-xl p-4 overflow-x-auto border border-[#222] my-6 shadow-xl" {...props} />
   ),
   code: (props) => {
-    // If it has a className, it's a code block (from rehype-highlight). Otherwise, it's inline code.
     const isInline = !props.className;
     if (isInline) {
-      return <code className="bg-[var(--bg-tertiary)] text-luxury-magenta px-1.5 py-0.5 rounded-md text-xs md:text-sm font-mono border border-[var(--glass-border)]" {...props} />;
+      return <code className="bg-[var(--bg-tertiary)] text-[var(--accent-color)] px-1.5 py-0.5 rounded-md text-xs md:text-sm font-mono border border-[var(--glass-border)]" {...props} />;
     }
     return <code className="text-xs md:text-sm font-mono text-neutral-300 block" {...props} />;
   },

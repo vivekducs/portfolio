@@ -59,7 +59,7 @@ export default function TableOfContents() {
           >
             <a 
               href={`#${heading.id}`}
-              className={`block transition-colors ${activeId === heading.id ? "text-luxury-orange font-bold" : "text-[var(--text-secondary)] hover:text-[var(--text-primary)]"}`}
+              className={`block transition-colors ${activeId === heading.id ? "text-[var(--accent-color)] font-bold" : "text-[var(--text-secondary)] hover:text-[var(--text-primary)]"}`}
             >
               {heading.text}
             </a>

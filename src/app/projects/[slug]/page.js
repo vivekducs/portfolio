@@ -36,7 +36,7 @@ export default function ProjectCaseStudy({ params }) {
   }
 
   return (
-    <main className="min-h-screen pt-24 pb-20 px-6">
+    <main className="min-h-screen pt-24 pb-20 px-6 bg-[var(--bg-primary)]">
       <div className="max-w-6xl mx-auto">
         
         {/* Navigation */}
@@ -51,7 +51,7 @@ export default function ProjectCaseStudy({ params }) {
         <header className="mb-16">
           <div className="flex items-center gap-3 mb-4">
             <span className="text-xs font-bold px-3 py-1 bg-[var(--bg-tertiary)] border border-[var(--border-color)] text-[var(--text-primary)] rounded-full uppercase tracking-wider">{project.category}</span>
-            {project.featured && <span className="text-xs font-bold px-3 py-1 bg-luxury-orange/20 border border-luxury-orange/50 text-luxury-orange rounded-full uppercase tracking-wider shadow-[0_0_10px_rgba(249,115,22,0.2)]">Featured</span>}
+            {project.featured && <span className="text-xs font-bold px-3 py-1 bg-green-500/10 border border-green-500/30 text-[var(--accent-color)] rounded-full uppercase tracking-wider shadow-[0_0_10px_rgba(34,197,94,0.1)]">Featured</span>}
           </div>
           <h1 className="text-4xl md:text-6xl font-black tracking-tight mb-6 text-[var(--text-primary)] leading-tight">{project.title}</h1>
           <p className="text-lg md:text-xl text-[var(--text-secondary)] max-w-3xl leading-relaxed">{project.desc}</p>
@@ -63,7 +63,7 @@ export default function ProjectCaseStudy({ params }) {
               </a>
             )}
             {project.live && (
-              <a href={project.live} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-5 py-2.5 rounded-xl border border-luxury-purple bg-luxury-purple text-white font-bold hover:bg-luxury-magenta hover:border-luxury-magenta transition-all shadow-[0_4px_14px_rgba(147,51,234,0.3)] hover:shadow-[0_6px_20px_rgba(217,70,239,0.4)]">
+              <a href={project.live} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-5 py-2.5 rounded-xl border border-[var(--accent-color)] bg-[var(--accent-color)] text-[var(--bg-primary)] font-bold hover:bg-green-600 dark:hover:bg-green-400 hover:border-green-600 dark:hover:border-green-400 transition-all shadow-[0_4px_12px_rgba(22,163,74,0.15)]">
                 <ExternalLink size={18} /> Live Project
               </a>
             )}
@@ -77,14 +77,14 @@ export default function ProjectCaseStudy({ params }) {
               <>
                 <section>
                   <h2 className="text-2xl font-bold flex items-center gap-3 text-[var(--text-primary)] mb-6">
-                    <Target size={24} className="text-luxury-orange" /> The Problem
+                    <Target size={24} className="text-[var(--accent-color)]" /> The Problem
                   </h2>
                   <p className="text-[var(--text-secondary)] leading-relaxed">{project.engineering.problem}</p>
                 </section>
 
                 <section>
                   <h2 className="text-2xl font-bold flex items-center gap-3 text-[var(--text-primary)] mb-6">
-                    <Layers size={24} className="text-luxury-orange" /> System Architecture
+                    <Layers size={24} className="text-[var(--accent-color)]" /> System Architecture
                   </h2>
                   <p className="text-[var(--text-secondary)] leading-relaxed">{project.engineering.architecture}</p>
                   
@@ -96,13 +96,13 @@ export default function ProjectCaseStudy({ params }) {
 
                 <section>
                   <h2 className="text-2xl font-bold flex items-center gap-3 text-[var(--text-primary)] mb-6">
-                    <ShieldCheck size={24} className="text-luxury-orange" /> Key Engineering Decisions
+                    <ShieldCheck size={24} className="text-[var(--accent-color)]" /> Key Engineering Decisions
                   </h2>
                   <div className="space-y-4">
                     {project.engineering.decisions.map((dec, idx) => (
                       <div key={idx} className="glass-card rounded-xl border border-[var(--glass-border)] p-5">
                         <h3 className="text-base font-bold text-[var(--text-primary)] mb-2 flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-luxury-magenta"></span>
+                          <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-color)]"></span>
                           {dec.title}
                         </h3>
                         <p className="text-sm text-[var(--text-secondary)] leading-relaxed ml-3.5">{dec.content}</p>
@@ -113,7 +113,7 @@ export default function ProjectCaseStudy({ params }) {
 
                 <section>
                   <h2 className="text-2xl font-bold flex items-center gap-3 text-[var(--text-primary)] mb-6">
-                    <Activity size={24} className="text-luxury-orange" /> Scaling Strategy
+                    <Activity size={24} className="text-[var(--accent-color)]" /> Scaling Strategy
                   </h2>
                   <p className="text-[var(--text-secondary)] leading-relaxed">{project.engineering.scaling}</p>
                 </section>
@@ -121,7 +121,7 @@ export default function ProjectCaseStudy({ params }) {
                 {project.engineering.tradeoffs && (
                   <section>
                     <h2 className="text-2xl font-bold flex items-center gap-3 text-[var(--text-primary)] mb-6">
-                      <Scale size={24} className="text-luxury-orange" /> Architecture Tradeoffs
+                      <Scale size={24} className="text-[var(--accent-color)]" /> Architecture Tradeoffs
                     </h2>
                     <p className="text-[var(--text-secondary)] leading-relaxed">{project.engineering.tradeoffs}</p>
                   </section>
@@ -130,7 +130,7 @@ export default function ProjectCaseStudy({ params }) {
                 {project.engineering.aiWorkflow && (
                   <section>
                     <h2 className="text-2xl font-bold flex items-center gap-3 text-[var(--text-primary)] mb-6">
-                      <BrainCircuit size={24} className="text-luxury-orange" /> AI Workflow
+                      <BrainCircuit size={24} className="text-[var(--accent-color)]" /> AI Workflow
                     </h2>
                     <p className="text-[var(--text-secondary)] leading-relaxed">{project.engineering.aiWorkflow}</p>
                   </section>
@@ -139,7 +139,7 @@ export default function ProjectCaseStudy({ params }) {
                 {project.engineering.deploymentFlow && (
                   <section>
                     <h2 className="text-2xl font-bold flex items-center gap-3 text-[var(--text-primary)] mb-6">
-                      <Cloud size={24} className="text-luxury-orange" /> Deployment Flow
+                      <Cloud size={24} className="text-[var(--accent-color)]" /> Deployment Flow
                     </h2>
                     <p className="text-[var(--text-secondary)] leading-relaxed">{project.engineering.deploymentFlow}</p>
                   </section>
@@ -148,7 +148,7 @@ export default function ProjectCaseStudy({ params }) {
                 {project.engineering.future && (
                   <section>
                     <h2 className="text-2xl font-bold flex items-center gap-3 text-[var(--text-primary)] mb-6">
-                      <Rocket size={24} className="text-luxury-orange" /> Future Improvements
+                      <Rocket size={24} className="text-[var(--accent-color)]" /> Future Improvements
                     </h2>
                     <p className="text-[var(--text-secondary)] leading-relaxed">{project.engineering.future}</p>
                   </section>
@@ -157,7 +157,7 @@ export default function ProjectCaseStudy({ params }) {
                 {project.engineering.apiSchema && (
                   <section>
                     <h2 className="text-2xl font-bold flex items-center gap-3 text-[var(--text-primary)] mb-6">
-                      <Zap size={24} className="text-luxury-orange" /> Sample API Request
+                      <Zap size={24} className="text-[var(--accent-color)]" /> Sample API Request
                     </h2>
                     <div className="bg-[#0A0A0A] border border-[#222] rounded-xl p-5 overflow-x-auto shadow-inner">
                       <div className="flex items-center justify-between border-b border-[#333] pb-3 mb-4">
@@ -199,7 +199,7 @@ export default function ProjectCaseStudy({ params }) {
                 <ul className="space-y-3.5">
                   {project.highlights.map((h, i) => (
                     <li key={i} className="text-sm text-[var(--text-secondary)] flex items-start gap-3 font-medium">
-                      <span className="text-luxury-orange mt-1"><ArrowRight size={14} /></span>
+                      <span className="text-[var(--accent-color)] mt-1"><ArrowRight size={14} /></span>
                       <span className="leading-relaxed">{h}</span>
                     </li>
                   ))}

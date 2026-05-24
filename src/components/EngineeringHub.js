@@ -58,7 +58,7 @@ export default function EngineeringHub() {
       <div className="max-w-6xl mx-auto px-4">
         
         <div className="mb-10 text-center">
-          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-4 bg-gradient-to-r from-luxury-purple to-luxury-orange text-transparent bg-clip-text">
+          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-4 bg-gradient-to-r from-[var(--accent-color)] to-emerald-500 text-transparent bg-clip-text">
             Engineering Ecosystem
           </h2>
           <p className="text-[var(--text-secondary)] text-sm md:text-base max-w-2xl mx-auto">
@@ -70,19 +70,19 @@ export default function EngineeringHub() {
         <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-10">
           <button 
             onClick={() => setActiveTab("system-design")}
-            className={`flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 rounded-xl text-xs md:text-sm font-bold transition-all border ${activeTab === "system-design" ? "bg-luxury-purple/10 border-luxury-purple text-luxury-purple" : "bg-[var(--bg-tertiary)] border-[var(--border-color)] text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--text-muted)]"}`}
+            className={`flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 rounded-xl text-xs md:text-sm font-bold transition-all border ${activeTab === "system-design" ? "bg-[var(--accent-color)]/10 border-[var(--accent-color)] text-[var(--accent-color)]" : "bg-[var(--bg-tertiary)] border-[var(--border-color)] text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--text-muted)]"}`}
           >
             <Server size={16} /> System Design Lab
           </button>
           <button 
             onClick={() => setActiveTab("api-playground")}
-            className={`flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 rounded-xl text-xs md:text-sm font-bold transition-all border ${activeTab === "api-playground" ? "bg-luxury-purple/10 border-luxury-purple text-luxury-purple" : "bg-[var(--bg-tertiary)] border-[var(--border-color)] text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--text-muted)]"}`}
+            className={`flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 rounded-xl text-xs md:text-sm font-bold transition-all border ${activeTab === "api-playground" ? "bg-[var(--accent-color)]/10 border-[var(--accent-color)] text-[var(--accent-color)]" : "bg-[var(--bg-tertiary)] border-[var(--border-color)] text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--text-muted)]"}`}
           >
             <Terminal size={16} /> Live API Playground
           </button>
           <button 
             onClick={() => setActiveTab("devops")}
-            className={`flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 rounded-xl text-xs md:text-sm font-bold transition-all border ${activeTab === "devops" ? "bg-luxury-purple/10 border-luxury-purple text-luxury-purple" : "bg-[var(--bg-tertiary)] border-[var(--border-color)] text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--text-muted)]"}`}
+            className={`flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 rounded-xl text-xs md:text-sm font-bold transition-all border ${activeTab === "devops" ? "bg-[var(--accent-color)]/10 border-[var(--accent-color)] text-[var(--accent-color)]" : "bg-[var(--bg-tertiary)] border-[var(--border-color)] text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--text-muted)]"}`}
           >
             <Activity size={16} /> DevOps Telemetry
           </button>
@@ -100,7 +100,7 @@ export default function EngineeringHub() {
                     key={proj}
                     onClick={() => setActiveProject(proj)}
                     className={`px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider border transition-colors ${
-                      activeProject === proj ? "bg-brand-primary/20 border-brand-primary text-brand-primary" : "bg-transparent border-[var(--border-color)] text-[var(--text-muted)] hover:text-[var(--text-primary)]"
+                      activeProject === proj ? "bg-[var(--accent-color)]/10 border-[var(--accent-color)] text-[var(--accent-color)]" : "bg-transparent border-[var(--border-color)] text-[var(--text-muted)] hover:text-[var(--text-primary)]"
                     }`}
                   >
                     {proj.replace("-", " ")}
@@ -119,7 +119,7 @@ export default function EngineeringHub() {
               <div className="space-y-4">
                 <div className="p-6 bg-[#0a0a0a] border border-neutral-800 rounded-2xl">
                   <h3 className="text-sm font-bold text-[var(--text-primary)] flex items-center gap-2 mb-4">
-                    <Database size={16} className="text-brand-primary" /> Request Configuration
+                    <Database size={16} className="text-[var(--accent-color)]" /> Request Configuration
                   </h3>
                   <div className="space-y-3">
                     <div>
@@ -139,7 +139,7 @@ export default function EngineeringHub() {
                     </div>
                     <button 
                       onClick={handleSimulateApi}
-                      className="w-full py-2.5 rounded-lg bg-brand-primary text-white text-xs font-bold hover:bg-brand-secondary transition-colors"
+                      className="w-full py-2.5 rounded-lg bg-[var(--accent-color)] text-white text-xs font-bold hover:bg-green-600 transition-colors"
                     >
                       {isFetching ? "Sending Request..." : "Send Request ->"}
                     </button>
@@ -149,7 +149,7 @@ export default function EngineeringHub() {
               
               <div className="p-6 bg-[#0a0a0a] border border-neutral-800 rounded-2xl flex flex-col">
                 <h3 className="text-sm font-bold text-[var(--text-primary)] flex items-center gap-2 mb-4">
-                  <Code size={16} className="text-brand-primary" /> Response Output
+                  <Code size={16} className="text-[var(--accent-color)]" /> Response Output
                 </h3>
                 <div className="flex-1 bg-neutral-900 rounded-lg border border-neutral-800 p-4 relative overflow-y-auto">
                   {apiResponse ? (
@@ -174,7 +174,7 @@ export default function EngineeringHub() {
               <div className="md:col-span-2 p-6 bg-[#0a0a0a] border border-neutral-800 rounded-2xl">
                 <div className="flex items-center justify-between mb-6">
                   <h3 className="text-sm font-bold text-[var(--text-primary)] flex items-center gap-2">
-                    <Activity size={16} className="text-brand-primary" /> Global Request Traffic (24h)
+                    <Activity size={16} className="text-[var(--accent-color)]" /> Global Request Traffic (24h)
                   </h3>
                   <span className="px-2 py-1 bg-green-500/10 text-green-400 border border-green-500/20 rounded text-[9px] font-bold">ALL SYSTEMS NORMAL</span>
                 </div>
@@ -184,9 +184,9 @@ export default function EngineeringHub() {
                       <XAxis dataKey="time" stroke="#525252" fontSize={10} tickLine={false} axisLine={false} />
                       <Tooltip 
                         contentStyle={{ backgroundColor: '#171717', border: '1px solid #262626', borderRadius: '8px', fontSize: '12px' }}
-                        itemStyle={{ color: '#f97316' }}
+                        itemStyle={{ color: '#22c55e' }}
                       />
-                      <Line type="monotone" dataKey="req" stroke="#f97316" strokeWidth={2} dot={{ r: 0 }} activeDot={{ r: 4 }} />
+                      <Line type="monotone" dataKey="req" stroke="#22c55e" strokeWidth={2} dot={{ r: 0 }} activeDot={{ r: 4 }} />
                     </LineChart>
                   </ResponsiveContainer>
                 </div>
@@ -205,7 +205,7 @@ export default function EngineeringHub() {
                   </div>
                 </div>
                 <div className="p-4 bg-[#0a0a0a] border border-neutral-800 rounded-2xl flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-full bg-brand-primary/10 flex items-center justify-center text-brand-primary">
+                  <div className="w-10 h-10 rounded-full bg-emerald-500/10 flex items-center justify-center text-[var(--accent-color)]">
                     <Trophy size={20} />
                   </div>
                   <div>

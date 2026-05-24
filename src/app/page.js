@@ -131,7 +131,7 @@ export default function Home() {
 
                 {/* Dedicated VK AI Chat Window */}
                 <div className="relative">
-                  <div className="absolute -top-3 left-6 z-10 px-2 py-0.5 bg-gradient-to-r from-luxury-violet to-luxury-magenta text-white font-bold text-[9px] rounded-full uppercase tracking-wider mono-font shadow-sm animate-pulse">
+                  <div className="absolute -top-3 left-6 z-10 px-2 py-0.5 bg-[var(--accent-color)] text-[var(--bg-primary)] font-bold text-[9px] rounded-full uppercase tracking-wider mono-font shadow-sm animate-pulse">
                     AI Active
                   </div>
                   <VKAssistant />
@@ -139,8 +139,8 @@ export default function Home() {
 
                 {/* Recruitment Pitch Glass panel */}
                 <div className="glass-card rounded-2xl border border-[var(--glass-border)] p-5 shadow-sm text-left relative overflow-hidden">
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-luxury-orange opacity-5 rounded-full blur-xl pointer-events-none" />
-                  <h4 className="text-xs font-bold text-luxury-orange mono-font uppercase tracking-widest mb-2 flex items-center gap-1.5">
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-green-500 opacity-5 rounded-full blur-xl pointer-events-none" />
+                  <h4 className="text-xs font-bold text-[var(--accent-color)] mono-font uppercase tracking-widest mb-2 flex items-center gap-1.5">
                     <Sparkles size={11} /> Quick Recruitment Spec
                   </h4>
                   <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed font-semibold">
@@ -158,13 +158,13 @@ export default function Home() {
         {/* Floating AI Button — Mobile */}
         <button
           onClick={() => setIsAssistantOpen(true)}
-          className="lg:hidden fixed bottom-6 right-6 z-50 p-4 rounded-full text-white shadow-xl shadow-luxury-purple/30 cursor-pointer flex items-center justify-center group"
-          style={{ background: "linear-gradient(135deg, #7c3aed, #d946ef, #f97316)" }}
+          className="lg:hidden fixed bottom-6 right-6 z-50 p-4 rounded-full text-white shadow-xl shadow-green-500/20 cursor-pointer flex items-center justify-center group"
+          style={{ background: "var(--accent-color)" }}
           title="Open VK Assistant AI"
         >
           <Bot size={20} className="group-hover:scale-110 transition-transform" />
           {/* Pulse rings */}
-          <span className="absolute inset-0 rounded-full animate-ping bg-luxury-purple opacity-20" />
+          <span className="absolute inset-0 rounded-full animate-ping bg-green-500 opacity-20" />
         </button>
 
         {/* Full AI Assistant Modal */}

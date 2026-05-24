@@ -52,7 +52,7 @@ export default function BlogPost({ params }) {
               </span>
               <div className="flex items-center gap-2">
                 {data.tags && data.tags.map(tag => (
-                  <span key={tag} className="text-[10px] font-bold px-2 py-1 bg-luxury-purple/10 text-luxury-purple rounded-md uppercase tracking-wide">
+                  <span key={tag} className="text-[10px] font-bold px-2 py-1 bg-green-500/10 text-[var(--accent-color)] rounded-md uppercase tracking-wide">
                     <Tag size={10} className="mr-1 inline-block" />
                     {tag}
                   </span>
