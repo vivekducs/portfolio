@@ -52,14 +52,6 @@ export default function Hero({ onOpenAssistant }) {
     return () => clearTimeout(timer);
   }, [typedText, isDeleting, phraseIdx]);
 
-  const [mousePos, setMousePos] = useState({ x: -9999, y: -9999 });
-
-  useEffect(() => {
-    const handleMouse = (e) => setMousePos({ x: e.clientX, y: e.clientY });
-    window.addEventListener("mousemove", handleMouse);
-    return () => window.removeEventListener("mousemove", handleMouse);
-  }, []);
-
   const handleScroll = (id) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -67,24 +59,6 @@ export default function Hero({ onOpenAssistant }) {
 
   return (
     <section id="home" className="relative py-8 md:py-16 overflow-hidden flex flex-col items-center">
-      {/* Mouse-reactive glow spotlight */}
-      <div
-        className="mouse-glow hidden lg:block"
-        style={{ left: mousePos.x, top: mousePos.y }}
-      />
-
-      {/* Cinematic backlighting effects */}
-      <div className="absolute top-20 right-[15%] w-96 h-96 bg-luxury-purple opacity-20 rounded-full blur-[100px] pointer-events-none"></div>
-      <div className="absolute bottom-10 left-[10%] w-96 h-96 bg-luxury-magenta opacity-15 rounded-full blur-[100px] pointer-events-none"></div>
-      <div className="absolute top-40 left-[40%] w-80 h-80 bg-luxury-orange opacity-10 rounded-full blur-[80px] pointer-events-none"></div>
-
-      {/* Floating particles background simulation */}
-      <div className="absolute inset-0 z-0 pointer-events-none opacity-40 select-none">
-        <div className="absolute top-1/4 left-1/4 w-2 h-2 rounded-full bg-luxury-purple animate-ping"></div>
-        <div className="absolute top-1/3 right-1/3 w-1.5 h-1.5 rounded-full bg-luxury-magenta animate-pulse" style={{ animationDelay: "1s" }}></div>
-        <div className="absolute bottom-1/4 right-1/4 w-2 h-2 rounded-full bg-luxury-orange animate-ping" style={{ animationDelay: "0.5s" }}></div>
-      </div>
-
       <div className="w-full max-w-6xl z-10 px-4">
         {/* Available Pill */}
         <AnimatedSection delay={0}>
@@ -103,7 +77,7 @@ export default function Hero({ onOpenAssistant }) {
             {/* Passport Circular Avatar */}
             <AnimatedSection delay={100}>
               <div className="flex items-center gap-4">
-                <div className="relative w-16 h-16 rounded-full bg-gradient-to-tr from-luxury-violet via-luxury-magenta to-luxury-orange p-[2px] shadow-lg shadow-luxury-purple/20">
+                <div className="relative w-16 h-16 rounded-full border-2 border-[var(--border-color)] p-0.5 shadow-sm">
                   <Image
                     src="/Photovivek.jpeg"
                     alt="Vivek Kumar"
@@ -116,7 +90,7 @@ export default function Hero({ onOpenAssistant }) {
                 </div>
                 <div>
                   <p className="text-xs text-[var(--text-muted)] font-bold tracking-widest uppercase mono-font">Developer Persona</p>
-                  <h4 className="text-base font-bold tracking-tight">Vivek Kumar <span className="text-luxury-magenta">👋</span></h4>
+                  <h4 className="text-base font-bold tracking-tight">Vivek Kumar <span className="text-[var(--text-primary)]">👋</span></h4>
                 </div>
               </div>
             </AnimatedSection>
@@ -125,7 +99,7 @@ export default function Hero({ onOpenAssistant }) {
             <AnimatedSection delay={200}>
               <h1 className="text-4xl sm:text-5xl font-black tracking-tight leading-[1.1] text-[var(--text-primary)]">
                 Building Scalable <br className="hidden sm:inline" />
-                <span className="gradient-text">AI Systems</span> & Modern <br />
+                <span className="text-[var(--text-primary)] underline decoration-4 decoration-[var(--border-color)] underline-offset-4">AI Systems</span> & Modern <br />
                 Software Products
               </h1>
             </AnimatedSection>
@@ -139,7 +113,7 @@ export default function Hero({ onOpenAssistant }) {
             {/* Animated Typing Segment */}
             <AnimatedSection delay={400}>
               <div className="h-10 flex items-center bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-xl px-4 py-2 w-fit">
-                <span className="text-xs font-bold text-luxury-purple uppercase tracking-widest mono-font flex items-center gap-2 mr-2">
+                <span className="text-xs font-bold text-[var(--text-primary)] uppercase tracking-widest mono-font flex items-center gap-2 mr-2">
                   <Terminal size={14} /> FOCUS:
                 </span>
                 <span className="text-sm font-semibold mono-font text-[var(--text-primary)] typing-cursor">
@@ -163,7 +137,7 @@ export default function Hero({ onOpenAssistant }) {
                     trackCTA("Explore Projects", "Hero Section");
                     handleScroll("projects");
                   }}
-                  className="px-6 py-3.5 bg-gradient-to-r from-luxury-violet to-luxury-purple hover:opacity-95 text-white font-bold text-sm rounded-xl shadow-md shadow-luxury-purple/15 flex items-center gap-2 transition-all cursor-pointer hover:translate-y-[-2px]"
+                  className="px-6 py-3.5 bg-[var(--text-primary)] hover:bg-[var(--text-secondary)] text-[var(--bg-primary)] font-bold text-sm rounded-xl shadow-sm flex items-center gap-2 transition-all cursor-pointer hover:translate-y-[-2px]"
                 >
                   <span>Explore Projects</span>
                   <ArrowRight size={14} />
@@ -174,9 +148,9 @@ export default function Hero({ onOpenAssistant }) {
                   onClick={() => trackDownload("Resume.pdf")}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-6 py-3.5 bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:border-luxury-purple/40 text-[var(--text-primary)] font-bold text-sm rounded-xl flex items-center gap-2 transition-all shadow-sm cursor-pointer hover:translate-y-[-2px]"
+                  className="px-6 py-3.5 bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:border-[var(--text-primary)] text-[var(--text-primary)] font-bold text-sm rounded-xl flex items-center gap-2 transition-all shadow-sm cursor-pointer hover:translate-y-[-2px]"
                 >
-                  <FileDown size={14} className="text-luxury-purple" />
+                  <FileDown size={14} className="text-[var(--text-primary)]" />
                   <span>Resume</span>
                 </a>
 
@@ -185,16 +159,16 @@ export default function Hero({ onOpenAssistant }) {
                     trackCTA("Contact Click", "Hero Section");
                     handleScroll("contact");
                   }}
-                  className="px-6 py-3.5 bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:border-luxury-purple/40 text-[var(--text-primary)] font-bold text-sm rounded-xl transition-all shadow-sm cursor-pointer hover:translate-y-[-2px]"
+                  className="px-6 py-3.5 bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:border-[var(--text-primary)] text-[var(--text-primary)] font-bold text-sm rounded-xl transition-all shadow-sm cursor-pointer hover:translate-y-[-2px]"
                 >
                   Contact
                 </button>
 
                 <button
                   onClick={onOpenAssistant}
-                  className="px-6 py-3.5 bg-luxury-purple/10 border border-luxury-purple/20 text-luxury-purple font-bold text-sm rounded-xl flex items-center gap-2 hover:bg-luxury-purple/20 transition-all cursor-pointer hover:translate-y-[-2px]"
+                  className="px-6 py-3.5 bg-[var(--bg-tertiary)] border border-[var(--border-color)] text-[var(--text-primary)] font-bold text-sm rounded-xl flex items-center gap-2 hover:bg-[var(--text-primary)] hover:text-[var(--bg-primary)] transition-all cursor-pointer hover:translate-y-[-2px] group"
                 >
-                  <MessageSquare size={14} />
+                  <MessageSquare size={14} className="group-hover:text-[var(--bg-primary)]" />
                   <span>Talk to VK Assistant</span>
                 </button>
               </div>
@@ -203,10 +177,7 @@ export default function Hero({ onOpenAssistant }) {
 
           {/* Right Column: Dynamic Workstation Image Rendering */}
           <div className="lg:col-span-5 relative flex justify-center mt-8 lg:mt-0 select-none">
-            <div className="relative w-full max-w-[420px] aspect-square rounded-3xl overflow-hidden glass-card border p-2 shadow-2xl flex items-center justify-center animate-in fade-in zoom-in duration-1000">
-
-              {/* Outer decorative neon frame rings */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-luxury-purple/10 via-luxury-magenta/5 to-luxury-orange/10 pointer-events-none rounded-3xl"></div>
+            <div className="relative w-full max-w-[420px] aspect-square rounded-3xl overflow-hidden glass-card border border-[var(--border-color)] p-2 shadow-sm flex items-center justify-center animate-in fade-in zoom-in duration-1000">
 
               {/* Actual Image */}
               <Image
@@ -215,12 +186,12 @@ export default function Hero({ onOpenAssistant }) {
                 width={400}
                 height={400}
                 priority
-                className="w-full h-full rounded-2xl object-cover"
+                className="w-full h-full rounded-2xl object-cover grayscale opacity-90 hover:grayscale-0 transition-all duration-500"
               />
 
               {/* Dynamic glowing HUD widget layers */}
-              <div className="absolute bottom-4 left-4 bg-black/70 backdrop-blur-md border border-white/10 text-white rounded-2xl p-3 text-[10px] font-semibold mono-font shadow-lg flex items-center gap-2">
-                <Sparkles size={12} className="text-luxury-orange animate-spin" />
+              <div className="absolute bottom-4 left-4 bg-[var(--bg-primary)] border border-[var(--border-color)] text-[var(--text-primary)] rounded-xl p-3 text-[10px] font-semibold mono-font shadow-sm flex items-center gap-2">
+                <Sparkles size={12} className="text-[var(--text-primary)] animate-spin" />
                 <span>VK.AI Model Active</span>
               </div>
             </div>
@@ -238,9 +209,9 @@ export default function Hero({ onOpenAssistant }) {
           ].map((stat, idx) => (
             <div
               key={idx}
-              className="glass-card rounded-2xl border border-[var(--glass-border)] p-4 text-center hover:border-luxury-purple/30 transition-all shadow-sm"
+              className="glass-card rounded-2xl border border-[var(--border-color)] p-4 text-center hover:border-[var(--text-primary)] transition-all shadow-sm"
             >
-              <h3 className="text-2xl sm:text-3xl font-black gradient-text tracking-tight mb-1">
+              <h3 className="text-2xl sm:text-3xl font-black text-[var(--text-primary)] tracking-tight mb-1">
                 {stat.metric}
               </h3>
               <p className="text-[10px] sm:text-xs text-[var(--text-muted)] font-semibold uppercase tracking-wider mono-font">

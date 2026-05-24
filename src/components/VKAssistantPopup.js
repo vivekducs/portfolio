@@ -38,24 +38,20 @@ export default function VKAssistantPopup({ isOpen, onClose }) {
         className="relative w-full sm:max-w-lg glass-card sm:rounded-3xl rounded-t-3xl border border-[var(--glass-border)] shadow-2xl overflow-hidden flex flex-col z-10 max-h-[92vh] sm:max-h-[85vh]"
         style={{ animation: "slideUp 0.3s cubic-bezier(0.34,1.56,0.64,1)" }}
       >
-        {/* Decorative glow blobs */}
-        <div className="absolute -top-20 -left-20 w-40 h-40 bg-luxury-violet opacity-20 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-luxury-orange opacity-15 rounded-full blur-3xl pointer-events-none" />
-
         {/* Header bar */}
         <div className="flex items-center gap-3 px-5 py-4 border-b border-[var(--border-color)] shrink-0 relative">
           {/* Drag handle on mobile */}
           <div className="absolute top-2 left-1/2 -translate-x-1/2 w-10 h-1 rounded-full bg-[var(--border-color)] sm:hidden" />
 
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-luxury-violet via-luxury-magenta to-luxury-orange p-[1.5px] shadow-lg shadow-luxury-purple/20">
+          <div className="w-9 h-9 rounded-xl bg-[var(--text-primary)] p-[1.5px] shadow-sm">
             <div className="w-full h-full rounded-xl bg-[var(--bg-secondary)] flex items-center justify-center">
-              <Sparkles size={16} className="text-luxury-magenta animate-pulse" />
+              <Sparkles size={16} className="text-[var(--text-primary)] animate-pulse" />
             </div>
           </div>
 
           <div className="flex-1 min-w-0">
             <h3 className="font-bold text-sm text-[var(--text-primary)] leading-tight">
-              VK <span className="gradient-text">Assistant</span>
+              VK <span className="text-[var(--text-primary)]">Assistant</span>
             </h3>
             <p className="text-[10px] text-[var(--text-muted)] mono-font">
               AI · Voice · Recruiter Mode
@@ -67,7 +63,7 @@ export default function VKAssistantPopup({ isOpen, onClose }) {
             {[...Array(6)].map((_, i) => (
               <span
                 key={i}
-                className="inline-block w-[3px] rounded-full bg-gradient-to-t from-luxury-violet to-luxury-magenta"
+                className="inline-block w-[3px] rounded-full bg-[var(--text-primary)]"
                 style={{
                   height: `${8 + (i % 3) * 6}px`,
                   animation: `soundwave 1.4s infinite ease-in-out alternate`,
@@ -96,7 +92,7 @@ export default function VKAssistantPopup({ isOpen, onClose }) {
             <Cpu size={9} />
             Powered by VK AI · Gemini 1.5 Flash
           </span>
-          <span className="text-[9px] text-emerald-500 font-semibold mono-font">● Online</span>
+          <span className="text-[9px] text-[var(--text-primary)] font-semibold mono-font">● Online</span>
         </div>
       </div>
 

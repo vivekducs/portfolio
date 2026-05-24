@@ -67,10 +67,10 @@ function Heatmap({ data, tooltipPrefix = "contributions" }) {
 
   const getStyle = (lvl) => {
     if (lvl === 0) return "bg-[var(--bg-tertiary)]"; 
-    if (lvl === 1) return "bg-[#9be9a8] dark:bg-[#0e4429]";
-    if (lvl === 2) return "bg-[#40c463] dark:bg-[#006d32]";
-    if (lvl === 3) return "bg-[#30a14e] dark:bg-[#26a641]";
-    return "bg-[#216e39] dark:bg-[#39d353]"; 
+    if (lvl === 1) return "bg-neutral-300 dark:bg-neutral-800";
+    if (lvl === 2) return "bg-neutral-400 dark:bg-neutral-600";
+    if (lvl === 3) return "bg-neutral-600 dark:bg-neutral-400";
+    return "bg-neutral-800 dark:bg-neutral-200"; 
   };
 
   return (
@@ -182,7 +182,7 @@ export default function Stats() {
       <div className="w-full max-w-6xl z-10 px-4 mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 text-left">
           <div>
-            <p className="text-sm font-semibold text-luxury-purple uppercase tracking-widest mb-2 flex items-center gap-2">
+            <p className="text-sm font-semibold text-[var(--text-primary)] uppercase tracking-widest mb-2 flex items-center gap-2">
               <Activity size={16} /> Activity & Statistics
             </p>
             <h2 className="text-3xl font-bold tracking-tight text-[var(--text-primary)]">
@@ -193,7 +193,7 @@ export default function Stats() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 text-left">
           {/* GitHub Panel */}
-          <div className="bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-xl p-6 flex flex-col justify-between hover:shadow-lg transition-shadow duration-300">
+          <div className="bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-xl p-6 flex flex-col justify-between hover:shadow-sm transition-shadow duration-300">
             <div>
               <div className="flex items-center justify-between mb-6 pb-4 border-b border-[var(--border-color)]">
                 <h3 className="text-lg font-bold text-[var(--text-primary)] flex items-center gap-2">
@@ -203,7 +203,7 @@ export default function Stats() {
                   href="https://github.com/AVPXM8"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1 text-sm text-[var(--text-muted)] hover:text-luxury-purple transition-colors font-medium"
+                  className="flex items-center gap-1 text-sm text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors font-medium"
                 >
                   @AVPXM8 <ExternalLink size={14} />
                 </a>
@@ -216,23 +216,23 @@ export default function Stats() {
               {githubDetails && (
                 <div className="mt-6 mb-6 pb-6 border-b border-[var(--border-color)]">
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                    <div className="bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-lg p-3 text-center transition-all hover:-translate-y-1 hover:shadow-md">
-                      <Star size={16} className="text-yellow-500 mx-auto mb-1" />
+                    <div className="bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-lg p-3 text-center transition-all hover:-translate-y-1 hover:shadow-sm hover:border-[var(--text-primary)]">
+                      <Star size={16} className="text-[var(--text-primary)] mx-auto mb-1" />
                       <p className="text-xs text-[var(--text-muted)] font-medium">Stars</p>
                       <p className="text-lg font-bold text-[var(--text-primary)]"><AnimatedCounter target={githubDetails.totalStars} /></p>
                     </div>
-                    <div className="bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-lg p-3 text-center transition-all hover:-translate-y-1 hover:shadow-md">
-                      <GitMerge size={16} className="text-luxury-purple mx-auto mb-1" />
+                    <div className="bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-lg p-3 text-center transition-all hover:-translate-y-1 hover:shadow-sm hover:border-[var(--text-primary)]">
+                      <GitMerge size={16} className="text-[var(--text-primary)] mx-auto mb-1" />
                       <p className="text-xs text-[var(--text-muted)] font-medium">PRs</p>
                       <p className="text-lg font-bold text-[var(--text-primary)]"><AnimatedCounter target={githubDetails.totalPRs} /></p>
                     </div>
-                    <div className="bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-lg p-3 text-center transition-all hover:-translate-y-1 hover:shadow-md">
-                      <CircleDot size={16} className="text-emerald-500 mx-auto mb-1" />
+                    <div className="bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-lg p-3 text-center transition-all hover:-translate-y-1 hover:shadow-sm hover:border-[var(--text-primary)]">
+                      <CircleDot size={16} className="text-[var(--text-primary)] mx-auto mb-1" />
                       <p className="text-xs text-[var(--text-muted)] font-medium">Issues</p>
                       <p className="text-lg font-bold text-[var(--text-primary)]"><AnimatedCounter target={githubDetails.totalIssues} /></p>
                     </div>
-                    <div className="bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-lg p-3 text-center transition-all hover:-translate-y-1 hover:shadow-md">
-                      <Activity size={16} className="text-luxury-orange mx-auto mb-1" />
+                    <div className="bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-lg p-3 text-center transition-all hover:-translate-y-1 hover:shadow-sm hover:border-[var(--text-primary)]">
+                      <Activity size={16} className="text-[var(--text-primary)] mx-auto mb-1" />
                       <p className="text-xs text-[var(--text-muted)] font-medium">Commits</p>
                       <p className="text-lg font-bold text-[var(--text-primary)]"><AnimatedCounter target={githubDetails.totalContributions} /></p>
                     </div>
@@ -271,17 +271,17 @@ export default function Stats() {
           </div>
 
           {/* LeetCode Panel */}
-          <div className="bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-xl p-6 flex flex-col justify-between hover:shadow-lg transition-shadow duration-300">
+          <div className="bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-xl p-6 flex flex-col justify-between hover:shadow-sm transition-shadow duration-300">
             <div>
               <div className="flex items-center justify-between mb-6 pb-4 border-b border-[var(--border-color)]">
                 <h3 className="text-lg font-bold text-[var(--text-primary)] flex items-center gap-2">
-                  <Code2 size={20} className="text-yellow-500" /> LeetCode Progress
+                  <Code2 size={20} className="text-[var(--text-primary)]" /> LeetCode Progress
                 </h3>
                 <a
                   href="https://leetcode.com/u/avpxm8/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1 text-sm text-[var(--text-muted)] hover:text-yellow-500 transition-colors font-medium"
+                  className="flex items-center gap-1 text-sm text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors font-medium"
                 >
                   avpxm8 <ExternalLink size={14} />
                 </a>
@@ -307,7 +307,7 @@ export default function Stats() {
                     <p className="text-xs text-[var(--text-muted)] font-medium mb-1">Contest Rating</p>
                     <p className="text-2xl font-bold text-[var(--text-primary)]"><AnimatedCounter target={rating} /></p>
                     <div className="flex flex-col gap-1 mt-2">
-                      <span className="text-yellow-500 text-xs font-medium">Top <AnimatedCounter target={topPercent} isFloat />% Global</span>
+                      <span className="text-[var(--text-secondary)] text-xs font-medium">Top <AnimatedCounter target={topPercent} isFloat />% Global</span>
                     </div>
                   </div>
                 </div>
@@ -336,7 +336,7 @@ export default function Stats() {
                   <div className="w-full overflow-visible pb-4">
                     <div className="flex flex-wrap gap-4 min-w-min">
                       {lcStats.badges.map(b => (
-                        <div key={b.id} className="relative group cursor-pointer bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-xl p-2.5 flex items-center justify-center transition-all hover:border-luxury-purple hover:shadow-[0_0_20px_rgba(124,58,237,0.3)] shrink-0 z-10 hover:z-50">
+                        <div key={b.id} className="relative group cursor-pointer bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-xl p-2.5 flex items-center justify-center transition-all hover:border-[var(--text-primary)] hover:shadow-sm shrink-0 z-10 hover:z-50">
                           <img 
                             src={b.icon.startsWith('/') ? `https://leetcode.com${b.icon}` : b.icon} 
                             alt={b.displayName} 

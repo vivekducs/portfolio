@@ -63,14 +63,11 @@ export default function Contact() {
 
   return (
     <section id="contact" className="relative py-12 border-t border-[var(--border-color)]">
-      {/* Light orbs */}
-      <div className="absolute top-10 left-[15%] w-80 h-80 bg-luxury-purple opacity-[0.06] rounded-full blur-[90px] pointer-events-none"></div>
-
       <div className="w-full max-w-6xl z-10 px-4">
         
         {/* Title */}
         <div className="flex flex-col mb-8 text-left">
-          <p className="text-xs font-bold text-luxury-purple mono-font uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
+          <p className="text-xs font-bold text-[var(--text-primary)] mono-font uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
             <MessageSquareCode size={13} /> INITIATE CONNECTION
           </p>
           <h2 className="text-3xl font-extrabold tracking-tight text-[var(--text-primary)]">
@@ -97,9 +94,9 @@ export default function Contact() {
               {/* Email */}
               <a
                 href="mailto:vivekducs@gmail.com"
-                className="flex items-center gap-4 p-4 glass-card rounded-2xl border border-[var(--glass-border)] hover:border-luxury-purple/30 shadow-sm transition-all group"
+                className="flex items-center gap-4 p-4 glass-card rounded-2xl border border-[var(--glass-border)] hover:border-[var(--text-primary)] shadow-sm transition-all group"
               >
-                <div className="w-10 h-10 rounded-xl bg-luxury-purple/10 border border-luxury-purple/20 text-luxury-purple flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                <div className="w-10 h-10 rounded-xl bg-[var(--bg-tertiary)] border border-[var(--border-color)] text-[var(--text-primary)] flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                   <Mail size={16} />
                 </div>
                 <div>
@@ -113,9 +110,9 @@ export default function Contact() {
                 href="https://www.linkedin.com/in/vivek33pal/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-4 p-4 glass-card rounded-2xl border border-[var(--glass-border)] hover:border-luxury-purple/30 shadow-sm transition-all group"
+                className="flex items-center gap-4 p-4 glass-card rounded-2xl border border-[var(--glass-border)] hover:border-[var(--text-primary)] shadow-sm transition-all group"
               >
-                <div className="w-10 h-10 rounded-xl bg-luxury-purple/10 border border-luxury-purple/20 text-luxury-purple flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                <div className="w-10 h-10 rounded-xl bg-[var(--bg-tertiary)] border border-[var(--border-color)] text-[var(--text-primary)] flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                   <Linkedin size={16} />
                 </div>
                 <div>
@@ -129,9 +126,9 @@ export default function Contact() {
                 href="https://github.com/AVPXM8"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-4 p-4 glass-card rounded-2xl border border-[var(--glass-border)] hover:border-luxury-purple/30 shadow-sm transition-all group"
+                className="flex items-center gap-4 p-4 glass-card rounded-2xl border border-[var(--glass-border)] hover:border-[var(--text-primary)] shadow-sm transition-all group"
               >
-                <div className="w-10 h-10 rounded-xl bg-luxury-purple/10 border border-luxury-purple/20 text-luxury-purple flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                <div className="w-10 h-10 rounded-xl bg-[var(--bg-tertiary)] border border-[var(--border-color)] text-[var(--text-primary)] flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                   <Github size={16} />
                 </div>
                 <div>
@@ -146,14 +143,14 @@ export default function Contact() {
                 onClick={() => trackCTA("Schedule Meeting", "Contact Section")}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-4 p-4 bg-gradient-to-r from-[var(--bg-tertiary)] to-luxury-purple/5 rounded-2xl border border-luxury-purple/20 hover:border-luxury-purple/50 shadow-sm transition-all group"
+                className="flex items-center gap-4 p-4 bg-[var(--bg-secondary)] rounded-2xl border border-[var(--border-color)] hover:border-[var(--text-primary)] shadow-sm transition-all group"
               >
-                <div className="w-10 h-10 rounded-xl bg-luxury-orange/10 border border-luxury-orange/20 text-luxury-orange flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                <div className="w-10 h-10 rounded-xl bg-[var(--bg-tertiary)] border border-[var(--border-color)] text-[var(--text-primary)] flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                   <CalendarDays size={16} />
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold text-luxury-purple uppercase tracking-wider mono-font">Priority Review</h4>
-                  <p className="text-sm font-semibold text-[var(--text-primary)]">Schedule a 15-min chat</p>
+                  <h4 className="text-xs font-bold text-[var(--text-primary)] uppercase tracking-wider mono-font">Priority Review</h4>
+                  <p className="text-sm font-semibold text-[var(--text-secondary)]">Schedule a 15-min chat</p>
                 </div>
               </a>
 
@@ -162,12 +159,12 @@ export default function Contact() {
 
           {/* Right Column: Dynamic Form */}
           <div className="lg:col-span-7">
-            <div className="glass-card rounded-3xl border border-[var(--glass-border)] p-6 md:p-8 shadow-md relative overflow-hidden">
+            <div className="glass-card rounded-3xl border border-[var(--border-color)] p-6 md:p-8 shadow-sm relative overflow-hidden transition-all hover:border-[var(--text-primary)]">
               
               {/* Corner accent glow decorative */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-luxury-magenta opacity-5 rounded-full blur-2xl -mr-16 -mt-16 pointer-events-none"></div>
+              <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--text-primary)] opacity-5 rounded-full blur-2xl -mr-16 -mt-16 pointer-events-none"></div>
 
-              <h4 className="text-sm font-bold text-luxury-purple uppercase tracking-widest mono-font mb-6">
+              <h4 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-widest mono-font mb-6">
                 Send a Message
               </h4>
 
@@ -195,7 +192,7 @@ export default function Contact() {
                       value={form.name}
                       onChange={(e) => setForm({ ...form, name: e.target.value })}
                       placeholder="e.g. Alex Recruiter"
-                      className="w-full bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-luxury-purple focus:ring-1 focus:ring-luxury-purple transition-all text-[var(--text-primary)]"
+                      className="w-full bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[var(--text-primary)] focus:ring-1 focus:ring-[var(--text-primary)] transition-all text-[var(--text-primary)]"
                       suppressHydrationWarning
                     />
                   </div>
@@ -212,7 +209,7 @@ export default function Contact() {
                       value={form.email}
                       onChange={(e) => setForm({ ...form, email: e.target.value })}
                       placeholder="e.g. alex@company.com"
-                      className="w-full bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-luxury-purple focus:ring-1 focus:ring-luxury-purple transition-all text-[var(--text-primary)]"
+                      className="w-full bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[var(--text-primary)] focus:ring-1 focus:ring-[var(--text-primary)] transition-all text-[var(--text-primary)]"
                       suppressHydrationWarning
                     />
                   </div>
@@ -229,7 +226,7 @@ export default function Contact() {
                       value={form.message}
                       onChange={(e) => setForm({ ...form, message: e.target.value })}
                       placeholder="Hi Vivek, I looked at your NIMCET Rank Predictor and SDE intern timeline..."
-                      className="w-full bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-luxury-purple focus:ring-1 focus:ring-luxury-purple transition-all text-[var(--text-primary)]"
+                      className="w-full bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[var(--text-primary)] focus:ring-1 focus:ring-[var(--text-primary)] transition-all text-[var(--text-primary)]"
                       suppressHydrationWarning
                     />
                   </div>
@@ -239,7 +236,7 @@ export default function Contact() {
                     type="submit"
                     suppressHydrationWarning
                     disabled={isSubmitting}
-                    className="w-full py-3.5 bg-gradient-to-r from-luxury-violet to-luxury-purple hover:opacity-95 text-white font-bold text-sm rounded-xl shadow-md flex items-center justify-center gap-2 transition-all cursor-pointer disabled:opacity-50 hover:translate-y-[-1px]"
+                    className="w-full py-3.5 bg-[var(--text-primary)] text-[var(--bg-primary)] hover:bg-[var(--text-secondary)] font-bold text-sm rounded-xl shadow-sm flex items-center justify-center gap-2 transition-all cursor-pointer disabled:opacity-50 hover:translate-y-[-1px]"
                     aria-label="Send secure message"
                   >
                     <span>{isSubmitting ? "Transmitting..." : "Send Secure Message"}</span>
@@ -256,9 +253,9 @@ export default function Contact() {
         {/* Mobile footer credits */}
         <div className="lg:hidden text-[10px] text-[var(--text-muted)] font-semibold mono-font text-center border-t border-[var(--border-color)] mt-12 pt-6 pb-2 space-y-4">
           <div className="flex justify-center gap-6">
-            <a href="https://github.com/AVPXM8" target="_blank" rel="noopener noreferrer" className="hover:text-luxury-purple">GitHub</a>
-            <a href="https://www.linkedin.com/in/vivek33pal/" target="_blank" rel="noopener noreferrer" className="hover:text-luxury-purple">LinkedIn</a>
-            <a href="mailto:vivekducs@gmail.com" className="hover:text-luxury-purple">Email</a>
+            <a href="https://github.com/AVPXM8" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)]">GitHub</a>
+            <a href="https://www.linkedin.com/in/vivek33pal/" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)]">LinkedIn</a>
+            <a href="mailto:vivekducs@gmail.com" className="hover:text-[var(--text-primary)]">Email</a>
           </div>
           <div>
             © 2026 Vivek Kumar. All rights reserved.

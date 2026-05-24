@@ -17,15 +17,15 @@ const SUGGESTED_PROMPTS = [
 function TypingIndicator() {
   return (
     <div className="flex justify-start items-end gap-2">
-      <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-luxury-violet to-luxury-magenta flex items-center justify-center shrink-0">
-        <Sparkles size={10} className="text-white" />
+      <div className="w-6 h-6 rounded-full bg-[var(--text-primary)] flex items-center justify-center shrink-0">
+        <Sparkles size={10} className="text-[var(--bg-primary)]" />
       </div>
       <div className="bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-2xl rounded-bl-none px-4 py-3 flex items-center gap-1">
-        <span className="bar" />
-        <span className="bar" />
-        <span className="bar" />
-        <span className="bar" />
-        <span className="bar" />
+        <span className="bar bg-[var(--text-secondary)]" />
+        <span className="bar bg-[var(--text-secondary)]" />
+        <span className="bar bg-[var(--text-secondary)]" />
+        <span className="bar bg-[var(--text-secondary)]" />
+        <span className="bar bg-[var(--text-secondary)]" />
       </div>
     </div>
   );
@@ -209,27 +209,22 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
   return (
     <div
       className={`flex flex-col h-full ${
-        isModal ? "w-full" : "glass-card rounded-2xl border border-[var(--glass-border)] p-4 shadow-xl relative overflow-hidden"
+        isModal ? "w-full" : "glass-card rounded-2xl border border-[var(--glass-border)] p-4 shadow-sm relative overflow-hidden"
       }`}
     >
-      {/* Glow */}
-      {!isModal && (
-        <div className="absolute top-0 right-0 w-32 h-32 bg-luxury-purple opacity-10 rounded-full blur-2xl -mr-16 -mt-16 pointer-events-none" />
-      )}
-
       {/* Header */}
       <div className="flex items-center justify-between border-b pb-3 mb-3 border-[var(--border-color)] shrink-0">
         <div className="flex items-center gap-2.5">
           <div className="relative">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-luxury-violet via-luxury-magenta to-luxury-orange flex items-center justify-center text-white shadow-md shadow-luxury-purple/20">
+            <div className="w-8 h-8 rounded-full bg-[var(--text-primary)] flex items-center justify-center text-[var(--bg-primary)] shadow-sm">
               <Sparkles size={14} className={isStreaming ? "animate-spin" : "animate-pulse"} />
             </div>
             <span className={`absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full border-2 border-[var(--bg-secondary)] ${
-              isListening ? "bg-red-400 animate-pulse" : isSpeaking ? "bg-blue-400 animate-pulse" : "bg-emerald-500"
+              isListening ? "bg-red-400 animate-pulse" : isSpeaking ? "bg-[var(--text-primary)] animate-pulse" : "bg-emerald-500"
             }`} />
           </div>
           <div>
-            <h4 className="text-sm font-semibold mono-font leading-none">VK Assistant</h4>
+            <h4 className="text-sm font-semibold mono-font leading-none text-[var(--text-primary)]">VK Assistant</h4>
             <p className="text-[10px] text-[var(--text-muted)] mt-0.5">
               {isListening ? "🎙 Listening..." : isSpeaking ? "🔊 Speaking..." : isStreaming ? "● Thinking..." : "● Online · AI Agent"}
             </p>
@@ -243,7 +238,7 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
             onClick={() => { setVoiceEnabled((v) => !v); window.speechSynthesis?.cancel(); }}
             className={`p-1.5 rounded-lg transition-all cursor-pointer ${
               voiceEnabled
-                ? "bg-luxury-purple/15 text-luxury-purple border border-luxury-purple/30"
+                ? "bg-[var(--text-primary)] text-[var(--bg-primary)] border border-[var(--text-primary)]"
                 : "text-[var(--text-muted)] hover:bg-[var(--bg-tertiary)]"
             }`}
             title={voiceEnabled ? "Disable voice responses" : "Enable voice responses"}
@@ -272,22 +267,22 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
             <div className={`flex items-end gap-2 max-w-[88%] ${msg.role === "user" ? "flex-row-reverse" : "flex-row"}`}>
               {/* Avatar */}
               {msg.role === "assistant" && (
-                <div className="w-5 h-5 rounded-full bg-gradient-to-tr from-luxury-violet to-luxury-magenta flex items-center justify-center shrink-0 mb-0.5">
-                  <Sparkles size={9} className="text-white" />
+                <div className="w-5 h-5 rounded-full bg-[var(--text-primary)] flex items-center justify-center shrink-0 mb-0.5">
+                  <Sparkles size={9} className="text-[var(--bg-primary)]" />
                 </div>
               )}
 
               <div
                 className={`px-3.5 py-2.5 text-xs leading-relaxed rounded-2xl ${
                   msg.role === "user"
-                    ? "bg-gradient-to-r from-luxury-violet to-luxury-purple text-white rounded-tr-none shadow-md shadow-luxury-purple/10"
+                    ? "bg-[var(--text-primary)] text-[var(--bg-primary)] rounded-tr-none shadow-sm"
                     : "bg-[var(--bg-tertiary)] border border-[var(--border-color)] text-[var(--text-primary)] rounded-tl-none"
                 }`}
                 style={{ whiteSpace: "pre-line" }}
               >
                 {msg.content}
                 {msg.streaming && (
-                  <span className="inline-block w-1.5 h-3 bg-luxury-purple animate-pulse rounded-sm ml-1 align-middle" />
+                  <span className="inline-block w-1.5 h-3 bg-[var(--bg-primary)] animate-pulse rounded-sm ml-1 align-middle" />
                 )}
               </div>
             </div>
@@ -307,7 +302,7 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
         <div className={`mb-2 px-3 py-2 rounded-xl text-xs border ${
           micError
             ? "border-red-500/30 bg-red-500/5 text-red-400"
-            : "border-luxury-purple/20 bg-luxury-purple/5 text-[var(--text-secondary)]"
+            : "border-[var(--text-primary)]/20 bg-[var(--text-primary)]/5 text-[var(--text-secondary)]"
         } mono-font`}>
           {micError || `🎙 ${transcript}...`}
         </div>
@@ -325,7 +320,7 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
               suppressHydrationWarning
               onClick={() => sendMessage(q.text)}
               disabled={isStreaming}
-              className="text-[10px] bg-[var(--bg-secondary)] border border-[var(--border-color)] text-[var(--text-secondary)] hover:text-luxury-purple hover:border-luxury-purple/40 hover:bg-luxury-purple/5 transition-all px-2.5 py-1 rounded-full mono-font cursor-pointer disabled:opacity-50"
+              className="text-[10px] bg-[var(--bg-secondary)] border border-[var(--border-color)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--text-primary)] hover:bg-[var(--text-primary)]/5 transition-all px-2.5 py-1 rounded-full mono-font cursor-pointer disabled:opacity-50"
             >
               {q.label}
             </button>
@@ -346,7 +341,7 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
           className={`p-2.5 rounded-xl border transition-all cursor-pointer shrink-0 ${
             isListening
               ? "bg-red-500/10 border-red-500/40 text-red-400 animate-pulse"
-              : "border-[var(--border-color)] text-[var(--text-muted)] hover:border-luxury-purple/30 hover:text-luxury-purple hover:bg-luxury-purple/5"
+              : "border-[var(--border-color)] text-[var(--text-muted)] hover:border-[var(--text-primary)] hover:text-[var(--text-primary)] hover:bg-[var(--text-primary)]/5"
           }`}
           title={isListening ? "Stop recording" : "Start voice input"}
           aria-label={isListening ? "Stop voice recording" : "Start voice recording"}
@@ -363,13 +358,13 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
             onChange={(e) => setInputText(e.target.value)}
             placeholder={isListening ? "Listening..." : "Ask anything about Vivek..."}
             disabled={isStreaming || isListening}
-            className="w-full bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-xl px-3.5 py-2.5 text-xs focus:outline-none focus:border-luxury-purple/40 focus:ring-1 focus:ring-luxury-purple/20 transition-all pr-10 text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
+            className="w-full bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-xl px-3.5 py-2.5 text-xs focus:outline-none focus:border-[var(--text-primary)]/40 focus:ring-1 focus:ring-[var(--text-primary)]/20 transition-all pr-10 text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
           />
           <button
             type="submit"
             suppressHydrationWarning
             disabled={!inputText.trim() || isStreaming}
-            className="absolute right-1.5 top-1.5 p-1.5 rounded-lg bg-gradient-to-r from-luxury-violet to-luxury-purple hover:opacity-90 disabled:opacity-40 text-white transition-all cursor-pointer"
+            className="absolute right-1.5 top-1.5 p-1.5 rounded-lg bg-[var(--text-primary)] text-[var(--bg-primary)] hover:bg-[var(--text-secondary)] disabled:opacity-40 transition-all cursor-pointer"
             aria-label="Send message"
           >
             <Send size={12} />

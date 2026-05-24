@@ -44,9 +44,9 @@ export default function Header({ activeSection, onOpenAssistant, isRecruiterMode
       <div className="flex items-center justify-between">
         {/* Mobile Logo */}
         <div className="flex items-center gap-2 cursor-pointer" onClick={() => handleNavigation({ id: "home", type: "anchor" })}>
-          <div className="w-9 h-9 rounded-lg bg-gradient-to-tr from-luxury-violet via-luxury-magenta to-luxury-orange p-[1.5px]">
-            <div className="w-full h-full rounded-lg bg-[var(--bg-secondary)] flex items-center justify-center font-bold text-base">
-              <span className="gradient-text">VK</span>
+          <div className="w-9 h-9 rounded-lg bg-[var(--text-primary)] p-[1px] shadow-sm flex items-center justify-center">
+            <div className="w-full h-full rounded-lg bg-[var(--text-primary)] flex items-center justify-center font-bold text-base text-[var(--bg-primary)]">
+              <span>VK</span>
             </div>
           </div>
           <div>
@@ -62,26 +62,26 @@ export default function Header({ activeSection, onOpenAssistant, isRecruiterMode
             onClick={toggleRecruiterMode}
             className={`p-2 rounded-lg border transition-all ${
               isRecruiterMode
-                ? "border-luxury-orange/30 bg-luxury-orange/10 text-luxury-orange"
-                : "border-[var(--border-color)] bg-[var(--bg-tertiary)] text-[var(--text-secondary)]"
+                ? "border-[var(--text-primary)] bg-[var(--text-primary)] text-[var(--bg-primary)]"
+                : "border-[var(--border-color)] bg-[var(--bg-tertiary)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
             }`}
           >
-            <div className={`w-3 h-3 rounded-full ${isRecruiterMode ? "bg-luxury-orange animate-pulse" : "bg-[var(--text-muted)]"}`} />
+            <div className={`w-3 h-3 rounded-full ${isRecruiterMode ? "bg-[var(--bg-primary)] animate-pulse" : "bg-[var(--text-muted)]"}`} />
           </button>
 
           {/* AI Assistant Quick Trigger */}
           <button
             onClick={onOpenAssistant}
-            className="flex items-center gap-1 bg-luxury-purple/10 border border-luxury-purple/20 text-luxury-purple px-2.5 py-1.5 rounded-full text-[10px] font-bold tracking-wide mono-font cursor-pointer hover:bg-luxury-purple/20 transition-all"
+            className="flex items-center gap-1 bg-[var(--bg-tertiary)] border border-[var(--border-color)] text-[var(--text-primary)] px-2.5 py-1.5 rounded-full text-[10px] font-bold tracking-wide mono-font cursor-pointer hover:bg-[var(--text-primary)] hover:text-[var(--bg-primary)] transition-all group"
           >
-            <Sparkles size={11} className="animate-pulse" />
+            <Sparkles size={11} className="animate-pulse group-hover:text-[var(--bg-primary)] text-[var(--text-primary)]" />
             <span>AI Bot</span>
           </button>
 
           {/* Theme switcher */}
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-lg border border-[var(--border-color)] bg-[var(--bg-tertiary)] text-[var(--text-secondary)] cursor-pointer"
+            className="p-2 rounded-lg border border-[var(--border-color)] bg-[var(--bg-tertiary)] hover:border-[var(--text-primary)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all cursor-pointer"
           >
             {theme === "light" ? <Moon size={14} /> : <Sun size={14} />}
           </button>
@@ -89,7 +89,7 @@ export default function Header({ activeSection, onOpenAssistant, isRecruiterMode
           {/* Hamburger Menu Toggle */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="p-2 rounded-lg border border-[var(--border-color)] bg-[var(--bg-tertiary)] text-[var(--text-primary)] cursor-pointer"
+            className="p-2 rounded-lg border border-[var(--border-color)] bg-[var(--bg-tertiary)] hover:border-[var(--text-primary)] text-[var(--text-primary)] transition-all cursor-pointer"
           >
             {isOpen ? <X size={14} /> : <Menu size={14} />}
           </button>
@@ -109,11 +109,11 @@ export default function Header({ activeSection, onOpenAssistant, isRecruiterMode
                   onClick={() => handleNavigation(item)}
                   className={`w-full flex items-center gap-3.5 px-4 py-3 rounded-xl text-sm font-semibold transition-all cursor-pointer ${
                     isActive
-                      ? "bg-luxury-purple/10 border-l-2 border-luxury-purple text-luxury-purple"
+                      ? "bg-[var(--text-primary)] text-[var(--bg-primary)] shadow-sm"
                       : "text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-tertiary)]"
                   }`}
                 >
-                  <Icon size={16} />
+                  <Icon size={16} className={isActive ? "text-[var(--bg-primary)]" : ""} />
                   <span>{item.label}</span>
                 </button>
               );

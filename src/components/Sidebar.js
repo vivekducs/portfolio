@@ -80,9 +80,9 @@ export default function Sidebar({ activeSection, onOpenAssistant, isRecruiterMod
       <div className="space-y-8">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => handleNavigation({ id: "home", type: "anchor" })}>
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-luxury-violet via-luxury-magenta to-luxury-orange p-[1.5px] shadow-lg shadow-luxury-purple/10">
-              <div className="w-full h-full rounded-xl bg-[var(--bg-secondary)] flex items-center justify-center font-bold text-lg tracking-wider">
-                <span className="gradient-text">VK</span>
+            <div className="w-10 h-10 rounded-xl bg-[var(--text-primary)] text-[var(--bg-primary)] p-[1px] shadow-sm flex items-center justify-center">
+              <div className="w-full h-full rounded-xl bg-[var(--text-primary)] flex items-center justify-center font-bold text-lg tracking-wider text-[var(--bg-primary)]">
+                <span>VK</span>
               </div>
             </div>
             <div>
@@ -94,7 +94,7 @@ export default function Sidebar({ activeSection, onOpenAssistant, isRecruiterMod
           {/* Theme Switcher Toggle */}
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-xl border border-[var(--border-color)] bg-[var(--bg-tertiary)] hover:bg-[var(--border-color)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all cursor-pointer shadow-sm"
+            className="p-2 rounded-xl border border-[var(--border-color)] bg-[var(--bg-tertiary)] hover:border-[var(--text-primary)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all cursor-pointer shadow-sm"
             title={theme === "light" ? "Switch to Dark Mode" : "Switch to Light Mode"}
           >
             {theme === "light" ? <Moon size={15} /> : <Sun size={15} />}
@@ -112,11 +112,11 @@ export default function Sidebar({ activeSection, onOpenAssistant, isRecruiterMod
                 onClick={() => handleNavigation(item)}
                 className={`w-full flex items-center gap-3.5 px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-200 cursor-pointer ${
                   isActive
-                    ? "bg-gradient-to-r from-luxury-purple/10 to-luxury-magenta/5 border-l-2 border-luxury-purple text-luxury-purple"
+                    ? "bg-[var(--text-primary)] text-[var(--bg-primary)] shadow-sm"
                     : "text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-tertiary)]"
                 }`}
               >
-                <Icon size={16} className={isActive ? "text-luxury-purple" : ""} />
+                <Icon size={16} className={isActive ? "text-[var(--bg-primary)]" : ""} />
                 <span>{item.label}</span>
               </button>
             );
@@ -131,12 +131,12 @@ export default function Sidebar({ activeSection, onOpenAssistant, isRecruiterMod
           onClick={toggleRecruiterMode}
           className={`w-full flex items-center justify-between px-4 py-3 rounded-xl border transition-all ${
             isRecruiterMode
-              ? "bg-luxury-orange/10 border-luxury-orange/30 text-luxury-orange shadow-[0_0_15px_rgba(249,115,22,0.1)]"
-              : "bg-[var(--bg-tertiary)] border-[var(--border-color)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-luxury-orange/50"
+              ? "bg-[var(--text-primary)] border-[var(--text-primary)] text-[var(--bg-primary)]"
+              : "bg-[var(--bg-tertiary)] border-[var(--border-color)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--text-primary)]"
           }`}
         >
           <div className="flex items-center gap-2">
-            <div className={`w-2 h-2 rounded-full ${isRecruiterMode ? "bg-luxury-orange animate-pulse" : "bg-[var(--text-muted)]"}`} />
+            <div className={`w-2 h-2 rounded-full ${isRecruiterMode ? "bg-[var(--bg-primary)] animate-pulse" : "bg-[var(--text-muted)]"}`} />
             <span className="text-xs font-bold uppercase tracking-wider mono-font">Recruiter</span>
           </div>
           <span className="text-[10px] font-bold">{isRecruiterMode ? "ON" : "OFF"}</span>
@@ -145,11 +145,11 @@ export default function Sidebar({ activeSection, onOpenAssistant, isRecruiterMod
         {/* Floating VK Assistant Control */}
         <div 
           onClick={onOpenAssistant}
-          className="glass-card rounded-xl border p-3 hover:border-luxury-purple/40 shadow-sm cursor-pointer group transition-all"
+          className="glass-card rounded-xl border p-3 hover:border-[var(--text-primary)] shadow-sm cursor-pointer group transition-all"
         >
           <div className="flex items-center justify-between mb-2">
-            <span className="text-[10px] font-bold text-luxury-purple mono-font tracking-widest flex items-center gap-1.5">
-              <Sparkles size={10} className="animate-pulse" /> VK ASSISTANT
+            <span className="text-[10px] font-bold text-[var(--text-primary)] mono-font tracking-widest flex items-center gap-1.5">
+              <Sparkles size={10} className="text-[var(--text-primary)] animate-pulse" /> VK ASSISTANT
             </span>
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
           </div>
@@ -161,7 +161,7 @@ export default function Sidebar({ activeSection, onOpenAssistant, isRecruiterMod
               <span className="bar"></span>
               <span className="bar"></span>
             </div>
-            <span className="text-[11px] text-[var(--text-muted)] group-hover:text-luxury-purple transition-all font-semibold mono-font">
+            <span className="text-[11px] text-[var(--text-muted)] group-hover:text-[var(--text-primary)] transition-all font-semibold mono-font">
               Ask AI about VK
             </span>
           </div>
@@ -172,9 +172,9 @@ export default function Sidebar({ activeSection, onOpenAssistant, isRecruiterMod
           href="https://github.com/AVPXM8"
           target="_blank"
           rel="noopener noreferrer"
-          className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-[var(--bg-tertiary)] border border-[var(--border-color)] hover:border-luxury-purple hover:bg-luxury-purple/5 text-[var(--text-primary)] font-semibold text-sm rounded-xl shadow-sm transition-all group"
+          className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-[var(--bg-tertiary)] border border-[var(--border-color)] hover:border-[var(--text-primary)] hover:bg-[var(--text-primary)] hover:text-[var(--bg-primary)] text-[var(--text-primary)] font-semibold text-sm rounded-xl shadow-sm transition-all group"
         >
-          <FileText size={15} className="text-luxury-purple group-hover:scale-110 transition-transform" />
+          <FileText size={15} className="group-hover:scale-110 transition-transform" />
           <span>View GitHub CV</span>
         </a>
 
@@ -184,7 +184,7 @@ export default function Sidebar({ activeSection, onOpenAssistant, isRecruiterMod
             href="https://github.com/AVPXM8"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-luxury-purple transition-colors p-1 hover:bg-[var(--bg-tertiary)] rounded-lg"
+            className="hover:text-[var(--text-primary)] transition-colors p-1 hover:bg-[var(--bg-tertiary)] rounded-lg"
           >
             <Github size={16} />
           </a>
@@ -192,13 +192,13 @@ export default function Sidebar({ activeSection, onOpenAssistant, isRecruiterMod
             href="https://www.linkedin.com/in/vivek33pal/"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-luxury-purple transition-colors p-1 hover:bg-[var(--bg-tertiary)] rounded-lg"
+            className="hover:text-[var(--text-primary)] transition-colors p-1 hover:bg-[var(--bg-tertiary)] rounded-lg"
           >
             <Linkedin size={16} />
           </a>
           <a
             href="mailto:vivekducs@gmail.com"
-            className="hover:text-luxury-purple transition-colors p-1 hover:bg-[var(--bg-tertiary)] rounded-lg"
+            className="hover:text-[var(--text-primary)] transition-colors p-1 hover:bg-[var(--bg-tertiary)] rounded-lg"
           >
             <Mail size={16} />
           </a>
