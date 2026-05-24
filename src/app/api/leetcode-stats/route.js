@@ -1,45 +1,73 @@
 export async function GET() {
   try {
-    // Using alfa-leetcode-api public proxy
-    const res = await fetch("https://alfa-leetcode-api.onrender.com/vivekducs/solved", {
+    const res = await fetch("https://alfa-leetcode-api.onrender.com/avpxm8/solved", {
       next: { revalidate: 3600 },
     });
 
-    let solved = { solvedProblem: 500, easySolved: 210, mediumSolved: 240, hardSolved: 50 };
+    let solved = {};
     if (res.ok) {
       const data = await res.json();
       solved = {
-        solvedProblem: data.solvedProblem || 500,
-        easySolved: data.easySolved || 210,
-        mediumSolved: data.mediumSolved || 240,
-        hardSolved: data.hardSolved || 50,
+        solvedProblem: data.solvedProblem || 0,
+        easySolved: data.easySolved || 0,
+        mediumSolved: data.mediumSolved || 0,
+        hardSolved: data.hardSolved || 0,
       };
     }
 
-    const contestRes = await fetch("https://alfa-leetcode-api.onrender.com/vivekducs/contest", {
+    const contestRes = await fetch("https://alfa-leetcode-api.onrender.com/avpxm8/contest", {
       next: { revalidate: 3600 },
     });
 
-    let contest = { contestRating: 1664, contestGlobalRanking: 0 };
+    let contest = {};
     if (contestRes.ok) {
       const data = await contestRes.json();
       contest = {
-        contestRating: Math.round(data.contestRating || 1664),
+        contestRating: Math.round(data.contestRating || 0),
         contestGlobalRanking: data.contestGlobalRanking || 0,
-        contestTopPercentage: data.contestTopPercentage || 16.41,
+        contestTopPercentage: data.contestTopPercentage || 0,
       };
     }
 
-    return Response.json({ ...solved, ...contest });
-  } catch {
-    return Response.json({
-      solvedProblem: 500,
-      easySolved: 210,
-      mediumSolved: 240,
-      hardSolved: 50,
-      contestRating: 1664,
-      contestGlobalRanking: 0,
-      contestTopPercentage: 16.41,
+    const calRes = await fetch("https://alfa-leetcode-api.onrender.com/avpxm8/calendar", {
+      next: { revalidate: 3600 },
     });
+    
+    let calendar = {};
+    if (calRes.ok) {
+      const data = await calRes.json();
+      if (data.submissionCalendar) {
+        calendar = JSON.parse(data.submissionCalendar);
+      }
+    }
+
+    const badgeRes = await fetch("https://alfa-leetcode-api.onrender.com/avpxm8/badges", {
+      next: { revalidate: 3600 },
+    });
+
+    let badges = [];
+    if (badgeRes.ok) {
+      const data = await badgeRes.json();
+      if (data.badges) {
+        badges = data.badges; // Get all badges
+      }
+    }
+
+    const profileRes = await fetch("https://alfa-leetcode-api.onrender.com/avpxm8", {
+      next: { revalidate: 3600 },
+    });
+    
+    let profile = {};
+    if (profileRes.ok) {
+      const data = await profileRes.json();
+      profile = {
+        ranking: data.ranking || 0,
+        reputation: data.reputation || 0,
+      };
+    }
+
+    return Response.json({ ...solved, ...contest, ...profile, calendar, badges });
+  } catch (error) {
+    return Response.json({ error: "Failed to fetch LeetCode stats" }, { status: 500 });
   }
 }

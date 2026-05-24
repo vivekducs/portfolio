@@ -14,6 +14,7 @@ import Stats from "@/components/Stats";
 import Contact from "@/components/Contact";
 import VKAssistant from "@/components/VKAssistant";
 import VKAssistantPopup from "@/components/VKAssistantPopup";
+import RecruiterDashboard from "@/components/RecruiterDashboard";
 import AchievementWall from "@/components/AchievementWall";
 import AIBootLoader from "@/components/AIBootLoader";
 import { MessageSquare, Sparkles, Bot } from "lucide-react";
@@ -24,9 +25,16 @@ const GlobeSection = dynamic(() => import("@/components/GlobeSection"), {
   loading: () => null,
 });
 
+// Lazy load heavy React Flow / Recharts section
+const EngineeringHub = dynamic(() => import("@/components/EngineeringHub"), {
+  ssr: false,
+  loading: () => null,
+});
+
 export default function Home() {
   const [activeSection, setActiveSection] = useState("home");
   const [isAssistantOpen, setIsAssistantOpen] = useState(false);
+  const [isRecruiterMode, setIsRecruiterMode] = useState(false);
   const [bootDone, setBootDone] = useState(false);
 
   // Only show boot loader on first visit (per session)
@@ -82,6 +90,8 @@ export default function Home() {
         <Sidebar
           activeSection={activeSection}
           onOpenAssistant={() => setIsAssistantOpen(true)}
+          isRecruiterMode={isRecruiterMode}
+          toggleRecruiterMode={() => setIsRecruiterMode(!isRecruiterMode)}
         />
 
         {/* Main Workspace Frame */}
@@ -91,19 +101,24 @@ export default function Home() {
           <Header
             activeSection={activeSection}
             onOpenAssistant={() => setIsAssistantOpen(true)}
+            isRecruiterMode={isRecruiterMode}
+            toggleRecruiterMode={() => setIsRecruiterMode(!isRecruiterMode)}
           />
 
           {/* Dashboard Content Grid */}
           <div className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
-              {/* Center Grid Column: Main Portfolio Sections */}
               <main className="lg:col-span-8 space-y-4">
+                {isRecruiterMode && (
+                  <RecruiterDashboard onClose={() => setIsRecruiterMode(false)} />
+                )}
                 <Hero onOpenAssistant={() => setIsAssistantOpen(true)} />
                 <About />
                 <GlobeSection />
-                <Skills />
                 <Projects />
+                <Skills />
+                <EngineeringHub />
                 <Experience />
                 <AchievementWall />
                 <Certifications />

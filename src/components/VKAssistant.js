@@ -239,6 +239,7 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
         <div className="flex items-center gap-1">
           {/* Voice TTS toggle */}
           <button
+            suppressHydrationWarning
             onClick={() => { setVoiceEnabled((v) => !v); window.speechSynthesis?.cancel(); }}
             className={`p-1.5 rounded-lg transition-all cursor-pointer ${
               voiceEnabled
@@ -246,14 +247,17 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
                 : "text-[var(--text-muted)] hover:bg-[var(--bg-tertiary)]"
             }`}
             title={voiceEnabled ? "Disable voice responses" : "Enable voice responses"}
+            aria-label="Toggle voice responses"
           >
             {voiceEnabled ? <Volume2 size={13} /> : <VolumeX size={13} />}
           </button>
 
           {isModal && onClose && (
             <button
+              suppressHydrationWarning
               onClick={onClose}
               className="p-1.5 rounded-lg hover:bg-[var(--bg-tertiary)] transition-colors text-[var(--text-muted)] hover:text-[var(--text-primary)] cursor-pointer"
+              aria-label="Close assistant"
             >
               <X size={16} />
             </button>
@@ -318,6 +322,7 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
           {SUGGESTED_PROMPTS.slice(0, isModal ? 8 : 4).map((q, idx) => (
             <button
               key={idx}
+              suppressHydrationWarning
               onClick={() => sendMessage(q.text)}
               disabled={isStreaming}
               className="text-[10px] bg-[var(--bg-secondary)] border border-[var(--border-color)] text-[var(--text-secondary)] hover:text-luxury-purple hover:border-luxury-purple/40 hover:bg-luxury-purple/5 transition-all px-2.5 py-1 rounded-full mono-font cursor-pointer disabled:opacity-50"
@@ -336,6 +341,7 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
         {/* Mic button */}
         <button
           type="button"
+          suppressHydrationWarning
           onClick={isListening ? stopVoice : startVoice}
           className={`p-2.5 rounded-xl border transition-all cursor-pointer shrink-0 ${
             isListening
@@ -343,6 +349,7 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
               : "border-[var(--border-color)] text-[var(--text-muted)] hover:border-luxury-purple/30 hover:text-luxury-purple hover:bg-luxury-purple/5"
           }`}
           title={isListening ? "Stop recording" : "Start voice input"}
+          aria-label={isListening ? "Stop voice recording" : "Start voice recording"}
         >
           {isListening ? <MicOff size={14} /> : <Mic size={14} />}
         </button>
@@ -350,6 +357,7 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
         <div className="relative flex-1">
           <input
             ref={inputRef}
+            suppressHydrationWarning
             type="text"
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
@@ -359,8 +367,10 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
           />
           <button
             type="submit"
+            suppressHydrationWarning
             disabled={!inputText.trim() || isStreaming}
             className="absolute right-1.5 top-1.5 p-1.5 rounded-lg bg-gradient-to-r from-luxury-violet to-luxury-purple hover:opacity-90 disabled:opacity-40 text-white transition-all cursor-pointer"
+            aria-label="Send message"
           >
             <Send size={12} />
           </button>

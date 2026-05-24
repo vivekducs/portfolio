@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { ExternalLink, Sparkles, BookOpen, Layers, Target, Shield } from "lucide-react";
 import ArchitectureDiagram from "./ArchitectureDiagram";
+import { projectsData } from "@/data/projects";
+import Link from "next/link";
 
 const Github = ({ size = 24, ...props }) => (
   <svg
@@ -25,61 +27,7 @@ const Github = ({ size = 24, ...props }) => (
 export default function Projects() {
   const [filter, setFilter] = useState("all");
 
-  const projects = [
-    {
-      id: "mathem-solvex",
-      title: "Mathem Solvex",
-      category: "ai-ml",
-      featured: true,
-      desc: "AI-powered educational platform designed to resolve mathematical doubts dynamically. Integrates dense vector lookup, natural language queries, and complete student tracking dashboards.",
-      highlights: [
-        "3,000+ active student users",
-        "330K+ organic Google Search Impressions",
-        "AI-powered semantic search via Pinecone & Gemini API",
-        "Comprehensive CRUD administrator dashboard"
-      ],
-      tech: ["Node.js", "Express.js", "MongoDB", "Gemini API", "Pinecone", "React.js"],
-      live: "https://question.maarula.in/",
-      github: "https://github.com/AVPXM8/mathem-solvex-updated"
-    },
-    {
-      id: "palora",
-      title: "Palora",
-      category: "ai-ml",
-      featured: false,
-      desc: "AI-powered emotional wellness and mental health counseling platform. Features sentiment-aware journaling prompts, real-time stress analysis, and supportive wellness guidance.",
-      tech: ["Node.js", "Express.js", "MongoDB", "Gemini API"],
-      github: "https://github.com/AVPXM8" // Placeholder since no specific github was specified
-    },
-    {
-      id: "observeflow",
-      title: "ObserveFlow",
-      category: "systems",
-      featured: false,
-      desc: "Real-time high-throughput log aggregation and cluster monitoring dashboard. Collects distributed system logs, parses errors, and fires alerts based on traffic thresholds.",
-      tech: ["Node.js", "Docker", "MongoDB", "React", "GitHub Actions"],
-      github: "https://github.com/AVPXM8/ObserveFlow"
-    },
-    {
-      id: "rank-predictor",
-      title: "Rank Predictor",
-      category: "fullstack",
-      featured: false,
-      desc: "Predictive ranking calculator and college matching system tailored for national NIMCET and CUET Computer Science aspirants across India.",
-      tech: ["HTML", "CSS", "JavaScript", "React.js"],
-      live: "https://rankpredictor.maarula.in/",
-      github: "https://github.com/AVPXM8/Rank-Predictor"
-    },
-    {
-      id: "garbage-classification",
-      title: "Garbage Classification",
-      category: "ai-ml",
-      featured: false,
-      desc: "Deep learning waste categorization system leveraging Convolutional Neural Networks (CNN) to automatically sort recyclables from general waste.",
-      tech: ["Python", "TensorFlow", "CNN", "OpenCV"],
-      github: "https://github.com/AVPXM8/garbage-classification"
-    }
-  ];
+  const projects = projectsData;
 
   const filteredProjects = filter === "all" 
     ? projects.filter(p => !p.featured) 
@@ -188,15 +136,22 @@ export default function Projects() {
 
                 {/* Actions */}
                 <div className="flex flex-wrap items-center gap-3 pt-2">
+                  <Link
+                    href={`/projects/${featuredProject.id}`}
+                    className="px-5 py-2.5 bg-gradient-to-r from-luxury-violet to-luxury-purple text-white text-xs font-bold rounded-xl shadow-md hover:opacity-95 transition-all flex items-center gap-1.5"
+                  >
+                    <span>Read Case Study</span>
+                    <BookOpen size={12} />
+                  </Link>
                   {featuredProject.live && (
                     <a
                       href={featuredProject.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-5 py-2.5 bg-gradient-to-r from-luxury-violet to-luxury-purple text-white text-xs font-bold rounded-xl shadow-md hover:opacity-95 transition-all flex items-center gap-1.5"
+                      className="px-5 py-2.5 bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:border-luxury-purple text-[var(--text-primary)] text-xs font-bold rounded-xl transition-all flex items-center gap-1.5"
                     >
-                      <span>Live Demo</span>
-                      <ExternalLink size={12} />
+                      <ExternalLink size={12} className="text-luxury-purple" />
+                      <span>Live Site</span>
                     </a>
                   )}
                   {featuredProject.github && (

@@ -1,0 +1,69 @@
+---
+title: "Semantic Search with Pinecone: A Deep Dive"
+date: "2024-05-12"
+excerpt: "How I achieved sub-50ms latency for nearest-neighbor semantic search across thousands of mathematical documents using Pinecone vector database."
+tags: ["Pinecone", "Vector DB", "System Design", "Node.js"]
+---
+
+Implementing an intelligent search system for a mathematical doubt resolution platform poses unique challenges. Traditional keyword search (like Elasticsearch) fails when students query conceptually similar but lexically different mathematical problems.
+
+To solve this for **Mathem Solvex**, I architected a semantic search pipeline utilizing **Pinecone**.
+
+## The Problem with Lexical Search
+
+When a student searches for *"How to find the area under a curve"*, a lexical search engine looks for exact keyword matches. However, the database might contain the question as *"Evaluate the definite integral for the region bounded by..."* 
+
+Keyword search yields zero results.
+
+## Vector Search Architecture
+
+I shifted the architecture to a **Dense Vector Retrieval** system:
+
+1. **Embedding Generation**: User queries are intercepted by the Node.js backend and sent to an embedding model (e.g., `text-embedding-ada-002` or `sentence-transformers/all-MiniLM-L6-v2`) to generate a dense high-dimensional vector.
+2. **Nearest Neighbor Search**: This vector is queried against a Pinecone Index containing pre-computed vectors for all questions in our database.
+3. **Hydration**: Pinecone returns the top-K matching document IDs. We query MongoDB to hydrate these IDs into full problem descriptions.
+
+### Code Implementation
+
+Here is a snippet showing how the Node.js backend handles the semantic query:
+
+```javascript
+import { Pinecone } from '@pinecone-database/pinecone';
+import { generateEmbedding } from './ml-service';
+import QuestionModel from '../models/Question';
+
+const pinecone = new Pinecone({
+  apiKey: process.env.PINECONE_API_KEY
+});
+
+export async function semanticSearch(queryText, topK = 5) {
+  // 1. Generate Query Vector
+  const queryVector = await generateEmbedding(queryText);
+  
+  // 2. Query Pinecone Index
+  const index = pinecone.index('mathem-solvex');
+  const results = await index.query({
+    vector: queryVector,
+    topK,
+    includeMetadata: true
+  });
+  
+  // 3. Hydrate from MongoDB
+  const questionIds = results.matches.map(match => match.id);
+  const hydratedQuestions = await QuestionModel.find({ _id: { $in: questionIds } });
+  
+  return hydratedQuestions;
+}
+```
+
+## Optimizing for Sub-50ms Latency
+
+To achieve the stringent **sub-50ms** latency requirement, several optimizations were implemented:
+
+- **Connection Pooling**: Maintaining persistent gRPC connections to Pinecone rather than establishing new HTTPS connections per request.
+- **Index Pod Sizing**: Moving from `p1` to `s1` pods for massive storage, then utilizing `p2` for ultra-low latency reads.
+- **Redis Caching**: Caching exact match embeddings in Redis. If a student searches a very common query (e.g., "Integration by parts"), we bypass the embedding generation entirely.
+
+## Future Improvements
+
+Currently, the system uses single-vector representations. In the future, I plan to implement **ColBERT** (Contextualized Late Interaction over BERT) or hybrid search (Sparse + Dense vectors) to handle queries where exact keywords *do* matter alongside semantic meaning.

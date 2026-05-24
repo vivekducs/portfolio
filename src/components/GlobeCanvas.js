@@ -20,10 +20,12 @@ function latLonToVec3(lat, lon, radius = 1.02) {
 function LocationMarker() {
   const markerRef = useRef();
   const ringRef = useRef();
+  const timeRef = useRef(0);
   const noidaPos = latLonToVec3(28.5355, 77.391);
 
-  useFrame((state) => {
-    const t = state.clock.elapsedTime;
+  useFrame((state, delta) => {
+    timeRef.current += delta;
+    const t = timeRef.current;
     if (ringRef.current) {
       ringRef.current.scale.setScalar(1 + 0.3 * Math.sin(t * 2));
       ringRef.current.material.opacity = 0.6 + 0.4 * Math.sin(t * 2);
@@ -50,6 +52,62 @@ function LocationMarker() {
           side={THREE.DoubleSide}
         />
       </mesh>
+    </group>
+  );
+}
+
+function NeuralNetworkOrbit() {
+  const orbitRef = useRef();
+  const timeRef = useRef(0);
+
+  useFrame((state, delta) => {
+    timeRef.current += delta;
+    const t = timeRef.current;
+    if (orbitRef.current) {
+      orbitRef.current.rotation.y = t * 0.1;
+      orbitRef.current.rotation.z = t * 0.05;
+    }
+  });
+
+  const nodes = Array.from({ length: 8 }).map((_, i) => {
+    const angle = (i / 8) * Math.PI * 2;
+    const radius = 1.3 + Math.random() * 0.2;
+    const x = Math.cos(angle) * radius;
+    const y = (Math.random() - 0.5) * 1.5;
+    const z = Math.sin(angle) * radius;
+    
+    return (
+      <group key={i} position={[x, y, z]}>
+        <mesh>
+          <octahedronGeometry args={[0.04]} />
+          <meshStandardMaterial 
+            color="#f97316" 
+            emissive="#f97316" 
+            emissiveIntensity={0.8}
+            wireframe
+          />
+        </mesh>
+        <mesh>
+          <sphereGeometry args={[0.015, 8, 8]} />
+          <meshBasicMaterial color="#ffffff" />
+        </mesh>
+      </group>
+    );
+  });
+
+  return (
+    <group ref={orbitRef}>
+      {/* Orbital connection ring */}
+      <mesh rotation={[Math.PI / 2, 0.5, 0]}>
+        <ringGeometry args={[1.35, 1.36, 64]} />
+        <meshBasicMaterial color="#9333ea" transparent opacity={0.15} side={THREE.DoubleSide} />
+      </mesh>
+      <mesh rotation={[Math.PI / 2, -0.5, 0]}>
+        <ringGeometry args={[1.45, 1.46, 64]} />
+        <meshBasicMaterial color="#d946ef" transparent opacity={0.1} side={THREE.DoubleSide} />
+      </mesh>
+      
+      {nodes}
     </group>
   );
 }
@@ -102,6 +160,9 @@ function GlobeMesh() {
 
       {/* Location marker */}
       <LocationMarker />
+      
+      {/* Advanced Neural Orbit System */}
+      <NeuralNetworkOrbit />
     </group>
   );
 }

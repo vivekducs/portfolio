@@ -60,12 +60,32 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Vivek Kumar",
+    "jobTitle": "AI Engineer & Full Stack Developer",
+    "url": "https://vivekkumar-portfolio.vercel.app",
+    "sameAs": [
+      "https://github.com/AVPXM8",
+      "https://linkedin.com/in/vivekkumar"
+    ],
+    "knowsAbout": ["Artificial Intelligence", "Node.js", "React.js", "MongoDB", "System Architecture"]
+  };
+
   return (
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
+      <body className="min-h-full flex flex-col" suppressHydrationWarning>
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>

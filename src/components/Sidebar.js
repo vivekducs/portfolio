@@ -39,7 +39,7 @@ const Linkedin = ({ size = 24, ...props }) => (
 );
 
 
-export default function Sidebar({ activeSection, onOpenAssistant }) {
+export default function Sidebar({ activeSection, onOpenAssistant, isRecruiterMode, toggleRecruiterMode }) {
   const { theme, toggleTheme } = useTheme();
 
   const menuItems = [
@@ -112,6 +112,22 @@ export default function Sidebar({ activeSection, onOpenAssistant }) {
 
       {/* Bottom Section - Controls and Social Profiles */}
       <div className="space-y-5">
+        {/* Recruiter Mode Toggle */}
+        <button
+          onClick={toggleRecruiterMode}
+          className={`w-full flex items-center justify-between px-4 py-3 rounded-xl border transition-all ${
+            isRecruiterMode
+              ? "bg-luxury-orange/10 border-luxury-orange/30 text-luxury-orange shadow-[0_0_15px_rgba(249,115,22,0.1)]"
+              : "bg-[var(--bg-tertiary)] border-[var(--border-color)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-luxury-orange/50"
+          }`}
+        >
+          <div className="flex items-center gap-2">
+            <div className={`w-2 h-2 rounded-full ${isRecruiterMode ? "bg-luxury-orange animate-pulse" : "bg-[var(--text-muted)]"}`} />
+            <span className="text-xs font-bold uppercase tracking-wider mono-font">Recruiter</span>
+          </div>
+          <span className="text-[10px] font-bold">{isRecruiterMode ? "ON" : "OFF"}</span>
+        </button>
+
         {/* Floating VK Assistant Control */}
         <div 
           onClick={onOpenAssistant}

@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { BarChart3, Award, Activity, Star, Code2, ExternalLink } from "lucide-react";
+import { Activity, Code2, ExternalLink, GitMerge, CircleDot, Star } from "lucide-react";
 
-const Github = ({ size = 24, ...props }) => (
+const GithubIcon = ({ size = 24, ...props }) => (
   <svg viewBox="0 0 24 24" width={size} height={size} stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" {...props}>
     <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
     <path d="M9 18c-4.51 2-5-2-7-2" />
@@ -36,7 +36,7 @@ function AnimatedCounter({ target, duration = 1500, isFloat = false }) {
   }, []);
 
   useEffect(() => {
-    if (!started) return;
+    if (!started || target === 0) return;
     const steps = 50;
     const stepDuration = duration / steps;
     let step = 0;
@@ -54,23 +54,63 @@ function AnimatedCounter({ target, duration = 1500, isFloat = false }) {
   return <span ref={ref}>{value}</span>;
 }
 
+function Heatmap({ data, tooltipPrefix = "contributions" }) {
+  if (!data || data.length === 0) return <div className="h-[120px] flex items-center justify-center text-sm text-[var(--text-muted)]">Loading data...</div>;
+
+  const getLevel = (count) => {
+    if (count === 0 || count === null || count === undefined) return 0;
+    if (count <= 2) return 1;
+    if (count <= 5) return 2;
+    if (count <= 10) return 3;
+    return 4;
+  };
+
+  const getStyle = (lvl) => {
+    if (lvl === 0) return "bg-[var(--bg-tertiary)]"; 
+    if (lvl === 1) return "bg-[#9be9a8] dark:bg-[#0e4429]";
+    if (lvl === 2) return "bg-[#40c463] dark:bg-[#006d32]";
+    if (lvl === 3) return "bg-[#30a14e] dark:bg-[#26a641]";
+    return "bg-[#216e39] dark:bg-[#39d353]"; 
+  };
+
+  return (
+    <div className="w-full overflow-x-auto pb-2 scrollbar-hide">
+      <div className="inline-grid grid-flow-col gap-1 select-none min-w-max">
+        {data.map((week, wIdx) => (
+          <div key={wIdx} className="grid grid-rows-7 gap-1">
+            {week.map((count, dIdx) => {
+              if (count === null || count === undefined) {
+                 return <div key={dIdx} className="w-3 h-3 rounded-[2px] bg-transparent" />;
+              }
+              const lvl = getLevel(count);
+              return (
+                <div
+                  key={dIdx}
+                  className={`w-3 h-3 rounded-[2px] transition-colors ${getStyle(lvl)} hover:ring-1 hover:ring-[var(--text-primary)]`}
+                  title={count ? `${count} ${tooltipPrefix}` : `No ${tooltipPrefix}`}
+                />
+              );
+            })}
+          </div>
+        ))}
+      </div>
+      
+      <div className="flex items-center justify-end text-[10px] text-[var(--text-muted)] mt-3 gap-1.5 font-medium">
+        <span>Less</span>
+        {[0, 1, 2, 3, 4].map((lvl) => (
+          <span key={lvl} className={`w-3 h-3 rounded-[2px] ${getStyle(lvl)}`} />
+        ))}
+        <span>More</span>
+      </div>
+    </div>
+  );
+}
+
 export default function Stats() {
   const [ghStats, setGhStats] = useState(null);
   const [lcStats, setLcStats] = useState(null);
+  const [lcGrid, setLcGrid] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  // Generate deterministic commit grid (seeded random-like)
-  const weeks = 40;
-  const daysOfWeek = 7;
-  const commitGrid = Array.from({ length: weeks }, (_, w) =>
-    Array.from({ length: daysOfWeek }, (_, d) => {
-      const seed = (w * 7 + d + 13) % 17;
-      if (seed < 5) return 0;
-      if (seed < 10) return 1;
-      if (seed < 14) return 2;
-      return 3;
-    })
-  );
 
   useEffect(() => {
     async function fetchStats() {
@@ -79,10 +119,18 @@ export default function Stats() {
           fetch("/api/github-stats").then((r) => r.json()),
           fetch("/api/leetcode-stats").then((r) => r.json()),
         ]);
-        if (gh.status === "fulfilled") setGhStats(gh.value);
-        if (lc.status === "fulfilled") setLcStats(lc.value);
+        if (gh.status === "fulfilled" && !gh.value.error) {
+          setGhStats(gh.value);
+        }
+        if (lc.status === "fulfilled" && !lc.value.error) {
+          setLcStats(lc.value);
+          if (lc.value.calendar) {
+            const grid = formatLeetcodeCalendar(lc.value.calendar);
+            setLcGrid(grid);
+          }
+        }
       } catch {
-        // use fallback defaults
+        // Handle errors silently
       } finally {
         setLoading(false);
       }
@@ -90,223 +138,220 @@ export default function Stats() {
     fetchStats();
   }, []);
 
-  const repos = ghStats?.public_repos || 30;
-  const topLangs = ghStats?.topLanguages || [
-    { lang: "JavaScript", count: 14 },
-    { lang: "Python", count: 6 },
-    { lang: "TypeScript", count: 4 },
-    { lang: "HTML", count: 4 },
-    { lang: "CSS", count: 3 },
-  ];
-  const totalLangCount = topLangs.reduce((a, b) => a + b.count, 0);
+  const formatLeetcodeCalendar = (calendarData) => {
+    if (!calendarData || Object.keys(calendarData).length === 0) return [];
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const grid = Array.from({ length: 52 }, () => Array(7).fill(0));
+    
+    Object.entries(calendarData).forEach(([ts, count]) => {
+      const date = new Date(parseInt(ts) * 1000);
+      date.setHours(0, 0, 0, 0);
+      const diffTime = Math.abs(today - date);
+      const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+      
+      if (diffDays < 364) {
+        const targetDate = new Date(today);
+        targetDate.setDate(today.getDate() - diffDays);
+        const dayIdx = targetDate.getDay();
+        const weekIdx = 51 - Math.floor((diffDays + (7 - today.getDay() - 1)) / 7);
+        if (weekIdx >= 0 && weekIdx < 52) {
+          grid[weekIdx][dayIdx] = count;
+        }
+      }
+    });
+    
+    return grid;
+  };
 
-  const rating = lcStats?.contestRating || 1664;
-  const totalSolved = lcStats?.solvedProblem || 500;
-  const easySolved = lcStats?.easySolved || 210;
-  const mediumSolved = lcStats?.mediumSolved || 240;
-  const hardSolved = lcStats?.hardSolved || 50;
-  const topPercent = lcStats?.contestTopPercentage || 16.41;
+  const repos = ghStats?.public_repos || 0;
+  const topLangs = ghStats?.topLanguages || [];
+  const totalLangCount = topLangs.reduce((a, b) => a + b.count, 0);
+  const contributions = ghStats?.contributions || [];
+  const githubDetails = ghStats?.githubDetails;
+
+  const rating = lcStats?.contestRating || 0;
+  const totalSolved = lcStats?.solvedProblem || 0;
+  const easySolved = lcStats?.easySolved || 0;
+  const mediumSolved = lcStats?.mediumSolved || 0;
+  const hardSolved = lcStats?.hardSolved || 0;
+  const topPercent = lcStats?.contestTopPercentage || 0;
 
   return (
-    <section id="stats" className="relative py-12 border-t border-[var(--border-color)]">
-      <div className="absolute top-10 right-[20%] w-72 h-72 bg-luxury-purple opacity-[0.06] rounded-full blur-[80px] pointer-events-none" />
-
-      <div className="w-full max-w-6xl z-10 px-4">
-        {/* Title */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 text-left">
+    <section id="stats" className="relative py-16 border-t border-[var(--border-color)] bg-[var(--bg-primary)]">
+      <div className="w-full max-w-6xl z-10 px-4 mx-auto">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 text-left">
           <div>
-            <p className="text-xs font-bold text-luxury-purple mono-font uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
-              <BarChart3 size={13} /> CODING STANDARDS
+            <p className="text-sm font-semibold text-luxury-purple uppercase tracking-widest mb-2 flex items-center gap-2">
+              <Activity size={16} /> Activity & Statistics
             </p>
-            <h2 className="text-3xl font-extrabold tracking-tight text-[var(--text-primary)]">
-              Algorithmic Profiles & Activity
+            <h2 className="text-3xl font-bold tracking-tight text-[var(--text-primary)]">
+              Developer Profile
             </h2>
           </div>
-          <a
-            href="https://github.com/AVPXM8"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 md:mt-0 flex items-center gap-1.5 text-xs text-[var(--text-muted)] hover:text-luxury-purple transition-colors mono-font font-semibold"
-          >
-            <Github size={13} /> @AVPXM8 <ExternalLink size={10} />
-          </a>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 text-left">
-          
-          {/* LeetCode Panel */}
-          <div className="lg:col-span-5 glass-card rounded-3xl border border-[var(--glass-border)] p-6 shadow-sm flex flex-col justify-between relative overflow-hidden">
-            <div className="absolute top-4 right-4 flex items-center gap-1.5 bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 text-[10px] font-bold px-2.5 py-1 rounded-full mono-font">
-              <Star size={10} fill="currentColor" /> LeetCode Pro
-            </div>
-
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 text-left">
+          {/* GitHub Panel */}
+          <div className="bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-xl p-6 flex flex-col justify-between hover:shadow-lg transition-shadow duration-300">
             <div>
-              <h3 className="text-sm font-bold text-luxury-purple uppercase tracking-widest mono-font mb-6">
-                LeetCode Performance
-              </h3>
-
-              {/* Ring chart */}
-              <div className="flex flex-col sm:flex-row items-center gap-6 mb-6">
-                <div className="relative w-28 h-28 flex items-center justify-center shrink-0">
-                  <svg className="w-full h-full transform -rotate-90">
-                    <circle cx="56" cy="56" r="48" className="stroke-[var(--bg-tertiary)] fill-transparent stroke-[6px]" />
-                    <circle
-                      cx="56" cy="56" r="48"
-                      className="fill-transparent stroke-[6px]"
-                      stroke="url(#ringGrad)"
-                      strokeDasharray="301"
-                      strokeDashoffset={301 - (rating / 2000) * 301}
-                      strokeLinecap="round"
-                    />
-                    <defs>
-                      <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="#7c3aed" />
-                        <stop offset="100%" stopColor="#d946ef" />
-                      </linearGradient>
-                    </defs>
-                  </svg>
-                  <div className="absolute text-center">
-                    <span className="text-xl font-black text-[var(--text-primary)] leading-none">
-                      <AnimatedCounter target={rating} />
-                    </span>
-                    <p className="text-[9px] text-[var(--text-muted)] font-bold uppercase tracking-wider mt-0.5">Rating</p>
-                  </div>
-                </div>
-
-                <div className="space-y-2.5 w-full">
-                  <div className="flex justify-between text-xs">
-                    <span className="text-[var(--text-secondary)] font-semibold">Problems Solved:</span>
-                    <span className="text-[var(--text-primary)] font-black mono-font">
-                      <AnimatedCounter target={totalSolved} />+
-                    </span>
-                  </div>
-                  <div className="flex justify-between text-xs">
-                    <span className="text-[var(--text-secondary)] font-semibold">Global Standing:</span>
-                    <span className="text-luxury-orange font-black mono-font">
-                      Top <AnimatedCounter target={topPercent} isFloat={true} />%
-                    </span>
-                  </div>
-                  <div className="flex justify-between text-xs">
-                    <span className="text-[var(--text-secondary)] font-semibold">Contest Badge:</span>
-                    <span className="text-luxury-magenta font-black mono-font">Active Competitor</span>
-                  </div>
-                </div>
+              <div className="flex items-center justify-between mb-6 pb-4 border-b border-[var(--border-color)]">
+                <h3 className="text-lg font-bold text-[var(--text-primary)] flex items-center gap-2">
+                  <GithubIcon size={20} /> GitHub Activity
+                </h3>
+                <a
+                  href="https://github.com/AVPXM8"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1 text-sm text-[var(--text-muted)] hover:text-luxury-purple transition-colors font-medium"
+                >
+                  @AVPXM8 <ExternalLink size={14} />
+                </a>
               </div>
 
-              {/* Difficulty bars */}
-              <div className="space-y-3.5 border-t border-[var(--border-color)] pt-5">
-                <h4 className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider mono-font mb-2">Problem Distribution</h4>
-                {[
-                  { label: "EASY", count: easySolved, total: totalSolved, color: "bg-emerald-500" },
-                  { label: "MEDIUM", count: mediumSolved, total: totalSolved, color: "bg-amber-500" },
-                  { label: "HARD", count: hardSolved, total: totalSolved, color: "bg-rose-500" },
-                ].map((row) => (
-                  <div key={row.label}>
-                    <div className="flex justify-between text-[10px] font-bold mb-1">
-                      <span className={row.label === "EASY" ? "text-emerald-500" : row.label === "MEDIUM" ? "text-amber-500" : "text-rose-500"}>
-                        {row.label}
-                      </span>
-                      <span className="text-[var(--text-primary)] mono-font">{row.count} / {row.total}</span>
+              <div className="mb-6">
+                <Heatmap data={contributions} tooltipPrefix="contributions" />
+              </div>
+              
+              {githubDetails && (
+                <div className="mt-6 mb-6 pb-6 border-b border-[var(--border-color)]">
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                    <div className="bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-lg p-3 text-center transition-all hover:-translate-y-1 hover:shadow-md">
+                      <Star size={16} className="text-yellow-500 mx-auto mb-1" />
+                      <p className="text-xs text-[var(--text-muted)] font-medium">Stars</p>
+                      <p className="text-lg font-bold text-[var(--text-primary)]"><AnimatedCounter target={githubDetails.totalStars} /></p>
                     </div>
-                    <div className="w-full bg-[var(--bg-tertiary)] h-2 rounded-full overflow-hidden">
-                      <div
-                        className={`${row.color} h-full rounded-full transition-all duration-1000`}
-                        style={{ width: `${Math.round((row.count / row.total) * 100)}%` }}
-                      />
+                    <div className="bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-lg p-3 text-center transition-all hover:-translate-y-1 hover:shadow-md">
+                      <GitMerge size={16} className="text-luxury-purple mx-auto mb-1" />
+                      <p className="text-xs text-[var(--text-muted)] font-medium">PRs</p>
+                      <p className="text-lg font-bold text-[var(--text-primary)]"><AnimatedCounter target={githubDetails.totalPRs} /></p>
+                    </div>
+                    <div className="bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-lg p-3 text-center transition-all hover:-translate-y-1 hover:shadow-md">
+                      <CircleDot size={16} className="text-emerald-500 mx-auto mb-1" />
+                      <p className="text-xs text-[var(--text-muted)] font-medium">Issues</p>
+                      <p className="text-lg font-bold text-[var(--text-primary)]"><AnimatedCounter target={githubDetails.totalIssues} /></p>
+                    </div>
+                    <div className="bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-lg p-3 text-center transition-all hover:-translate-y-1 hover:shadow-md">
+                      <Activity size={16} className="text-luxury-orange mx-auto mb-1" />
+                      <p className="text-xs text-[var(--text-muted)] font-medium">Commits</p>
+                      <p className="text-lg font-bold text-[var(--text-primary)]"><AnimatedCounter target={githubDetails.totalContributions} /></p>
                     </div>
                   </div>
-                ))}
-              </div>
-            </div>
+                </div>
+              )}
 
-            <div className="text-[10px] text-[var(--text-muted)] font-medium pt-3 mt-4 border-t border-[var(--border-color)] mono-font flex justify-between">
-              <span>{loading ? "Syncing LeetCode stats..." : "✓ Live LeetCode data"}</span>
-              <a href="https://leetcode.com/u/vivekducs/" target="_blank" rel="noopener noreferrer" className="hover:text-luxury-purple transition-colors">
-                vivekducs ↗
-              </a>
+              {topLangs.length > 0 && (
+                <div className="mt-2">
+                  <h4 className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider mb-4 flex items-center justify-between">
+                    <span>Top Languages</span>
+                    <span className="text-[var(--text-secondary)] normal-case text-xs font-medium">{githubDetails?.totalRepos || repos} Total Repos</span>
+                  </h4>
+                  <div className="space-y-4">
+                    {topLangs.map((l) => (
+                      <div key={l.lang}>
+                        <div className="flex justify-between text-sm mb-1.5">
+                          <span className="font-medium text-[var(--text-primary)]" style={{ color: LANG_COLORS[l.lang] || "var(--text-primary)" }}>{l.lang}</span>
+                          <span className="text-[var(--text-muted)] text-xs font-medium">{Math.round((l.count / totalLangCount) * 100)}%</span>
+                        </div>
+                        <div className="w-full bg-[var(--bg-tertiary)] h-2 rounded-full overflow-hidden">
+                          <div
+                            className="h-full rounded-full transition-all duration-1000"
+                            style={{
+                              width: `${Math.round((l.count / totalLangCount) * 100)}%`,
+                              background: LANG_COLORS[l.lang] || "#9333ea",
+                            }}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 
-          {/* GitHub Panel */}
-          <div className="lg:col-span-7 glass-card rounded-3xl border border-[var(--glass-border)] p-6 shadow-sm flex flex-col justify-between relative overflow-hidden">
+          {/* LeetCode Panel */}
+          <div className="bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-xl p-6 flex flex-col justify-between hover:shadow-lg transition-shadow duration-300">
             <div>
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-sm font-bold text-luxury-purple uppercase tracking-widest mono-font flex items-center gap-1.5">
-                  <Github size={16} /> GitHub Contribution Matrix
+              <div className="flex items-center justify-between mb-6 pb-4 border-b border-[var(--border-color)]">
+                <h3 className="text-lg font-bold text-[var(--text-primary)] flex items-center gap-2">
+                  <Code2 size={20} className="text-yellow-500" /> LeetCode Progress
                 </h3>
-                <span className="text-[10px] bg-luxury-purple/10 border border-luxury-purple/20 text-luxury-purple font-bold px-2.5 py-1 rounded-full mono-font">
-                  <AnimatedCounter target={repos} />+ Repositories
-                </span>
+                <a
+                  href="https://leetcode.com/u/avpxm8/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1 text-sm text-[var(--text-muted)] hover:text-yellow-500 transition-colors font-medium"
+                >
+                  avpxm8 <ExternalLink size={14} />
+                </a>
               </div>
 
-              {/* Top Languages */}
-              <div className="mb-5">
-                <h4 className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider mono-font mb-3">
-                  <Code2 size={10} className="inline mr-1" /> Top Languages
-                </h4>
-                <div className="space-y-2">
-                  {topLangs.slice(0, 4).map((l) => (
-                    <div key={l.lang}>
-                      <div className="flex justify-between text-[10px] mb-0.5">
-                        <span className="font-semibold text-[var(--text-secondary)]" style={{ color: LANG_COLORS[l.lang] }}>{l.lang}</span>
-                        <span className="text-[var(--text-muted)] mono-font">{Math.round((l.count / totalLangCount) * 100)}%</span>
-                      </div>
-                      <div className="w-full bg-[var(--bg-tertiary)] h-1.5 rounded-full overflow-hidden">
-                        <div
-                          className="h-full rounded-full transition-all duration-1000"
-                          style={{
-                            width: `${Math.round((l.count / totalLangCount) * 100)}%`,
-                            background: LANG_COLORS[l.lang] || "#9333ea",
-                          }}
-                        />
-                      </div>
+              <div className="mb-6">
+                <Heatmap data={lcGrid} tooltipPrefix="submissions" />
+              </div>
+
+              <div className="grid grid-cols-2 gap-4 mt-8">
+                <div className="bg-[var(--bg-tertiary)] rounded-xl p-4 border border-[var(--border-color)]">
+                  <p className="text-xs text-[var(--text-muted)] font-medium mb-1">Problems Solved</p>
+                  <p className="text-2xl font-bold text-[var(--text-primary)]"><AnimatedCounter target={totalSolved} /></p>
+                  <div className="flex items-center gap-2 mt-2 text-xs font-medium">
+                    <span className="text-emerald-500">E:{easySolved}</span>
+                    <span className="text-amber-500">M:{mediumSolved}</span>
+                    <span className="text-rose-500">H:{hardSolved}</span>
+                  </div>
+                </div>
+                
+                <div className="bg-[var(--bg-tertiary)] rounded-xl p-4 border border-[var(--border-color)] flex flex-col justify-between">
+                  <div>
+                    <p className="text-xs text-[var(--text-muted)] font-medium mb-1">Contest Rating</p>
+                    <p className="text-2xl font-bold text-[var(--text-primary)]"><AnimatedCounter target={rating} /></p>
+                    <div className="flex flex-col gap-1 mt-2">
+                      <span className="text-yellow-500 text-xs font-medium">Top <AnimatedCounter target={topPercent} isFloat />% Global</span>
                     </div>
-                  ))}
+                  </div>
+                </div>
+
+                <div className="bg-[var(--bg-tertiary)] rounded-xl p-4 border border-[var(--border-color)]">
+                  <p className="text-xs text-[var(--text-muted)] font-medium mb-1">Global Rank</p>
+                  <p className="text-2xl font-bold text-[var(--text-primary)]"><AnimatedCounter target={lcStats?.ranking || 0} /></p>
+                </div>
+
+                <div className="bg-[var(--bg-tertiary)] rounded-xl p-4 border border-[var(--border-color)]">
+                  <p className="text-xs text-[var(--text-muted)] font-medium mb-1">Reputation</p>
+                  <p className="text-2xl font-bold text-[var(--text-primary)]"><AnimatedCounter target={lcStats?.reputation || 0} /></p>
                 </div>
               </div>
 
-              {/* Commit heatmap */}
-              <div className="w-full overflow-x-auto pb-2">
-                <div className="inline-grid grid-flow-col gap-[3px] select-none">
-                  {commitGrid.map((week, wIdx) => (
-                    <div key={wIdx} className="grid grid-rows-7 gap-[3px]">
-                      {week.map((lvl, dIdx) => {
-                        let fillStyle = "bg-[var(--bg-tertiary)]";
-                        if (lvl === 1) fillStyle = "bg-luxury-purple/20 border border-luxury-purple/10";
-                        if (lvl === 2) fillStyle = "bg-luxury-purple/55 shadow-sm";
-                        if (lvl === 3) fillStyle = "bg-gradient-to-tr from-luxury-violet to-luxury-magenta shadow-md";
-                        return (
-                          <div
-                            key={dIdx}
-                            className={`w-3 h-3 rounded-sm transition-all hover:scale-125 cursor-pointer ${fillStyle}`}
-                            title={`Activity level: ${lvl}`}
+              {(lcStats?.badges && lcStats.badges.length > 0) && (
+                <div className="mt-6 pt-6 border-t border-[var(--border-color)] relative z-10">
+                  <div className="flex items-center justify-between mb-4">
+                    <p className="text-xs text-[var(--text-muted)] font-semibold uppercase tracking-wider">Acquired Badges</p>
+                    <span className="text-xs font-semibold bg-[var(--bg-tertiary)] text-[var(--text-primary)] px-2.5 py-1 rounded-full border border-[var(--border-color)]">
+                      {lcStats.badges.length} Badges
+                    </span>
+                  </div>
+                  
+                  {/* Badge Scroll Container */}
+                  <div className="w-full overflow-visible pb-4">
+                    <div className="flex flex-wrap gap-4 min-w-min">
+                      {lcStats.badges.map(b => (
+                        <div key={b.id} className="relative group cursor-pointer bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-xl p-2.5 flex items-center justify-center transition-all hover:border-luxury-purple hover:shadow-[0_0_20px_rgba(124,58,237,0.3)] shrink-0 z-10 hover:z-50">
+                          <img 
+                            src={b.icon.startsWith('/') ? `https://leetcode.com${b.icon}` : b.icon} 
+                            alt={b.displayName} 
+                            className="w-11 h-11 object-contain drop-shadow-md transition-transform duration-300 group-hover:scale-[2.2]"
                           />
-                        );
-                      })}
+                          <div className="absolute -top-12 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-[var(--bg-secondary)] border border-[var(--border-color)] text-[var(--text-primary)] font-bold text-xs whitespace-nowrap px-3 py-2 rounded shadow-2xl pointer-events-none z-50">
+                            {b.displayName}
+                            <div className="absolute -bottom-[6px] left-1/2 -translate-x-1/2 border-l-[6px] border-r-[6px] border-t-[6px] border-l-transparent border-r-transparent border-t-[var(--border-color)]"></div>
+                          </div>
+                        </div>
+                      ))}
                     </div>
-                  ))}
+                  </div>
                 </div>
-              </div>
-
-              {/* Legend */}
-              <div className="flex items-center justify-between text-[9px] text-[var(--text-muted)] font-semibold uppercase tracking-wider mono-font mt-2 border-t border-[var(--border-color)] pt-3">
-                <div className="flex items-center gap-1">
-                  <Activity size={10} className="text-luxury-orange" />
-                  <span>900+ contributions last year</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <span>Less</span>
-                  {["bg-[var(--bg-tertiary)]", "bg-luxury-purple/25", "bg-luxury-purple/60", "bg-luxury-magenta"].map((c, i) => (
-                    <span key={i} className={`w-2.5 h-2.5 rounded ${c}`} />
-                  ))}
-                  <span>More</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="text-[10px] text-[var(--text-muted)] font-medium pt-3 mt-4 border-t border-[var(--border-color)] mono-font flex justify-between">
-              <span>{loading ? "Fetching GitHub data..." : "✓ Live GitHub API"}</span>
-              <span>Account: @AVPXM8</span>
+              )}
             </div>
           </div>
         </div>

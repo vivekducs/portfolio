@@ -1,0 +1,81 @@
+@reference "../../globals.css";
+
+.container {
+  @apply min-h-screen bg-[var(--bg-primary)] pt-24 pb-32 px-4;
+}
+
+.wrapper {
+  @apply max-w-5xl mx-auto;
+}
+
+.backLink {
+  @apply inline-flex items-center gap-2 text-sm text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors;
+}
+
+.categoryBadge {
+  @apply px-3 py-1 rounded-full bg-[var(--bg-tertiary)] border border-[var(--border-color)] text-[10px] font-bold tracking-wider uppercase text-[var(--text-secondary)];
+}
+
+.featuredBadge {
+  @apply px-3 py-1 rounded-full bg-brand-primary/10 text-brand-primary border border-brand-primary/20 text-[10px] font-bold tracking-wider uppercase flex items-center gap-1;
+}
+
+.title {
+  @apply text-4xl md:text-5xl font-extrabold tracking-tight mb-6 gradient-text;
+}
+
+.description {
+  @apply text-lg text-[var(--text-secondary)] leading-relaxed max-w-3xl;
+}
+
+.actionBtn {
+  @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-[var(--border-color)] bg-[var(--bg-secondary)] text-sm font-semibold hover:bg-[var(--bg-tertiary)] transition-colors;
+}
+
+.actionBtnPrimary {
+  @apply bg-brand-primary text-white border-transparent hover:bg-brand-secondary;
+}
+
+.grid {
+  @apply grid grid-cols-1 lg:grid-cols-3 gap-12;
+}
+
+.mainCol {
+  @apply lg:col-span-2 space-y-16;
+}
+
+.sidebarCol {
+  @apply space-y-6;
+}
+
+.section {
+  @apply space-y-6;
+}
+
+.sectionTitle {
+  @apply flex items-center gap-3 text-xl font-bold tracking-tight pb-4 border-b border-[var(--border-color)];
+}
+
+.textBody {
+  @apply text-[var(--text-secondary)] leading-loose text-base;
+}
+
+.diagramPlaceholder {
+  @apply w-full h-64 rounded-2xl bg-[var(--bg-tertiary)] border border-dashed border-[var(--border-color)] flex items-center justify-center;
+}
+
+.decisionCard {
+  @apply p-6 rounded-2xl bg-[var(--bg-secondary)] border border-[var(--border-color)] shadow-sm;
+}
+
+.codeBlock {
+  @apply bg-[#0a0a0a] rounded-xl p-4 overflow-x-auto border border-neutral-800;
+}
+
+.sidebarCard {
+  @apply p-6 rounded-2xl bg-[var(--glass-bg)] border border-[var(--glass-border)] backdrop-blur-md shadow-sm;
+}
+
+.techTag {
+  @apply px-3 py-1.5 rounded-lg bg-[var(--bg-tertiary)] text-xs font-mono text-[var(--text-secondary)] border border-[var(--border-color)];
+}

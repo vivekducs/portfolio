@@ -1,0 +1,37 @@
+---
+title: "Why I Migrated from REST to gRPC for Internal Services"
+date: "2024-04-02"
+excerpt: "A deep dive into Protocol Buffers, multiplexing, and why gRPC dramatically improved our internal inter-service latency."
+tags: ["Architecture", "gRPC", "Go", "Microservices"]
+---
+
+# Migrating from REST to gRPC
+
+In a microservice architecture, internal service-to-service communication latency can compound quickly. When service A calls service B, which calls service C, a 50ms REST overhead turns into a 150ms bottleneck.
+
+## The Problem with JSON/REST
+JSON is a fantastic, human-readable data format. But for machine-to-machine communication, it's bloated. Serializing and deserializing JSON takes significant CPU cycles. 
+
+## Protocol Buffers (Protobuf)
+By switching to gRPC, we adopted Protocol Buffers. This binary serialization format is incredibly fast and enforces a strict contract between services.
+
+```proto
+syntax = "proto3";
+
+package logging;
+
+service LogIngestor {
+  rpc StreamLogs (stream LogEntry) returns (IngestSummary) {}
+}
+
+message LogEntry {
+  string timestamp = 1;
+  string level = 2;
+  string message = 3;
+}
+```
+
+## Multiplexing over HTTP/2
+Because gRPC uses HTTP/2 under the hood, we could multiplex thousands of log streams over a single TCP connection, drastically reducing connection overhead.
+
+The result? Internal latency dropped by 70%, and CPU usage on the API Gateway decreased by 30%.

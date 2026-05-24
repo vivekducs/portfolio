@@ -54,9 +54,24 @@ const VIVEK_SYSTEM_PROMPT = `You are VK Assistant — the AI-powered digital rep
 - Tech: Python, TensorFlow, CNN, OpenCV
 - GitHub: https://github.com/AVPXM8/garbage-classification
 
-## Work Experience
-- SDE Intern at SafeQbit Technologies Pvt Ltd (Feb 2026 – May 2026): Built scalable UI architectures, deployed products on Vercel
-- Training at Tech Mahindra (Jul 2023 – Jan 2024): Enterprise software workflows
+## Engineering Decisions & Architecture (Knowledge Base)
+
+### Why MongoDB for Mathem Solvex?
+- Vivek chose MongoDB due to its flexible document schema, allowing fluid unstructured data storage for diverse mathematical queries and user sessions.
+- Ideal for high-read, moderate-write scenarios with dynamic JSON-like data representations.
+
+### Why Pinecone & Gemini API?
+- Pinecone was chosen for ultra-fast, scalable vector similarity search, enabling the "semantic search" feature.
+- Gemini API handles the NLP interpretation and extraction of mathematical entities, turning raw text into structured queries before vectorization.
+
+### ObserveFlow's Microservices & Docker
+- Built as containerized microservices to independently scale the log-ingestion nodes from the analytics/dashboard nodes.
+- Docker ensures environment parity between development and production, critical for distributed logging pipelines.
+- TTL (Time-To-Live) indexes in MongoDB automatically purge old logs, reducing storage costs.
+
+### CI/CD and Deployment Workflows
+- Projects utilize GitHub Actions for continuous integration, automatically running tests and linting.
+- Vercel is the primary deployment target for Next.js/React frontends, leveraging Edge functions and CDN caching.
 
 ## Coding Achievements
 - LeetCode Rating: 1664 (Top 16.41% globally)
@@ -164,6 +179,18 @@ function getRuleBasedResponse(query) {
   }
   if (query.includes("palora")) {
     return "Palora is an AI-driven emotional wellness startup project — a mental health counseling and journaling platform. It analyzes user sentiment in real-time and provides wellness guidance using the Gemini API. Built with Node.js, Express.js, and MongoDB, Palora demonstrates Vivek's ability to build human-centered AI products.";
+  }
+  if (query.includes("mongodb") || query.includes("database") || query.includes("why mongodb")) {
+    return "Vivek frequently uses MongoDB due to its flexible document schema, which is perfect for dynamic unstructured data (like mathematical queries in Mathem Solvex or logs in ObserveFlow). He also utilizes TTL (Time-To-Live) indexes in MongoDB to automatically purge stale logs, optimizing database storage and reducing costs.";
+  }
+  if (query.includes("pinecone") || query.includes("semantic search") || query.includes("vector")) {
+    return "Pinecone is used in Mathem Solvex for ultra-fast, scalable vector similarity search. Combined with the Gemini API to generate embeddings, this architecture allows the platform to perform semantic search — finding related mathematical concepts based on meaning rather than exact keyword matches.";
+  }
+  if (query.includes("docker") || query.includes("microservice") || query.includes("observeflow architecture")) {
+    return "ObserveFlow uses a containerized microservices architecture powered by Docker. This allows Vivek to independently scale the log-ingestion nodes from the analytics nodes. Docker ensures environment consistency, making the distributed logging pipeline highly reliable.";
+  }
+  if (query.includes("deployment") || query.includes("ci/cd") || query.includes("github actions")) {
+    return "Vivek's deployment workflow relies heavily on GitHub Actions for CI/CD, automatically running tests and linters. Frontends are typically deployed to Vercel to leverage Edge functions and CDN caching, while backend APIs and databases are deployed on scalable cloud providers like AWS or Render.";
   }
   if (query.includes("rank predictor") || query.includes("nimcet") || query.includes("cuet")) {
     return "Rank Predictor is a highly popular college eligibility calculator for NIMCET and CUET Computer Science aspirants. Given a candidate's entrance rank, it predicts which colleges they can join. Live at rankpredictor.maarula.in — built with HTML, CSS, JavaScript, and React.js.";

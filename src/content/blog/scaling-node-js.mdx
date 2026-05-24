@@ -1,0 +1,33 @@
+---
+title: "Scaling Node.js Microservices to 10k RPS"
+date: "2024-03-15"
+excerpt: "How I optimized an Express.js backend using Redis caching, worker threads, and PM2 cluster mode to handle massive traffic spikes."
+tags: ["Backend", "Node.js", "Scaling", "Redis"]
+---
+
+# Scaling Node.js Microservices
+
+When handling high traffic, the single-threaded nature of Node.js can become a bottleneck for CPU-intensive operations. Here's how I scaled a critical path to handle 10,000 requests per second.
+
+## 1. The Bottleneck
+Initially, our route was parsing large JSON payloads synchronously. This blocked the event loop.
+
+## 2. Implementing Redis Caching
+By implementing a read-through cache using Redis, we reduced database queries by 85%.
+
+```js
+app.get('/api/data', async (req, res) => {
+  const cached = await redis.get('data');
+  if (cached) return res.json(JSON.parse(cached));
+  
+  const data = await db.fetchData();
+  await redis.set('data', JSON.stringify(data), 'EX', 60);
+  res.json(data);
+});
+```
+
+## 3. Worker Threads for CPU tasks
+We offloaded the heavy parsing to `worker_threads`, freeing up the main event loop to continue accepting incoming HTTP connections.
+
+## Conclusion
+By adopting these simple but effective strategies, the p99 latency dropped from 800ms to just 45ms.

@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, Send, MessageSquareCode, FileText, CheckCircle2 } from "lucide-react";
+import { Mail, Send, MessageSquareCode, FileText, CheckCircle2, CalendarDays } from "lucide-react";
+import { trackEvent, trackCTA } from "@/lib/analytics";
 
 const Github = ({ size = 24, ...props }) => (
   <svg
@@ -49,6 +50,8 @@ export default function Contact() {
     if (!form.name || !form.email || !form.message) return;
 
     setIsSubmitting(true);
+    trackEvent("Contact_Form_Submit", { name: form.name });
+    
     // Simulate submission delay
     setTimeout(() => {
       setIsSubmitting(false);
@@ -137,6 +140,23 @@ export default function Contact() {
                 </div>
               </a>
 
+              {/* Scheduling */}
+              <a
+                href="https://cal.com/"
+                onClick={() => trackCTA("Schedule Meeting", "Contact Section")}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 p-4 bg-gradient-to-r from-[var(--bg-tertiary)] to-luxury-purple/5 rounded-2xl border border-luxury-purple/20 hover:border-luxury-purple/50 shadow-sm transition-all group"
+              >
+                <div className="w-10 h-10 rounded-xl bg-luxury-orange/10 border border-luxury-orange/20 text-luxury-orange flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                  <CalendarDays size={16} />
+                </div>
+                <div>
+                  <h4 className="text-xs font-bold text-luxury-purple uppercase tracking-wider mono-font">Priority Review</h4>
+                  <p className="text-sm font-semibold text-[var(--text-primary)]">Schedule a 15-min chat</p>
+                </div>
+              </a>
+
             </div>
           </div>
 
@@ -176,6 +196,7 @@ export default function Contact() {
                       onChange={(e) => setForm({ ...form, name: e.target.value })}
                       placeholder="e.g. Alex Recruiter"
                       className="w-full bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-luxury-purple focus:ring-1 focus:ring-luxury-purple transition-all text-[var(--text-primary)]"
+                      suppressHydrationWarning
                     />
                   </div>
 
@@ -192,6 +213,7 @@ export default function Contact() {
                       onChange={(e) => setForm({ ...form, email: e.target.value })}
                       placeholder="e.g. alex@company.com"
                       className="w-full bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-luxury-purple focus:ring-1 focus:ring-luxury-purple transition-all text-[var(--text-primary)]"
+                      suppressHydrationWarning
                     />
                   </div>
 
@@ -208,14 +230,17 @@ export default function Contact() {
                       onChange={(e) => setForm({ ...form, message: e.target.value })}
                       placeholder="Hi Vivek, I looked at your NIMCET Rank Predictor and SDE intern timeline..."
                       className="w-full bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-luxury-purple focus:ring-1 focus:ring-luxury-purple transition-all text-[var(--text-primary)]"
+                      suppressHydrationWarning
                     />
                   </div>
 
                   {/* Submit Button */}
                   <button
                     type="submit"
+                    suppressHydrationWarning
                     disabled={isSubmitting}
                     className="w-full py-3.5 bg-gradient-to-r from-luxury-violet to-luxury-purple hover:opacity-95 text-white font-bold text-sm rounded-xl shadow-md flex items-center justify-center gap-2 transition-all cursor-pointer disabled:opacity-50 hover:translate-y-[-1px]"
+                    aria-label="Send secure message"
                   >
                     <span>{isSubmitting ? "Transmitting..." : "Send Secure Message"}</span>
                     <Send size={13} className={isSubmitting ? "animate-ping" : ""} />

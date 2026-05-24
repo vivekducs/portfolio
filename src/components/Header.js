@@ -1,12 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import { Menu, X, Sun, Moon, Sparkles, Home, User, Code2, Briefcase, Award, History, BarChart3, Mail } from "lucide-react";
+import { Menu, X, Sun, Moon, Sparkles, Home, User, Code2, Briefcase, Award, History, BarChart3, Mail, FileText, Link as LinkIcon } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 
-export default function Header({ activeSection, onOpenAssistant }) {
+export default function Header({ activeSection, onOpenAssistant, isRecruiterMode, toggleRecruiterMode }) {
   const { theme, toggleTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleScroll = (id) => {
+    setIsOpen(false);
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   const menuItems = [
     { id: "home", label: "Home", icon: Home },
@@ -18,14 +26,6 @@ export default function Header({ activeSection, onOpenAssistant }) {
     { id: "stats", label: "Stats & DSA", icon: BarChart3 },
     { id: "contact", label: "Contact", icon: Mail },
   ];
-
-  const handleScroll = (id) => {
-    setIsOpen(false);
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-    }
-  };
 
   return (
     <header className="lg:hidden w-full sticky top-0 bg-[var(--bg-secondary)] border-b border-[var(--border-color)] px-5 py-4 z-40">
@@ -45,6 +45,18 @@ export default function Header({ activeSection, onOpenAssistant }) {
 
         {/* Action Buttons */}
         <div className="flex items-center gap-3">
+          {/* Recruiter Toggle */}
+          <button
+            onClick={toggleRecruiterMode}
+            className={`p-2 rounded-lg border transition-all ${
+              isRecruiterMode
+                ? "border-luxury-orange/30 bg-luxury-orange/10 text-luxury-orange"
+                : "border-[var(--border-color)] bg-[var(--bg-tertiary)] text-[var(--text-secondary)]"
+            }`}
+          >
+            <div className={`w-3 h-3 rounded-full ${isRecruiterMode ? "bg-luxury-orange animate-pulse" : "bg-[var(--text-muted)]"}`} />
+          </button>
+
           {/* AI Assistant Quick Trigger */}
           <button
             onClick={onOpenAssistant}

@@ -1,0 +1,64 @@
+---
+title: "MongoDB Optimization: Indexes & Schema Design"
+date: "2024-06-05"
+excerpt: "Techniques for optimizing MongoDB performance for read-heavy applications, including TTL indexes, compound indexes, and efficient schema modeling."
+tags: ["MongoDB", "Database", "Performance", "Backend"]
+---
+
+When building the backend for **ObserveFlow**, a real-time analytics and monitoring platform, the database had to handle a massive influx of time-series data and high-frequency reads. 
+
+Initially, the sheer volume of logs caused our MongoDB instance to bottleneck during aggregation pipelines. Here are the architectural shifts I made to optimize it.
+
+## 1. Time-To-Live (TTL) Indexes
+
+Analytics data loses its granular value over time. Storing raw request logs indefinitely bloats the database and slows down active memory working sets.
+
+I implemented TTL indexes to automatically prune raw event data older than 30 days:
+
+```javascript
+// Mongoose Schema Definition
+const eventSchema = new mongoose.Schema({
+  eventType: String,
+  payload: Object,
+  createdAt: { type: Date, default: Date.now }
+});
+
+// Automatically delete documents 30 days after creation
+eventSchema.index({ createdAt: 1 }, { expireAfterSeconds: 2592000 });
+```
+
+This kept the collection size manageable without requiring cron jobs.
+
+## 2. Compound Indexing for Dashboards
+
+Dashboards usually filter by multiple fields simultaneously (e.g., `projectId` AND `status` AND `dateRange`).
+
+Initially, I had single-field indexes. I migrated to Compound Indexes based on the ESR (Equality, Sort, Range) rule:
+
+```javascript
+// ESR Rule: Equality first, then Sort, then Range
+logSchema.index({ projectId: 1, createdAt: -1, status: 1 });
+```
+
+This dramatically reduced the `examined_documents` metric in our slow query logs, bringing the average query time for the main dashboard from 1.2s down to ~45ms.
+
+## 3. Pre-Aggregated Rollups
+
+Running an aggregation pipeline over millions of rows every time a user opens their dashboard is highly inefficient. 
+
+Instead of aggregating on read, I implemented an **aggregation on write** strategy (rollups). Every minute, a worker runs a pipeline to summarize the raw logs into a `DailyStats` collection. 
+
+```javascript
+const dailyStatUpdate = {
+  $inc: { totalRequests: 1, errorCount: isError ? 1 : 0 },
+  $set: { lastActive: new Date() }
+};
+
+await DailyStats.updateOne(
+  { projectId: id, date: todayStr }, 
+  dailyStatUpdate, 
+  { upsert: true }
+);
+```
+
+The frontend dashboard now simply queries the pre-aggregated `DailyStats` collection, resulting in instant load times.

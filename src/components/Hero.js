@@ -5,6 +5,8 @@ import Image from "next/image";
 import { ArrowRight, FileDown, Sparkles, MessageSquare, Terminal } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
 
+import { trackCTA, trackDownload } from "@/lib/analytics";
+
 // Stable constant outside component — avoids stale closure & ESLint dep warnings
 const TYPING_PHRASES = [
   "AI Integrated Systems",
@@ -103,7 +105,7 @@ export default function Hero({ onOpenAssistant }) {
               <div className="flex items-center gap-4">
                 <div className="relative w-16 h-16 rounded-full bg-gradient-to-tr from-luxury-violet via-luxury-magenta to-luxury-orange p-[2px] shadow-lg shadow-luxury-purple/20">
                   <Image
-                    src="/vivek_avatar.png"
+                    src="/Photovivek.jpeg"
                     alt="Vivek Kumar"
                     width={64}
                     height={64}
@@ -157,15 +159,19 @@ export default function Hero({ onOpenAssistant }) {
             <AnimatedSection delay={600}>
               <div className="flex flex-wrap gap-3.5 pt-2">
                 <button
-                  onClick={() => handleScroll("projects")}
+                  onClick={() => {
+                    trackCTA("Explore Projects", "Hero Section");
+                    handleScroll("projects");
+                  }}
                   className="px-6 py-3.5 bg-gradient-to-r from-luxury-violet to-luxury-purple hover:opacity-95 text-white font-bold text-sm rounded-xl shadow-md shadow-luxury-purple/15 flex items-center gap-2 transition-all cursor-pointer hover:translate-y-[-2px]"
                 >
                   <span>Explore Projects</span>
                   <ArrowRight size={14} />
                 </button>
-                
+
                 <a
                   href="https://github.com/AVPXM8"
+                  onClick={() => trackDownload("Resume.pdf")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-6 py-3.5 bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:border-luxury-purple/40 text-[var(--text-primary)] font-bold text-sm rounded-xl flex items-center gap-2 transition-all shadow-sm cursor-pointer hover:translate-y-[-2px]"
@@ -175,7 +181,10 @@ export default function Hero({ onOpenAssistant }) {
                 </a>
 
                 <button
-                  onClick={() => handleScroll("contact")}
+                  onClick={() => {
+                    trackCTA("Contact Click", "Hero Section");
+                    handleScroll("contact");
+                  }}
                   className="px-6 py-3.5 bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:border-luxury-purple/40 text-[var(--text-primary)] font-bold text-sm rounded-xl transition-all shadow-sm cursor-pointer hover:translate-y-[-2px]"
                 >
                   Contact
@@ -195,13 +204,13 @@ export default function Hero({ onOpenAssistant }) {
           {/* Right Column: Dynamic Workstation Image Rendering */}
           <div className="lg:col-span-5 relative flex justify-center mt-8 lg:mt-0 select-none">
             <div className="relative w-full max-w-[420px] aspect-square rounded-3xl overflow-hidden glass-card border p-2 shadow-2xl flex items-center justify-center animate-in fade-in zoom-in duration-1000">
-              
+
               {/* Outer decorative neon frame rings */}
               <div className="absolute inset-0 bg-gradient-to-tr from-luxury-purple/10 via-luxury-magenta/5 to-luxury-orange/10 pointer-events-none rounded-3xl"></div>
-              
+
               {/* Actual Image */}
               <Image
-                src="/holographic_developer.png"
+                src="/Photovivek.jpeg"
                 alt="AI futuristic workstation"
                 width={400}
                 height={400}

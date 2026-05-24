@@ -1,0 +1,66 @@
+---
+title: "AI Integration with Gemini API: Fallback Systems"
+date: "2024-05-18"
+excerpt: "How I designed a robust fallback system using the Gemini API when semantic search fails to yield high-confidence matches."
+tags: ["Gemini", "AI", "System Design", "Node.js"]
+---
+
+Building AI-powered applications requires defensive engineering. When a user asks a highly specific, novel mathematical question, the vector database might not contain any vector that meets the similarity threshold. 
+
+Instead of returning "No results found," I implemented a dynamic generative fallback system utilizing the **Google Gemini API**.
+
+## The Confidence Threshold Pattern
+
+In Mathem Solvex, every Pinecone semantic search query returns a list of matches, each with a `score`. The score represents the cosine similarity between the query vector and the document vector.
+
+```javascript
+const THRESHOLD = 0.88;
+
+const bestMatch = results.matches[0];
+
+if (bestMatch && bestMatch.score > THRESHOLD) {
+  return await hydrateDocument(bestMatch.id);
+} else {
+  return await triggerGenerativeFallback(queryText);
+}
+```
+
+## Designing the Generative Fallback
+
+When the score is below `0.88`, it means the database has never seen this exact conceptual problem. The request is asynchronously routed to the `GenerativeService`.
+
+### Prompt Engineering for Mathematics
+
+Mathematical generation is notoriously prone to hallucinations. To mitigate this, I designed a strict system prompt:
+
+```javascript
+const SYSTEM_PROMPT = `
+You are an expert mathematics professor.
+The user will provide a mathematical problem.
+You MUST format your response as a JSON object containing:
+{
+  "steps": ["step 1...", "step 2..."],
+  "final_answer": "...",
+  "confidence_level": "HIGH" | "MEDIUM" | "LOW"
+}
+Do not use markdown blocks outside the JSON.
+`;
+
+const response = await geminiModel.generateContent({
+  contents: [{ role: 'user', parts: [{ text: queryText }] }],
+  systemInstruction: { role: 'system', parts: [{ text: SYSTEM_PROMPT }] }
+});
+```
+
+### Parsing and Validation
+
+By enforcing a JSON structure, the backend can safely parse the Gemini response, validate it against a Zod schema, and render it beautifully in the frontend UI without exposing raw LLM text streams to the client.
+
+## Handling Latency
+
+LLM generation is slow (often 2-4 seconds). To prevent the client from timing out:
+1. The backend immediately returns a `202 Accepted` with a `jobId`.
+2. The client establishes a Server-Sent Events (SSE) connection or polls the `/status/:jobId` endpoint.
+3. The server processes the Gemini API request in a background worker and updates the job status upon completion.
+
+This architecture ensures a highly resilient, premium user experience even when facing novel data.

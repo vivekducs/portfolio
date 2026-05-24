@@ -12,7 +12,7 @@ export default function About() {
     },
     {
       degree: "Bachelor of Computer Applications (BCA)",
-      institution: "Maharshi Pratap Group",
+      institution: "Maharana Pratap College of Professional Studies",
       period: "2020 – 2023",
       details: "Graduated with honors. Developed foundational systems in OOPs, DBMS, Networking, and web technologies.",
     },
@@ -59,13 +59,13 @@ export default function About() {
 
         {/* Desktop Split Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
+
           {/* Left Column: Narrative description */}
           <div className="lg:col-span-6 space-y-6 text-left">
             <h3 className="text-xl font-bold tracking-tight text-[var(--text-primary)]">
               Bridging academic theory with premium software engineering
             </h3>
-            
+
             <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
               I am a driven **Master of Computer Applications (MCA) student** and **AI Engineer** with a passion for designing high-performance distributed architectures and real-time backend systems.
             </p>
