@@ -66,27 +66,27 @@ function Heatmap({ data, tooltipPrefix = "contributions" }) {
   };
 
   const getStyle = (lvl) => {
-    if (lvl === 0) return "bg-[var(--bg-tertiary)]"; 
-    if (lvl === 1) return "bg-emerald-500/20 dark:bg-emerald-400/10";
-    if (lvl === 2) return "bg-emerald-500/40 dark:bg-emerald-400/30";
-    if (lvl === 3) return "bg-emerald-500/70 dark:bg-emerald-400/60";
-    return "bg-emerald-600 dark:bg-emerald-500"; 
+    if (lvl === 0) return "bg-neutral-100 dark:bg-neutral-900 border border-neutral-200/50 dark:border-neutral-800/60"; 
+    if (lvl === 1) return "bg-emerald-500/20 dark:bg-emerald-400/15 border border-emerald-500/10";
+    if (lvl === 2) return "bg-emerald-500/45 dark:bg-emerald-400/35 border border-emerald-500/10";
+    if (lvl === 3) return "bg-emerald-500/75 dark:bg-emerald-400/65 border border-emerald-500/10";
+    return "bg-emerald-500 dark:bg-emerald-400 border border-emerald-400/60 shadow-[0_0_8px_rgba(16,185,129,0.4)] dark:shadow-[0_0_8px_rgba(52,211,153,0.4)]"; 
   };
 
   return (
     <div className="w-full overflow-x-auto pb-2 scrollbar-hide">
-      <div className="inline-grid grid-flow-col gap-1 select-none min-w-max">
+      <div className="inline-grid grid-flow-col gap-1 select-none min-w-max p-1">
         {data.map((week, wIdx) => (
           <div key={wIdx} className="grid grid-rows-7 gap-1">
             {week.map((count, dIdx) => {
               if (count === null || count === undefined) {
-                 return <div key={dIdx} className="w-3 h-3 rounded-[2px] bg-transparent" />;
+                 return <div key={dIdx} className="w-3.5 h-3.5 bg-transparent" />;
               }
               const lvl = getLevel(count);
               return (
                 <div
                   key={dIdx}
-                  className={`w-3 h-3 rounded-[2px] transition-colors ${getStyle(lvl)} hover:ring-1 hover:ring-[var(--text-primary)]`}
+                  className={`w-3.5 h-3.5 rounded-[3px] transition-all duration-200 ${getStyle(lvl)} hover:scale-130 hover:z-10 hover:shadow-[0_0_10px_var(--accent-color)] hover:border-[var(--accent-color)] hover:ring-1 hover:ring-[var(--accent-color)]/30 cursor-pointer`}
                   title={count ? `${count} ${tooltipPrefix}` : `No ${tooltipPrefix}`}
                 />
               );
@@ -95,10 +95,10 @@ function Heatmap({ data, tooltipPrefix = "contributions" }) {
         ))}
       </div>
       
-      <div className="flex items-center justify-end text-[10px] text-[var(--text-muted)] mt-3 gap-1.5 font-medium">
+      <div className="flex items-center justify-end text-[10px] text-[var(--text-muted)] mt-3 gap-2 font-semibold mono-font">
         <span>Less</span>
         {[0, 1, 2, 3, 4].map((lvl) => (
-          <span key={lvl} className={`w-3 h-3 rounded-[2px] ${getStyle(lvl)}`} />
+          <span key={lvl} className={`w-3.5 h-3.5 rounded-[3px] ${getStyle(lvl)}`} />
         ))}
         <span>More</span>
       </div>

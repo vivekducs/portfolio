@@ -41,7 +41,7 @@ const ARCHITECTURES = {
         icon: Lock,
         color: "text-amber-500",
         bg: "bg-amber-500/10 border-amber-500/20",
-        items: ["JWT Authentication", "Vercel deployment", "Custom domain (maarula.in)"],
+        items: ["JWT Authentication", "Vercel deployment", "Custom domain (question.maarula.in)"],
       },
     ],
     flow: "User Query → React UI → Express API → Gemini Embedding → Pinecone Search → MongoDB → Response",

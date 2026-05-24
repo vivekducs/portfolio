@@ -109,7 +109,7 @@ export default function Home() {
           <div className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
-              <main className="lg:col-span-8 space-y-4">
+              <main className="lg:col-span-8 space-y-4 pb-20 lg:pb-0">
                 {isRecruiterMode && (
                   <RecruiterDashboard onClose={() => setIsRecruiterMode(false)} />
                 )}

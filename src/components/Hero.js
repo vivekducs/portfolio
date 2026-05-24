@@ -188,12 +188,6 @@ export default function Hero({ onOpenAssistant }) {
                 priority
                 className="w-full h-full rounded-2xl object-cover opacity-100 transition-all duration-500"
               />
-
-              {/* Dynamic glowing HUD widget layers */}
-              <div className="absolute bottom-4 left-4 bg-[var(--bg-primary)] border border-[var(--border-color)] text-[var(--text-primary)] rounded-xl p-3 text-[10px] font-semibold mono-font shadow-sm flex items-center gap-2">
-                <Sparkles size={12} className="text-[var(--text-primary)] animate-spin" />
-                <span>VK.AI Model Active</span>
-              </div>
             </div>
           </div>
         </div>

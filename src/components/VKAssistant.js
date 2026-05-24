@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import { Send, Sparkles, MessageSquare, X, Mic, MicOff, Volume2, VolumeX, ChevronDown } from "lucide-react";
+import { Send, Sparkles, MessageSquare, X, Mic, MicOff, Volume2, VolumeX } from "lucide-react";
 
 const SUGGESTED_PROMPTS = [
   { label: "Tell me about Mathem Solvex", text: "Tell me about the Mathem Solvex project." },
@@ -12,6 +12,80 @@ const SUGGESTED_PROMPTS = [
   { label: "Open GitHub", text: "Show me Vivek's GitHub profile." },
   { label: "AI integrations", text: "How does Vivek integrate AI into his projects?" },
   { label: "Contact Vivek", text: "How can I contact Vivek Kumar?" },
+];
+
+const PREDEFINED_ANSWERS = [
+  {
+    keywords: ["mathem", "solvex", "maarula"],
+    response: `**Mathem Solvex** is Vivek's flagship AI-powered educational platform.
+
+• **Interactive Question Bank**: Houses over **4,500+ premium math questions**.
+• **AI Semantic Search**: Integrates **Gemini embeddings** and a **Pinecone vector database** for semantic similarity search, achieving a **98.4% match accuracy**.
+• **Tech Stack**: Built with **React.js**, **Node.js & Express**, **MongoDB** for persistence, and Pinecone. Active at [question.maarula.in](https://question.maarula.in/).
+• **Track Record**: Reached over **3,000+ active users** and drove over **330K+ search impressions** on Google!`
+  },
+  {
+    keywords: ["observeflow", "log", "aggregator", "telemetry"],
+    response: `**ObserveFlow** is a containerized **Real-Time Log Aggregator** platform designed for system monitoring.
+
+• **Live Event Logs**: Aggregates, parses, and persists logs in real-time across multiple distributed services.
+• **DevOps & Containers**: Multi-service configuration orchestrated using **Docker containers** and container networks.
+• **Alerting**: Trigger engines configured to dispatch real-time alerts upon exceeding critical thresholds, with CI/CD automated via **GitHub Actions**.
+• **Tech Stack**: Built using **React.js**, **Node.js**, **Express**, and **MongoDB** with time-series log indexing.`
+  },
+  {
+    keywords: ["palora", "wellness", "sentiment", "journal"],
+    response: `**Palora** is an **AI-powered emotional wellness journaling** application.
+
+• **Sentiment & Emotion Analysis**: Performs real-time sentiment mining and multi-class emotion mapping on user diary entries.
+• **AI Recommendations**: Leverages generative language models to provide positive wellness tips, growth tracking, and progress metrics.
+• **Tech Stack**: Engineered using **Next.js (App Router)**, **Express.js**, **MongoDB**, and integrated with the **Gemini API** for text analysis.`
+  },
+  {
+    keywords: ["skill", "tech", "speciali", "languages", "tools", "competenc", "framework"],
+    response: `Vivek Kumar is a Full Stack Engineer and AI Product Builder. His core skills include:
+
+• **Frontend Engineering**: Next.js (App Router), React.js, Tailwind CSS, HTML5/CSS3, Framer Motion, Three.js.
+• **Backend Engineering**: Node.js, Express.js, RESTful API design, Microservices.
+• **Databases & Indexing**: MongoDB, MySQL, Pinecone Vector Database.
+• **Artificial Intelligence**: Gemini API, TensorFlow, CNNs, Semantic Search.
+• **Languages**: C++ (Strong DSA, 500+ problems), JavaScript (ES6+), Python.
+• **DevOps & Tools**: Docker, Git/GitHub, Vercel, Postman.`
+  },
+  {
+    keywords: ["leetcode", "dsa", "rank", "rating", "solved", "coding", "contest"],
+    response: `Vivek is an active competitive coder and mathematical problem solver:
+
+• **LeetCode contest rating**: Achieved a peak rating of **1664** (placing him in the **Top 16.4% globally**).
+• **DSA Solved**: Solved **500+ algorithmic problems** across LeetCode, GeeksforGeeks, and HackerRank.
+• **Key Specialties**: Expert in Advanced Graph Algorithms, Dynamic Programming, Tree operations, and time/space complexity optimization.`
+  },
+  {
+    keywords: ["experience", "work", "intern", "job", "mca", "education", "college"],
+    response: `Here is Vivek's academic and professional background:
+
+• **Current Education**: Pursuing his **Master of Computer Applications (MCA)** at **Delhi University** (Batch 2024-2026), studying advanced algorithms, database engines, and software engineering.
+• **Work Experience**: Currently serving as a **Backend Engineering Intern**, architecting Next.js applications, building high-throughput Express gateways, and designing AI integrations.`
+  },
+  {
+    keywords: ["contact", "hire", "email", "phone", "linkedin", "resume", "cv", "social"],
+    response: `You can reach out to Vivek Kumar directly to discuss hiring, SDE internships, or collaborations:
+
+• **Email**: [vivekducs@gmail.com](mailto:vivekducs@gmail.com)
+• **LinkedIn**: [linkedin.com/in/vivek33pal](https://www.linkedin.com/in/vivek33pal)
+• **GitHub**: [github.com/AVPXM8](https://github.com/AVPXM8)
+• **Resume / CV**: The official resume is fully viewable and downloadable via the Google Drive buttons in the Sidebar or Hero sections!`
+  },
+  {
+    keywords: ["project", "portfolio", "build", "flagship", "apps"],
+    response: `Vivek has built three flagship software applications detailed on this page:
+
+1. **Mathem Solvex**: AI-powered math question engine featuring semantic vector search (3K+ users) live at [question.maarula.in](https://question.maarula.in/).
+2. **ObserveFlow**: Dockerized real-time log ingestion and dashboard telemetry screen.
+3. **Palora**: Emotional wellness diary with Gemini-powered sentiment insights.
+
+All codebases are open-source and hosted on his GitHub (@AVPXM8)!`
+  }
 ];
 
 function TypingIndicator() {
@@ -35,7 +109,7 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
   const [messages, setMessages] = useState([
     {
       role: "assistant",
-      content: "Hi! I'm VK Assistant — Vivek Kumar's AI representative. Ask me about his projects, skills, experience, or DSA stats. I'm here to help recruiters and collaborators learn about Vivek!",
+      content: "Hi! I'm VK Assistant — Vivek Kumar's AI representative. Ask me about his projects, skills, experience, or LeetCode stats. I'm here to help recruiters and collaborators learn about Vivek!",
       timestamp: new Date(),
     },
   ]);
@@ -68,11 +142,11 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
   const speak = useCallback((text) => {
     if (!voiceEnabled || !window.speechSynthesis) return;
     window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
+    const cleanText = text.replace(/[*#•-]/g, ""); // Clean markdown formatting for clean speech
+    const utterance = new SpeechSynthesisUtterance(cleanText);
     utterance.rate = 0.95;
     utterance.pitch = 1.0;
     utterance.volume = 0.9;
-    // Prefer a professional male voice
     const voices = window.speechSynthesis.getVoices();
     const preferred = voices.find(
       (v) => v.name.includes("Google UK English Male") || v.name.includes("Microsoft Guy") || v.name.includes("Daniel")
@@ -84,6 +158,42 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
     window.speechSynthesis.speak(utterance);
   }, [voiceEnabled]);
 
+  // Robust Regex-based markdown formatter for chat bubble styling
+  const renderFormattedMessage = useCallback((text) => {
+    if (!text) return "";
+    
+    // A robust regex-based split that captures inline bold (**text**) and markdown links ([label](url))
+    const regex = /(\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\))/g;
+    const parts = text.split(regex);
+    
+    return parts.map((part, idx) => {
+      if (part.startsWith("**") && part.endsWith("**")) {
+        return (
+          <strong key={idx} className="font-extrabold text-[var(--text-primary)]">
+            {part.slice(2, -2)}
+          </strong>
+        );
+      }
+      if (part.startsWith("[") && part.includes("](")) {
+        const closeBracketIdx = part.indexOf("]");
+        const label = part.slice(1, closeBracketIdx);
+        const url = part.slice(closeBracketIdx + 2, -1);
+        return (
+          <a 
+            key={idx} 
+            href={url} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="text-[var(--accent-color)] hover:underline font-extrabold border-b border-green-500/20"
+          >
+            {label}
+          </a>
+        );
+      }
+      return part;
+    });
+  }, []);
+
   const sendMessage = useCallback(async (textToSend) => {
     if (!textToSend.trim() || isStreaming) return;
 
@@ -93,10 +203,43 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
     setTranscript("");
     setIsStreaming(true);
 
-    // Placeholder for streaming assistant message
     const assistantMsgId = Date.now();
     setMessages((prev) => [...prev, { role: "assistant", content: "", timestamp: new Date(), id: assistantMsgId, streaming: true }]);
 
+    // SMART CLIENT-SIDE Q&A ROUTER (Offline first, no API key required)
+    const promptLower = textToSend.toLowerCase();
+    const matched = PREDEFINED_ANSWERS.find(ans => 
+      ans.keywords.some(kw => promptLower.includes(kw))
+    );
+
+    if (matched) {
+      // Simulate real-time word-by-word streaming locally
+      const words = matched.response.split(" ");
+      let currentIdx = 0;
+      let currentText = "";
+
+      const interval = setInterval(() => {
+        if (currentIdx < words.length) {
+          currentText += (currentIdx === 0 ? "" : " ") + words[currentIdx];
+          setMessages((prev) =>
+            prev.map((m) =>
+              m.id === assistantMsgId ? { ...m, content: currentText } : m
+            )
+          );
+          currentIdx++;
+        } else {
+          clearInterval(interval);
+          setMessages((prev) =>
+            prev.map((m) => (m.id === assistantMsgId ? { ...m, streaming: false } : m))
+          );
+          setIsStreaming(false);
+          if (voiceEnabled) speak(matched.response);
+        }
+      }, 35); // Fluid typing speed
+      return;
+    }
+
+    // Fallback to Server LLM if not matched
     try {
       abortRef.current = new AbortController();
 
@@ -137,32 +280,33 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
               )
             );
           } catch {
-            // skip malformed
+            // skip
           }
         }
       }
 
-      // Mark done
       setMessages((prev) =>
         prev.map((m) => (m.id === assistantMsgId ? { ...m, streaming: false } : m))
       );
 
-      // TTS
       if (fullText) speak(fullText);
     } catch (err) {
       if (err.name !== "AbortError") {
+        // Generous static helper response on server LLM errors
+        const fallbackText = "I'm having trouble connecting to my cloud model right now, but I can definitely tell you that Vivek Kumar is a Full Stack & AI developer specializing in Node.js backends and Gemini AI platforms, holding a 1664 rating on LeetCode. Ask me about Mathem Solvex, his skills, or contact info, and I will happily answer locally!";
         setMessages((prev) =>
           prev.map((m) =>
             m.id === assistantMsgId
-              ? { ...m, content: "Sorry, I encountered an error. Please try again!", streaming: false }
+              ? { ...m, content: fallbackText, streaming: false }
               : m
           )
         );
+        if (voiceEnabled) speak(fallbackText);
       }
     } finally {
       setIsStreaming(false);
     }
-  }, [isStreaming, messages, speak]);
+  }, [isStreaming, messages, speak, voiceEnabled]);
 
   const startVoice = useCallback(() => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -209,7 +353,7 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
   return (
     <div
       className={`flex flex-col h-full ${
-        isModal ? "w-full" : "glass-card rounded-2xl border border-[var(--glass-border)] p-4 shadow-sm relative overflow-hidden"
+        isModal ? "w-full" : "glass-card rounded-2xl border border-[var(--glass-border)] p-4 shadow-sm relative overflow-hidden bg-[var(--bg-secondary)]"
       }`}
     >
       {/* Header */}
@@ -220,7 +364,7 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
               <Sparkles size={14} className={isStreaming ? "animate-spin" : "animate-pulse"} />
             </div>
             <span className={`absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full border-2 border-[var(--bg-secondary)] ${
-              isListening ? "bg-red-400 animate-pulse" : isSpeaking ? "bg-[var(--text-primary)] animate-pulse" : "bg-emerald-500"
+              isListening ? "bg-red-400 animate-pulse" : isSpeaking ? "bg-[var(--accent-color)] animate-pulse" : "bg-emerald-500"
             }`} />
           </div>
           <div>
@@ -232,13 +376,12 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
         </div>
 
         <div className="flex items-center gap-1">
-          {/* Voice TTS toggle */}
           <button
             suppressHydrationWarning
             onClick={() => { setVoiceEnabled((v) => !v); window.speechSynthesis?.cancel(); }}
             className={`p-1.5 rounded-lg transition-all cursor-pointer ${
               voiceEnabled
-                ? "bg-[var(--text-primary)] text-[var(--bg-primary)] border border-[var(--text-primary)]"
+                ? "bg-[var(--accent-color)] text-[var(--bg-primary)] border border-[var(--accent-color)]"
                 : "text-[var(--text-muted)] hover:bg-[var(--bg-tertiary)]"
             }`}
             title={voiceEnabled ? "Disable voice responses" : "Enable voice responses"}
@@ -265,7 +408,6 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
         {messages.map((msg, index) => (
           <div key={index} className={`flex flex-col ${msg.role === "user" ? "items-end" : "items-start"} gap-1`}>
             <div className={`flex items-end gap-2 max-w-[88%] ${msg.role === "user" ? "flex-row-reverse" : "flex-row"}`}>
-              {/* Avatar */}
               {msg.role === "assistant" && (
                 <div className="w-5 h-5 rounded-full bg-[var(--text-primary)] flex items-center justify-center shrink-0 mb-0.5">
                   <Sparkles size={9} className="text-[var(--bg-primary)]" />
@@ -275,14 +417,14 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
               <div
                 className={`px-3.5 py-2.5 text-xs leading-relaxed rounded-2xl ${
                   msg.role === "user"
-                    ? "bg-[var(--text-primary)] text-[var(--bg-primary)] rounded-tr-none shadow-sm"
-                    : "bg-[var(--bg-tertiary)] border border-[var(--border-color)] text-[var(--text-primary)] rounded-tl-none"
+                    ? "bg-[var(--accent-color)] text-[var(--bg-primary)] rounded-tr-none shadow-sm font-semibold"
+                    : "bg-[var(--bg-tertiary)] border border-[var(--border-color)] text-[var(--text-primary)] rounded-tl-none font-medium"
                 }`}
                 style={{ whiteSpace: "pre-line" }}
               >
-                {msg.content}
+                {renderFormattedMessage(msg.content)}
                 {msg.streaming && (
-                  <span className="inline-block w-1.5 h-3 bg-[var(--bg-primary)] animate-pulse rounded-sm ml-1 align-middle" />
+                  <span className="inline-block w-1.5 h-3 bg-[var(--accent-color)] animate-pulse rounded-sm ml-1 align-middle" />
                 )}
               </div>
             </div>
@@ -302,7 +444,7 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
         <div className={`mb-2 px-3 py-2 rounded-xl text-xs border ${
           micError
             ? "border-red-500/30 bg-red-500/5 text-red-400"
-            : "border-[var(--text-primary)]/20 bg-[var(--text-primary)]/5 text-[var(--text-secondary)]"
+            : "border-[var(--accent-color)]/20 bg-[var(--accent-color)]/5 text-[var(--text-secondary)]"
         } mono-font`}>
           {micError || `🎙 ${transcript}...`}
         </div>
@@ -310,7 +452,7 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
 
       {/* Suggested Prompts */}
       <div className="mb-3 shrink-0">
-        <p className="text-[9px] text-[var(--text-muted)] font-medium mb-1.5 mono-font flex items-center gap-1 uppercase tracking-wider">
+        <p className="text-[9px] text-[var(--text-muted)] font-bold mb-1.5 mono-font flex items-center gap-1 uppercase tracking-wider">
           <MessageSquare size={9} /> Quick queries
         </p>
         <div className="flex flex-wrap gap-1">
@@ -320,7 +462,7 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
               suppressHydrationWarning
               onClick={() => sendMessage(q.text)}
               disabled={isStreaming}
-              className="text-[10px] bg-[var(--bg-secondary)] border border-[var(--border-color)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--text-primary)] hover:bg-[var(--text-primary)]/5 transition-all px-2.5 py-1 rounded-full mono-font cursor-pointer disabled:opacity-50"
+              className="text-[10px] bg-[var(--bg-secondary)] border border-[var(--border-color)] text-[var(--text-secondary)] hover:text-[var(--bg-primary)] hover:border-[var(--accent-color)] hover:bg-[var(--accent-color)] transition-all px-2.5 py-1 rounded-full mono-font cursor-pointer disabled:opacity-50"
             >
               {q.label}
             </button>
@@ -333,7 +475,6 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
         onSubmit={(e) => { e.preventDefault(); sendMessage(inputText); }}
         className="flex gap-2 shrink-0"
       >
-        {/* Mic button */}
         <button
           type="button"
           suppressHydrationWarning
@@ -341,7 +482,7 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
           className={`p-2.5 rounded-xl border transition-all cursor-pointer shrink-0 ${
             isListening
               ? "bg-red-500/10 border-red-500/40 text-red-400 animate-pulse"
-              : "border-[var(--border-color)] text-[var(--text-muted)] hover:border-[var(--text-primary)] hover:text-[var(--text-primary)] hover:bg-[var(--text-primary)]/5"
+              : "border-[var(--border-color)] text-[var(--text-muted)] hover:border-[var(--accent-color)] hover:text-[var(--accent-color)] hover:bg-[var(--accent-color)]/5"
           }`}
           title={isListening ? "Stop recording" : "Start voice input"}
           aria-label={isListening ? "Stop voice recording" : "Start voice recording"}
@@ -358,13 +499,13 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
             onChange={(e) => setInputText(e.target.value)}
             placeholder={isListening ? "Listening..." : "Ask anything about Vivek..."}
             disabled={isStreaming || isListening}
-            className="w-full bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-xl px-3.5 py-2.5 text-xs focus:outline-none focus:border-[var(--text-primary)]/40 focus:ring-1 focus:ring-[var(--text-primary)]/20 transition-all pr-10 text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
+            className="w-full bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-xl px-3.5 py-2.5 text-xs focus:outline-none focus:border-[var(--accent-color)]/40 focus:ring-1 focus:ring-[var(--accent-color)]/20 transition-all pr-10 text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
           />
           <button
             type="submit"
             suppressHydrationWarning
             disabled={!inputText.trim() || isStreaming}
-            className="absolute right-1.5 top-1.5 p-1.5 rounded-lg bg-[var(--text-primary)] text-[var(--bg-primary)] hover:bg-[var(--text-secondary)] disabled:opacity-40 transition-all cursor-pointer"
+            className="absolute right-1.5 top-1.5 p-1.5 rounded-lg bg-[var(--accent-color)] text-[var(--bg-primary)] hover:bg-green-600 disabled:opacity-40 transition-all cursor-pointer"
             aria-label="Send message"
           >
             <Send size={12} />

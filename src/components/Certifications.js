@@ -8,55 +8,64 @@ export default function Certifications() {
       title: "Developing Back-End Apps with Node.js and Express",
       issuer: "IBM Corporation",
       url: "https://www.coursera.org/account/accomplishments/verify/0YG3Z7CCMHOS",
-      themeColor: "teal"
+      themeColor: "teal",
+      badge: "IBM"
     },
     {
       title: "JavaScript Programming Essentials",
       issuer: "IBM Corporation",
       url: "https://www.coursera.org/account/accomplishments/verify/Z7YY3ZUEVQLG",
-      themeColor: "amber"
+      themeColor: "amber",
+      badge: "IBM"
     },
     {
       title: "Python for Data Science and AI",
       issuer: "IBM Corporation",
       url: "https://www.credly.com/badges/2f5144fb-cef8-404d-b828-528bed14ca82/linked_in_profile",
-      themeColor: "emerald"
+      themeColor: "emerald",
+      badge: "IBM"
     },
     {
       title: "Supervised Machine Learning: Regression and Classification",
       issuer: "Stanford University",
       url: "https://www.coursera.org/account/accomplishments/verify/CULB58YLS97K",
-      themeColor: "crimson"
+      themeColor: "crimson",
+      badge: "SU"
     },
     {
       title: "Attention Mechanism",
       issuer: "Google Cloud",
       url: "https://www.skills.google/public_profiles/eb50a643-6f3d-4bb1-a4b2-6dddd48ecc40/badges/23294807?utm_medium=social&utm_source=linkedin&utm_campaign=ql-social-share",
-      themeColor: "amber"
+      themeColor: "amber",
+      badge: "GCP"
     },
     {
       title: "Introduction to Responsible AI",
       issuer: "Google Cloud",
       url: "https://www.skills.google/public_profiles/eb50a643-6f3d-4bb1-a4b2-6dddd48ecc40/badges/9961415?utm_medium=social&utm_source=linkedin&utm_campaign=ql-social-share",
-      themeColor: "emerald"
+      themeColor: "emerald",
+      badge: "GCP"
     },
     {
       title: "Introduction to Large Language Models",
       issuer: "Google Cloud",
       url: "https://www.skills.google/public_profiles/eb50a643-6f3d-4bb1-a4b2-6dddd48ecc40/badges/9960562?utm_medium=social&utm_source=linkedin&utm_campaign=ql-social-share",
-      themeColor: "copper"
+      themeColor: "copper",
+      badge: "GCP"
     },
     {
       title: "Introduction to Generative AI",
       issuer: "Google Cloud",
       url: "https://www.skills.google/public_profiles/eb50a643-6f3d-4bb1-a4b2-6dddd48ecc40/badges/9888589?utm_medium=social&utm_source=linkedin&utm_campaign=ql-social-share",
-      themeColor: "amber"
+      themeColor: "amber",
+      badge: "GCP"
     },
     {
       title: "Professional Certificate in Java Programming",
       issuer: "Udemy",
       url: "https://www.udemy.com/certificate/UC-f4808206-36a1-4432-b954-8bd8ed27f6eb/",
-      themeColor: "copper"
+      themeColor: "copper",
+      badge: "UD"
     }
   ];
 
@@ -68,6 +77,7 @@ export default function Certifications() {
       icon: "text-teal-600 dark:text-teal-400",
       borderLeft: "border-l-2 border-teal-500/60 dark:border-teal-400/60",
       accentGlow: "bg-teal-500/5 dark:bg-teal-400/5",
+      logoBadge: "bg-teal-500/10 text-teal-600 dark:text-teal-400 border border-teal-500/20"
     },
     amber: {
       hoverBorder: "hover:border-amber-500/40 dark:hover:border-amber-400/40",
@@ -75,6 +85,7 @@ export default function Certifications() {
       icon: "text-amber-600 dark:text-amber-400",
       borderLeft: "border-l-2 border-amber-500/60 dark:border-amber-400/60",
       accentGlow: "bg-amber-500/5 dark:bg-amber-400/5",
+      logoBadge: "bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20"
     },
     emerald: {
       hoverBorder: "hover:border-emerald-500/40 dark:hover:border-emerald-400/40",
@@ -82,6 +93,7 @@ export default function Certifications() {
       icon: "text-emerald-600 dark:text-emerald-400",
       borderLeft: "border-l-2 border-emerald-500/60 dark:border-emerald-400/60",
       accentGlow: "bg-emerald-500/5 dark:bg-emerald-400/5",
+      logoBadge: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20"
     },
     crimson: {
       hoverBorder: "hover:border-red-500/40 dark:hover:border-red-400/40",
@@ -89,6 +101,7 @@ export default function Certifications() {
       icon: "text-red-600 dark:text-red-400",
       borderLeft: "border-l-2 border-red-500/60 dark:border-red-400/60",
       accentGlow: "bg-red-500/5 dark:bg-red-400/5",
+      logoBadge: "bg-red-500/10 text-red-600 dark:text-red-400 border border-red-500/20"
     },
     copper: {
       hoverBorder: "hover:border-orange-500/40 dark:hover:border-orange-400/40",
@@ -96,16 +109,17 @@ export default function Certifications() {
       icon: "text-orange-600 dark:text-orange-400",
       borderLeft: "border-l-2 border-orange-500/60 dark:border-orange-400/60",
       accentGlow: "bg-orange-500/5 dark:bg-orange-400/5",
+      logoBadge: "bg-orange-500/10 text-orange-600 dark:text-orange-400 border border-orange-500/20"
     }
   };
 
   return (
-    <section id="certifications" className="relative py-12 border-t border-[var(--border-color)]">
+    <section id="certifications" className="relative py-12 border-t border-[var(--border-color)] bg-[var(--bg-primary)]">
       <div className="w-full max-w-6xl z-10 px-4">
         
         {/* Title */}
         <div className="flex flex-col mb-8 text-left">
-          <p className="text-xs font-bold text-[var(--text-primary)] mono-font uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
+          <p className="text-xs font-bold text-[var(--accent-color)] mono-font uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
             <Award size={13} /> VERIFIED CREDENTIALS
           </p>
           <h2 className="text-3xl font-extrabold tracking-tight text-[var(--text-primary)]">
@@ -131,17 +145,23 @@ export default function Certifications() {
                 {/* Visual Glow Ornament */}
                 <div className={`absolute -right-10 -bottom-10 w-28 h-28 rounded-full blur-2xl transition-transform duration-500 group-hover:scale-125 ${theme.accentGlow}`}></div>
 
-                <div className="space-y-3 relative z-10">
+                <div className="space-y-4 relative z-10">
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] text-[var(--text-secondary)] font-bold uppercase tracking-widest mono-font">
-                      {c.issuer}
+                    {/* Issuer Logo Initials Badge */}
+                    <span className={`px-2.5 py-1 text-[9px] font-black uppercase tracking-wider rounded-md mono-font ${theme.logoBadge}`}>
+                      {c.badge}
                     </span>
                     <ShieldCheck size={16} className={`${theme.icon} shrink-0`} />
                   </div>
 
-                  <h4 className="font-bold text-sm leading-snug tracking-tight text-[var(--text-primary)] min-h-[40px] group-hover:text-[var(--text-primary)] transition-all">
-                    {c.title}
-                  </h4>
+                  <div>
+                    <span className="text-[10px] text-[var(--text-muted)] font-bold uppercase tracking-widest mono-font">
+                      {c.issuer}
+                    </span>
+                    <h4 className="font-bold text-xs.5 leading-snug tracking-tight text-[var(--text-primary)] min-h-[40px] mt-1 group-hover:text-[var(--accent-color)] transition-colors duration-200">
+                      {c.title}
+                    </h4>
+                  </div>
                 </div>
 
                 {/* Bottom tag block */}
@@ -150,7 +170,7 @@ export default function Certifications() {
                     <CheckCircle size={10.5} className="text-emerald-500" />
                     <span className="group-hover:text-[var(--text-primary)] transition-colors">Verified Credential</span>
                   </span>
-                  <span className="text-[9px] uppercase tracking-wider text-[var(--text-muted)] group-hover:text-[var(--text-secondary)] transition-colors flex items-center gap-0.5">
+                  <span className="text-[9px] uppercase tracking-wider text-[var(--text-muted)] group-hover:text-[var(--accent-color)] transition-colors flex items-center gap-0.5">
                     View
                   </span>
                 </div>
