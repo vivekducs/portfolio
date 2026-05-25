@@ -10,13 +10,13 @@ export const MDXComponents = {
     const isInternal = href && (href.startsWith("/") || href.startsWith("#"));
     if (isInternal) {
       return (
-        <Link href={href} className="text-[var(--accent-color)] hover:text-green-700 dark:hover:text-green-400 transition-colors font-medium border-b border-green-500/20 hover:border-[var(--accent-color)]" {...props}>
+        <Link href={href} className="text-[var(--accent-color)] hover:text-violet-700 dark:hover:text-violet-400 transition-colors font-medium border-b border-violet-500/20 hover:border-[var(--accent-color)]" {...props}>
           {children}
         </Link>
       );
     }
     return (
-      <a href={href} target="_blank" rel="noopener noreferrer" className="text-[var(--accent-color)] hover:text-green-700 dark:hover:text-green-400 transition-colors font-medium border-b border-green-500/20 hover:border-[var(--accent-color)]" {...props}>
+      <a href={href} target="_blank" rel="noopener noreferrer" className="text-[var(--accent-color)] hover:text-violet-700 dark:hover:text-violet-400 transition-colors font-medium border-b border-violet-500/20 hover:border-[var(--accent-color)]" {...props}>
         {children}
       </a>
     );

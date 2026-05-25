@@ -17,8 +17,8 @@ export function generateStaticParams() {
   }));
 }
 
-export default function BlogPost({ params }) {
-  const { slug } = params;
+export default async function BlogPost({ params }) {
+  const { slug } = await params;
   const post = getBlogPostBySlug(slug);
 
   if (!post) {
@@ -32,7 +32,7 @@ export default function BlogPost({ params }) {
       <ReadingProgress />
       <main className="min-h-screen pt-24 pb-20 px-6 max-w-7xl mx-auto flex flex-col lg:flex-row gap-12 items-start">
         
-        <article className="flex-1 max-w-3xl lg:w-[800px]">
+        <article className="flex-1 w-full min-w-0 break-words max-w-3xl lg:w-[800px]">
           
           <nav className="mb-12">
             <Link href="/blog" className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">

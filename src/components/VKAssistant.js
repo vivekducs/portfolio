@@ -199,7 +199,7 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
             href={url} 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="text-[var(--accent-color)] hover:underline font-extrabold border-b border-green-500/20"
+            className="text-[var(--accent-color)] hover:underline font-extrabold border-b border-violet-500/20"
           >
             {label}
           </a>
@@ -379,7 +379,7 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
               <Sparkles size={14} className={isStreaming ? "animate-spin" : "animate-pulse"} />
             </div>
             <span className={`absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full border-2 border-[var(--bg-secondary)] ${
-              isListening ? "bg-red-400 animate-pulse" : isSpeaking ? "bg-[var(--accent-color)] animate-pulse" : "bg-emerald-500"
+              isListening ? "bg-red-400 animate-pulse" : isSpeaking ? "bg-[var(--accent-color)] animate-pulse" : "bg-violet-500"
             }`} />
           </div>
           <div>
@@ -520,7 +520,7 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
             type="submit"
             suppressHydrationWarning
             disabled={!inputText.trim() || isStreaming}
-            className="absolute right-1.5 top-1.5 p-1.5 rounded-lg bg-[var(--accent-color)] text-[var(--bg-primary)] hover:bg-green-600 disabled:opacity-40 transition-all cursor-pointer"
+            className="absolute right-1.5 top-1.5 p-1.5 rounded-lg bg-[var(--accent-color)] text-[var(--bg-primary)] hover:bg-violet-600 disabled:opacity-40 transition-all cursor-pointer"
             aria-label="Send message"
           >
             <Send size={12} />

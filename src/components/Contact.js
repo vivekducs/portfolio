@@ -255,7 +255,7 @@ Best regards,`;
 
               {success ? (
                 <div className="py-10 text-center flex flex-col items-center justify-center space-y-4 animate-in fade-in duration-300">
-                  <div className="w-14 h-14 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 flex items-center justify-center animate-bounce">
+                  <div className="w-14 h-14 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-500 flex items-center justify-center animate-bounce">
                     <CheckCircle2 size={32} />
                   </div>
                   <h5 className="font-bold text-lg text-[var(--text-primary)]">Message Transmitted Successfully!</h5>

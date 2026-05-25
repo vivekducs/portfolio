@@ -15,14 +15,14 @@ export default function Certifications() {
       title: "JavaScript Programming Essentials",
       issuer: "IBM Corporation",
       url: "https://www.coursera.org/account/accomplishments/verify/Z7YY3ZUEVQLG",
-      themeColor: "amber",
+      themeColor: "violet",
       badge: "IBM"
     },
     {
       title: "Python for Data Science and AI",
       issuer: "IBM Corporation",
       url: "https://www.credly.com/badges/2f5144fb-cef8-404d-b828-528bed14ca82/linked_in_profile",
-      themeColor: "emerald",
+      themeColor: "violet",
       badge: "IBM"
     },
     {
@@ -36,14 +36,14 @@ export default function Certifications() {
       title: "Attention Mechanism",
       issuer: "Google Cloud",
       url: "https://www.skills.google/public_profiles/eb50a643-6f3d-4bb1-a4b2-6dddd48ecc40/badges/23294807?utm_medium=social&utm_source=linkedin&utm_campaign=ql-social-share",
-      themeColor: "amber",
+      themeColor: "violet",
       badge: "GCP"
     },
     {
       title: "Introduction to Responsible AI",
       issuer: "Google Cloud",
       url: "https://www.skills.google/public_profiles/eb50a643-6f3d-4bb1-a4b2-6dddd48ecc40/badges/9961415?utm_medium=social&utm_source=linkedin&utm_campaign=ql-social-share",
-      themeColor: "emerald",
+      themeColor: "violet",
       badge: "GCP"
     },
     {
@@ -57,7 +57,7 @@ export default function Certifications() {
       title: "Introduction to Generative AI",
       issuer: "Google Cloud",
       url: "https://www.skills.google/public_profiles/eb50a643-6f3d-4bb1-a4b2-6dddd48ecc40/badges/9888589?utm_medium=social&utm_source=linkedin&utm_campaign=ql-social-share",
-      themeColor: "amber",
+      themeColor: "violet",
       badge: "GCP"
     },
     {
@@ -79,21 +79,21 @@ export default function Certifications() {
       accentGlow: "bg-teal-500/5 dark:bg-teal-400/5",
       logoBadge: "bg-teal-500/10 text-teal-600 dark:text-teal-400 border border-teal-500/20"
     },
-    amber: {
-      hoverBorder: "hover:border-amber-500/40 dark:hover:border-amber-400/40",
-      bgGlow: "bg-amber-500/[0.01] hover:bg-amber-500/[0.03] dark:bg-amber-950/5 dark:hover:bg-amber-950/20",
-      icon: "text-amber-600 dark:text-amber-400",
-      borderLeft: "border-l-2 border-amber-500/60 dark:border-amber-400/60",
-      accentGlow: "bg-amber-500/5 dark:bg-amber-400/5",
-      logoBadge: "bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20"
+    violet: {
+      hoverBorder: "hover:border-violet-500/40 dark:hover:border-violet-400/40",
+      bgGlow: "bg-violet-500/[0.01] hover:bg-violet-500/[0.03] dark:bg-violet-950/5 dark:hover:bg-violet-950/20",
+      icon: "text-violet-600 dark:text-violet-400",
+      borderLeft: "border-l-2 border-violet-500/60 dark:border-violet-400/60",
+      accentGlow: "bg-violet-500/5 dark:bg-violet-400/5",
+      logoBadge: "bg-violet-500/10 text-violet-600 dark:text-violet-400 border border-violet-500/20"
     },
-    emerald: {
-      hoverBorder: "hover:border-emerald-500/40 dark:hover:border-emerald-400/40",
-      bgGlow: "bg-emerald-500/[0.01] hover:bg-emerald-500/[0.03] dark:bg-emerald-950/5 dark:hover:bg-emerald-950/20",
-      icon: "text-emerald-600 dark:text-emerald-400",
-      borderLeft: "border-l-2 border-emerald-500/60 dark:border-emerald-400/60",
-      accentGlow: "bg-emerald-500/5 dark:bg-emerald-400/5",
-      logoBadge: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20"
+    violet: {
+      hoverBorder: "hover:border-violet-500/40 dark:hover:border-violet-400/40",
+      bgGlow: "bg-violet-500/[0.01] hover:bg-violet-500/[0.03] dark:bg-violet-950/5 dark:hover:bg-violet-950/20",
+      icon: "text-violet-600 dark:text-violet-400",
+      borderLeft: "border-l-2 border-violet-500/60 dark:border-violet-400/60",
+      accentGlow: "bg-violet-500/5 dark:bg-violet-400/5",
+      logoBadge: "bg-violet-500/10 text-violet-600 dark:text-violet-400 border border-violet-500/20"
     },
     crimson: {
       hoverBorder: "hover:border-red-500/40 dark:hover:border-red-400/40",
@@ -167,7 +167,7 @@ export default function Certifications() {
                 {/* Bottom tag block */}
                 <div className="flex items-center justify-between pt-3.5 mt-4 border-t border-[var(--border-color)] text-[10px] text-[var(--text-muted)] font-semibold mono-font relative z-10">
                   <span className="flex items-center gap-1.5">
-                    <CheckCircle size={10.5} className="text-emerald-500" />
+                    <CheckCircle size={10.5} className="text-violet-500" />
                     <span className="group-hover:text-[var(--text-primary)] transition-colors">Verified Credential</span>
                   </span>
                   <span className="text-[9px] uppercase tracking-wider text-[var(--text-muted)] group-hover:text-[var(--accent-color)] transition-colors flex items-center gap-0.5">

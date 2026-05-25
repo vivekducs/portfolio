@@ -109,7 +109,7 @@ export default function Home() {
           <div className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
-              <main className="lg:col-span-8 space-y-4 pb-20 lg:pb-0">
+              <main className="lg:col-span-8 space-y-16 pb-20 lg:pb-0">
                 {isRecruiterMode && (
                   <RecruiterDashboard onClose={() => setIsRecruiterMode(false)} />
                 )}
@@ -139,7 +139,7 @@ export default function Home() {
 
                 {/* Recruitment Pitch Glass panel */}
                 <div className="glass-card rounded-2xl border border-[var(--glass-border)] p-5 shadow-sm text-left relative overflow-hidden">
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-green-500 opacity-5 rounded-full blur-xl pointer-events-none" />
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-violet-500 opacity-5 rounded-full blur-xl pointer-events-none" />
                   <h4 className="text-xs font-bold text-[var(--accent-color)] mono-font uppercase tracking-widest mb-2 flex items-center gap-1.5">
                     <Sparkles size={11} /> Quick Recruitment Spec
                   </h4>

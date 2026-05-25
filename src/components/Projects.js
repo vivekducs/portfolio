@@ -36,32 +36,119 @@ export default function Projects() {
   const featuredProject = projects.find(p => p.featured);
 
   return (
-    <section id="projects" className="relative py-12 border-t border-[var(--border-color)]">
-      <div className="w-full max-w-6xl z-10 px-4">
+    <section id="projects" className="relative py-16 border-t border-[var(--border-color)]">
+      <div className="w-full max-w-5xl mx-auto z-10 px-4">
         
-        {/* Title */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 text-left">
-          <div>
-            <p className="text-xs font-bold text-[var(--text-primary)] mono-font uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
-              <Layers size={13} /> PORTFOLIO PROJECTS
-            </p>
-            <h2 className="text-3xl font-extrabold tracking-tight text-[var(--text-primary)]">
-              Featured Innovations
-            </h2>
-          </div>
+        {/* Section Header */}
+        <div className="mb-12 text-center flex flex-col items-center">
+          <p className="text-xs font-bold text-[var(--text-secondary)] mono-font uppercase tracking-widest mb-3 flex items-center gap-2">
+            <Layers size={14} /> Selected Work
+          </p>
+          <h2 className="text-4xl font-extrabold tracking-tight text-[var(--text-primary)]">
+            Engineering Impact
+          </h2>
+          <p className="text-sm text-[var(--text-secondary)] mt-4 max-w-2xl">
+            A showcase of production-grade systems, focusing on robust architecture, scalable backends, and tangible business value.
+          </p>
+        </div>
 
-          {/* Filtering buttons */}
-          <div className="flex flex-wrap gap-1.5 mt-4 md:mt-0 bg-[var(--bg-tertiary)] border border-[var(--border-color)] p-1 rounded-xl">
+        {/* Featured Project Showcase (Editorial Style) */}
+        {featuredProject && (
+          <div className="bg-[var(--bg-secondary)] rounded-2xl border border-[var(--border-color)] p-8 md:p-12 shadow-sm mb-12 relative overflow-hidden group hover:border-[var(--border-hover)] transition-all">
+            
+            <div className="absolute top-0 right-0 px-4 py-2 bg-[var(--text-primary)] text-[var(--bg-primary)] text-[10px] font-bold tracking-widest uppercase rounded-bl-2xl shadow-sm flex items-center gap-1.5">
+              <Sparkles size={11} /> Featured Case Study
+            </div>
+
+            <div className="max-w-3xl space-y-8 relative z-10 pt-4">
+              
+              <div>
+                <h3 className="text-3xl md:text-5xl font-black tracking-tight text-[var(--text-primary)] mb-2">
+                  {featuredProject.title}
+                </h3>
+                <p className="text-xs text-[var(--accent-color)] font-bold uppercase tracking-widest mono-font">
+                  AI-powered Educational Platform
+                </p>
+              </div>
+
+              <p className="text-base md:text-lg text-[var(--text-secondary)] leading-relaxed font-medium">
+                {featuredProject.desc}
+              </p>
+
+              {/* Highlights & Metrics Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                {featuredProject.highlights.map((h, i) => (
+                  <div key={i} className="flex items-start gap-3 p-4 border border-[var(--border-color)] rounded-xl bg-[var(--bg-primary)] shadow-sm">
+                    <Target size={16} className="text-[var(--accent-color)] mt-0.5 shrink-0" />
+                    <span className="text-sm text-[var(--text-primary)] font-semibold leading-tight">{h}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Tech Stack */}
+              <div className="pt-2">
+                <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-widest mb-3">Technology Stack</p>
+                <div className="flex flex-wrap gap-2">
+                  {featuredProject.tech.map((t, idx) => (
+                    <span
+                      key={idx}
+                      className="text-xs bg-[var(--bg-primary)] border border-[var(--border-color)] text-[var(--text-secondary)] font-medium px-3 py-1.5 rounded-lg mono-font shadow-sm"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Actions */}
+              <div className="flex flex-wrap items-center gap-4 pt-6 border-t border-[var(--border-color)]">
+                <Link
+                  href={`/projects/${featuredProject.id}`}
+                  className="px-6 py-3 bg-[var(--text-primary)] text-[var(--bg-primary)] hover:bg-[var(--text-secondary)] text-sm font-bold rounded-xl shadow-md transition-all flex items-center gap-2"
+                >
+                  <span>Read Case Study</span>
+                  <BookOpen size={14} />
+                </Link>
+                {featuredProject.live && (
+                  <a
+                    href={featuredProject.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-6 py-3 bg-transparent border border-[var(--border-color)] hover:border-[var(--text-primary)] text-[var(--text-primary)] text-sm font-bold rounded-xl transition-all flex items-center gap-2"
+                  >
+                    <ExternalLink size={14} />
+                    <span>Live Site</span>
+                  </a>
+                )}
+                {featuredProject.github && (
+                  <a
+                    href={featuredProject.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-6 py-3 bg-transparent border border-[var(--border-color)] hover:border-[var(--text-primary)] text-[var(--text-primary)] text-sm font-bold rounded-xl transition-all flex items-center gap-2"
+                  >
+                    <Github size={14} />
+                    <span>Source Code</span>
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Filtering */}
+        <div className="flex justify-center mb-8">
+          <div className="flex flex-wrap gap-2 p-1.5 bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-xl shadow-sm">
             {[
-              { id: "all", label: "Other Projects" },
-              { id: "ai-ml", label: "AI / ML" },
+              { id: "all", label: "All Projects" },
+              { id: "ai-ml", label: "AI & ML" },
               { id: "fullstack", label: "Full Stack" },
               { id: "systems", label: "Systems" }
             ].map((btn) => (
               <button
                 key={btn.id}
                 onClick={() => setFilter(btn.id)}
-                className={`text-xs font-bold px-3 py-1.5 rounded-lg transition-all cursor-pointer mono-font ${
+                className={`text-xs font-bold px-4 py-2 rounded-lg transition-all cursor-pointer mono-font ${
                   filter === btn.id
                     ? "bg-[var(--text-primary)] text-[var(--bg-primary)] shadow-sm"
                     : "text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
@@ -73,153 +160,21 @@ export default function Projects() {
           </div>
         </div>
 
-        {/* Featured Project Showcase */}
-        {featuredProject && (
-          <div className="glass-card rounded-3xl border border-[var(--glass-border)] p-6 md:p-8 shadow-sm mb-8 relative overflow-hidden text-left hover:border-[var(--text-primary)] transition-all">
-            
-            {/* Corner glowing badge */}
-            <div className="absolute top-0 right-0 bg-[var(--text-primary)] text-[var(--bg-primary)] text-[10px] font-bold tracking-widest uppercase px-5 py-2.5 rounded-bl-3xl shadow-sm mono-font flex items-center gap-1.5 select-none">
-              <Sparkles size={11} /> FEATURED CASE STUDY
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center pt-4 lg:pt-0">
-              
-              {/* Left Column: Details */}
-              <div className="lg:col-span-7 space-y-5">
-                <div>
-                  <h3 className="text-2xl font-bold tracking-tight text-[var(--text-primary)]">
-                    {featuredProject.title}
-                  </h3>
-                  <p className="text-xs text-[var(--text-secondary)] font-bold uppercase tracking-wider mono-font mt-1">
-                    AI-powered Educational Doubts solver
-                  </p>
-                </div>
-
-                <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
-                  {featuredProject.desc}
-                </p>
-
-                {/* Highlights List */}
-                <div className="space-y-2">
-                  <h4 className="text-xs font-bold text-[var(--text-primary)] mono-font uppercase tracking-widest">
-                    Performance Metrics & Highlights
-                  </h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                    {featuredProject.highlights.map((h, i) => (
-                      <div key={i} className="flex items-start gap-2 text-xs text-[var(--text-secondary)] font-medium">
-                        <Target size={12} className="text-[var(--text-primary)] mt-0.5 shrink-0" />
-                        <span>{h}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Tech Pills */}
-                <div className="space-y-2">
-                  <h4 className="text-xs font-bold text-[var(--text-primary)] mono-font uppercase tracking-widest">
-                    Infrastructure Stack
-                  </h4>
-                  <div className="flex flex-wrap gap-1.5">
-                    {featuredProject.tech.map((t, idx) => (
-                      <span
-                        key={idx}
-                        className="text-[10px] bg-[var(--bg-tertiary)] border border-[var(--border-color)] text-[var(--text-secondary)] font-semibold px-2.5 py-1 rounded-full mono-font"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Actions */}
-                <div className="flex flex-wrap items-center gap-3 pt-2">
-                  <Link
-                    href={`/projects/${featuredProject.id}`}
-                    className="px-5 py-2.5 bg-[var(--text-primary)] text-[var(--bg-primary)] hover:bg-[var(--text-secondary)] text-xs font-bold rounded-xl shadow-sm transition-all flex items-center gap-1.5"
-                  >
-                    <span>Read Case Study</span>
-                    <BookOpen size={12} />
-                  </Link>
-                  {featuredProject.live && (
-                    <a
-                      href={featuredProject.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-5 py-2.5 bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:border-[var(--text-primary)] hover:text-[var(--text-primary)] text-[var(--text-secondary)] text-xs font-bold rounded-xl transition-all flex items-center gap-1.5"
-                    >
-                      <ExternalLink size={12} />
-                      <span>Live Site</span>
-                    </a>
-                  )}
-                  {featuredProject.github && (
-                    <a
-                      href={featuredProject.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-5 py-2.5 bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:border-[var(--text-primary)] hover:text-[var(--text-primary)] text-[var(--text-secondary)] text-xs font-bold rounded-xl transition-all flex items-center gap-1.5"
-                    >
-                      <Github size={12} />
-                      <span>GitHub Spec</span>
-                    </a>
-                  )}
-                  <ArchitectureDiagram projectId={featuredProject.id} />
-                </div>
-              </div>
-
-              {/* Right Column: Dynamic Terminal Mockup */}
-              <div className="lg:col-span-5 select-none">
-                <div className="w-full bg-[var(--bg-secondary)] text-[var(--text-primary)] rounded-2xl border border-[var(--border-color)] p-4 shadow-sm font-mono text-[10px] space-y-2 relative overflow-hidden h-64 flex flex-col justify-between">
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-[var(--text-primary)] opacity-5 blur-xl rounded-full"></div>
-                  
-                  {/* Terminal Header */}
-                  <div className="flex items-center justify-between border-b border-[var(--border-color)] pb-2 mb-1">
-                    <div className="flex items-center gap-1.5">
-                      <span className="w-2.5 h-2.5 rounded-full bg-[var(--text-muted)]"></span>
-                      <span className="w-2.5 h-2.5 rounded-full bg-[var(--text-muted)]"></span>
-                      <span className="w-2.5 h-2.5 rounded-full bg-[var(--text-muted)]"></span>
-                    </div>
-                    <span className="text-[9px] text-[var(--text-muted)] font-bold uppercase tracking-wider">vk-terminal@mathem</span>
-                  </div>
-
-                  {/* Terminal Body */}
-                  <div className="flex-1 space-y-1.5 text-left overflow-y-auto pt-2">
-                    <p className="text-[var(--text-muted)]"># Initializing vector space index</p>
-                    <p className="text-[var(--text-primary)]">$ pinecone.init_index("math-doubts")</p>
-                    <p className="text-[var(--text-secondary)]">✓ Index linked: 4,500 dimensions loaded</p>
-                    <p className="text-[var(--text-muted)] mt-2"># Invoking Gemini semantic search inference</p>
-                    <p className="text-[var(--text-primary)]">$ gemini.embed_query("linear equations graph")</p>
-                    <p className="text-[var(--text-secondary)]">↳ Embeddings: [0.124, -0.984, 0.443, ...]</p>
-                    <p className="text-[var(--text-muted)] mt-2"># Query response complete (98.4% match)</p>
-                    <p className="text-[var(--text-primary)] font-bold">✓ Doubts resolved for user session 3,104</p>
-                  </div>
-
-                  {/* Terminal Footer */}
-                  <div className="text-[9px] text-[var(--text-muted)] border-t border-[var(--border-color)] pt-2 flex justify-between">
-                    <span>Active connections: 104</span>
-                    <span>Lat: 42ms</span>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        )}
-
         {/* Secondary Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {filteredProjects.map((p) => (
             <div
               key={p.id}
-              className="glass-card rounded-2xl border border-[var(--border-color)] p-6 shadow-sm flex flex-col justify-between hover:border-[var(--text-primary)] transition-all"
+              className="bg-[var(--bg-secondary)] rounded-2xl border border-[var(--border-color)] p-8 shadow-sm flex flex-col justify-between hover:border-[var(--border-hover)] hover:-translate-y-1 transition-all duration-300"
             >
               <div className="space-y-4">
-                <div className="flex items-start justify-between">
+                <div className="flex items-start justify-between mb-6">
                   <div>
-                    <h4 className="font-bold text-base text-[var(--text-primary)] leading-tight">
+                    <h4 className="font-bold text-xl text-[var(--text-primary)] tracking-tight">
                       {p.title}
                     </h4>
-                    <span className="text-[9px] text-[var(--text-primary)] font-bold uppercase tracking-widest mono-font">
-                      {p.category}
+                    <span className="text-[10px] text-[var(--accent-color)] font-bold uppercase tracking-widest mono-font mt-1 block">
+                      {p.category.replace('-', ' ')}
                     </span>
                   </div>
 
@@ -230,10 +185,10 @@ export default function Projects() {
                         href={p.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2 rounded-lg border border-[var(--border-color)] hover:border-[var(--text-primary)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all"
+                        className="p-2.5 rounded-xl border border-[var(--border-color)] hover:border-[var(--text-primary)] hover:bg-[var(--text-primary)] hover:text-[var(--bg-primary)] text-[var(--text-secondary)] transition-all shadow-sm"
                         title="GitHub Code"
                       >
-                        <Github size={13} />
+                        <Github size={14} />
                       </a>
                     )}
                     {p.live && (
@@ -241,33 +196,32 @@ export default function Projects() {
                         href={p.live}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2 rounded-lg border border-[var(--border-color)] hover:border-[var(--text-primary)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all"
+                        className="p-2.5 rounded-xl border border-[var(--border-color)] hover:border-[var(--text-primary)] hover:bg-[var(--text-primary)] hover:text-[var(--bg-primary)] text-[var(--text-secondary)] transition-all shadow-sm"
                         title="Live Site"
                       >
-                        <ExternalLink size={13} />
+                        <ExternalLink size={14} />
                       </a>
                     )}
                   </div>
                 </div>
 
-                <p className="text-xs text-[var(--text-secondary)] leading-relaxed min-h-[48px]">
+                <p className="text-sm text-[var(--text-secondary)] leading-relaxed min-h-[60px] font-medium">
                   {p.desc}
                 </p>
               </div>
 
               {/* Technologies used */}
-              <div className="mt-4 pt-3 border-t border-[var(--border-color)] space-y-3">
-                <div className="flex flex-wrap gap-1">
+              <div className="mt-6 pt-5 border-t border-[var(--border-color)]">
+                <div className="flex flex-wrap gap-2">
                   {p.tech.map((t, idx) => (
                     <span
                       key={idx}
-                      className="text-[9px] bg-[var(--bg-tertiary)] border border-[var(--border-color)] text-[var(--text-secondary)] font-semibold px-2 py-0.5 rounded-md mono-font"
+                      className="text-[10px] bg-[var(--bg-primary)] border border-[var(--border-color)] text-[var(--text-secondary)] font-semibold px-2.5 py-1 rounded-md mono-font shadow-sm"
                     >
                       {t}
                     </span>
                   ))}
                 </div>
-                <ArchitectureDiagram projectId={p.id} />
               </div>
             </div>
           ))}

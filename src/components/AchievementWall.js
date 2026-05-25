@@ -18,7 +18,7 @@ const ACHIEVEMENTS = [
     suffix: "+",
     label: "DSA Problems Solved",
     sub: "LeetCode, GFG, HackerRank",
-    color: "from-green-600 to-emerald-500",
+    color: "from-violet-600 to-violet-500",
     glowColor: "rgba(34,197,94,0.15)",
     delay: 0,
   },
@@ -29,7 +29,7 @@ const ACHIEVEMENTS = [
     suffix: "+",
     label: "Active Platform Users",
     sub: "Mathem Solvex",
-    color: "from-emerald-600 to-green-500",
+    color: "from-violet-600 to-violet-500",
     glowColor: "rgba(16,185,129,0.15)",
     delay: 100,
   },
@@ -40,7 +40,7 @@ const ACHIEVEMENTS = [
     suffix: "K+",
     label: "Search Impressions",
     sub: "Google Search Console",
-    color: "from-green-600 to-amber-500",
+    color: "from-violet-600 to-violet-500",
     glowColor: "rgba(34,197,94,0.15)",
     delay: 200,
   },
@@ -51,7 +51,7 @@ const ACHIEVEMENTS = [
     suffix: "+",
     label: "GitHub Repositories",
     sub: "@vivekducs",
-    color: "from-emerald-600 to-green-600",
+    color: "from-violet-600 to-violet-600",
     glowColor: "rgba(16,185,129,0.15)",
     delay: 300,
   },
@@ -62,7 +62,7 @@ const ACHIEVEMENTS = [
     suffix: "%",
     label: "Top LeetCode Ranking",
     sub: "Rating: 1664",
-    color: "from-amber-600 to-yellow-500",
+    color: "from-violet-600 to-yellow-500",
     glowColor: "rgba(217,119,6,0.15)",
     delay: 0,
   },
@@ -73,7 +73,7 @@ const ACHIEVEMENTS = [
     suffix: "+",
     label: "AI Products Built",
     sub: "Gemini · Pinecone · TensorFlow",
-    color: "from-green-600 to-emerald-500",
+    color: "from-violet-600 to-violet-500",
     glowColor: "rgba(34,197,94,0.15)",
     delay: 100,
   },
@@ -84,7 +84,7 @@ const ACHIEVEMENTS = [
     suffix: "+",
     label: "Years Engineering",
     sub: "Full Stack + AI",
-    color: "from-emerald-600 to-green-500",
+    color: "from-violet-600 to-violet-500",
     glowColor: "rgba(16,185,129,0.15)",
     delay: 200,
   },
@@ -95,7 +95,7 @@ const ACHIEVEMENTS = [
     suffix: "+",
     label: "Production Deployments",
     sub: "Vercel · Docker · CI/CD",
-    color: "from-green-600 to-amber-500",
+    color: "from-violet-600 to-violet-500",
     glowColor: "rgba(34,197,94,0.15)",
     delay: 300,
   },
@@ -198,8 +198,8 @@ function AchievementCard({ ach, index }) {
 export default function AchievementWall() {
   return (
     <section className="relative py-12 border-t border-[var(--border-color)] bg-[var(--bg-primary)]">
-      {/* Glow - Professional green */}
-      <div className="absolute top-20 left-[30%] w-80 h-80 bg-emerald-500 opacity-[0.03] rounded-full blur-[100px] pointer-events-none" />
+      {/* Glow - Professional violet */}
+      <div className="absolute top-20 left-[30%] w-80 h-80 bg-violet-500 opacity-[0.03] rounded-full blur-[100px] pointer-events-none" />
 
       <div className="w-full max-w-6xl z-10 px-4">
         <div className="flex flex-col mb-8 text-left">

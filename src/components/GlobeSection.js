@@ -10,7 +10,7 @@ const GlobeCanvas = dynamic(() => import("./GlobeCanvas"), {
   loading: () => (
     <div className="w-full h-[420px] flex items-center justify-center">
       <div className="text-center space-y-3">
-        <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-tr from-emerald-600 to-green-400 animate-spin opacity-60" />
+        <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-tr from-violet-600 to-violet-400 animate-spin opacity-60" />
         <p className="text-xs text-[var(--text-muted)] mono-font">Loading 3D Globe...</p>
       </div>
     </div>
@@ -23,14 +23,14 @@ const TECH_ICONS = [
   { name: "MongoDB", color: "#47A248", emoji: "🍃" },
   { name: "TensorFlow", color: "#FF6F00", emoji: "🧠" },
   { name: "Docker", color: "#2496ED", emoji: "🐳" },
-  { name: "Gemini", color: "#10b981", emoji: "✨" }, // Made Gemini emerald/green to match the green theme
+  { name: "Gemini", color: "#10b981", emoji: "✨" }, // Made Gemini violet/violet to match the violet theme
 ];
 
 export default function GlobeSection() {
   return (
     <section className="relative py-12 border-t border-[var(--border-color)] overflow-hidden bg-[var(--bg-primary)]">
-      {/* Background glows - Professional green */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-emerald-500 opacity-[0.03] rounded-full blur-[100px] pointer-events-none" />
+      {/* Background glows - Professional violet */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-violet-500 opacity-[0.03] rounded-full blur-[100px] pointer-events-none" />
 
       <div className="w-full max-w-6xl z-10 px-4 mx-auto">
         {/* Section title */}
@@ -54,8 +54,8 @@ export default function GlobeSection() {
             <div className="glass-card rounded-3xl border border-[var(--glass-border)] overflow-hidden shadow-xl relative">
               <GlobeCanvas />
               {/* Location badge */}
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/70 backdrop-blur-md border border-green-500/30 text-white rounded-full px-4 py-2 text-xs font-semibold mono-font flex items-center gap-2 shadow-lg">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/70 backdrop-blur-md border border-violet-500/30 text-white rounded-full px-4 py-2 text-xs font-semibold mono-font flex items-center gap-2 shadow-lg">
+                <span className="w-2 h-2 rounded-full bg-violet-500 animate-ping" />
                 Noida, Uttar Pradesh, India
               </div>
             </div>
@@ -71,7 +71,7 @@ export default function GlobeSection() {
                 {TECH_ICONS.map((tech) => (
                   <div
                     key={tech.name}
-                    className="flex items-center gap-2.5 bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-xl p-2.5 hover:border-green-500/30 hover:scale-[1.02] transition-all group cursor-default"
+                    className="flex items-center gap-2.5 bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-xl p-2.5 hover:border-violet-500/30 hover:scale-[1.02] transition-all group cursor-default"
                   >
                     <span className="text-lg">{tech.emoji}</span>
                     <span
@@ -90,10 +90,10 @@ export default function GlobeSection() {
                 Global Impact
               </h3>
               {[
-                { label: "Search Impressions", value: "330K+", color: "text-amber-600 dark:text-amber-400" },
-                { label: "Active Users", value: "3,000+", color: "text-emerald-600 dark:text-emerald-400" },
-                { label: "GitHub Repos", value: "30+", color: "text-green-600 dark:text-green-400" },
-                { label: "DSA Problems", value: "500+", color: "text-emerald-500" },
+                { label: "Search Impressions", value: "330K+", color: "text-violet-600 dark:text-violet-400" },
+                { label: "Active Users", value: "3,000+", color: "text-violet-600 dark:text-violet-400" },
+                { label: "GitHub Repos", value: "30+", color: "text-violet-600 dark:text-violet-400" },
+                { label: "DSA Problems", value: "500+", color: "text-violet-500" },
               ].map((stat) => (
                 <div key={stat.label} className="flex items-center justify-between">
                   <span className="text-xs text-[var(--text-secondary)] font-medium">{stat.label}</span>

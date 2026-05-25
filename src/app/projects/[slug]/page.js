@@ -27,8 +27,8 @@ export function generateStaticParams() {
   }));
 }
 
-export default function ProjectCaseStudy({ params }) {
-  const { slug } = params;
+export default async function ProjectCaseStudy({ params }) {
+  const { slug } = await params;
   const project = projectsData.find((p) => p.id === slug);
 
   if (!project) {

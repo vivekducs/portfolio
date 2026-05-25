@@ -58,7 +58,7 @@ export default function EngineeringHub() {
       <div className="max-w-6xl mx-auto px-4">
         
         <div className="mb-10 text-center">
-          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-4 bg-gradient-to-r from-[var(--accent-color)] to-emerald-500 text-transparent bg-clip-text">
+          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-4 bg-gradient-to-r from-[var(--accent-color)] to-violet-500 text-transparent bg-clip-text">
             Engineering Ecosystem
           </h2>
           <p className="text-[var(--text-secondary)] text-sm md:text-base max-w-2xl mx-auto">
@@ -125,7 +125,7 @@ export default function EngineeringHub() {
                     <div>
                       <label className="text-[10px] uppercase tracking-wider text-neutral-500 mb-1 block">Endpoint</label>
                       <div className="flex bg-neutral-900 rounded-lg overflow-hidden border border-neutral-800">
-                        <span className="bg-neutral-800 px-3 py-2 text-xs font-bold text-green-400">POST</span>
+                        <span className="bg-neutral-800 px-3 py-2 text-xs font-bold text-violet-400">POST</span>
                         <input type="text" value="https://api.maarula.in/v1/search/semantic" readOnly className="bg-transparent text-xs text-neutral-300 w-full px-3 outline-none" />
                       </div>
                     </div>
@@ -139,7 +139,7 @@ export default function EngineeringHub() {
                     </div>
                     <button 
                       onClick={handleSimulateApi}
-                      className="w-full py-2.5 rounded-lg bg-[var(--accent-color)] text-white text-xs font-bold hover:bg-green-600 transition-colors"
+                      className="w-full py-2.5 rounded-lg bg-[var(--accent-color)] text-white text-xs font-bold hover:bg-violet-600 transition-colors"
                     >
                       {isFetching ? "Sending Request..." : "Send Request ->"}
                     </button>
@@ -153,13 +153,13 @@ export default function EngineeringHub() {
                 </h3>
                 <div className="flex-1 bg-neutral-900 rounded-lg border border-neutral-800 p-4 relative overflow-y-auto">
                   {apiResponse ? (
-                    <pre className="text-xs font-mono text-green-400 animate-in fade-in zoom-in-95 duration-300">{apiResponse}</pre>
+                    <pre className="text-xs font-mono text-violet-400 animate-in fade-in zoom-in-95 duration-300">{apiResponse}</pre>
                   ) : (
                     <p className="text-xs text-neutral-600 font-mono flex items-center justify-center h-full">Waiting for request...</p>
                   )}
                   {apiResponse && (
                     <span className="absolute top-2 right-2 flex items-center gap-1.5 text-[9px] text-neutral-400 bg-neutral-800 px-2 py-1 rounded">
-                      <span className="w-1.5 h-1.5 rounded-full bg-green-500"></span> 200 OK (42ms)
+                      <span className="w-1.5 h-1.5 rounded-full bg-violet-500"></span> 200 OK (42ms)
                     </span>
                   )}
                 </div>
@@ -176,7 +176,7 @@ export default function EngineeringHub() {
                   <h3 className="text-sm font-bold text-[var(--text-primary)] flex items-center gap-2">
                     <Activity size={16} className="text-[var(--accent-color)]" /> Global Request Traffic (24h)
                   </h3>
-                  <span className="px-2 py-1 bg-green-500/10 text-green-400 border border-green-500/20 rounded text-[9px] font-bold">ALL SYSTEMS NORMAL</span>
+                  <span className="px-2 py-1 bg-violet-500/10 text-violet-400 border border-violet-500/20 rounded text-[9px] font-bold">ALL SYSTEMS NORMAL</span>
                 </div>
                 <div className="h-48 w-full">
                   <ResponsiveContainer width="100%" height="100%">
@@ -194,7 +194,7 @@ export default function EngineeringHub() {
 
               <div className="space-y-4">
                 <div className="p-4 bg-[#0a0a0a] border border-neutral-800 rounded-2xl flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-400">
+                  <div className="w-10 h-10 rounded-full bg-violet-500/10 flex items-center justify-center text-violet-400">
                     <GitCommit size={20} />
                   </div>
                   <div>
@@ -205,7 +205,7 @@ export default function EngineeringHub() {
                   </div>
                 </div>
                 <div className="p-4 bg-[#0a0a0a] border border-neutral-800 rounded-2xl flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-full bg-emerald-500/10 flex items-center justify-center text-[var(--accent-color)]">
+                  <div className="w-10 h-10 rounded-full bg-violet-500/10 flex items-center justify-center text-[var(--accent-color)]">
                     <Trophy size={20} />
                   </div>
                   <div>
@@ -220,15 +220,15 @@ export default function EngineeringHub() {
                   <ul className="space-y-2">
                     <li className="flex items-center justify-between text-xs">
                       <span className="text-neutral-300">API Gateway v2</span>
-                      <span className="text-green-400">Online</span>
+                      <span className="text-violet-400">Online</span>
                     </li>
                     <li className="flex items-center justify-between text-xs">
                       <span className="text-neutral-300">Pinecone Vector DB</span>
-                      <span className="text-green-400">Syncing</span>
+                      <span className="text-violet-400">Syncing</span>
                     </li>
                     <li className="flex items-center justify-between text-xs">
                       <span className="text-neutral-300">Gemini Pro API</span>
-                      <span className="text-green-400">Operational</span>
+                      <span className="text-violet-400">Operational</span>
                     </li>
                   </ul>
                 </div>

@@ -17,7 +17,7 @@ export default function RecruiterDashboard({ onClose }) {
         <div className="flex justify-between items-start mb-8 relative z-10">
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span className="w-2.5 h-2.5 rounded-full bg-violet-500 animate-pulse"></span>
               <span className="text-xs font-bold text-[var(--text-primary)] uppercase tracking-widest mono-font">
                 Recruiter Evaluation Mode Active
               </span>

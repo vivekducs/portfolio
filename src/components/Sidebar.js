@@ -169,7 +169,7 @@ export default function Sidebar({ activeSection, onOpenAssistant, isRecruiterMod
             <span className="text-[10px] font-bold text-[var(--text-primary)] mono-font tracking-widest flex items-center gap-1.5">
               <Sparkles size={10} className="text-[var(--text-primary)] animate-pulse" /> VK ASSISTANT
             </span>
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+            <span className="w-2 h-2 rounded-full bg-violet-500 animate-ping"></span>
           </div>
           <div className="flex items-center gap-2">
             <div className="flex gap-[2px] items-center">

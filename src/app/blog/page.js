@@ -33,7 +33,7 @@ export default function BlogList() {
             <p className="text-[var(--text-muted)]">No posts found.</p>
           ) : (
             posts.map((post) => (
-              <article key={post.slug} className="glass-card rounded-2xl border border-[var(--glass-border)] p-6 md:p-8 hover:border-green-500/40 transition-all">
+              <article key={post.slug} className="glass-card rounded-2xl border border-[var(--glass-border)] p-6 md:p-8 hover:border-violet-500/40 transition-all">
                 <Link href={`/blog/${post.slug}`} className="block h-full w-full group">
                   <div className="flex items-center gap-4 text-xs text-[var(--text-muted)] mb-3 font-mono">
                     <span className="flex items-center gap-1.5"><Calendar size={12} /> {post.date}</span>
@@ -50,7 +50,7 @@ export default function BlogList() {
                   <div className="flex items-center justify-between mt-auto">
                     <div className="flex flex-wrap gap-2">
                       {post.tags.map((tag) => (
-                        <span key={tag} className="text-[10px] font-bold px-2 py-1 bg-green-500/10 text-[var(--accent-color)] rounded-md uppercase tracking-wide">
+                        <span key={tag} className="text-[10px] font-bold px-2 py-1 bg-violet-500/10 text-[var(--accent-color)] rounded-md uppercase tracking-wide">
                           <Tag size={10} className="mr-1 inline-block" />
                           {tag}
                         </span>

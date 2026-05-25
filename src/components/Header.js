@@ -1,6 +1,6 @@
 "use client";
 
-import { Sun, Moon, Sparkles, Home, Code2, Briefcase, Mail } from "lucide-react";
+import { Sun, Moon, Sparkles, Home, Code2, BookOpen, Briefcase, Mail } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -10,7 +10,9 @@ export default function Header({ activeSection, onOpenAssistant, isRecruiterMode
   const router = useRouter();
 
   const handleNavigation = (item) => {
-    if (pathname !== "/") {
+    if (item.type === "link") {
+      router.push(item.path);
+    } else if (pathname !== "/") {
       router.push(`/#${item.id}`);
     } else {
       const el = document.getElementById(item.id);
@@ -68,10 +70,10 @@ export default function Header({ activeSection, onOpenAssistant, isRecruiterMode
         <button
           onClick={() => handleNavigation({ id: "home" })}
           className={`flex flex-col items-center gap-0.5 px-3 py-1 rounded-xl transition-all cursor-pointer ${
-            activeSection === "home" ? "text-[var(--accent-color)] scale-105" : "text-[var(--text-muted)]"
+            activeSection === "home" && pathname === "/" ? "text-[var(--accent-color)] scale-105" : "text-[var(--text-muted)]"
           }`}
         >
-          <Home size={16} className={activeSection === "home" ? "stroke-[2.5px]" : "stroke-[2px]"} />
+          <Home size={16} className={activeSection === "home" && pathname === "/" ? "stroke-[2.5px]" : "stroke-[2px]"} />
           <span className="text-[9px] font-bold tracking-tight">Home</span>
         </button>
 
@@ -79,11 +81,22 @@ export default function Header({ activeSection, onOpenAssistant, isRecruiterMode
         <button
           onClick={() => handleNavigation({ id: "skills" })}
           className={`flex flex-col items-center gap-0.5 px-3 py-1 rounded-xl transition-all cursor-pointer ${
-            activeSection === "skills" ? "text-[var(--accent-color)] scale-105" : "text-[var(--text-muted)]"
+            activeSection === "skills" && pathname === "/" ? "text-[var(--accent-color)] scale-105" : "text-[var(--text-muted)]"
           }`}
         >
-          <Code2 size={16} className={activeSection === "skills" ? "stroke-[2.5px]" : "stroke-[2px]"} />
+          <Code2 size={16} className={activeSection === "skills" && pathname === "/" ? "stroke-[2.5px]" : "stroke-[2px]"} />
           <span className="text-[9px] font-bold tracking-tight">Skills</span>
+        </button>
+
+        {/* Blog */}
+        <button
+          onClick={() => handleNavigation({ type: "link", path: "/blog" })}
+          className={`flex flex-col items-center gap-0.5 px-3 py-1 rounded-xl transition-all cursor-pointer ${
+            pathname.startsWith("/blog") ? "text-[var(--accent-color)] scale-105" : "text-[var(--text-muted)]"
+          }`}
+        >
+          <BookOpen size={16} className={pathname.startsWith("/blog") ? "stroke-[2.5px]" : "stroke-[2px]"} />
+          <span className="text-[9px] font-bold tracking-tight">Blog</span>
         </button>
 
         {/* AI Bot Center Floating button */}
@@ -100,21 +113,21 @@ export default function Header({ activeSection, onOpenAssistant, isRecruiterMode
         <button
           onClick={() => handleNavigation({ id: "projects" })}
           className={`flex flex-col items-center gap-0.5 px-3 py-1 rounded-xl transition-all cursor-pointer ${
-            activeSection === "projects" ? "text-[var(--accent-color)] scale-105" : "text-[var(--text-muted)]"
+            activeSection === "projects" && pathname === "/" ? "text-[var(--accent-color)] scale-105" : "text-[var(--text-muted)]"
           }`}
         >
-          <Briefcase size={16} className={activeSection === "projects" ? "stroke-[2.5px]" : "stroke-[2px]"} />
-          <span className="text-[9px] font-bold tracking-tight">Projects</span>
+          <Briefcase size={16} className={activeSection === "projects" && pathname === "/" ? "stroke-[2.5px]" : "stroke-[2px]"} />
+          <span className="text-[9px] font-bold tracking-tight">Work</span>
         </button>
 
         {/* Contact */}
         <button
           onClick={() => handleNavigation({ id: "contact" })}
           className={`flex flex-col items-center gap-0.5 px-3 py-1 rounded-xl transition-all cursor-pointer ${
-            activeSection === "contact" ? "text-[var(--accent-color)] scale-105" : "text-[var(--text-muted)]"
+            activeSection === "contact" && pathname === "/" ? "text-[var(--accent-color)] scale-105" : "text-[var(--text-muted)]"
           }`}
         >
-          <Mail size={16} className={activeSection === "contact" ? "stroke-[2.5px]" : "stroke-[2px]"} />
+          <Mail size={16} className={activeSection === "contact" && pathname === "/" ? "stroke-[2.5px]" : "stroke-[2px]"} />
           <span className="text-[9px] font-bold tracking-tight">Contact</span>
         </button>
       </nav>

@@ -13,7 +13,7 @@ export default function Skills() {
     {
       title: "Backend Engineering",
       icon: Server,
-      themeColor: "emerald",
+      themeColor: "violet",
       skills: ["Node.js", "Express.js", "REST APIs", "Microservices"],
     },
     {
@@ -25,13 +25,13 @@ export default function Skills() {
     {
       title: "Programming Languages",
       icon: Code2,
-      themeColor: "amber",
+      themeColor: "violet",
       skills: ["C++", "Python", "JavaScript (ES6+)"],
     },
     {
       title: "Artificial Intelligence",
       icon: Cpu,
-      themeColor: "emerald",
+      themeColor: "violet",
       skills: ["Gemini API", "Pinecone DB", "TensorFlow", "CNNs"],
     },
     {
@@ -54,25 +54,25 @@ export default function Skills() {
       icon: "text-teal-600 dark:text-teal-400",
       iconBg: "bg-teal-50 dark:bg-teal-950/30"
     },
-    emerald: {
-      borderHover: "hover:border-emerald-500/40 dark:hover:border-emerald-400/40",
-      bgGlow: "bg-emerald-500/[0.01] hover:bg-emerald-500/[0.03] dark:bg-emerald-950/5 dark:hover:bg-emerald-950/20",
-      accentGlow: "bg-emerald-500/5 dark:bg-emerald-400/5",
-      badgeBg: "bg-emerald-50/50 dark:bg-emerald-500/10 group-hover:bg-emerald-500/20",
-      badgeText: "text-emerald-700 dark:text-emerald-200 group-hover:text-emerald-800 dark:group-hover:text-emerald-100",
-      badgeBorder: "border-emerald-100/60 dark:border-emerald-500/30 group-hover:border-emerald-500/40",
-      icon: "text-emerald-600 dark:text-emerald-400",
-      iconBg: "bg-emerald-50 dark:bg-emerald-950/30"
+    violet: {
+      borderHover: "hover:border-violet-500/40 dark:hover:border-violet-400/40",
+      bgGlow: "bg-violet-500/[0.01] hover:bg-violet-500/[0.03] dark:bg-violet-950/5 dark:hover:bg-violet-950/20",
+      accentGlow: "bg-violet-500/5 dark:bg-violet-400/5",
+      badgeBg: "bg-violet-50/50 dark:bg-violet-500/10 group-hover:bg-violet-500/20",
+      badgeText: "text-violet-700 dark:text-violet-200 group-hover:text-violet-800 dark:group-hover:text-violet-100",
+      badgeBorder: "border-violet-100/60 dark:border-violet-500/30 group-hover:border-violet-500/40",
+      icon: "text-violet-600 dark:text-violet-400",
+      iconBg: "bg-violet-50 dark:bg-violet-950/30"
     },
-    amber: {
-      borderHover: "hover:border-amber-500/40 dark:hover:border-amber-400/40",
-      bgGlow: "bg-amber-500/[0.01] hover:bg-amber-500/[0.03] dark:bg-amber-950/5 dark:hover:bg-amber-950/20",
-      accentGlow: "bg-amber-500/5 dark:bg-amber-400/5",
-      badgeBg: "bg-amber-50/50 dark:bg-amber-500/10 group-hover:bg-amber-500/20",
-      badgeText: "text-amber-700 dark:text-amber-200 group-hover:text-amber-800 dark:group-hover:text-amber-100",
-      badgeBorder: "border-amber-100/60 dark:border-amber-500/30 group-hover:border-amber-500/40",
-      icon: "text-amber-600 dark:text-amber-400",
-      iconBg: "bg-amber-50 dark:bg-amber-950/30"
+    violet: {
+      borderHover: "hover:border-violet-500/40 dark:hover:border-violet-400/40",
+      bgGlow: "bg-violet-500/[0.01] hover:bg-violet-500/[0.03] dark:bg-violet-950/5 dark:hover:bg-violet-950/20",
+      accentGlow: "bg-violet-500/5 dark:bg-violet-400/5",
+      badgeBg: "bg-violet-50/50 dark:bg-violet-500/10 group-hover:bg-violet-500/20",
+      badgeText: "text-violet-700 dark:text-violet-200 group-hover:text-violet-800 dark:group-hover:text-violet-100",
+      badgeBorder: "border-violet-100/60 dark:border-violet-500/30 group-hover:border-violet-500/40",
+      icon: "text-violet-600 dark:text-violet-400",
+      iconBg: "bg-violet-50 dark:bg-violet-950/30"
     },
     copper: {
       borderHover: "hover:border-orange-500/40 dark:hover:border-orange-400/40",

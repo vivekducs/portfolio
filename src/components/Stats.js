@@ -296,7 +296,7 @@ export default function Stats() {
                   <p className="text-xs text-[var(--text-muted)] font-medium mb-1">Problems Solved</p>
                   <p className="text-2xl font-bold text-[var(--text-primary)]"><AnimatedCounter target={totalSolved} /></p>
                   <div className="flex items-center gap-2 mt-2 text-xs font-medium">
-                    <span className="text-emerald-500">E:{easySolved}</span>
+                    <span className="text-green-500">E:{easySolved}</span>
                     <span className="text-amber-500">M:{mediumSolved}</span>
                     <span className="text-rose-500">H:{hardSolved}</span>
                   </div>

@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --color-accent-primary: #22c55e;
-  --color-accent-hover: #16a34a;
+  --color-accent-primary: #8B5CF6;
+  --color-accent-hover: #C2B08D;
   
   --font-geist-sans: var(--font-geist-sans);
   --font-geist-mono: var(--font-geist-mono);
@@ -10,35 +10,35 @@
 
 :root {
   --bg-primary: #ffffff;
-  --bg-secondary: #fafafa;
-  --bg-tertiary: #eaeaea;
-  --text-primary: #000000;
-  --text-secondary: #555555;
-  --text-muted: #777777;
-  --border-color: #eaeaea;
-  --border-hover: #16a34a;
-  --accent-color: #16a34a;
-  --accent-light: #f0fdf4;
-  --glass-bg: rgba(255, 255, 255, 0.8);
-  --glass-border: rgba(0, 0, 0, 0.08);
-  --selection-bg: #16a34a;
-  --selection-text: #ffffff;
+  --bg-secondary: #f9f9f9;
+  --bg-tertiary: #f0f0f0;
+  --text-primary: #111111;
+  --text-secondary: #595959;
+  --text-muted: #8c8c8c;
+  --border-color: #e5e5e5;
+  --border-hover: #8B5CF6;
+  --accent-color: #8B5CF6;
+  --accent-light: #FBF9F6;
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(0, 0, 0, 0.05);
+  --selection-bg: #8B5CF6;
+  --selection-text: #000000;
 }
 
 [data-theme="dark"] {
-  --bg-primary: #000000;
-  --bg-secondary: #0a0a0a;
-  --bg-tertiary: #161616;
-  --text-primary: #ffffff;
-  --text-secondary: #a0a0a0;
-  --text-muted: #666666;
-  --border-color: #222222;
-  --border-hover: #22c55e;
-  --accent-color: #22c55e;
-  --accent-light: #064e3b;
-  --glass-bg: rgba(0, 0, 0, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --selection-bg: #22c55e;
+  --bg-primary: #0A0A0A;
+  --bg-secondary: #121212;
+  --bg-tertiary: #1A1A1A;
+  --text-primary: #F5F5F5;
+  --text-secondary: #A3A3A3;
+  --text-muted: #737373;
+  --border-color: #262626;
+  --border-hover: #8B5CF6;
+  --accent-color: #8B5CF6;
+  --accent-light: #2C2A24;
+  --glass-bg: rgba(10, 10, 10, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.06);
+  --selection-bg: #8B5CF6;
   --selection-text: #000000;
 }
 

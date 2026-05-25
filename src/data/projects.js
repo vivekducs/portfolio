@@ -4,7 +4,7 @@ export const projectsData = [
     title: "Mathem Solvex",
     category: "ai-ml",
     featured: true,
-    desc: "AI-powered educational platform designed to resolve mathematical doubts dynamically. Integrates dense vector lookup, natural language queries, and complete student tracking dashboards.",
+    desc: "Architected an AI-powered educational platform that successfully scaled to support over 3,000 active students. By implementing advanced search algorithms, the system delivers instant, step-by-step doubt resolution, driving significant user engagement and organic growth.",
     highlights: [
       "3,000+ active student users",
       "330K+ organic Google Search Impressions",
@@ -49,7 +49,7 @@ export const projectsData = [
     title: "Palora",
     category: "ai-ml",
     featured: false,
-    desc: "AI-powered emotional wellness and mental health counseling platform. Features sentiment-aware journaling prompts, real-time stress analysis, and supportive wellness guidance.",
+    desc: "Developed a secure, privacy-first emotional wellness platform utilizing AI to analyze user sentiment in real-time. Designed to handle high-traffic spikes seamlessly while providing users with actionable, stress-reducing guidance.",
     tech: ["Node.js", "Express.js", "MongoDB", "Gemini API"],
     github: "https://github.com/vivekducs/Palora-backend",
     engineering: {
@@ -76,7 +76,7 @@ export const projectsData = [
     title: "ObserveFlow",
     category: "systems",
     featured: false,
-    desc: "Real-time high-throughput log aggregation and cluster monitoring dashboard. Collects distributed system logs, parses errors, and fires alerts based on traffic thresholds.",
+    desc: "Engineered a high-throughput monitoring system that aggregates distributed logs in real-time. By implementing automated alerting and efficient data storage, the platform drastically reduced incident response times for production environments.",
     tech: ["Go", "Docker", "Prometheus", "Grafana", "WebSockets"],
     github: "https://github.com/vivekducs/ObserveFlow",
     engineering: {
@@ -103,7 +103,7 @@ export const projectsData = [
     title: "Rank Predictor",
     category: "fullstack",
     featured: false,
-    desc: "Predictive ranking calculator and college matching system tailored for national NIMCET and CUET Computer Science aspirants across India.",
+    desc: "Designed and deployed a highly responsive ranking calculator that supports thousands of concurrent users during peak traffic events, providing critical, real-time admission predictions for students.",
     tech: ["HTML", "CSS", "JavaScript", "React.js"],
     live: "https://rankpredictor.maarula.in/",
     github: "https://github.com/vivekducs/Rank-Predictor",
@@ -124,7 +124,7 @@ export const projectsData = [
     title: "Garbage Classification",
     category: "ai-ml",
     featured: false,
-    desc: "Deep learning waste categorization system leveraging Convolutional Neural Networks (CNN) to automatically sort recyclables from general waste.",
+    desc: "Built a deep learning classification system optimized for edge devices. By automating the categorization of recyclables, the project offers a scalable solution to improve efficiency in municipal waste management.",
     tech: ["Python", "TensorFlow", "CNN", "OpenCV"],
     github: "https://github.com/vivekducs/garbage-classification",
     engineering: {
