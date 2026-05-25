@@ -87,10 +87,10 @@ export default function VKAssistantPopup({ isOpen, onClose }) {
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between px-5 py-2 border-t border-[var(--border-color)] shrink-0">
+        <div className="hidden sm:flex items-center justify-between px-5 py-2 border-t border-[var(--border-color)] shrink-0">
           <span className="text-[9px] text-[var(--text-muted)] mono-font flex items-center gap-1">
             <Cpu size={9} />
-            Powered by VK AI · Gemini 1.5 Flash
+            Powered by VK AI
           </span>
           <span className="text-[9px] text-[var(--text-primary)] font-semibold mono-font">● Online</span>
         </div>

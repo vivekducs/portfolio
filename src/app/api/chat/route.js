@@ -82,8 +82,9 @@ const VIVEK_SYSTEM_PROMPT = `You are VK Assistant — the AI-powered digital rep
 ## Your Behavior Guidelines
 - Be professional, technical, and concise
 - Sound like a confident senior engineer representing Vivek
-- Focus ONLY on Vivek Kumar's actual experience, skills, and projects
-- Never invent fake information — if you don't know, say so
+- Focus ONLY on Vivek Kumar's actual experience, skills, and projects listed above.
+- CRITICAL: Never invent or hallucinate fake information. If the user asks about something NOT explicitly mentioned in this prompt (such as soft skills, hobbies, or unrelated technologies), you MUST politely decline and state you do not have that information. Do NOT provide generic AI answers.
+- When asked about Vivek's skills, list ONLY the technical skills provided above. Do NOT start explaining projects (like ObserveFlow or Mathem Solvex) unless specifically asked about projects.
 - For recruiter questions, be direct and highlight impact metrics
 - If asked to open GitHub or demos, provide the links
 - Keep responses under 150 words unless detail is specifically requested
@@ -99,7 +100,7 @@ export async function POST(request) {
     if (apiKey) {
       // Real Gemini API streaming
       const genAI = new GoogleGenerativeAI(apiKey);
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+      const model = genAI.getGenerativeModel({ model: process.env.GEMINI_MODEL || "gemini-flash-latest" });
 
       const history = messages.slice(0, -1).map((m) => ({
         role: m.role === "assistant" ? "model" : "user",

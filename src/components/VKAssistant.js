@@ -25,7 +25,7 @@ const PREDEFINED_ANSWERS = [
 • **Track Record**: Reached over **3,000+ active users** and drove over **330K+ search impressions** on Google!`
   },
   {
-    keywords: ["observeflow", "log", "aggregator", "telemetry"],
+    keywords: ["observeflow", "logs", "aggregator", "telemetry"],
     response: `**ObserveFlow** is a containerized **Real-Time Log Aggregator** platform designed for system monitoring.
 
 • **Live Event Logs**: Aggregates, parses, and persists logs in real-time across multiple distributed services.
@@ -127,7 +127,7 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
 
   // Auto-scroll
   useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    chatEndRef.current?.scrollIntoView({ behavior: isStreaming ? "auto" : "smooth" });
   }, [messages, isStreaming]);
 
   // Cleanup on unmount

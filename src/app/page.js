@@ -155,17 +155,7 @@ export default function Home() {
 
         </div>
 
-        {/* Floating AI Button — Mobile */}
-        <button
-          onClick={() => setIsAssistantOpen(true)}
-          className="lg:hidden fixed bottom-6 right-6 z-50 p-4 rounded-full text-white shadow-xl shadow-green-500/20 cursor-pointer flex items-center justify-center group"
-          style={{ background: "var(--accent-color)" }}
-          title="Open VK Assistant AI"
-        >
-          <Bot size={20} className="group-hover:scale-110 transition-transform" />
-          {/* Pulse rings */}
-          <span className="absolute inset-0 rounded-full animate-ping bg-green-500 opacity-20" />
-        </button>
+
 
         {/* Full AI Assistant Modal */}
         <VKAssistantPopup
