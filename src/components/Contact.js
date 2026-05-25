@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Mail, Send, MessageSquareCode, FileText, CheckCircle2, CalendarDays } from "lucide-react";
 import { trackEvent, trackCTA } from "@/lib/analytics";
 
@@ -62,6 +62,29 @@ export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [mailtoLink, setMailtoLink] = useState("mailto:vivekducs@gmail.com");
+
+  useEffect(() => {
+    const currentDate = new Date().toLocaleDateString("en-IN", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+
+    const body = `Hi Vivek,
+
+I would like to discuss a Software Development Engineer opportunity with you.
+
+Are you available for an interview on or after ${currentDate}?
+
+Best regards,`;
+
+    setMailtoLink(
+      `mailto:vivekducs@gmail.com?subject=${encodeURIComponent(
+        "SDE Opportunity Discussion"
+      )}&body=${encodeURIComponent(body)}`
+    );
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -139,7 +162,7 @@ export default function Contact() {
               
               {/* Email */}
               <a
-                href="mailto:vivekducs@gmail.com"
+                href={mailtoLink}
                 className="flex items-center gap-4 p-4 glass-card rounded-2xl border border-[var(--glass-border)] hover:border-[var(--text-primary)] shadow-sm transition-all group"
               >
                 <div className="w-10 h-10 rounded-xl bg-[var(--bg-tertiary)] border border-[var(--border-color)] text-[var(--text-primary)] flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
@@ -294,16 +317,26 @@ export default function Contact() {
                   </div>
 
                   {/* Submit Button */}
-                  <button
-                    type="submit"
-                    suppressHydrationWarning
-                    disabled={isSubmitting}
-                    className="w-full py-3.5 bg-[var(--text-primary)] text-[var(--bg-primary)] hover:bg-[var(--text-secondary)] font-bold text-sm rounded-xl shadow-sm flex items-center justify-center gap-2 transition-all cursor-pointer disabled:opacity-50 hover:translate-y-[-1px]"
-                    aria-label="Send secure message"
-                  >
-                    <span>{isSubmitting ? "Transmitting..." : "Send Secure Message"}</span>
-                    <Send size={13} className={isSubmitting ? "animate-ping" : ""} />
-                  </button>
+                  <div className="flex flex-col gap-3 pt-2">
+                    <button
+                      type="submit"
+                      suppressHydrationWarning
+                      disabled={isSubmitting}
+                      className="w-full py-3.5 bg-[var(--text-primary)] text-[var(--bg-primary)] hover:bg-[var(--text-secondary)] font-bold text-sm rounded-xl shadow-sm flex items-center justify-center gap-2 transition-all cursor-pointer disabled:opacity-50 hover:translate-y-[-1px]"
+                      aria-label="Send secure message"
+                    >
+                      <span>{isSubmitting ? "Transmitting..." : "Send Secure Message"}</span>
+                      <Send size={13} className={isSubmitting ? "animate-ping" : ""} />
+                    </button>
+                    
+                    <a
+                      href={mailtoLink}
+                      className="w-full py-3 bg-transparent border border-[var(--border-color)] text-[var(--text-primary)] hover:bg-[var(--bg-tertiary)] hover:border-[var(--text-primary)] font-bold text-xs rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer shadow-sm"
+                    >
+                      <span>Open Pre-filled Email via Client</span>
+                      <Mail size={14} />
+                    </a>
+                  </div>
                 </form>
               )}
 
