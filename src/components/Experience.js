@@ -5,7 +5,20 @@ import { motion } from "framer-motion";
 
 export default function Experience() {
   const experiences = [
-
+    {
+      id: 1,
+      role: "SDE Intern",
+      company: "SafeQbit Technologies Pvt Ltd",
+      period: "Feb 2026 – May 2026",
+      location: "Remote / Hybrid",
+      highlights: [
+        "Collaborated closely with company founders and the CTO to architect and deploy highly responsive client-facing modules.",
+        "Built and optimized modular frontend systems, securing lightning-fast page loading speeds.",
+        "Streamlined automated production build and release deployment scripts on Vercel.",
+        "Engineered scalable, cross-browser compatible UI elements following rigorous design guidelines."
+      ],
+      tech: ["React.js", "Tailwind CSS", "Vercel", "UI Engineering"]
+    },
     {
       id: 2,
       role: "Trainee Engineer",
@@ -24,9 +37,9 @@ export default function Experience() {
   return (
     <section id="experience" className="relative py-12 border-t border-[var(--border-color)]">
       <div className="w-full max-w-6xl z-10 px-4">
-        
+
         {/* Title */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
@@ -44,7 +57,7 @@ export default function Experience() {
         {/* Timeline container */}
         <div className="relative max-w-3xl mx-auto pl-6 md:pl-8 text-left space-y-12 py-2">
           {/* Timeline continuous line animation */}
-          <motion.div 
+          <motion.div
             initial={{ height: 0 }}
             whileInView={{ height: "100%" }}
             viewport={{ once: true }}
@@ -53,20 +66,20 @@ export default function Experience() {
           />
 
           {experiences.map((exp, i) => (
-            <motion.div 
-              key={exp.id} 
+            <motion.div
+              key={exp.id}
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: i * 0.2 }}
               className="relative group"
             >
-              
+
               {/* Timeline marker node dot */}
               <div className="absolute -left-[31px] md:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-[var(--bg-secondary)] border-4 border-[var(--text-primary)] group-hover:scale-125 transition-all duration-300 shadow-sm z-10" />
 
               <div className="glass-card rounded-2xl border border-[var(--glass-border)] p-6 shadow-sm hover:border-[var(--text-primary)] transition-all duration-300 relative overflow-hidden">
-                
+
                 {/* Header elements */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5 relative z-10">
                   <div>
