@@ -19,11 +19,6 @@ import AchievementWall from "@/components/AchievementWall";
 import AIBootLoader from "@/components/AIBootLoader";
 import { MessageSquare, Sparkles, Bot } from "lucide-react";
 
-// Lazy load heavy 3D globe section
-const GlobeSection = dynamic(() => import("@/components/GlobeSection"), {
-  ssr: false,
-  loading: () => null,
-});
 
 // Lazy load heavy React Flow / Recharts section
 const EngineeringHub = dynamic(() => import("@/components/EngineeringHub"), {
@@ -83,10 +78,10 @@ export default function Home() {
       )}
 
       <div
-        className="min-h-screen flex flex-col lg:flex-row bg-[var(--bg-primary)] transition-colors duration-400 select-none"
+        className="min-h-screen flex flex-col bg-[var(--bg-primary)] transition-colors duration-400 select-none relative"
         style={{ opacity: bootDone ? 1 : 0, transition: "opacity 0.5s ease" }}
       >
-        {/* Desktop Sidebar Panel */}
+        {/* Global Navigation */}
         <Sidebar
           activeSection={activeSection}
           onOpenAssistant={() => setIsAssistantOpen(true)}
@@ -95,7 +90,7 @@ export default function Home() {
         />
 
         {/* Main Workspace Frame */}
-        <div className="flex-1 flex flex-col overflow-x-hidden min-h-screen">
+        <div className="flex-1 flex flex-col overflow-x-hidden min-h-screen w-full">
 
           {/* Sticky Mobile/Tablet Header */}
           <Header
@@ -107,15 +102,14 @@ export default function Home() {
 
           {/* Dashboard Content Grid */}
           <div className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start relative mt-16">
 
-              <main className="lg:col-span-8 space-y-16 pb-20 lg:pb-0">
+              <main className="lg:col-span-8 space-y-24 pb-20 lg:pb-0">
                 {isRecruiterMode && (
                   <RecruiterDashboard onClose={() => setIsRecruiterMode(false)} />
                 )}
                 <Hero onOpenAssistant={() => setIsAssistantOpen(true)} />
                 <About />
-                <GlobeSection />
                 <Projects />
                 <Skills />
                 <EngineeringHub />
@@ -144,7 +138,7 @@ export default function Home() {
                     <Sparkles size={11} /> Quick Recruitment Spec
                   </h4>
                   <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed font-semibold">
-                    Vivek Kumar has a clean SDE intern record working on Vercel architectures, maintains a 1664 LeetCode rating, and specializes in Express/Node backend APIs. Request his full transcripts inside the Contact section!
+                    Vivek Kumar is a recent MCA graduate actively looking for engineering roles. He maintains a 1664 LeetCode rating, specializes in Express/Node backend APIs, and builds premium Full Stack apps. Request his full transcripts inside the Contact section!
                   </p>
                 </div>
 

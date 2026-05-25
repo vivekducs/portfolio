@@ -121,19 +121,7 @@ export default function RecruiterDashboard({ onClose }) {
               </div>
             </div>
 
-            <div className="bg-[var(--bg-primary)]/50 border border-[var(--border-color)] rounded-2xl p-5">
-              <h3 className="text-sm font-bold text-[var(--text-primary)] mb-3 flex items-center gap-2">
-                <Briefcase size={16} className="text-[var(--text-secondary)]" />
-                Current Role
-              </h3>
-              <div className="flex items-start justify-between">
-                <div>
-                  <h4 className="text-xs font-bold text-[var(--text-primary)]">Backend Intern</h4>
-                  <p className="text-[10px] text-[var(--text-secondary)]">Vercel & Next.js Ecosystem</p>
-                </div>
-                <span className="text-[10px] font-bold text-[var(--text-primary)] mono-font">Present</span>
-              </div>
-            </div>
+
           </div>
 
           {/* Column 3: Top Projects */}

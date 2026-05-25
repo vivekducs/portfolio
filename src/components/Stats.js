@@ -193,7 +193,7 @@ export default function Stats() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 text-left">
           {/* GitHub Panel */}
-          <div className="bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-xl p-6 flex flex-col justify-between hover:shadow-sm transition-shadow duration-300">
+          <div className="glass-card rounded-3xl p-6 flex flex-col justify-between hover:shadow-lg transition-all duration-500 hover:-translate-y-1">
             <div>
               <div className="flex items-center justify-between mb-6 pb-4 border-b border-[var(--border-color)]">
                 <h3 className="text-lg font-bold text-[var(--text-primary)] flex items-center gap-2">
@@ -271,7 +271,7 @@ export default function Stats() {
           </div>
 
           {/* LeetCode Panel */}
-          <div className="bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-xl p-6 flex flex-col justify-between hover:shadow-sm transition-shadow duration-300">
+          <div className="glass-card rounded-3xl p-6 flex flex-col justify-between hover:shadow-lg transition-all duration-500 hover:-translate-y-1">
             <div>
               <div className="flex items-center justify-between mb-6 pb-4 border-b border-[var(--border-color)]">
                 <h3 className="text-lg font-bold text-[var(--text-primary)] flex items-center gap-2">

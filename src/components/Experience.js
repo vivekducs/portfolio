@@ -5,20 +5,7 @@ import { motion } from "framer-motion";
 
 export default function Experience() {
   const experiences = [
-    {
-      id: 1,
-      role: "SDE Intern",
-      company: "SafeQbit Technologies Pvt Ltd",
-      period: "Feb 2026 – May 2026",
-      location: "Remote / Hybrid",
-      highlights: [
-        "Collaborated closely with company founders and the CTO to architect and deploy highly responsive client-facing modules.",
-        "Built and optimized modular frontend systems, securing lightning-fast page loading speeds.",
-        "Streamlined automated production build and release deployment scripts on Vercel.",
-        "Engineered scalable, cross-browser compatible UI elements following rigorous design guidelines."
-      ],
-      tech: ["React.js", "Tailwind CSS", "Vercel", "UI Engineering"]
-    },
+
     {
       id: 2,
       role: "Trainee Engineer",

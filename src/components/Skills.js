@@ -8,37 +8,43 @@ export default function Skills() {
       title: "Frontend Engineering",
       icon: Monitor,
       themeColor: "teal",
-      skills: ["React.js", "Tailwind CSS", "HTML5", "CSS3"],
+      skills: ["React.js", "Tailwind CSS", "HTML5", "CSS3", "Next.js (App Router)", "Framer Motion"],
+      bentoClass: "md:col-span-2 lg:col-span-2"
     },
     {
-      title: "Backend Engineering",
+      title: "Backend Architecture",
       icon: Server,
       themeColor: "violet",
-      skills: ["Node.js", "Express.js", "REST APIs", "Microservices"],
+      skills: ["Node.js", "Express.js", "REST APIs", "Microservices", "GraphQL"],
+      bentoClass: "md:row-span-2 lg:row-span-2"
     },
     {
       title: "Databases & Indexing",
       icon: Database,
       themeColor: "copper",
-      skills: ["MongoDB", "MySQL", "Vector Stores"],
+      skills: ["MongoDB", "MySQL", "Vector Stores (Pinecone)", "PostgreSQL", "Redis"],
+      bentoClass: "md:col-span-1 lg:col-span-1"
     },
     {
       title: "Programming Languages",
       icon: Code2,
       themeColor: "violet",
-      skills: ["C++", "Python", "JavaScript (ES6+)"],
+      skills: ["C++", "Python", "JavaScript (ES6+)", "TypeScript"],
+      bentoClass: "md:col-span-1 lg:col-span-1"
     },
     {
       title: "Artificial Intelligence",
       icon: Cpu,
       themeColor: "violet",
-      skills: ["Gemini API", "Pinecone DB", "TensorFlow", "CNNs"],
+      skills: ["Gemini API", "Pinecone DB", "TensorFlow", "CNNs", "LLM Integration", "RAG Systems"],
+      bentoClass: "md:col-span-2 lg:col-span-2"
     },
     {
       title: "Tools & Ecosystem",
       icon: Hammer,
       themeColor: "copper",
-      skills: ["Docker", "Git / GitHub", "Vercel", "Postman", "VS Code", "Claude / Codex"],
+      skills: ["Docker", "Git / GitHub", "Vercel", "Postman", "VS Code", "Linux", "AWS Basics"],
+      bentoClass: "md:col-span-1 lg:col-span-3"
     },
   ];
 
@@ -111,7 +117,7 @@ export default function Skills() {
             return (
               <div
                 key={idx}
-                className={`glass-card rounded-2xl border border-[var(--border-color)] p-5 text-left relative overflow-hidden flex flex-col justify-between shadow-sm transition-all duration-300 group hover:scale-[1.02] hover:-translate-y-0.5 ${theme.borderHover} ${theme.bgGlow}`}
+                className={`glass-card rounded-3xl border border-[var(--glass-border)] p-6 text-left relative overflow-hidden flex flex-col justify-between shadow-sm transition-all duration-500 group hover:-translate-y-1 ${theme.borderHover} ${theme.bgGlow} ${group.bentoClass}`}
               >
                 {/* Background decorative spot */}
                 <div className={`absolute -top-10 -right-10 w-24 h-24 rounded-full blur-2xl pointer-events-none transition-transform duration-500 group-hover:scale-125 ${theme.accentGlow}`}></div>
@@ -128,11 +134,11 @@ export default function Skills() {
                   </div>
 
                   {/* Skills Grid */}
-                  <div className="grid grid-cols-2 gap-2 pt-2">
+                  <div className="flex flex-wrap gap-2 pt-2">
                     {group.skills.map((skill, sIdx) => (
                       <div
                         key={sIdx}
-                        className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-xs font-semibold mono-font transition-all duration-200 select-none ${theme.badgeBg} ${theme.badgeBorder} ${theme.badgeText}`}
+                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-semibold mono-font transition-all duration-200 select-none ${theme.badgeBg} ${theme.badgeBorder} ${theme.badgeText}`}
                       >
                         <CheckCircle2 size={11} className={`${theme.icon} shrink-0`} />
                         <span className="truncate">{skill}</span>
