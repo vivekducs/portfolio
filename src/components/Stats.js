@@ -67,10 +67,10 @@ function Heatmap({ data, tooltipPrefix = "contributions" }) {
 
   const getStyle = (lvl) => {
     if (lvl === 0) return "bg-neutral-100 dark:bg-neutral-900 border border-neutral-200/50 dark:border-neutral-800/60"; 
-    if (lvl === 1) return "bg-emerald-500/20 dark:bg-emerald-400/15 border border-emerald-500/10";
-    if (lvl === 2) return "bg-emerald-500/45 dark:bg-emerald-400/35 border border-emerald-500/10";
-    if (lvl === 3) return "bg-emerald-500/75 dark:bg-emerald-400/65 border border-emerald-500/10";
-    return "bg-emerald-500 dark:bg-emerald-400 border border-emerald-400/60 shadow-[0_0_8px_rgba(16,185,129,0.4)] dark:shadow-[0_0_8px_rgba(52,211,153,0.4)]"; 
+    if (lvl === 1) return "bg-green-500/25 dark:bg-green-400/25 border border-green-500/10";
+    if (lvl === 2) return "bg-green-500/50 dark:bg-green-400/50 border border-green-500/10";
+    if (lvl === 3) return "bg-green-500/80 dark:bg-green-400/80 border border-green-500/10";
+    return "bg-green-500 dark:bg-green-400 border border-green-400/60 shadow-[0_0_8px_rgba(34,197,94,0.5)] dark:shadow-[0_0_12px_rgba(74,222,128,0.6)]"; 
   };
 
   return (

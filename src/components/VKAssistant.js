@@ -123,6 +123,7 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
   const chatEndRef = useRef(null);
   const inputRef = useRef(null);
   const recognitionRef = useRef(null);
+  const abortRef = useRef(null);
   const scrollContainerRef = useRef(null);
   const prevMessagesLength = useRef(1);
 
