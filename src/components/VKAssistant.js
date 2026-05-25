@@ -123,11 +123,25 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
   const chatEndRef = useRef(null);
   const inputRef = useRef(null);
   const recognitionRef = useRef(null);
-  const abortRef = useRef(null);
+  const scrollContainerRef = useRef(null);
+  const prevMessagesLength = useRef(1);
 
   // Auto-scroll
   useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: isStreaming ? "auto" : "smooth" });
+    const isNewMessage = messages.length > prevMessagesLength.current;
+    prevMessagesLength.current = messages.length;
+
+    if (!scrollContainerRef.current) {
+      chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+      return;
+    }
+
+    const { scrollTop, scrollHeight, clientHeight } = scrollContainerRef.current;
+    const isNearBottom = scrollHeight - scrollTop - clientHeight < 150;
+
+    if (isNewMessage || isNearBottom) {
+      chatEndRef.current?.scrollIntoView({ behavior: isStreaming && !isNewMessage ? "auto" : "smooth" });
+    }
   }, [messages, isStreaming]);
 
   // Cleanup on unmount
@@ -404,7 +418,7 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
       </div>
 
       {/* Chat Messages */}
-      <div className="flex-1 overflow-y-auto space-y-3 pr-1 mb-3 min-h-[200px] max-h-[380px]">
+      <div ref={scrollContainerRef} className="flex-1 overflow-y-auto space-y-3 pr-1 mb-3 min-h-[200px] max-h-[380px]">
         {messages.map((msg, index) => (
           <div key={index} className={`flex flex-col ${msg.role === "user" ? "items-end" : "items-start"} gap-1`}>
             <div className={`flex items-end gap-2 max-w-[88%] ${msg.role === "user" ? "flex-row-reverse" : "flex-row"}`}>
