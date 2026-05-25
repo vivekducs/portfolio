@@ -278,12 +278,12 @@ export default function Stats() {
                   <Code2 size={20} className="text-[var(--text-primary)]" /> LeetCode Progress
                 </h3>
                 <a
-                  href="https://leetcode.com/u/avpxm8/"
+                  href="https://leetcode.com/u/vivekducs/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-1 text-sm text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors font-medium"
                 >
-                  avpxm8 <ExternalLink size={14} />
+                  vivekducs <ExternalLink size={14} />
                 </a>
               </div>
 

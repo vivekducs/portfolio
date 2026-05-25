@@ -1,6 +1,6 @@
 export async function GET() {
   try {
-    const res = await fetch("https://alfa-leetcode-api.onrender.com/avpxm8/solved", {
+    const res = await fetch("https://alfa-leetcode-api.onrender.com/vivekducs/solved", {
       next: { revalidate: 3600 },
     });
 
@@ -15,7 +15,7 @@ export async function GET() {
       };
     }
 
-    const contestRes = await fetch("https://alfa-leetcode-api.onrender.com/avpxm8/contest", {
+    const contestRes = await fetch("https://alfa-leetcode-api.onrender.com/vivekducs/contest", {
       next: { revalidate: 3600 },
     });
 
@@ -29,7 +29,7 @@ export async function GET() {
       };
     }
 
-    const calRes = await fetch("https://alfa-leetcode-api.onrender.com/avpxm8/calendar", {
+    const calRes = await fetch("https://alfa-leetcode-api.onrender.com/vivekducs/calendar", {
       next: { revalidate: 3600 },
     });
     
@@ -41,7 +41,7 @@ export async function GET() {
       }
     }
 
-    const badgeRes = await fetch("https://alfa-leetcode-api.onrender.com/avpxm8/badges", {
+    const badgeRes = await fetch("https://alfa-leetcode-api.onrender.com/vivekducs/badges", {
       next: { revalidate: 3600 },
     });
 
@@ -53,7 +53,7 @@ export async function GET() {
       }
     }
 
-    const profileRes = await fetch("https://alfa-leetcode-api.onrender.com/avpxm8", {
+    const profileRes = await fetch("https://alfa-leetcode-api.onrender.com/vivekducs", {
       next: { revalidate: 3600 },
     });
     
