@@ -38,6 +38,24 @@ const Linkedin = ({ size = 24, ...props }) => (
   </svg>
 );
 
+const Instagram = ({ size = 24, ...props }) => (
+  <svg
+    viewBox="0 0 24 24"
+    width={size}
+    height={size}
+    stroke="currentColor"
+    strokeWidth="2"
+    fill="none"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+  >
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+  </svg>
+);
+
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -181,7 +199,7 @@ export default function Sidebar({ activeSection, onOpenAssistant, isRecruiterMod
         {/* Social Icons row */}
         <div className="flex items-center justify-between px-2 text-[var(--text-muted)]">
           <a
-            href="https://github.com/AVPXM8"
+            href="https://github.com/vivekducs"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-[var(--text-primary)] transition-colors p-1 hover:bg-[var(--bg-tertiary)] rounded-lg"
@@ -189,12 +207,20 @@ export default function Sidebar({ activeSection, onOpenAssistant, isRecruiterMod
             <Github size={16} />
           </a>
           <a
-            href="https://www.linkedin.com/in/vivek33pal/"
+            href="https://www.linkedin.com/in/vivekducs/"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-[var(--text-primary)] transition-colors p-1 hover:bg-[var(--bg-tertiary)] rounded-lg"
           >
             <Linkedin size={16} />
+          </a>
+          <a
+            href="https://www.instagram.com/ashish._.pal3"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-[var(--text-primary)] transition-colors p-1 hover:bg-[var(--bg-tertiary)] rounded-lg"
+          >
+            <Instagram size={16} />
           </a>
           <a
             href="mailto:vivekducs@gmail.com"

@@ -72,8 +72,8 @@ const PREDEFINED_ANSWERS = [
     response: `You can reach out to Vivek Kumar directly to discuss hiring, SDE internships, or collaborations:
 
 • **Email**: [vivekducs@gmail.com](mailto:vivekducs@gmail.com)
-• **LinkedIn**: [linkedin.com/in/vivek33pal](https://www.linkedin.com/in/vivek33pal)
-• **GitHub**: [github.com/AVPXM8](https://github.com/AVPXM8)
+• **LinkedIn**: [linkedin.com/in/vivekducs](https://www.linkedin.com/in/vivekducs)
+• **GitHub**: [github.com/vivekducs](https://github.com/vivekducs)
 • **Resume / CV**: The official resume is fully viewable and downloadable via the Google Drive buttons in the Sidebar or Hero sections!`
   },
   {
@@ -84,7 +84,7 @@ const PREDEFINED_ANSWERS = [
 2. **ObserveFlow**: Dockerized real-time log ingestion and dashboard telemetry screen.
 3. **Palora**: Emotional wellness diary with Gemini-powered sentiment insights.
 
-All codebases are open-source and hosted on his GitHub (@AVPXM8)!`
+All codebases are open-source and hosted on his GitHub (@vivekducs)!`
   }
 ];
 

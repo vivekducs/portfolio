@@ -39,6 +39,24 @@ const Linkedin = ({ size = 24, ...props }) => (
   </svg>
 );
 
+const Instagram = ({ size = 24, ...props }) => (
+  <svg
+    viewBox="0 0 24 24"
+    width={size}
+    height={size}
+    stroke="currentColor"
+    strokeWidth="2"
+    fill="none"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+  >
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+  </svg>
+);
+
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -107,7 +125,7 @@ export default function Contact() {
 
               {/* LinkedIn */}
               <a
-                href="https://www.linkedin.com/in/vivek33pal/"
+                href="https://www.linkedin.com/in/vivekducs/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-4 p-4 glass-card rounded-2xl border border-[var(--glass-border)] hover:border-[var(--text-primary)] shadow-sm transition-all group"
@@ -117,13 +135,29 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider mono-font">LinkedIn Profile</h4>
-                  <p className="text-sm font-semibold text-[var(--text-primary)] break-all">linkedin.com/in/vivek33pal</p>
+                  <p className="text-sm font-semibold text-[var(--text-primary)] break-all">linkedin.com/in/vivekducs</p>
+                </div>
+              </a>
+
+              {/* Instagram */}
+              <a
+                href="https://www.instagram.com/ashish._.pal3"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 p-4 glass-card rounded-2xl border border-[var(--glass-border)] hover:border-[var(--text-primary)] shadow-sm transition-all group"
+              >
+                <div className="w-10 h-10 rounded-xl bg-[var(--bg-tertiary)] border border-[var(--border-color)] text-[var(--text-primary)] flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                  <Instagram size={16} />
+                </div>
+                <div>
+                  <h4 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider mono-font">Instagram</h4>
+                  <p className="text-sm font-semibold text-[var(--text-primary)] break-all">@ashish._.pal3</p>
                 </div>
               </a>
 
               {/* GitHub */}
               <a
-                href="https://github.com/AVPXM8"
+                href="https://github.com/vivekducs"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-4 p-4 glass-card rounded-2xl border border-[var(--glass-border)] hover:border-[var(--text-primary)] shadow-sm transition-all group"
@@ -133,7 +167,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider mono-font">GitHub Handles</h4>
-                  <p className="text-sm font-semibold text-[var(--text-primary)] break-all">github.com/AVPXM8</p>
+                  <p className="text-sm font-semibold text-[var(--text-primary)] break-all">github.com/vivekducs</p>
                 </div>
               </a>
 
@@ -253,8 +287,9 @@ export default function Contact() {
         {/* Mobile footer credits */}
         <div className="lg:hidden text-[10px] text-[var(--text-muted)] font-semibold mono-font text-center border-t border-[var(--border-color)] mt-12 pt-6 pb-2 space-y-4">
           <div className="flex justify-center gap-6">
-            <a href="https://github.com/AVPXM8" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)]">GitHub</a>
-            <a href="https://www.linkedin.com/in/vivek33pal/" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)]">LinkedIn</a>
+            <a href="https://github.com/vivekducs" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)]">GitHub</a>
+            <a href="https://www.linkedin.com/in/vivekducs/" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)]">LinkedIn</a>
+            <a href="https://www.instagram.com/ashish._.pal3" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)]">Instagram</a>
             <a href="mailto:vivekducs@gmail.com" className="hover:text-[var(--text-primary)]">Email</a>
           </div>
           <div>

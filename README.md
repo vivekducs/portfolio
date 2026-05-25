@@ -84,8 +84,8 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 | | |
 |--|--|
 | **Email** | [vivekducs@gmail.com](mailto:vivekducs@gmail.com) |
-| **LinkedIn** | [linkedin.com/in/vivek33pal](https://www.linkedin.com/in/vivek33pal/) |
-| **GitHub** | [github.com/AVPXM8](https://github.com/AVPXM8) |
+| **LinkedIn** | [linkedin.com/in/vivekducs](https://www.linkedin.com/in/vivekducs/) |
+| **GitHub** | [github.com/vivekducs](https://github.com/vivekducs) |
 
 ---
 

@@ -50,7 +50,7 @@ const ACHIEVEMENTS = [
     value: 30,
     suffix: "+",
     label: "GitHub Repositories",
-    sub: "@AVPXM8",
+    sub: "@vivekducs",
     color: "from-emerald-600 to-green-600",
     glowColor: "rgba(16,185,129,0.15)",
     delay: 300,

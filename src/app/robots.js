@@ -5,6 +5,6 @@ export default function robots() {
       allow: '/',
       disallow: '/private/',
     },
-    sitemap: 'https://vivekkumar-portfolio.vercel.app/sitemap.xml',
+    sitemap: 'https://vivekducs.is-a.dev/sitemap.xml',
   }
 }

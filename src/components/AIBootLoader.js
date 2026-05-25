@@ -6,7 +6,7 @@ const BOOT_LINES = [
   { text: "Initializing VK Assistant...", color: "text-emerald-500", delay: 0 },
   { text: "Loading AI Systems...", color: "text-green-500", delay: 500 },
   { text: "Connecting to Engineering Portfolio...", color: "text-amber-500", delay: 1000 },
-  { text: "Syncing GitHub repositories → AVPXM8", color: "text-emerald-400", delay: 1500 },
+  { text: "Syncing GitHub repositories → vivekducs", color: "text-emerald-400", delay: 1500 },
   { text: "Mapping project architectures...", color: "text-green-400", delay: 2000 },
   { text: "Calibrating DSA performance metrics...", color: "text-amber-400", delay: 2400 },
   { text: "Portfolio Ready.", color: "text-white font-black", delay: 2900 },

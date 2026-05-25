@@ -1,5 +1,5 @@
 export default function sitemap() {
-  const baseUrl = "https://vivekkumar-portfolio.vercel.app";
+  const baseUrl = "https://vivekducs.is-a.dev";
 
   return [
     {

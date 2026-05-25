@@ -200,12 +200,12 @@ export default function Stats() {
                   <GithubIcon size={20} /> GitHub Activity
                 </h3>
                 <a
-                  href="https://github.com/AVPXM8"
+                  href="https://github.com/vivekducs"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-1 text-sm text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors font-medium"
                 >
-                  @AVPXM8 <ExternalLink size={14} />
+                  @vivekducs <ExternalLink size={14} />
                 </a>
               </div>
 

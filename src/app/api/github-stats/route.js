@@ -1,6 +1,6 @@
 export async function GET() {
   try {
-    const res = await fetch("https://api.github.com/users/AVPXM8", {
+    const res = await fetch("https://api.github.com/users/vivekducs", {
       headers: {
         Accept: "application/vnd.github.v3+json",
         "User-Agent": "VK-Portfolio",
@@ -29,7 +29,7 @@ export async function GET() {
 
       const query = `
         query {
-          user(login: "AVPXM8") {
+          user(login: "vivekducs") {
             repositories(first: 100, ownerAffiliations: [OWNER, COLLABORATOR], orderBy: {field: UPDATED_AT, direction: DESC}) {
               totalCount
               nodes {
@@ -56,10 +56,10 @@ export async function GET() {
               }
             }
           }
-          searchPRs: search(query: "author:AVPXM8 is:pr created:>=${twoYearsAgoDateStr}", type: ISSUE, first: 0) {
+          searchPRs: search(query: "author:vivekducs is:pr created:>=${twoYearsAgoDateStr}", type: ISSUE, first: 0) {
             issueCount
           }
-          searchIssues: search(query: "author:AVPXM8 is:issue created:>=${twoYearsAgoDateStr}", type: ISSUE, first: 0) {
+          searchIssues: search(query: "author:vivekducs is:issue created:>=${twoYearsAgoDateStr}", type: ISSUE, first: 0) {
             issueCount
           }
         }

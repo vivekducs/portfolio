@@ -8,7 +8,7 @@ const VIVEK_SYSTEM_PROMPT = `You are VK Assistant — the AI-powered digital rep
 - Available for SDE / AI Engineer roles
 - Location: Noida, India
 - Email: vivekducs@gmail.com
-- GitHub: https://github.com/AVPXM8
+- GitHub: https://github.com/vivekducs
 
 ## Technical Skills
 - Backend: Node.js, Express.js, MongoDB, MySQL, C++, Python
@@ -26,33 +26,33 @@ const VIVEK_SYSTEM_PROMPT = `You are VK Assistant — the AI-powered digital rep
 - Admin dashboard with full CRUD operations
 - Tech: Node.js, Express.js, MongoDB, Gemini API, Pinecone, React.js
 - Live: https://question.maarula.in/
-- GitHub: https://github.com/AVPXM8/mathem-solvex-updated
+- GitHub: https://github.com/vivekducs/mathem-solvex-updated
 
 ### ObserveFlow
 - Real-time high-throughput log aggregation and cluster monitoring dashboard
 - Collects distributed system logs, parses errors, fires alerts based on traffic thresholds
 - Containerized microservices architecture
 - Tech: Node.js, Docker, MongoDB, React, GitHub Actions
-- GitHub: https://github.com/AVPXM8/ObserveFlow
+- GitHub: https://github.com/vivekducs/ObserveFlow
 
 ### Palora
 - AI-powered emotional wellness and mental health counseling platform
 - Sentiment-aware journaling prompts, real-time stress analysis
 - Tech: Node.js, Express.js, MongoDB, Gemini API
-- GitHub: https://github.com/AVPXM8
+- GitHub: https://github.com/vivekducs
 
 ### Rank Predictor
 - Predictive ranking calculator for NIMCET and CUET Computer Science aspirants
 - Predicts college eligibility based on entrance ranks
 - Tech: HTML, CSS, JavaScript, React.js
 - Live: https://rankpredictor.maarula.in/
-- GitHub: https://github.com/AVPXM8/Rank-Predictor
+- GitHub: https://github.com/vivekducs/Rank-Predictor
 
 ### Garbage Classification
 - Deep learning waste categorization using CNNs
 - Automatically sorts recyclables from general waste
 - Tech: Python, TensorFlow, CNN, OpenCV
-- GitHub: https://github.com/AVPXM8/garbage-classification
+- GitHub: https://github.com/vivekducs/garbage-classification
 
 ## Engineering Decisions & Architecture (Knowledge Base)
 
@@ -175,7 +175,7 @@ function getRuleBasedResponse(query) {
     return "Mathem Solvex is Vivek's flagship AI-powered educational platform. It serves 3,000+ active student users and has achieved 330K+ organic Google Search Impressions. The platform features semantic search using Pinecone vector embeddings + Gemini API, enabling students to resolve complex mathematical doubts instantly. Built with Node.js, Express.js, MongoDB, and React.js. Live at question.maarula.in";
   }
   if (query.includes("observeflow")) {
-    return "ObserveFlow is a real-time log aggregation and monitoring platform. It collects distributed system logs, parses errors, and fires intelligent alerts based on traffic thresholds. The architecture uses containerized Node.js microservices with Docker, MongoDB for log persistence, React for the dashboard, and GitHub Actions for CI/CD. GitHub: github.com/AVPXM8/ObserveFlow";
+    return "ObserveFlow is a real-time log aggregation and monitoring platform. It collects distributed system logs, parses errors, and fires intelligent alerts based on traffic thresholds. The architecture uses containerized Node.js microservices with Docker, MongoDB for log persistence, React for the dashboard, and GitHub Actions for CI/CD. GitHub: github.com/vivekducs/ObserveFlow";
   }
   if (query.includes("palora")) {
     return "Palora is an AI-driven emotional wellness startup project — a mental health counseling and journaling platform. It analyzes user sentiment in real-time and provides wellness guidance using the Gemini API. Built with Node.js, Express.js, and MongoDB, Palora demonstrates Vivek's ability to build human-centered AI products.";
@@ -211,10 +211,10 @@ function getRuleBasedResponse(query) {
     return "Vivek's academic background:\n• MCA (Master of Computer Applications) — Delhi University, 2024–2026: Advanced Algorithms, Distributed Databases, ML, Cloud Systems\n• BCA (Bachelor of Computer Applications) — Maharshi Pratap Group, 2020–2023: Graduated with honors in OOPs, DBMS, Networking";
   }
   if (query.includes("github") || query.includes("open github") || query.includes("repo")) {
-    return "Vivek's GitHub is at github.com/AVPXM8 — featuring 30+ repositories spanning AI products, full-stack apps, monitoring systems, and ML projects. You can explore his code directly at: https://github.com/AVPXM8";
+    return "Vivek's GitHub is at github.com/vivekducs — featuring 30+ repositories spanning AI products, full-stack apps, monitoring systems, and ML projects. You can explore his code directly at: https://github.com/vivekducs";
   }
   if (query.includes("contact") || query.includes("hire") || query.includes("email") || query.includes("reach")) {
-    return "To contact Vivek Kumar:\n• Email: vivekducs@gmail.com\n• GitHub: github.com/AVPXM8\n• He's actively looking for SDE / AI Engineer roles\nYou can also scroll to the Contact section on this portfolio to send a message directly!";
+    return "To contact Vivek Kumar:\n• Email: vivekducs@gmail.com\n• GitHub: github.com/vivekducs\n• He's actively looking for SDE / AI Engineer roles\nYou can also scroll to the Contact section on this portfolio to send a message directly!";
   }
   if (query.includes("architecture") || query.includes("backend") || query.includes("system design")) {
     return "Vivek's backend architecture philosophy centers on microservices, containerization (Docker), and scalable API design. His projects use RESTful APIs with Node.js/Express, MongoDB for flexible data models, and CI/CD pipelines via GitHub Actions for automated deployments to Vercel.";

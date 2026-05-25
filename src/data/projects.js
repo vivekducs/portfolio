@@ -13,7 +13,7 @@ export const projectsData = [
     ],
     tech: ["Node.js", "Express.js", "MongoDB", "Gemini API", "Pinecone", "React.js"],
     live: "https://question.maarula.in/",
-    github: "https://github.com/AVPXM8/mathem-solvex-updated",
+    github: "https://github.com/vivekducs/mathem-solvex-updated",
     engineering: {
       problem: "Students frequently encounter mathematical doubts outside classroom hours but traditional search engines provide generic answers rather than step-by-step contextual resolutions.",
       architecture: "A microservices-inspired monolith where a Node.js/Express backend coordinates between a MongoDB primary datastore and a Pinecone vector database. User queries are vectorized using sentence-transformers before undergoing semantic search.",
@@ -51,7 +51,7 @@ export const projectsData = [
     featured: false,
     desc: "AI-powered emotional wellness and mental health counseling platform. Features sentiment-aware journaling prompts, real-time stress analysis, and supportive wellness guidance.",
     tech: ["Node.js", "Express.js", "MongoDB", "Gemini API"],
-    github: "https://github.com/AVPXM8/Palora-backend",
+    github: "https://github.com/vivekducs/Palora-backend",
     engineering: {
       problem: "Access to preliminary mental health support is often gated. Users needed a secure, zero-judgment journaling space capable of detecting subtle shifts in emotional distress.",
       architecture: "A secure REST API built with Express, featuring JWT authentication and robust rate-limiting. Journal entries are asynchronously processed by Gemini for emotional analysis.",
@@ -78,7 +78,7 @@ export const projectsData = [
     featured: false,
     desc: "Real-time high-throughput log aggregation and cluster monitoring dashboard. Collects distributed system logs, parses errors, and fires alerts based on traffic thresholds.",
     tech: ["Go", "Docker", "Prometheus", "Grafana", "WebSockets"],
-    github: "https://github.com/AVPXM8/ObserveFlow",
+    github: "https://github.com/vivekducs/ObserveFlow",
     engineering: {
       problem: "Distributed microservices generate fragmented logs, making root-cause analysis during production incidents painfully slow.",
       architecture: "A Go-based ingestor service that consumes logs via gRPC. Logs are buffered in memory and flushed to a time-series optimized datastore. A WebSocket server streams critical alerts to the frontend.",
@@ -106,7 +106,7 @@ export const projectsData = [
     desc: "Predictive ranking calculator and college matching system tailored for national NIMCET and CUET Computer Science aspirants across India.",
     tech: ["HTML", "CSS", "JavaScript", "React.js"],
     live: "https://rankpredictor.maarula.in/",
-    github: "https://github.com/AVPXM8/Rank-Predictor",
+    github: "https://github.com/vivekducs/Rank-Predictor",
     engineering: {
       problem: "Aspirants needed a reliable way to predict their college assignments based on mock test scores before official results.",
       architecture: "A lightweight React SPA frontend paired with a static probabilistic model derived from 5 years of historical admissions data.",
@@ -126,7 +126,7 @@ export const projectsData = [
     featured: false,
     desc: "Deep learning waste categorization system leveraging Convolutional Neural Networks (CNN) to automatically sort recyclables from general waste.",
     tech: ["Python", "TensorFlow", "CNN", "OpenCV"],
-    github: "https://github.com/AVPXM8/garbage-classification",
+    github: "https://github.com/vivekducs/garbage-classification",
     engineering: {
       problem: "Manual sorting of municipal solid waste is inefficient and hazardous.",
       architecture: "A custom ResNet-inspired CNN architecture trained on a dataset of 25,000 augmented images across 6 waste categories.",

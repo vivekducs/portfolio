@@ -29,7 +29,7 @@ export const metadata = {
     "Software Engineer",
     "Portfolio",
   ],
-  authors: [{ name: "Vivek Kumar", url: "https://github.com/AVPXM8" }],
+  authors: [{ name: "Vivek Kumar", url: "https://github.com/vivekducs" }],
   creator: "Vivek Kumar",
   openGraph: {
     type: "website",
@@ -65,10 +65,10 @@ export default function RootLayout({ children }) {
     "@type": "Person",
     "name": "Vivek Kumar",
     "jobTitle": "AI Engineer & Full Stack Developer",
-    "url": "https://vivekkumar-portfolio.vercel.app",
+    "url": "https://vivekducs.is-a.dev",
     "sameAs": [
-      "https://github.com/AVPXM8",
-      "https://www.linkedin.com/in/vivek33pal/"
+      "https://github.com/vivekducs",
+      "https://www.linkedin.com/in/vivekducs/"
     ],
     "knowsAbout": ["Artificial Intelligence", "Node.js", "React.js", "MongoDB", "System Architecture"]
   };
