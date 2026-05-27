@@ -30,7 +30,7 @@ export default async function BlogPost({ params }) {
   return (
     <>
       <ReadingProgress />
-      <main className="min-h-screen pt-24 pb-20 px-6 max-w-7xl mx-auto flex flex-col lg:flex-row gap-12 items-start">
+      <main className="min-h-screen pt-24 pb-20 px-4 md:px-6 w-full max-w-7xl mx-auto flex flex-col lg:flex-row gap-12 items-start">
         
         <article className="flex-1 w-full min-w-0 break-words max-w-3xl lg:w-[800px]">
           
@@ -50,7 +50,7 @@ export default async function BlogPost({ params }) {
               <span className="flex items-center gap-2">
                 <Calendar size={14} /> {data.date}
               </span>
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2">
                 {data.tags && data.tags.map(tag => (
                   <span key={tag} className="text-[10px] font-bold px-2 py-1 bg-green-500/10 text-[var(--accent-color)] rounded-md uppercase tracking-wide">
                     <Tag size={10} className="mr-1 inline-block" />
@@ -62,7 +62,7 @@ export default async function BlogPost({ params }) {
           </header>
 
           {/* MDX Content */}
-          <div className="w-full">
+          <div className="w-full max-w-full">
             <MDXRemote 
               source={content} 
               components={MDXComponents}

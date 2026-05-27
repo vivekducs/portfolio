@@ -32,25 +32,44 @@ function AnimatedCounter({ target, duration = 1500, isFloat = false }) {
 
   useEffect(() => {
     if (!started || target === 0) return;
-    const steps = 50;
-    const stepDuration = duration / steps;
-    let step = 0;
-    const timer = setInterval(() => {
-      step++;
-      const progress = step / steps;
+    let startTime = null;
+    let animationFrameId;
+
+    const animate = (timestamp) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      
+      // easeOutCubic
       const eased = 1 - Math.pow(1 - progress, 3);
-      const v = target * eased;
-      setValue(isFloat ? parseFloat(v.toFixed(2)) : Math.round(v));
-      if (step >= steps) clearInterval(timer);
-    }, stepDuration);
-    return () => clearInterval(timer);
+      const currentVal = target * eased;
+      
+      setValue(isFloat ? parseFloat(currentVal.toFixed(2)) : Math.round(currentVal));
+
+      if (progress < 1) {
+        animationFrameId = requestAnimationFrame(animate);
+      }
+    };
+
+    animationFrameId = requestAnimationFrame(animate);
+
+    return () => cancelAnimationFrame(animationFrameId);
   }, [started, target, duration, isFloat]);
 
   return <span ref={ref}>{value}</span>;
 }
 
 function Heatmap({ data, tooltipPrefix = "contributions" }) {
-  if (!data || data.length === 0) return <div className="h-[120px] flex items-center justify-center text-sm text-[var(--text-muted)]">Loading data...</div>;
+  if (!data || data.length === 0) return (
+    <div className="h-[120px] w-full flex flex-col gap-1.5 animate-pulse">
+      {Array.from({ length: 7 }).map((_, i) => (
+        <div key={i} className="flex gap-1.5 w-full">
+          {Array.from({ length: 52 }).map((_, j) => (
+            <div key={j} className="h-2.5 w-2.5 rounded-[2px] bg-[var(--bg-tertiary)]/50" />
+          ))}
+        </div>
+      ))}
+    </div>
+  );
 
   const getLevel = (count) => {
     if (count === 0 || count === null || count === undefined) return 0;
@@ -208,7 +227,15 @@ export default function Stats() {
                 <Heatmap data={contributions} tooltipPrefix="contributions" />
               </div>
               
-              {githubDetails && (
+              {loading ? (
+                <div className="mt-6 mb-6 pb-6 border-b border-[var(--border-color)]">
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                    {Array.from({ length: 4 }).map((_, i) => (
+                      <div key={i} className="bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-lg p-3 h-24 animate-pulse" />
+                    ))}
+                  </div>
+                </div>
+              ) : githubDetails && (
                 <div className="mt-6 mb-6 pb-6 border-b border-[var(--border-color)]">
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                     <div className="bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-lg p-3 text-center transition-all hover:-translate-y-1 hover:shadow-sm hover:border-[var(--text-primary)]">
@@ -235,7 +262,17 @@ export default function Stats() {
                 </div>
               )}
 
-              {topLangs.length > 0 && (
+              {loading ? (
+                <div className="mt-2 space-y-4">
+                  <h4 className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider mb-4 flex items-center justify-between">
+                    <div className="w-24 h-3 bg-[var(--bg-tertiary)] animate-pulse rounded" />
+                    <div className="w-16 h-3 bg-[var(--bg-tertiary)] animate-pulse rounded" />
+                  </h4>
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <div key={i} className="w-full bg-[var(--bg-tertiary)] h-2 rounded-full animate-pulse" />
+                  ))}
+                </div>
+              ) : topLangs.length > 0 && (
                 <div className="mt-2">
                   <h4 className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider mb-4 flex items-center justify-between">
                     <span>Top Languages</span>
@@ -286,37 +323,45 @@ export default function Stats() {
                 <Heatmap data={lcGrid} tooltipPrefix="submissions" />
               </div>
 
-              <div className="grid grid-cols-2 gap-4 mt-8">
-                <div className="bg-[var(--bg-tertiary)] rounded-xl p-4 border border-[var(--border-color)]">
-                  <p className="text-xs text-[var(--text-muted)] font-medium mb-1">Problems Solved</p>
-                  <p className="text-2xl font-bold text-[var(--text-primary)]"><AnimatedCounter target={totalSolved} /></p>
-                  <div className="flex items-center gap-2 mt-2 text-xs font-medium">
-                    <span className="text-green-500">E:{easySolved}</span>
-                    <span className="text-amber-500">M:{mediumSolved}</span>
-                    <span className="text-rose-500">H:{hardSolved}</span>
-                  </div>
+              {loading ? (
+                <div className="grid grid-cols-2 gap-4 mt-8">
+                  {Array.from({ length: 4 }).map((_, i) => (
+                    <div key={i} className="bg-[var(--bg-tertiary)] rounded-xl p-4 border border-[var(--border-color)] h-[90px] animate-pulse" />
+                  ))}
                 </div>
-                
-                <div className="bg-[var(--bg-tertiary)] rounded-xl p-4 border border-[var(--border-color)] flex flex-col justify-between">
-                  <div>
-                    <p className="text-xs text-[var(--text-muted)] font-medium mb-1">Contest Rating</p>
-                    <p className="text-2xl font-bold text-[var(--text-primary)]"><AnimatedCounter target={rating} /></p>
-                    <div className="flex flex-col gap-1 mt-2">
-                      <span className="text-[var(--text-secondary)] text-xs font-medium">Top <AnimatedCounter target={topPercent} isFloat />% Global</span>
+              ) : (
+                <div className="grid grid-cols-2 gap-4 mt-8">
+                  <div className="bg-[var(--bg-tertiary)] rounded-xl p-4 border border-[var(--border-color)]">
+                    <p className="text-xs text-[var(--text-muted)] font-medium mb-1">Problems Solved</p>
+                    <p className="text-2xl font-bold text-[var(--text-primary)]"><AnimatedCounter target={totalSolved} /></p>
+                    <div className="flex items-center gap-2 mt-2 text-xs font-medium">
+                      <span className="text-green-500">E:{easySolved}</span>
+                      <span className="text-amber-500">M:{mediumSolved}</span>
+                      <span className="text-rose-500">H:{hardSolved}</span>
                     </div>
                   </div>
-                </div>
+                  
+                  <div className="bg-[var(--bg-tertiary)] rounded-xl p-4 border border-[var(--border-color)] flex flex-col justify-between">
+                    <div>
+                      <p className="text-xs text-[var(--text-muted)] font-medium mb-1">Contest Rating</p>
+                      <p className="text-2xl font-bold text-[var(--text-primary)]"><AnimatedCounter target={rating} /></p>
+                      <div className="flex flex-col gap-1 mt-2">
+                        <span className="text-[var(--text-secondary)] text-xs font-medium">Top <AnimatedCounter target={topPercent} isFloat />% Global</span>
+                      </div>
+                    </div>
+                  </div>
 
-                <div className="bg-[var(--bg-tertiary)] rounded-xl p-4 border border-[var(--border-color)]">
-                  <p className="text-xs text-[var(--text-muted)] font-medium mb-1">Global Rank</p>
-                  <p className="text-2xl font-bold text-[var(--text-primary)]"><AnimatedCounter target={lcStats?.ranking || 0} /></p>
-                </div>
+                  <div className="bg-[var(--bg-tertiary)] rounded-xl p-4 border border-[var(--border-color)]">
+                    <p className="text-xs text-[var(--text-muted)] font-medium mb-1">Global Rank</p>
+                    <p className="text-2xl font-bold text-[var(--text-primary)]"><AnimatedCounter target={lcStats?.ranking || 0} /></p>
+                  </div>
 
-                <div className="bg-[var(--bg-tertiary)] rounded-xl p-4 border border-[var(--border-color)]">
-                  <p className="text-xs text-[var(--text-muted)] font-medium mb-1">Reputation</p>
-                  <p className="text-2xl font-bold text-[var(--text-primary)]"><AnimatedCounter target={lcStats?.reputation || 0} /></p>
+                  <div className="bg-[var(--bg-tertiary)] rounded-xl p-4 border border-[var(--border-color)]">
+                    <p className="text-xs text-[var(--text-muted)] font-medium mb-1">Reputation</p>
+                    <p className="text-2xl font-bold text-[var(--text-primary)]"><AnimatedCounter target={lcStats?.reputation || 0} /></p>
+                  </div>
                 </div>
-              </div>
+              )}
 
               {(lcStats?.badges && lcStats.badges.length > 0) && (
                 <div className="mt-6 pt-6 border-t border-[var(--border-color)] relative z-10">

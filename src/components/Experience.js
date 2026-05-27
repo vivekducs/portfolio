@@ -1,6 +1,6 @@
 "use client";
 
-import { History, Briefcase, Calendar, Building2, MapPin } from "lucide-react";
+import { History, Briefcase, Calendar, MapPin, Building2, Code2, Database, Shield } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function Experience() {

@@ -1,5 +1,3 @@
-"use client";
-
 import { Code2, Monitor, Cpu, Server, Database, Hammer, CheckCircle2 } from "lucide-react";
 
 export default function Skills() {

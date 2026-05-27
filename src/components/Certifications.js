@@ -1,5 +1,3 @@
-"use client";
-
 import { Award, CheckCircle, ShieldCheck } from "lucide-react";
 
 export default function Certifications() {

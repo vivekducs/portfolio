@@ -4,9 +4,11 @@ import { useRef } from "react";
 import Image from "next/image";
 import { ArrowRight, FileDown, MessageSquare } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
+import { useDashboard } from "./DashboardLayout";
 import { trackCTA, trackDownload } from "@/lib/analytics";
 
-export default function Hero({ onOpenAssistant }) {
+export default function Hero() {
+  const { setIsAssistantOpen } = useDashboard();
   const handleScroll = (id) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -64,7 +66,7 @@ export default function Hero({ onOpenAssistant }) {
             </a>
 
             <button
-              onClick={onOpenAssistant}
+              onClick={() => setIsAssistantOpen(true)}
               className="px-7 py-3.5 bg-[var(--bg-tertiary)] border border-[var(--border-color)] text-[var(--text-primary)] font-bold text-sm rounded-xl flex items-center gap-2 hover:bg-[var(--text-primary)] hover:text-[var(--bg-primary)] transition-all cursor-pointer hover:-translate-y-0.5 group"
             >
               <MessageSquare size={16} className="group-hover:text-[var(--bg-primary)]" />
@@ -83,7 +85,7 @@ export default function Hero({ onOpenAssistant }) {
                 width={112}
                 height={112}
                 priority
-                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                className="w-full h-full object-cover transition-all duration-500"
               />
             </div>
             <div className="text-center">

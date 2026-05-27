@@ -28,7 +28,7 @@ export const MDXComponents = {
     <blockquote className="border-l-4 border-[var(--accent-color)] pl-4 italic text-[var(--text-muted)] my-6 bg-[var(--bg-tertiary)] py-3 rounded-r-lg" {...props} />
   ),
   pre: (props) => (
-    <pre className="bg-[#0d0d0d] rounded-xl p-4 overflow-x-auto border border-[#222] my-6 shadow-xl" {...props} />
+    <pre className="bg-[#0d0d0d] rounded-xl p-4 overflow-x-auto w-full max-w-full border border-[#222] my-6 shadow-xl" {...props} />
   ),
   code: (props) => {
     const isInline = !props.className;

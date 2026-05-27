@@ -1,5 +1,3 @@
-"use client";
-
 import { BookOpen, Shield, Code, Cpu, Server, Layers, HelpCircle } from "lucide-react";
 
 export default function About() {
