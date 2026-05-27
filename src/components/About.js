@@ -115,10 +115,10 @@ export default function About() {
               return (
                 <div
                   key={idx}
-                  className="glass-card rounded-2xl border border-[var(--border-color)] hover:border-[var(--text-primary)] p-5 text-left flex flex-col justify-between transition-all shadow-sm group"
+                  className="glass-card rounded-2xl border border-[var(--border-color)] hover:border-[var(--gradient-mid)] p-5 text-left flex flex-col justify-between transition-all duration-500 shadow-sm group hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(217,70,239,0.1)]"
                 >
                   <div>
-                    <div className="w-10 h-10 rounded-xl bg-[var(--text-primary)] p-[1px] mb-4 inline-flex shadow-sm transition-all group-hover:bg-[var(--text-secondary)]">
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--gradient-start)] to-[var(--gradient-end)] p-[1px] mb-4 inline-flex shadow-sm transition-all group-hover:scale-105">
                       <div className="w-full h-full rounded-xl bg-[var(--bg-secondary)] flex items-center justify-center text-[var(--text-primary)] transition-all">
                         <Icon size={18} />
                       </div>

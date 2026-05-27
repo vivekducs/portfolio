@@ -76,9 +76,9 @@ export default function Experience() {
             >
 
               {/* Timeline marker node dot */}
-              <div className="absolute -left-[31px] md:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-[var(--bg-secondary)] border-4 border-[var(--text-primary)] group-hover:scale-125 transition-all duration-300 shadow-sm z-10" />
+              <div className="absolute -left-[31px] md:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-[var(--bg-secondary)] border-4 border-[var(--text-primary)] group-hover:border-[var(--gradient-mid)] group-hover:scale-125 transition-all duration-300 shadow-sm z-10" />
 
-              <div className="glass-card rounded-2xl border border-[var(--glass-border)] p-6 shadow-sm hover:border-[var(--text-primary)] transition-all duration-300 relative overflow-hidden">
+              <div className="glass-card rounded-2xl border border-[var(--glass-border)] p-6 shadow-sm hover:border-[var(--gradient-mid)] transition-all duration-500 relative overflow-hidden group-hover:-translate-y-1 group-hover:shadow-[0_10px_30px_rgba(217,70,239,0.1)]">
 
                 {/* Header elements */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5 relative z-10">

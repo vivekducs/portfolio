@@ -17,7 +17,7 @@ export default function Hero() {
   return (
     <section id="home" className="relative pt-12 pb-20 md:pt-24 md:pb-32 overflow-hidden flex flex-col items-center border-b border-[var(--border-color)]">
       <div className="w-full max-w-5xl z-10 px-4 flex flex-col items-center text-center">
-        
+
         {/* Minimal Availability Badge */}
         <AnimatedSection delay={0}>
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-full text-xs font-semibold text-[var(--text-secondary)] shadow-sm mb-10 transition-all hover:border-[var(--border-hover)]">

@@ -376,15 +376,19 @@ export default function Stats() {
                   <div className="w-full overflow-visible pb-4">
                     <div className="flex flex-wrap gap-4 min-w-min">
                       {lcStats.badges.map(b => (
-                        <div key={b.id} className="relative group cursor-pointer bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-xl p-2.5 flex items-center justify-center transition-all hover:border-[var(--text-primary)] hover:shadow-sm shrink-0 z-10 hover:z-50">
+                        <div 
+                          key={b.id} 
+                          tabIndex={0}
+                          className="relative group cursor-pointer bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-xl p-2.5 flex items-center justify-center transition-all hover:border-[var(--text-primary)] focus:border-[var(--text-primary)] hover:shadow-sm focus:shadow-sm shrink-0 z-10 hover:z-50 focus:z-50 outline-none"
+                        >
                           <Image 
                             src={b.icon.startsWith('/') ? `https://leetcode.com${b.icon}` : b.icon} 
                             alt={b.displayName} 
                             width={44}
                             height={44}
-                            className="w-11 h-11 object-contain drop-shadow-md transition-transform duration-300 group-hover:scale-[2.2]"
+                            className="w-11 h-11 object-contain drop-shadow-md transition-transform duration-300 group-hover:scale-[2.2] group-focus:scale-[2.2] group-active:scale-[2.2]"
                           />
-                          <div className="absolute -top-12 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-[var(--bg-secondary)] border border-[var(--border-color)] text-[var(--text-primary)] font-bold text-xs whitespace-nowrap px-3 py-2 rounded shadow-2xl pointer-events-none z-50">
+                          <div className="absolute -top-12 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-focus:opacity-100 group-active:opacity-100 transition-opacity bg-[var(--bg-secondary)] border border-[var(--border-color)] text-[var(--text-primary)] font-bold text-xs whitespace-nowrap px-3 py-2 rounded shadow-2xl pointer-events-none z-50">
                             {b.displayName}
                             <div className="absolute -bottom-[6px] left-1/2 -translate-x-1/2 border-l-[6px] border-r-[6px] border-t-[6px] border-l-transparent border-r-transparent border-t-[var(--border-color)]"></div>
                           </div>
