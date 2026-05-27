@@ -14,6 +14,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
+  metadataBase: new URL("https://vivekducs.is-a.dev"),
+  alternates: {
+    canonical: "/",
+  },
   title: "Vivek Kumar | AI Engineer & Full Stack Developer Portfolio",
   description:
     "Portfolio of Vivek Kumar — MCA Student, AI Engineer, Full Stack Developer & Backend Architect from Noida, India. Specializing in scalable AI-powered systems, real-time backends, and production-grade products.",
@@ -81,16 +85,13 @@ export default function RootLayout({ children }) {
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-      data-scroll-behavior="smooth"
       suppressHydrationWarning
     >
-      <head>
+      <body className="min-h-full flex flex-col" suppressHydrationWarning>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-      </head>
-      <body className="min-h-full flex flex-col" suppressHydrationWarning>
         <ThemeProvider>{children}</ThemeProvider>
         
         {/* Google Analytics */}

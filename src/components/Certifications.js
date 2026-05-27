@@ -87,14 +87,6 @@ export default function Certifications() {
       accentGlow: "bg-violet-500/5 dark:bg-violet-400/5",
       logoBadge: "bg-violet-500/10 text-violet-600 dark:text-violet-400 border border-violet-500/20"
     },
-    violet: {
-      hoverBorder: "hover:border-violet-500/40 dark:hover:border-violet-400/40",
-      bgGlow: "bg-violet-500/[0.01] hover:bg-violet-500/[0.03] dark:bg-violet-950/5 dark:hover:bg-violet-950/20",
-      icon: "text-violet-600 dark:text-violet-400",
-      borderLeft: "border-l-2 border-violet-500/60 dark:border-violet-400/60",
-      accentGlow: "bg-violet-500/5 dark:bg-violet-400/5",
-      logoBadge: "bg-violet-500/10 text-violet-600 dark:text-violet-400 border border-violet-500/20"
-    },
     crimson: {
       hoverBorder: "hover:border-red-500/40 dark:hover:border-red-400/40",
       bgGlow: "bg-red-500/[0.01] hover:bg-red-500/[0.03] dark:bg-red-950/5 dark:hover:bg-red-950/20",

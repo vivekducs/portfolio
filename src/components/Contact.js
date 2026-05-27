@@ -1,67 +1,16 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Mail, Send, MessageSquareCode, FileText, CheckCircle2, CalendarDays } from "lucide-react";
+import { Mail, Send, MessageSquareCode, FileText, CheckCircle2, CalendarDays, AlertCircle } from "lucide-react";
 import { trackEvent, trackCTA } from "@/lib/analytics";
-
-const Github = ({ size = 24, ...props }) => (
-  <svg
-    viewBox="0 0 24 24"
-    width={size}
-    height={size}
-    stroke="currentColor"
-    strokeWidth="2"
-    fill="none"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    {...props}
-  >
-    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
-    <path d="M9 18c-4.51 2-5-2-7-2" />
-  </svg>
-);
-
-const Linkedin = ({ size = 24, ...props }) => (
-  <svg
-    viewBox="0 0 24 24"
-    width={size}
-    height={size}
-    stroke="currentColor"
-    strokeWidth="2"
-    fill="none"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    {...props}
-  >
-    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-    <rect width="4" height="12" x="2" y="9" />
-    <circle cx="4" cy="4" r="2" />
-  </svg>
-);
-
-const Instagram = ({ size = 24, ...props }) => (
-  <svg
-    viewBox="0 0 24 24"
-    width={size}
-    height={size}
-    stroke="currentColor"
-    strokeWidth="2"
-    fill="none"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    {...props}
-  >
-    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-  </svg>
-);
+import { GithubIcon as Github, LinkedinIcon as Linkedin, InstagramIcon as Instagram } from "./icons";
 
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [formError, setFormError] = useState(null);
   const [mailtoLink, setMailtoLink] = useState("mailto:vivekducs@gmail.com");
 
   useEffect(() => {
@@ -91,6 +40,7 @@ Best regards,`;
     if (!form.name || !form.email || !form.message) return;
 
     setIsSubmitting(true);
+    setFormError(null);
     trackEvent("Contact_Form_Submit", { name: form.name });
     
     try {
@@ -115,16 +65,10 @@ Best regards,`;
         setForm({ name: "", email: "", message: "" });
         setTimeout(() => setSuccess(false), 5000);
       } else {
-        console.error("Form submission failed", result);
-        // Fallback simulated success if key is missing/invalid during dev
-        setSuccess(true);
-        setTimeout(() => setSuccess(false), 5000);
+        setFormError("Message could not be sent. Please try the email link below.");
       }
-    } catch (error) {
-      console.error("Error submitting form", error);
-      // Fallback simulated success for demo purposes
-      setSuccess(true);
-      setTimeout(() => setSuccess(false), 5000);
+    } catch {
+      setFormError("Network error. Please use the email link below to contact directly.");
     } finally {
       setIsSubmitting(false);
     }
@@ -265,6 +209,13 @@ Best regards,`;
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
+                  {/* Error message */}
+                  {formError && (
+                    <div className="flex items-center gap-2 p-3 bg-red-500/10 border border-red-500/20 rounded-xl text-sm text-red-400 animate-in fade-in duration-300">
+                      <AlertCircle size={16} className="shrink-0" />
+                      {formError}
+                    </div>
+                  )}
                   {/* Name field */}
                   <div className="text-left">
                     <label htmlFor="name" className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider mono-font mb-1.5">
@@ -278,7 +229,6 @@ Best regards,`;
                       onChange={(e) => setForm({ ...form, name: e.target.value })}
                       placeholder="e.g. Alex Recruiter"
                       className="w-full bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[var(--text-primary)] focus:ring-1 focus:ring-[var(--text-primary)] transition-all text-[var(--text-primary)]"
-                      suppressHydrationWarning
                     />
                   </div>
 
@@ -295,7 +245,6 @@ Best regards,`;
                       onChange={(e) => setForm({ ...form, email: e.target.value })}
                       placeholder="e.g. alex@company.com"
                       className="w-full bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[var(--text-primary)] focus:ring-1 focus:ring-[var(--text-primary)] transition-all text-[var(--text-primary)]"
-                      suppressHydrationWarning
                     />
                   </div>
 
@@ -312,7 +261,6 @@ Best regards,`;
                       onChange={(e) => setForm({ ...form, message: e.target.value })}
                       placeholder="Hi Vivek, I looked at your NIMCET Rank Predictor and SDE intern timeline..."
                       className="w-full bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[var(--text-primary)] focus:ring-1 focus:ring-[var(--text-primary)] transition-all text-[var(--text-primary)]"
-                      suppressHydrationWarning
                     />
                   </div>
 
@@ -320,7 +268,6 @@ Best regards,`;
                   <div className="flex flex-col gap-3 pt-2">
                     <button
                       type="submit"
-                      suppressHydrationWarning
                       disabled={isSubmitting}
                       className="w-full py-3.5 bg-[var(--text-primary)] text-[var(--bg-primary)] hover:bg-[var(--text-secondary)] font-bold text-sm rounded-xl shadow-sm flex items-center justify-center gap-2 transition-all cursor-pointer disabled:opacity-50 hover:translate-y-[-1px]"
                       aria-label="Send secure message"

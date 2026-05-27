@@ -102,11 +102,10 @@ export default function Header({ activeSection, onOpenAssistant, isRecruiterMode
         {/* AI Bot Center Floating button */}
         <button
           onClick={onOpenAssistant}
-          className="relative -mt-6 w-12 h-12 rounded-full bg-[var(--accent-color)] border-4 border-[var(--bg-secondary)] text-[var(--bg-primary)] shadow-lg flex items-center justify-center cursor-pointer transition-all hover:scale-110 active:scale-95 group z-50 animate-bounce"
-          style={{ animationDuration: "3s" }}
+          className="relative -mt-6 w-12 h-12 rounded-full bg-[var(--accent-color)] border-4 border-[var(--bg-secondary)] text-[var(--bg-primary)] shadow-lg flex items-center justify-center cursor-pointer transition-all hover:scale-110 active:scale-95 group z-50"
         >
           <Sparkles size={18} className="animate-pulse text-[var(--bg-primary)]" />
-          <span className="absolute inset-0 rounded-full animate-ping bg-[var(--accent-color)] opacity-20 pointer-events-none" />
+          <span className="absolute inset-0 rounded-full bg-[var(--accent-color)] opacity-20 pointer-events-none" />
         </button>
 
         {/* Projects */}

@@ -1,14 +1,9 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import { Activity, Code2, ExternalLink, GitMerge, CircleDot, Star } from "lucide-react";
-
-const GithubIcon = ({ size = 24, ...props }) => (
-  <svg viewBox="0 0 24 24" width={size} height={size} stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" {...props}>
-    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
-    <path d="M9 18c-4.51 2-5-2-7-2" />
-  </svg>
-);
+import { GithubIcon } from "./icons";
 
 const LANG_COLORS = {
   JavaScript: "#f7df1e",
@@ -337,9 +332,11 @@ export default function Stats() {
                     <div className="flex flex-wrap gap-4 min-w-min">
                       {lcStats.badges.map(b => (
                         <div key={b.id} className="relative group cursor-pointer bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-xl p-2.5 flex items-center justify-center transition-all hover:border-[var(--text-primary)] hover:shadow-sm shrink-0 z-10 hover:z-50">
-                          <img 
+                          <Image 
                             src={b.icon.startsWith('/') ? `https://leetcode.com${b.icon}` : b.icon} 
                             alt={b.displayName} 
+                            width={44}
+                            height={44}
                             className="w-11 h-11 object-contain drop-shadow-md transition-transform duration-300 group-hover:scale-[2.2]"
                           />
                           <div className="absolute -top-12 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-[var(--bg-secondary)] border border-[var(--border-color)] text-[var(--text-primary)] font-bold text-xs whitespace-nowrap px-3 py-2 rounded shadow-2xl pointer-events-none z-50">

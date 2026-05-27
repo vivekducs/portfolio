@@ -64,7 +64,7 @@ export default function About() {
             </h3>
 
             <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
-              I am a driven **Master of Computer Applications (MCA) student** and **AI Engineer** with a passion for designing high-performance distributed architectures and real-time backend systems.
+              I am a driven <strong>Master of Computer Applications (MCA) student</strong> and <strong>AI Engineer</strong> with a passion for designing high-performance distributed architectures and real-time backend systems.
             </p>
 
             <p className="text-sm text-[var(--text-secondary)] leading-relaxed">

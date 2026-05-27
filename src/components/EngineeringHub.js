@@ -5,13 +5,7 @@ import { Terminal, Activity, Server, Database, Code, ShieldCheck, Box, GitCommit
 import dynamic from "next/dynamic";
 const SystemDiagram = dynamic(() => import("./SystemDiagram"), { ssr: false });
 
-// Dynamically import Recharts because it's a heavy client-side dependency
-const LineChart = dynamic(() => import("recharts").then(mod => mod.LineChart), { ssr: false });
-const Line = dynamic(() => import("recharts").then(mod => mod.Line), { ssr: false });
-const XAxis = dynamic(() => import("recharts").then(mod => mod.XAxis), { ssr: false });
-const YAxis = dynamic(() => import("recharts").then(mod => mod.YAxis), { ssr: false });
-const Tooltip = dynamic(() => import("recharts").then(mod => mod.Tooltip), { ssr: false });
-const ResponsiveContainer = dynamic(() => import("recharts").then(mod => mod.ResponsiveContainer), { ssr: false });
+import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 
 const mockMetrics = [
   { time: "00:00", req: 120 }, { time: "04:00", req: 180 }, { time: "08:00", req: 450 },

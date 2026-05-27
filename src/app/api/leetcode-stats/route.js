@@ -1,72 +1,52 @@
+const LEETCODE_API = "https://alfa-leetcode-api.onrender.com/vivekducs";
+const FETCH_OPTIONS = { next: { revalidate: 3600 } };
+
 export async function GET() {
   try {
-    const res = await fetch("https://alfa-leetcode-api.onrender.com/vivekducs/solved", {
-      next: { revalidate: 3600 },
-    });
+    // Parallelize all 5 API calls (was sequential — 5x slower)
+    const [solvedRes, contestRes, calRes, badgeRes, profileRes] = await Promise.allSettled([
+      fetch(`${LEETCODE_API}/solved`, FETCH_OPTIONS).then((r) => r.json()),
+      fetch(`${LEETCODE_API}/contest`, FETCH_OPTIONS).then((r) => r.json()),
+      fetch(`${LEETCODE_API}/calendar`, FETCH_OPTIONS).then((r) => r.json()),
+      fetch(`${LEETCODE_API}/badges`, FETCH_OPTIONS).then((r) => r.json()),
+      fetch(`${LEETCODE_API}`, FETCH_OPTIONS).then((r) => r.json()),
+    ]);
 
-    let solved = {};
-    if (res.ok) {
-      const data = await res.json();
-      solved = {
-        solvedProblem: data.solvedProblem || 0,
-        easySolved: data.easySolved || 0,
-        mediumSolved: data.mediumSolved || 0,
-        hardSolved: data.hardSolved || 0,
-      };
-    }
+    const solved = solvedRes.status === "fulfilled" ? {
+      solvedProblem: solvedRes.value.solvedProblem || 0,
+      easySolved: solvedRes.value.easySolved || 0,
+      mediumSolved: solvedRes.value.mediumSolved || 0,
+      hardSolved: solvedRes.value.hardSolved || 0,
+    } : {};
 
-    const contestRes = await fetch("https://alfa-leetcode-api.onrender.com/vivekducs/contest", {
-      next: { revalidate: 3600 },
-    });
+    const contest = contestRes.status === "fulfilled" ? {
+      contestRating: Math.round(contestRes.value.contestRating || 0),
+      contestGlobalRanking: contestRes.value.contestGlobalRanking || 0,
+      contestTopPercentage: contestRes.value.contestTopPercentage || 0,
+    } : {};
 
-    let contest = {};
-    if (contestRes.ok) {
-      const data = await contestRes.json();
-      contest = {
-        contestRating: Math.round(data.contestRating || 0),
-        contestGlobalRanking: data.contestGlobalRanking || 0,
-        contestTopPercentage: data.contestTopPercentage || 0,
-      };
-    }
-
-    const calRes = await fetch("https://alfa-leetcode-api.onrender.com/vivekducs/calendar", {
-      next: { revalidate: 3600 },
-    });
-    
     let calendar = {};
-    if (calRes.ok) {
-      const data = await calRes.json();
-      if (data.submissionCalendar) {
-        calendar = JSON.parse(data.submissionCalendar);
+    if (calRes.status === "fulfilled" && calRes.value.submissionCalendar) {
+      calendar = JSON.parse(calRes.value.submissionCalendar);
+    }
+
+    const badges = badgeRes.status === "fulfilled" && badgeRes.value.badges
+      ? badgeRes.value.badges
+      : [];
+
+    const profile = profileRes.status === "fulfilled" ? {
+      ranking: profileRes.value.ranking || 0,
+      reputation: profileRes.value.reputation || 0,
+    } : {};
+
+    return Response.json(
+      { ...solved, ...contest, ...profile, calendar, badges },
+      {
+        headers: {
+          "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
+        },
       }
-    }
-
-    const badgeRes = await fetch("https://alfa-leetcode-api.onrender.com/vivekducs/badges", {
-      next: { revalidate: 3600 },
-    });
-
-    let badges = [];
-    if (badgeRes.ok) {
-      const data = await badgeRes.json();
-      if (data.badges) {
-        badges = data.badges; // Get all badges
-      }
-    }
-
-    const profileRes = await fetch("https://alfa-leetcode-api.onrender.com/vivekducs", {
-      next: { revalidate: 3600 },
-    });
-    
-    let profile = {};
-    if (profileRes.ok) {
-      const data = await profileRes.json();
-      profile = {
-        ranking: data.ranking || 0,
-        reputation: data.reputation || 0,
-      };
-    }
-
-    return Response.json({ ...solved, ...contest, ...profile, calendar, badges });
+    );
   } catch (error) {
     return Response.json({ error: "Failed to fetch LeetCode stats" }, { status: 500 });
   }

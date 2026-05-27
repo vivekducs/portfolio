@@ -70,16 +70,6 @@ export default function Skills() {
       icon: "text-violet-600 dark:text-violet-400",
       iconBg: "bg-violet-50 dark:bg-violet-950/30"
     },
-    violet: {
-      borderHover: "hover:border-violet-500/40 dark:hover:border-violet-400/40",
-      bgGlow: "bg-violet-500/[0.01] hover:bg-violet-500/[0.03] dark:bg-violet-950/5 dark:hover:bg-violet-950/20",
-      accentGlow: "bg-violet-500/5 dark:bg-violet-400/5",
-      badgeBg: "bg-violet-50/50 dark:bg-violet-500/10 group-hover:bg-violet-500/20",
-      badgeText: "text-violet-700 dark:text-violet-200 group-hover:text-violet-800 dark:group-hover:text-violet-100",
-      badgeBorder: "border-violet-100/60 dark:border-violet-500/30 group-hover:border-violet-500/40",
-      icon: "text-violet-600 dark:text-violet-400",
-      iconBg: "bg-violet-50 dark:bg-violet-950/30"
-    },
     copper: {
       borderHover: "hover:border-orange-500/40 dark:hover:border-orange-400/40",
       bgGlow: "bg-orange-500/[0.01] hover:bg-orange-500/[0.03] dark:bg-orange-950/5 dark:hover:bg-orange-950/20",

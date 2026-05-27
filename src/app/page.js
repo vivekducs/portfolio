@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import dynamic from "next/dynamic";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
@@ -9,19 +9,31 @@ import About from "@/components/About";
 import Projects from "@/components/Projects";
 import Skills from "@/components/Skills";
 import Experience from "@/components/Experience";
-import Certifications from "@/components/Certifications";
-import Stats from "@/components/Stats";
-import Contact from "@/components/Contact";
 import VKAssistant from "@/components/VKAssistant";
-import VKAssistantPopup from "@/components/VKAssistantPopup";
-import RecruiterDashboard from "@/components/RecruiterDashboard";
-import AchievementWall from "@/components/AchievementWall";
 import AIBootLoader from "@/components/AIBootLoader";
-import { MessageSquare, Sparkles, Bot } from "lucide-react";
+import { Sparkles } from "lucide-react";
 
-
-// Lazy load heavy React Flow / Recharts section
+// Lazy load heavy below-the-fold components
 const EngineeringHub = dynamic(() => import("@/components/EngineeringHub"), {
+  ssr: false,
+  loading: () => null,
+});
+const Certifications = dynamic(() => import("@/components/Certifications"), {
+  loading: () => null,
+});
+const Stats = dynamic(() => import("@/components/Stats"), {
+  loading: () => null,
+});
+const Contact = dynamic(() => import("@/components/Contact"), {
+  loading: () => null,
+});
+const RecruiterDashboard = dynamic(() => import("@/components/RecruiterDashboard"), {
+  loading: () => null,
+});
+const AchievementWall = dynamic(() => import("@/components/AchievementWall"), {
+  loading: () => null,
+});
+const VKAssistantPopup = dynamic(() => import("@/components/VKAssistantPopup"), {
   ssr: false,
   loading: () => null,
 });
@@ -44,26 +56,40 @@ export default function Home() {
     }
   }, []);
 
-  // Monitor scroll to update active section in sidebar
+  // Scroll to top after boot completes (prevents "already scrolled" bug)
+  useEffect(() => {
+    if (bootDone) {
+      window.scrollTo(0, 0);
+    }
+  }, [bootDone]);
+
+  // Monitor scroll via IntersectionObserver (replaces janky scroll event listener)
+  const sectionRefs = useRef({});
+  const registerSection = useCallback((id, el) => {
+    if (el) sectionRefs.current[id] = el;
+  }, []);
+
   useEffect(() => {
     const sections = ["home", "about", "skills", "projects", "experience", "certifications", "stats", "contact"];
-    const handleScrollObserver = () => {
-      const scrollPos = window.scrollY + 200;
-      for (const section of sections) {
-        const el = document.getElementById(section);
-        if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPos >= top && scrollPos < top + height) {
-            setActiveSection(section);
-            break;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
           }
         }
-      }
-    };
-    window.addEventListener("scroll", handleScrollObserver);
-    return () => window.removeEventListener("scroll", handleScrollObserver);
-  }, []);
+      },
+      { rootMargin: "-20% 0px -60% 0px", threshold: 0 }
+    );
+
+    // Observe all section elements by ID
+    sections.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, [bootDone]);
 
   return (
     <>
@@ -78,7 +104,7 @@ export default function Home() {
       )}
 
       <div
-        className="min-h-screen flex flex-col bg-[var(--bg-primary)] transition-colors duration-400 select-none relative"
+        className="min-h-screen flex flex-col bg-[var(--bg-primary)] transition-colors duration-400 relative"
         style={{ opacity: bootDone ? 1 : 0, transition: "opacity 0.5s ease" }}
       >
         {/* Global Navigation */}
@@ -102,7 +128,7 @@ export default function Home() {
 
           {/* Dashboard Content Grid */}
           <div className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start relative mt-16">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start relative mt-6 lg:mt-16">
 
               <main className="lg:col-span-8 space-y-24 pb-20 lg:pb-0">
                 {isRecruiterMode && (
@@ -121,7 +147,7 @@ export default function Home() {
               </main>
 
               {/* Right Grid Column: Sticky VK AI Chat Widget */}
-              <aside className="hidden lg:block lg:col-span-4 sticky top-6 space-y-6 pt-16">
+              <aside className="hidden lg:block lg:col-span-4 sticky top-20 space-y-6 pt-16">
 
                 {/* Dedicated VK AI Chat Window */}
                 <div className="relative">

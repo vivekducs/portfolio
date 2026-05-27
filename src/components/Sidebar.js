@@ -1,6 +1,6 @@
 "use client";
 
-import { Home, User, Code2, Briefcase, Award, History, BarChart3, Mail, FileText, Moon, Sun, Sparkles, BookOpen } from "lucide-react";
+import { FileText, Moon, Sun, Sparkles } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";

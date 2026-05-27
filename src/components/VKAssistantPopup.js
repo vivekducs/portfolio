@@ -24,7 +24,12 @@ export default function VKAssistantPopup({ isOpen, onClose }) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div 
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="vk-assistant-title"
+    >
       {/* Backdrop */}
       <div
         ref={overlayRef}
@@ -50,7 +55,7 @@ export default function VKAssistantPopup({ isOpen, onClose }) {
           </div>
 
           <div className="flex-1 min-w-0">
-            <h3 className="font-bold text-sm text-[var(--text-primary)] leading-tight">
+            <h3 id="vk-assistant-title" className="font-bold text-sm text-[var(--text-primary)] leading-tight">
               VK <span className="text-[var(--text-primary)]">Assistant</span>
             </h3>
             <p className="text-[10px] text-[var(--text-muted)] mono-font">
@@ -95,11 +100,6 @@ export default function VKAssistantPopup({ isOpen, onClose }) {
           <span className="text-[9px] text-[var(--text-primary)] font-semibold mono-font">● Online</span>
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(30px) scale(0.97) } to { opacity: 1; transform: translateY(0) scale(1) } }
-      `}</style>
     </div>
   );
 }

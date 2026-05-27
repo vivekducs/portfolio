@@ -144,16 +144,23 @@ export async function GET() {
       }
     }
 
-    return Response.json({
-      public_repos: data.public_repos || 0,
-      followers: data.followers || 0,
-      following: data.following || 0,
-      avatar_url: data.avatar_url,
-      bio: data.bio,
-      topLanguages,
-      contributions,
-      githubDetails
-    });
+    return Response.json(
+      {
+        public_repos: data.public_repos || 0,
+        followers: data.followers || 0,
+        following: data.following || 0,
+        avatar_url: data.avatar_url,
+        bio: data.bio,
+        topLanguages,
+        contributions,
+        githubDetails
+      },
+      {
+        headers: {
+          "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
+        },
+      }
+    );
   } catch (error) {
     return Response.json({ error: "Failed to fetch GitHub stats" }, { status: 500 });
   }

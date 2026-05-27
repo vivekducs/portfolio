@@ -32,9 +32,9 @@ export function ThemeProvider({ children }) {
     document.documentElement.setAttribute("data-theme", nextTheme);
   };
 
-  // Prevent hydration mismatch by not rendering theme-dependent classes immediately
+  // Prevent hydration mismatch — skip rendering until theme is resolved client-side
   if (!mounted) {
-    return <div className="opacity-0">{children}</div>;
+    return null;
   }
 
   return (

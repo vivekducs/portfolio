@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const BOOT_LINES = [
   { text: "Initializing VK Assistant...", color: "text-violet-500", delay: 0 },
@@ -17,30 +17,36 @@ export default function AIBootLoader({ onComplete }) {
   const [progress, setProgress] = useState(0);
   const [fading, setFading] = useState(false);
   const [done, setDone] = useState(false);
+  const onCompleteRef = useRef(onComplete);
+  onCompleteRef.current = onComplete;
 
   useEffect(() => {
+    const timers = [];
+
     // Show lines sequentially
     BOOT_LINES.forEach((line, idx) => {
       const t = setTimeout(() => {
         setVisibleLines((prev) => [...prev, idx]);
         setProgress(Math.round(((idx + 1) / BOOT_LINES.length) * 100));
       }, line.delay);
-      return () => clearTimeout(t);
+      timers.push(t);
     });
 
     // Start fade out
-    const fadeTimer = setTimeout(() => setFading(true), 3600);
+    const fadeTimer = setTimeout(() => setFading(true), 3200);
+    timers.push(fadeTimer);
+
     // Unmount
     const doneTimer = setTimeout(() => {
       setDone(true);
-      onComplete?.();
-    }, 4200);
+      onCompleteRef.current?.();
+    }, 3800);
+    timers.push(doneTimer);
 
     return () => {
-      clearTimeout(fadeTimer);
-      clearTimeout(doneTimer);
+      timers.forEach(clearTimeout);
     };
-  }, [onComplete]);
+  }, []);
 
   if (done) return null;
 

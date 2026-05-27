@@ -126,30 +126,33 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
   const abortRef = useRef(null);
   const scrollContainerRef = useRef(null);
   const prevMessagesLength = useRef(1);
+  const streamingIntervalRef = useRef(null);
 
-  // Auto-scroll
+  // Auto-scroll — scoped to chat container only (never scrolls the page)
   useEffect(() => {
     const isNewMessage = messages.length > prevMessagesLength.current;
     prevMessagesLength.current = messages.length;
 
-    if (!scrollContainerRef.current) {
-      chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
-      return;
-    }
+    const container = scrollContainerRef.current;
+    if (!container) return;
 
-    const { scrollTop, scrollHeight, clientHeight } = scrollContainerRef.current;
+    const { scrollTop, scrollHeight, clientHeight } = container;
     const isNearBottom = scrollHeight - scrollTop - clientHeight < 150;
 
     if (isNewMessage || isNearBottom) {
-      chatEndRef.current?.scrollIntoView({ behavior: isStreaming && !isNewMessage ? "auto" : "smooth" });
+      container.scrollTo({
+        top: container.scrollHeight,
+        behavior: isStreaming && !isNewMessage ? "instant" : "smooth",
+      });
     }
   }, [messages, isStreaming]);
 
-  // Cleanup on unmount
+  // Cleanup on unmount — clear all async resources
   useEffect(() => {
     return () => {
       if (recognitionRef.current) recognitionRef.current.stop();
       if (abortRef.current) abortRef.current.abort();
+      if (streamingIntervalRef.current) clearInterval(streamingIntervalRef.current);
       window.speechSynthesis?.cancel();
     };
   }, []);
@@ -233,7 +236,7 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
       let currentIdx = 0;
       let currentText = "";
 
-      const interval = setInterval(() => {
+      streamingIntervalRef.current = setInterval(() => {
         if (currentIdx < words.length) {
           currentText += (currentIdx === 0 ? "" : " ") + words[currentIdx];
           setMessages((prev) =>
@@ -243,7 +246,8 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
           );
           currentIdx++;
         } else {
-          clearInterval(interval);
+          clearInterval(streamingIntervalRef.current);
+          streamingIntervalRef.current = null;
           setMessages((prev) =>
             prev.map((m) => (m.id === assistantMsgId ? { ...m, streaming: false } : m))
           );
@@ -392,7 +396,6 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
 
         <div className="flex items-center gap-1">
           <button
-            suppressHydrationWarning
             onClick={() => { setVoiceEnabled((v) => !v); window.speechSynthesis?.cancel(); }}
             className={`p-1.5 rounded-lg transition-all cursor-pointer ${
               voiceEnabled
@@ -407,7 +410,6 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
 
           {isModal && onClose && (
             <button
-              suppressHydrationWarning
               onClick={onClose}
               className="p-1.5 rounded-lg hover:bg-[var(--bg-tertiary)] transition-colors text-[var(--text-muted)] hover:text-[var(--text-primary)] cursor-pointer"
               aria-label="Close assistant"
@@ -474,7 +476,6 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
           {SUGGESTED_PROMPTS.slice(0, isModal ? 8 : 4).map((q, idx) => (
             <button
               key={idx}
-              suppressHydrationWarning
               onClick={() => sendMessage(q.text)}
               disabled={isStreaming}
               className="text-[10px] bg-[var(--bg-secondary)] border border-[var(--border-color)] text-[var(--text-secondary)] hover:text-[var(--bg-primary)] hover:border-[var(--accent-color)] hover:bg-[var(--accent-color)] transition-all px-2.5 py-1 rounded-full mono-font cursor-pointer disabled:opacity-50"
@@ -492,7 +493,6 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
       >
         <button
           type="button"
-          suppressHydrationWarning
           onClick={isListening ? stopVoice : startVoice}
           className={`p-2.5 rounded-xl border transition-all cursor-pointer shrink-0 ${
             isListening
@@ -508,7 +508,6 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
         <div className="relative flex-1">
           <input
             ref={inputRef}
-            suppressHydrationWarning
             type="text"
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
@@ -518,7 +517,6 @@ export default function VKAssistant({ isModal = false, onClose = null }) {
           />
           <button
             type="submit"
-            suppressHydrationWarning
             disabled={!inputText.trim() || isStreaming}
             className="absolute right-1.5 top-1.5 p-1.5 rounded-lg bg-[var(--accent-color)] text-[var(--bg-primary)] hover:bg-violet-600 disabled:opacity-40 transition-all cursor-pointer"
             aria-label="Send message"
